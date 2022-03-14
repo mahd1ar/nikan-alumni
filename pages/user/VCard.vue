@@ -16,8 +16,12 @@
       alt=""
     />
 
-    <div class="container mx-auto flex flex-row items-start gap-7 relative">
-      <div class="w-9/12 bg-white rounded-xl overflow-hidden flex flex-col">
+    <div
+      class="container mx-auto flex flex-col-reverse md:flex-row items-start gap-7 relative"
+    >
+      <div
+        class="lg:w-9/12 md:w-7/12 w-full bg-white rounded-xl overflow-hidden flex flex-col"
+      >
         <div class="px-7 pt-7">
           <div class="flex flex-col">
             <h1 class="text-3xl">درباره من</h1>
@@ -37,9 +41,9 @@
             <div class="w-10 h-1 bg-cyan-400 my-5"></div>
           </div>
           <!-- cards -->
-          <div class="grid grid-cols-2 gap-2">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 my-3">
             <div
-              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded"
+              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden"
             >
               <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
                 <svg
@@ -83,7 +87,7 @@
             </div>
 
             <div
-              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded"
+              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden"
             >
               <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
                 <svg
@@ -127,7 +131,7 @@
             </div>
 
             <div
-              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded"
+              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden"
             >
               <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
                 <svg
@@ -166,12 +170,16 @@
                     />
                   </svg>
                 </span>
-                <span> a.mahdiyar7@yahoo.com </span>
+                <span
+                  class="text-ellipsis whitespace-nowrap overflow-hidden w-full inline-block"
+                >
+                  a.mahdiyar7@yahoo.com سیشصثبصضثبصثب صثبصثبصثب
+                </span>
               </div>
             </div>
 
             <div
-              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded"
+              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden"
             >
               <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
                 <svg
@@ -217,9 +225,9 @@
           </div>
 
           <div
-            class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded mt-2 flex-col"
+            class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden mt-2 flex-col"
           >
-            <div class="flex">
+            <div class="flex items-start">
               <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -251,7 +259,7 @@
             </div>
 
             <div class="py-5 px-3 h-72">
-              <!-- <client-only>
+              <client-only>
                 <l-map
                   @click="clickmap"
                   style="height: 100%"
@@ -292,14 +300,16 @@
                     </l-icon>
                   </l-marker>
                 </l-map>
-              </client-only> -->
+              </client-only>
             </div>
           </div>
         </div>
       </div>
-      <div class="w-3/12 bg-white flex flex-col rounded-xl">
+      <div class="lg:w-3/12 md:w-5/12 w-full bg-white flex flex-col rounded-xl">
         <div class="px-7">
-          <div class="h-20 relative">
+          <div
+            class="h-20 relative flex justify-center items-center mx-auto max-w-xs"
+          >
             <img
               class="absolute rounded-3xl bottom-0"
               src="https://avatars.githubusercontent.com/u/32998122?v=4"
@@ -462,6 +472,8 @@ export default Vue.extend({
     clickmap(ev: any) {
       // @ts-ignore
       this.$refs.marker!.setLatLng([ev.latlng.lat, ev.latlng.lng])
+
+      // this.$nuxt.$on emit
     },
   },
   mounted() {
