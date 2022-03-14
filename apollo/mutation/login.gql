@@ -1,0 +1,37 @@
+# mutation LoginUser($username: String!, $password: String!) {
+#   login(input: { password: $password, username: $username }) {
+#     # authToken
+#     # clientMutationId
+#     # refreshToken
+#     # sessionToken
+#     # customer {
+#     #   jwtAuthExpiration
+#     #   jwtAuthToken
+#     #   username
+#     #   id
+#     # }
+#        authToken
+#     refreshToken
+#     user {
+#       id
+#       name
+#     }
+#   }
+# }
+
+mutation Login($username: String!, $password: String!, $clientMutationId: String = "") {
+  login(
+    input: {username: $username, password: $password, clientMutationId: $clientMutationId}
+  ) {
+    authToken
+    refreshToken
+    user {
+      jwtAuthExpiration
+      jwtAuthToken
+      jwtRefreshToken
+      jwtUserSecret
+      id
+      email
+    }
+  }
+}

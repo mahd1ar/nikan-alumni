@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-samim;
+  }
+}
+
+@layer components {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}
+
+h1 {
+  font-family: 'Noto Naskh Arabic', serif;
+
+  @apply relative flex items-center justify-start gap-2 
+  before:w-10 before:h-0.5 before:bg-cyan-500 before:relative before:inline-block;
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&display=swap'); */
