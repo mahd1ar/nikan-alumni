@@ -10,6 +10,10 @@
       <span class="hidden xl:block">xl</span>
       <span class="hidden 2xl:block">2xl</span>
     </div>
+    <about />
+    <client-only>
+      <square-loader />
+    </client-only>
     <Nuxt />
   </div>
 </template>

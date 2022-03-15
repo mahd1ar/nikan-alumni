@@ -172,6 +172,8 @@ HSBC Bank Middle East
     }
   },
   mounted() {
+    // @ts-ignore
+    window.l = this
     setInterval(() => {
       const n = this.counter.fname
       // console.log(this.counter.fst)

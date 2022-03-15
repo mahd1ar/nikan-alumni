@@ -1,9 +1,10 @@
 import { Plugin, Context } from '@nuxt/types'
+// import { BoxLoading } from './loading'
 import LOGIN_MUT from "@/apollo/mutation/login.gql"
 import REFRESH_TOKEN_MUT from "@/apollo/mutation/refresh.gql"
-
 import { LoginMutation, LoginMutationVariables, RefreshAuthTokenMutation, RefreshAuthTokenMutationVariables } from '@/types/types'
 import { timeout } from '~/data/utils'
+
 
 type userCreadit = { username: string, password: string }
 
@@ -14,15 +15,21 @@ enum Authentication {
     id = 'authentication.user.id'
 }
 
+
+
 class LoginStrategy {
 
+    // private boxLoading: BoxLoading
     private ctx: Context
 
     readonly refreshTokenInterval = 60 * 5 * 1000; // 5 minut interval
+    readonly attemptToRefreshTheTokenThreshold = 3
 
-    private _kickoutInterval = 0
+    private _attemptToRefreshTheToken = 0
 
     constructor(ctx: Context) {
+
+        this._attemptToRefreshTheToken = this.attemptToRefreshTheTokenThreshold
 
         this.ctx = ctx;
         this.refreshHandler()
@@ -34,16 +41,8 @@ class LoginStrategy {
         localStorage.setItem(Authentication.refreshToken, String(response.login?.refreshToken))
         localStorage.setItem(Authentication.email, String(response.login?.user?.email))
         localStorage.setItem(Authentication.id, String(response.login?.user?.id))
-        // if(response.login?.user?.jwtAuthExpiration){
 
-
-        //     const  timeout = Math.abs( parseInt( response.login.user.jwtAuthExpiration) * 1000 - Date.now() )
-
-        //     this._kickoutInterval = window.setTimeout(() => {
-        //             this.logout()
-        //     }, timeout);
-
-        // }
+        this._attemptToRefreshTheToken = this.attemptToRefreshTheTokenThreshold
 
         if (response.login?.authToken) {
             this.setToken(response.login.authToken);
@@ -52,24 +51,39 @@ class LoginStrategy {
                 this.refreshHandler()
             }, this.refreshTokenInterval)
         }
+        this.ctx.$boxLoading.endLoading()
     }
 
     private async refreshHandler() {
         const refreshToken = localStorage.getItem(Authentication.refreshToken)
-
+        let flag = false;
         if (refreshToken) {
 
             try {
                 await this.refresh()
-                console.log("refresh handler is called")
+
+                this._attemptToRefreshTheToken = this.attemptToRefreshTheTokenThreshold
+                this.ctx.$boxLoading.endLoading()
 
 
             } catch (error) {
+                if (this._attemptToRefreshTheToken > 0) {
+                    this._attemptToRefreshTheToken--;
+                    this.ctx.$boxLoading.startLoadingEmpty()
+                    // delete me later
+                    this.ctx.$boxLoading.startLoading("attempt to login " + this._attemptToRefreshTheToken)
+                    this.refreshHandler()
+                } else {
 
-                this.logout()
+                    this.logout()
+                    flag = true;
+                }
             }
-            await timeout(this.refreshTokenInterval)
-            this.refreshHandler()
+            if (flag) {
+
+                await timeout(this.refreshTokenInterval)
+                this.refreshHandler()
+            }
         }
     }
 
@@ -77,6 +91,7 @@ class LoginStrategy {
         this.logout()
 
         try {
+            this.ctx.$boxLoading.startLoading("در حال احراز هویت")
 
             const { data: response } = await this.ctx.app.apolloProvider.defaultClient.mutate<LoginMutation, LoginMutationVariables>({ mutation: LOGIN_MUT, variables: { ...data, clientMutationId: String(~~(Math.random() * 100000)) } })
 
@@ -125,6 +140,7 @@ class LoginStrategy {
         this.ctx.store.dispatch("authentication/logout")
         this.ctx.$apolloHelpers.onLogout()
         this.clearStorage()
+        this.ctx.$boxLoading.endLoading()
     }
 
     private setToken(token: string) {
