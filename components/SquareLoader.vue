@@ -1,5 +1,5 @@
 <template>
-  <transition name="animation">
+  <transition name="v-openwindow">
     <div
       class="bg-[#242F3F] inline-flex justify-center items-center gap-2 p-2 fixed bottom-10 left-10 z-30 rounded"
       v-if="isLoading"
@@ -29,16 +29,6 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.animation-enter-active,
-.animation-leave-active {
-  transition: all 0.2s;
-  transform: scale(1);
-}
-.animation-enter, .animation-leave-to /* .animation-leave-active below version 2.1.8 */ {
-  transform: scale(0.9);
-  opacity: 0;
-}
-
 .loader {
   display: inline-block;
   width: 30px;

@@ -13,6 +13,16 @@
     @apply flex items-center justify-center;
   }
 }
+/*  transitions */
+.v-openwindow-enter-active,
+.v-openwindow-leave-active {
+  transition: all 0.2s;
+  transform: scale(1);
+}
+.v-openwindow-enter, .v-openwindow-leave-to /* .v-openwindow-leave-active below version 2.1.8 */ {
+  transform: scale(0.9);
+  opacity: 0;
+}
 
 /* h1 {
   font-family: 'Noto Naskh Arabic', serif;
