@@ -1,0 +1,18 @@
+query fetchMe {
+  viewer {
+    avatar {
+      url
+    }
+    email
+    description
+    firstName
+    id
+    lastName
+    nicename
+    databaseId
+    username
+    occupation {
+      occupation
+    }
+  }
+}

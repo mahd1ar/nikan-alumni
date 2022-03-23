@@ -12,6 +12,12 @@ export type Scalars = {
   Float: number;
 };
 
+/** A Field Group registered by ACF */
+export type AcfFieldGroup = {
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>;
+};
+
 /** Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from. */
 export type Avatar = {
   __typename?: 'Avatar';
@@ -1258,6 +1264,8 @@ export type CreateEventInput = {
   categories?: InputMaybe<EventCategoriesInput>;
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The comment status for the object */
+  commentStatus?: InputMaybe<Scalars['String']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -1813,10 +1821,16 @@ export type EnqueuedStylesheet = EnqueuedAsset & Node & {
 };
 
 /** The Event type */
-export type Event = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable & {
+export type Event = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable & {
   __typename?: 'Event';
   /** Connection between the Event type and the category type */
   categories?: Maybe<EventToCategoryConnection>;
+  /** The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility. */
+  commentCount?: Maybe<Scalars['Int']>;
+  /** Whether the comments are open or closed for this particular post. */
+  commentStatus?: Maybe<Scalars['String']>;
+  /** Connection between the Event type and the Comment type */
+  comments?: Maybe<EventToCommentConnection>;
   /** The content of the post. */
   content?: Maybe<Scalars['String']>;
   /** Connection between the ContentNode type and the ContentType type */
@@ -1844,6 +1858,8 @@ export type Event = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node &
    * @deprecated Deprecated in favor of the databaseId field
    */
   eventId: Scalars['Int'];
+  /** Added to the GraphQL Schema because the ACF Field Group &quot;مشخصات رویداد&quot; was set to Show in GraphQL. */
+  eventProps?: Maybe<Event_Eventprops>;
   /** The excerpt of the post. */
   excerpt?: Maybe<Scalars['String']>;
   /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
@@ -1902,6 +1918,16 @@ export type EventCategoriesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<EventToCategoryConnectionWhereArgs>;
+};
+
+
+/** The Event type */
+export type EventCommentsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<EventToCommentConnectionWhereArgs>;
 };
 
 
@@ -2076,6 +2102,88 @@ export type EventToCategoryConnectionWhereArgs = {
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** Connection between the Event type and the Comment type */
+export type EventToCommentConnection = {
+  __typename?: 'EventToCommentConnection';
+  /** Edges for the EventToCommentConnection connection */
+  edges?: Maybe<Array<Maybe<EventToCommentConnectionEdge>>>;
+  /** The nodes of the connection, without the edges */
+  nodes?: Maybe<Array<Maybe<Comment>>>;
+  /** Information about pagination in a connection. */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type EventToCommentConnectionEdge = {
+  __typename?: 'EventToCommentConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node?: Maybe<Comment>;
+};
+
+/** Arguments for filtering the EventToCommentConnection connection */
+export type EventToCommentConnectionWhereArgs = {
+  /** Comment author email address. */
+  authorEmail?: InputMaybe<Scalars['String']>;
+  /** Array of author IDs to include comments for. */
+  authorIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of author IDs to exclude comments for. */
+  authorNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Comment author URL. */
+  authorUrl?: InputMaybe<Scalars['String']>;
+  /** Array of comment IDs to include. */
+  commentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of IDs of users whose unapproved comments will be returned by the query regardless of status. */
+  commentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Include comments of a given type. */
+  commentType?: InputMaybe<Scalars['String']>;
+  /** Include comments from a given array of comment types. */
+  commentTypeIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Exclude comments from a given array of comment types. */
+  commentTypeNotIn?: InputMaybe<Scalars['String']>;
+  /** Content object author ID to limit results by. */
+  contentAuthor?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of author IDs to retrieve comments for. */
+  contentAuthorIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of author IDs *not* to retrieve comments for. */
+  contentAuthorNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Limit results to those affiliated with a given content object ID. */
+  contentId?: InputMaybe<Scalars['ID']>;
+  /** Array of content object IDs to include affiliated comments for. */
+  contentIdIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of content object IDs to exclude affiliated comments for. */
+  contentIdNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Content object name to retrieve affiliated comments for. */
+  contentName?: InputMaybe<Scalars['String']>;
+  /** Content Object parent ID to retrieve affiliated comments for. */
+  contentParent?: InputMaybe<Scalars['Int']>;
+  /** Array of content object statuses to retrieve affiliated comments for. Pass 'any' to match any value. */
+  contentStatus?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Content object type or array of types to retrieve affiliated comments for. Pass 'any' to match any value. */
+  contentType?: InputMaybe<Array<InputMaybe<ContentTypeEnum>>>;
+  /** Array of IDs or email addresses of users whose unapproved comments will be returned by the query regardless of $status. Default empty */
+  includeUnapproved?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Karma score to retrieve matching comments for. */
+  karma?: InputMaybe<Scalars['Int']>;
+  /** The cardinality of the order of the connection */
+  order?: InputMaybe<OrderEnum>;
+  /** Field to order the comments by. */
+  orderby?: InputMaybe<CommentsConnectionOrderbyEnum>;
+  /** Parent ID of comment to retrieve children of. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Array of parent IDs of comments to retrieve children for. */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of parent IDs of comments *not* to retrieve children for. */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Search term(s) to retrieve matching comments for. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Comment status to limit results by. */
+  status?: InputMaybe<Scalars['String']>;
+  /** Include comments for a specific user ID. */
+  userId?: InputMaybe<Scalars['ID']>;
+};
+
 /** Connection between the Event type and the Event type */
 export type EventToPreviewConnectionEdge = {
   __typename?: 'EventToPreviewConnectionEdge';
@@ -2211,6 +2319,25 @@ export type EventToTermNodeConnectionWhereArgs = {
   termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Whether to prime meta caches for matched terms. Default true. */
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Field Group */
+export type Event_Eventprops = AcfFieldGroup & {
+  __typename?: 'Event_Eventprops';
+  /**
+   * مدت زمان رویداد را به واحد روز اینجا وارد کنید
+   * اگر رویدادی یک روز طول میکشد 1
+   * اگر دو هفته طول میکشد 14 
+   * و اگر 2 ساعت طول میکشد عدد 0.083 را وارد کنید
+   */
+  duration?: Maybe<Scalars['Float']>;
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  /**
+   * تاریخ شروع رویداد را اینجا وارد کنید
+   * برای تبدیل تاریخ شمسی به قمری میتوانید از سایت time.ir اقدام کنید
+   */
+  startingFrom?: Maybe<Scalars['String']>;
 };
 
 /** The general setting type */
@@ -7539,6 +7666,8 @@ export type UpdateEventInput = {
   categories?: InputMaybe<EventCategoriesInput>;
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The comment status for the object */
+  commentStatus?: InputMaybe<Scalars['String']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -7691,6 +7820,7 @@ export type UpdatePostInput = {
   content?: InputMaybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']>;
+  example?: InputMaybe<Scalars['String']>;
   /** The excerpt of the object */
   excerpt?: InputMaybe<Scalars['String']>;
   /** The ID of the post object */
@@ -7830,6 +7960,7 @@ export type UpdateUserInput = {
   nicename?: InputMaybe<Scalars['String']>;
   /** The user's nickname, defaults to the user's username. */
   nickname?: InputMaybe<Scalars['String']>;
+  occupation?: InputMaybe<Scalars['String']>;
   /** A string that contains the plain text password for the user. */
   password?: InputMaybe<Scalars['String']>;
   /** If true, this will refresh the users JWT secret. */
@@ -7912,6 +8043,8 @@ export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdenti
   nicename?: Maybe<Scalars['String']>;
   /** Nickname of the user. */
   nickname?: Maybe<Scalars['String']>;
+  /** Added to the GraphQL Schema because the ACF Field Group &quot;اشتغال&quot; was set to Show in GraphQL. */
+  occupation?: Maybe<User_Occupation>;
   /** Connection between the User type and the page type */
   pages?: Maybe<UserToPageConnection>;
   /** Connection between the User type and the post type */
@@ -8487,6 +8620,14 @@ export type UserToUserRoleConnectionEdge = {
   node?: Maybe<UserRole>;
 };
 
+/** Field Group */
+export type User_Occupation = AcfFieldGroup & {
+  __typename?: 'User_Occupation';
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  occupation?: Maybe<Scalars['String']>;
+};
+
 /** Field to order the connection by */
 export enum UsersConnectionOrderbyEnum {
   /** Order by display name */
@@ -8560,7 +8701,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'RootMutation', login?: { __typename?: 'LoginPayload', authToken?: string | null, refreshToken?: string | null, user?: { __typename?: 'User', jwtAuthExpiration?: string | null, jwtAuthToken?: string | null, jwtRefreshToken?: string | null, jwtUserSecret?: string | null, id: string, email?: string | null } | null } | null };
+export type LoginMutation = { __typename?: 'RootMutation', login?: { __typename?: 'LoginPayload', authToken?: string | null, refreshToken?: string | null, user?: { __typename?: 'User', jwtAuthExpiration?: string | null, jwtAuthToken?: string | null, jwtRefreshToken?: string | null, jwtUserSecret?: string | null, id: string, email?: string | null, firstName?: string | null, lastName?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } | null } | null };
 
 export type RefreshAuthTokenMutationVariables = Exact<{
   jwtRefreshToken?: InputMaybe<Scalars['String']>;
@@ -8569,3 +8710,32 @@ export type RefreshAuthTokenMutationVariables = Exact<{
 
 
 export type RefreshAuthTokenMutation = { __typename?: 'RootMutation', refreshJwtAuthToken?: { __typename?: 'RefreshJwtAuthTokenPayload', authToken?: string | null } | null };
+
+export type UpdateUserMutationVariables = Exact<{
+  id: Scalars['ID'];
+  occupation?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'RootMutation', updateUser?: { __typename?: 'UpdateUserPayload', clientMutationId?: string | null, user?: { __typename?: 'User', id: string, firstName?: string | null } | null } | null };
+
+export type EventQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+  authorEmail: Scalars['String'];
+}>;
+
+
+export type EventQuery = { __typename?: 'RootQuery', event?: { __typename?: 'Event', date?: string | null, title?: string | null, id: string, content?: string | null, commentCount?: number | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', link?: string | null, sourceUrl?: string | null } | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', name?: string | null, link?: string | null } | null } | null> | null } | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, startingFrom?: string | null } | null, comments?: { __typename?: 'EventToCommentConnection', nodes?: Array<{ __typename?: 'Comment', approved?: boolean | null, type?: string | null, content?: string | null } | null> | null } | null } | null };
+
+export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, excerpt?: string | null, title?: string | null, commentCount?: number | null } | null> | null } | null };
+
+export type FetchMeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, occupation?: { __typename?: 'User_Occupation', occupation?: string | null } | null } | null };

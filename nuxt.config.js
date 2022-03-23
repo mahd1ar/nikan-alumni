@@ -24,6 +24,7 @@ export default {
 
     { src: '~/plugins/authentication.ts', mode: 'client' },
     { src: '~/plugins/loading.ts', mode: 'client' },
+    { src: '~/plugins/about.ts', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,6 +46,7 @@ export default {
     "@nuxtjs/apollo",
     // '@nuxtjs/auth-next'
     'nuxt-leaflet',
+    'cookie-universal-nuxt',
   ],
 
   apollo: {
@@ -101,6 +103,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ["vee-validate/dist/rules"],
     postcss: {
       plugins: {
         tailwindcss: {},

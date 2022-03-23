@@ -1,5 +1,9 @@
 # nikan-final
 
+## convention:
+comments with `[REG]` are stans for registeration
+
+
 ## Build Setup
 
 ```bash

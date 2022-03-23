@@ -32,6 +32,11 @@ mutation Login($username: String!, $password: String!, $clientMutationId: String
       jwtUserSecret
       id
       email
+      firstName
+      lastName
+      avatar {
+        url
+      }
     }
   }
 }

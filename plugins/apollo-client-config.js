@@ -1,19 +1,30 @@
 import { onError } from 'apollo-link-error'
+import { Dict } from '~/data/utils/dictionary'
 
-export default function (ctx) {
+const apolloClientConfig = (ctx) => {
+
+
     const errorLink = onError(({ networkError, graphQLErrors }) => {
+
+
+        if (networkError) {
+            if (process.client)
+                ctx.$about.error({ title: Dict.net_err })
+        }
+
+
+
+
+
         console.log({ networkError })
         console.log("graphQLErrors")
         console.log(graphQLErrors)
         if (Array.isArray(graphQLErrors) && graphQLErrors.some(error => error.debugMessage && error.debugMessage.search("invalid-jwt") !== -1)) {
-            console.log("LOGGING OUT")
-            // ctx.app.$notify.error({
-            //     title: 'token expired',
-            //     color: "#ef4444", theme: "dark", animateInside: false,
-            // })
-            window.alert("token exp ")
+            if (process.client)
+                ctx.$about.info({ title: Dict.auth_kickout, body: error.debugMessage ? String(error.debugMessage) : '' })
+
         }
-        console.log({ ctx })
+
     })
     return {
         link: errorLink,
@@ -22,3 +33,5 @@ export default function (ctx) {
 
     }
 }
+
+export default apolloClientConfig

@@ -92,3 +92,10 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style scoped>
+/* havaset bashes */
+/* backdrop-filter blur(16px)
+background-color rgba(255, 255, 255, 0.8)
+border-bottom-color rgb(160, 164, 167) */
+</style>

@@ -1,0 +1,34 @@
+query Event($id: ID = "cG9zdDoxMA==", $authorEmail: String!) {
+  event(id: $id) {
+    date
+    title(format: RENDERED)
+    id
+    content(format: RENDERED)
+    commentCount
+    featuredImage {
+      node {
+        link
+        sourceUrl(size: LARGE)
+      }
+    }
+    categories {
+      edges {
+        node {
+          name
+          link
+        }
+      }
+    }
+    eventProps {
+      duration
+      startingFrom
+    }
+    comments(where: {authorEmail: $authorEmail}) {
+      nodes {
+        approved
+        type
+        content(format: RAW)
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@
     <h1>hi</h1>
     <button @click="login">login</button>
     <button @click="getMe">getMe</button>
+    <nuxt-link to="user/editprofile">edit profile</nuxt-link>
   </div>
 </template>
 
@@ -49,16 +50,20 @@ export default Vue.extend({
           }
         }
       `
-
-      const { data: m } = await this.$apollo.query({ query: VUEQ })
-
-      console.log(m)
+      try {
+        const { data: m } = await this.$apollo.query({ query: VUEQ })
+        console.log(m)
+      } catch (error) {
+        console.info('CNACELE')
+      }
     },
   },
   computed: { ...mapGetters({ isLoggedIn: 'authentication/isLoggedIn' }) },
   mounted() {
     // @ts-ignore
     window.l = this
+
+    console.log('redirected from' + this.$route.redirectedFrom)
   },
 })
 </script>

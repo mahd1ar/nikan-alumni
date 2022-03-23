@@ -23,6 +23,23 @@
   transform: scale(0.9);
   opacity: 0;
 }
+.v-openwindow-move {
+  transition: transform 0.2s;
+}
+
+/*  transitions */
+.v-fade-enter-active,
+.v-fade-leave-active {
+  transition: all 0.2s;
+
+  transition-delay: calc(var(--count) * 75ms);
+}
+.v-fade-enter, .v-fade-leave-to /* .v-fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.v-fade-move {
+  transition: transform 0.2s;
+}
 
 /* h1 {
   font-family: 'Noto Naskh Arabic', serif;

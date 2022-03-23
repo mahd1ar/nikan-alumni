@@ -26,8 +26,6 @@ enum Mutations {
 export type RootState = ReturnType<typeof state>
 
 
-
-
 export const getters: GetterTree<RootState, RootState> = {
     isLoading: state => state.isLoading,
     lockScreen: state => state.lockScreen,
@@ -50,7 +48,6 @@ export const mutations: MutationTree<RootState> = {
         }
     },
     [Mutations.reset]: (state) => {
-        console.log("HI")
         Object.assign(state, initialState)
     }
 }

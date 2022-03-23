@@ -2,17 +2,25 @@
   <div>
     <div
       v-if="$nuxt.context.isDev"
-      class="fixed top-10 left-10 z-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
+      class="fixed opacity-50 top-10 left-10 z-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
     >
+      <div
+        class="p-1"
+        :class="{ 'bg-red-200': !isLoggedIn, 'bg-green-200': isLoggedIn }"
+      >
+        {{ isLoggedIn ? 'logged in' : 'logged out' }}
+      </div>
       <span class="hidden sm:block">sm</span>
       <span class="hidden md:block">md</span>
       <span class="hidden lg:block">lg</span>
       <span class="hidden xl:block">xl</span>
       <span class="hidden 2xl:block">2xl</span>
     </div>
-    <about />
     <client-only>
-      <square-loader />
+      <div class="m-auto fixed bottom-10 right-20 z-30">
+        <about />
+        <square-loader />
+      </div>
     </client-only>
     <Nuxt />
   </div>
@@ -26,7 +34,11 @@
 //     });
 // }
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
+
 export default Vue.extend({
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'Default',
   head: {
     link: [
       {
@@ -59,5 +71,7 @@ export default Vue.extend({
       },
     ],
   },
+  computed: { ...mapGetters({ isLoggedIn: 'authentication/isLoggedIn' }) },
+  mounted() {},
 })
 </script>

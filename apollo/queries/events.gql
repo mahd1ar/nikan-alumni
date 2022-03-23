@@ -1,0 +1,10 @@
+query events {
+  events(first: 10) {
+    nodes {
+      id
+      excerpt(format: RAW)
+      title(format: RENDERED)
+      commentCount
+    }
+  }
+}

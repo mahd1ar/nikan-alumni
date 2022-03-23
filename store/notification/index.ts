@@ -1,4 +1,5 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { timeout } from '~/data/utils'
 
 
 
@@ -15,7 +16,7 @@ export type CNotification = {
 }
 
 interface StateNotification extends CNotification {
-    type: 'success' | 'error' | 'about'
+    type: 'success' | 'error' | 'about' | 'info'
     id: number
 }
 
@@ -24,9 +25,7 @@ export const state = () => ({
 })
 
 enum Mutations {
-    success = "LOADING",
-    error = "ERROR",
-    about = "ABOUT"
+    push = "PUSH"
 }
 
 export type RootState = ReturnType<typeof state>
@@ -37,28 +36,63 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 
 export const mutations: MutationTree<RootState> = {
-    [Mutations.success]: (state, option: CNotification) => {
-        const x: StateNotification = {
-            title: option.title,
-            body: option.body || '',
-            id: ~~(Math.random() * 1000),
-            type: 'success',
-            time: option.time || 3000
-        }
 
-        state.notification.push(x)
+    CLEAR: (state, id: number) => {
 
-        window.setTimeout(() => {
-            const index = state.notification.indexOf(x)
+        const item = state.notification.find(i => i.id === id)
+
+        if (item) {
+            const index = state.notification.indexOf(item)
             state.notification.splice(index, index + 1)
+        }
+    },
 
-        }, x.time)
-
+    [Mutations.push]: (state, option: StateNotification) => {
+        state.notification.push(option)
     }
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-    success({ commit }, options: CNotification) {
-        commit(Mutations.success, options)
+    clear({ commit }, id: number) {
+
+        commit('CLEAR', id)
+    },
+    async success({ commit, dispatch }, options: CNotification) {
+        const newItem: StateNotification = {
+            title: options.title,
+            body: options.body || '',
+            id: ~~(Math.random() * 1000),
+            type: 'success',
+            time: options.time || 3000
+        }
+        commit(Mutations.push, newItem);
+        await timeout(newItem.time!);
+        dispatch('clear', newItem.id)
+    },
+
+    async error({ commit, dispatch }, options: CNotification) {
+        const newItem: StateNotification = {
+            title: options.title,
+            body: options.body || '',
+            id: ~~(Math.random() * 1000),
+            type: 'error',
+            time: options.time || 3000
+        }
+        commit(Mutations.push, newItem);
+        await timeout(newItem.time!);
+        dispatch('clear', newItem.id)
+    },
+
+    async info({ commit, dispatch }, options: CNotification) {
+        const newItem: StateNotification = {
+            title: options.title,
+            body: options.body || '',
+            id: ~~(Math.random() * 1000),
+            type: 'info',
+            time: options.time || 3000
+        }
+        commit(Mutations.push, newItem);
+        await timeout(newItem.time!);
+        dispatch('clear', newItem.id)
     }
 }

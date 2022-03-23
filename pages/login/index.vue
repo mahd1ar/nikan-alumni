@@ -49,6 +49,7 @@
         >
           <h2
             class="text-2xl font-naskh font-semibold text-center text-gray-700 dark:text-white"
+            @click="h"
           >
             کانون دانش آموختگان نیکان
           </h2>
@@ -106,6 +107,7 @@
             >
             <input
               id="LoggingEmailAddress"
+              v-model="user.username"
               class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="email"
             />
@@ -127,15 +129,25 @@
 
             <input
               id="loggingPassword"
+              v-model="user.password"
               class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="password"
             />
           </div>
 
+          <div class="mx-auto mt-4">
+            <vue-hcaptcha
+              v-if="false"
+              theme="dark"
+              sitekey="073dbe4d-32be-4898-ad05-23a10d6e580b"
+              @verify="h"
+            ></vue-hcaptcha>
+          </div>
+
           <div class="mt-8">
             <button
-              @click="login()"
               class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+              @click="login()"
             >
               Login
             </button>
@@ -160,63 +172,73 @@
 
 <script lang="ts">
 import Vue from 'vue'
-// import login from '@/apollo/mutation/login.gql'
-// import { JwtCredit, User } from '~/data/utils/schema'
 
-// import { LoginUserMutation } from '@/types/types'
+// declare module hcaptcha {
+//   export function close(): void
+//   export function execute(): void
+//   export function getRespKey(): string
+//   export function getResponse(): string
+//   export function remove(): void
+//   export function render(): void
+//   export function reset(): void
+//   export function setData(): void
+// }
+import VueHcaptcha from '@hcaptcha/vue-hcaptcha'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
+  components: { VueHcaptcha },
+  middleware: ['unauthenticated'],
   data() {
     return {
       loaded: false,
-      user: { username: 'admin_uynhgk9j', password: '8WF9IU&loED7&ZaB' },
+      user: { username: 'mahdiyaranari', password: 'master33' },
     }
   },
-  methods: {
-    async login() {
-      this.$nuxt.$loading.start()
+  head: {
+    script: [
+      {
+        src: 'https://js.hcaptcha.com/1/api.js',
+        body: true,
+        async: true,
+        defer: true,
+      },
+    ],
+  },
 
-      try {
-        const credentials = {
-          username: 'admin_uynhgk9j',
-          password: '8WF9IU&loED7&ZaB',
+  computed: {
+    ...mapGetters({
+      isLoggedIn: 'authentication/isLoggedIn',
+    }),
+  },
+
+  watch: {
+    isLoggedIn(newval: boolean) {
+      if (newval) {
+        let nextPath = this.$route.query.redirect
+        if (nextPath) {
+          if (Array.isArray(nextPath))
+            nextPath = nextPath[0] ? nextPath[0] : '/'
+
+          this.$router.push(decodeURIComponent(nextPath))
+        } else {
+          this.$router.push('/user/editprofile')
         }
-
-        // await this.$auth.loginWith('graphql', credentials)
-        // const { data } = await this.$apollo.mutate<LoginUserMutation>({
-        //   mutation: login,
-        //   variables: {
-        //     username: 'admin_uynhgk9j',
-        //     password: '8WF9IU&loED7&ZaB',
-        //   },
-        // })
-        // console.log(data?.login?.user?.id)
-        // const user = {} as User
-        // const jwtCreadit = {} as JwtCredit
-        // console.log(
-        //   new Date(Number(data.login.customer.jwtAuthExpiration) * 1000)
-        // )
-        // user.username = data.login.customer.username
-        // jwtCreadit.authToken = data.login.authToken
-        // jwtCreadit.refreshToken = data.login.refreshToken
-        // jwtCreadit.customerId = data.login.customer.id
-        // jwtCreadit.jwtAuthExpiration = data.login.customer.jwtAuthExpiration
-
-        // this.$store.dispatch('auth/login', { ...user, ...jwtCreadit })
-      } catch (e) {
-        console.error(e)
-      } finally {
-        this.$nuxt.$loading.finish()
       }
     },
   },
   mounted() {
     // @ts-ignore
-    window.l = this
-    setTimeout(() => {
-      this.loaded = true
-    }, 300)
-    // console.log(this.$apollo)
+    this.loaded = true
+  },
+
+  methods: {
+    async login() {
+      await this.$authentication().login(this.user)
+    },
+    h(e: string) {
+      console.log(e)
+    },
   },
 })
 </script>

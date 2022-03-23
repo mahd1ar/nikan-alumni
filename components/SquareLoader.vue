@@ -1,7 +1,7 @@
 <template>
   <transition name="v-openwindow">
     <div
-      class="bg-[#242F3F] inline-flex justify-center items-center gap-2 p-2 fixed bottom-10 left-10 z-30 rounded"
+      class="bg-[#242F3F] inline-flex justify-center items-center gap-3 p-2 rounded"
       v-if="isLoading"
     >
       <div>
@@ -31,8 +31,8 @@ export default Vue.extend({
 <style scoped>
 .loader {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   position: relative;
   border: 4px solid #fff;
   top: 50%;

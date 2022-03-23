@@ -1,7 +1,11 @@
 <template>
   <div dir="rtl" class="">
     <!-- search -->
-    <float-search @closeModal="search.show = false" v-if="search.show" />
+    <client-only>
+      <transition name="v-fade">
+        <float-search @closeModal="search.show = false" v-if="search.show" />
+      </transition>
+    </client-only>
 
     <!-- hero section -->
     <div class="h-screen w-full flex flex-col">
