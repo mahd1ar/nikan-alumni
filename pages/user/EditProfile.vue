@@ -332,9 +332,9 @@
                         >بیوگرافی</label
                       >
                       <textarea
+                        id="description"
                         v-model="user.description"
                         placeholder="چند خط درباره خودت بنویس"
-                        id="description"
                         name="description"
                         cols="30"
                         rows="5"
@@ -359,9 +359,9 @@
                       >Email Address</label
                     >
                     <input
+                      id="emailAddress"
                       disabled
                       :value="user.email"
-                      id="emailAddress"
                       type="email"
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                     />

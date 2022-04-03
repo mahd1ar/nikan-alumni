@@ -195,7 +195,7 @@ HSBC Bank Middle East
 })
 </script>
 
-<style >
+<style>
 .m-blur-background {
   background: linear-gradient(90deg, #297387 0%, rgb(179 250 0 / 3%) 100%);
   /* backdrop-filter: blur(2px); */

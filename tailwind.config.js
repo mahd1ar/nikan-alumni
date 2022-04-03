@@ -2,12 +2,11 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./nuxt.config.{js,ts}",
-
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './nuxt.config.{js,ts}',
   ],
   theme: {
     container: {
@@ -22,16 +21,15 @@ module.exports = {
     extend: {
       colors: {
         tm: {
-          black: "#232E3B",
-          gray: "#626F7F",
-          yellow: { DEFAULT: "#f7ca18", dark: "#67540a" },
-
+          black: '#232E3B',
+          gray: '#626F7F',
+          yellow: { DEFAULT: '#f7ca18', dark: '#67540a' },
         },
       },
       fontFamily: {
-        'naskh': ['Noto Naskh Arabic', ...defaultTheme.fontFamily.sans],
-        'vazir': ['Vazir', ...defaultTheme.fontFamily.sans],
-        'samim': ['Samim', ...defaultTheme.fontFamily.sans],
+        naskh: ['Noto Naskh Arabic', ...defaultTheme.fontFamily.sans],
+        vazir: ['Vazir', ...defaultTheme.fontFamily.sans],
+        samim: ['Samim', ...defaultTheme.fontFamily.sans],
       },
     },
   },

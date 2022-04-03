@@ -123,9 +123,9 @@
                 </div>
               </div>
               <div
-                class="text-neutral-700 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
                 v-for="(i, index) in menu"
                 :key="index"
+                class="text-neutral-700 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
               >
                 {{ i }}
               </div>
@@ -424,8 +424,8 @@
                       {{ e.title }}
                     </h2>
                     <p
-                      class="leading-relaxed mb-5 hover:underline cursor-pointer"
                       v-snip="3"
+                      class="leading-relaxed mb-5 hover:underline cursor-pointer"
                     >
                       {{ e.body }}
                     </p>
@@ -719,7 +719,7 @@ HSBC Bank Middle East
 })
 </script>
 
-<style >
+<style>
 .m-blur-background {
   background: linear-gradient(
     90deg,

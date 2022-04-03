@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-screen flex-center">
+  <div class="h-screen w-full flex-center">
     <div class="container mx-auto">
       <div
         class="flex max-w-sm mx-auto my-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl"
@@ -183,6 +183,7 @@ import Vue from 'vue'
 //   export function reset(): void
 //   export function setData(): void
 // }
+
 import VueHcaptcha from '@hcaptcha/vue-hcaptcha'
 import { mapGetters } from 'vuex'
 
@@ -242,4 +243,3 @@ export default Vue.extend({
   },
 })
 </script>
-

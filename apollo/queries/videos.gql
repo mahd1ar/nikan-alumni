@@ -1,0 +1,22 @@
+query videos ($first: Int = 8, $parent: Int = 5) {
+ categories(where: {parent: $parent}) {
+    edges {
+      node {
+        id
+        name
+        videos(first: $first) {
+          nodes {
+            content(format: RENDERED)
+            id
+            date
+            title
+            speakers {
+              speakers
+            }
+            featuredImageId
+          }
+        }
+      }
+    }
+  }
+}

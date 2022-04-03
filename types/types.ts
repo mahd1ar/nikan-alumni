@@ -115,6 +115,8 @@ export type Category = DatabaseIdentifier & HierarchicalTermNode & MenuItemLinka
   termTaxonomyId?: Maybe<Scalars['Int']>;
   /** The unique resource identifier path */
   uri?: Maybe<Scalars['String']>;
+  /** Connection between the category type and the Video type */
+  videos?: Maybe<CategoryToVideoConnection>;
 };
 
 
@@ -182,6 +184,16 @@ export type CategoryPostsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CategoryToPostConnectionWhereArgs>;
+};
+
+
+/** The category type */
+export type CategoryVideosArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CategoryToVideoConnectionWhereArgs>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -518,6 +530,84 @@ export type CategoryToTaxonomyConnectionEdge = {
   __typename?: 'CategoryToTaxonomyConnectionEdge';
   /** The node of the connection, without the edges */
   node?: Maybe<Taxonomy>;
+};
+
+/** Connection between the category type and the Video type */
+export type CategoryToVideoConnection = {
+  __typename?: 'CategoryToVideoConnection';
+  /** Edges for the CategoryToVideoConnection connection */
+  edges?: Maybe<Array<Maybe<CategoryToVideoConnectionEdge>>>;
+  /** The nodes of the connection, without the edges */
+  nodes?: Maybe<Array<Maybe<Video>>>;
+  /** Information about pagination in a connection. */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type CategoryToVideoConnectionEdge = {
+  __typename?: 'CategoryToVideoConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node?: Maybe<Video>;
+};
+
+/** Arguments for filtering the CategoryToVideoConnection connection */
+export type CategoryToVideoConnectionWhereArgs = {
+  /** Category ID */
+  categoryId?: InputMaybe<Scalars['Int']>;
+  /** Array of category IDs, used to display objects from one category OR another */
+  categoryIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Use Category Slug */
+  categoryName?: InputMaybe<Scalars['String']>;
+  /** Array of category IDs, used to display objects from one category OR another */
+  categoryNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: InputMaybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Tag Slug */
+  tag?: InputMaybe<Scalars['String']>;
+  /** Use Tag ID */
+  tagId?: InputMaybe<Scalars['String']>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of tag slugs, used to display objects from one tag OR another */
+  tagSlugAnd?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of tag slugs, used to exclude objects in specified tags */
+  tagSlugIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']>;
 };
 
 /** A Comment object */
@@ -1085,7 +1175,9 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
+  /** The Type of Content object */
+  Video = 'VIDEO'
 }
 
 /** The Type of Identifier used to fetch a single Content Type node. To be used along with the "id" field. Default is "ID". */
@@ -1181,7 +1273,9 @@ export enum ContentTypesOfCategoryEnum {
   /** The Type of Content object */
   Event = 'EVENT',
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
+  /** The Type of Content object */
+  Video = 'VIDEO'
 }
 
 /** Allowed Content Types of the PostFormat taxonomy. */
@@ -1195,7 +1289,9 @@ export enum ContentTypesOfTagEnum {
   /** The Type of Content object */
   Event = 'EVENT',
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
+  /** The Type of Content object */
+  Video = 'VIDEO'
 }
 
 /** Input for the createCategory mutation */
@@ -1519,6 +1615,41 @@ export type CreateUserPayload = {
   user?: Maybe<User>;
 };
 
+/** Input for the createVideo mutation */
+export type CreateVideoInput = {
+  /** Set connections between the Video and categories */
+  categories?: InputMaybe<VideoCategoriesInput>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']>;
+  /** The excerpt of the object */
+  excerpt?: InputMaybe<Scalars['String']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Set connections between the Video and tags */
+  tags?: InputMaybe<VideoTagsInput>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+/** The payload for the createVideo mutation */
+export type CreateVideoPayload = {
+  __typename?: 'CreateVideoPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The Post object mutation type. */
+  video?: Maybe<Video>;
+};
+
 /** Object that can be identified with a Database ID */
 export type DatabaseIdentifier = {
   /** The unique identifier stored in the database */
@@ -1753,6 +1884,27 @@ export type DeleteUserPayload = {
   deletedId?: Maybe<Scalars['ID']>;
   /** The deleted user object */
   user?: Maybe<User>;
+};
+
+/** Input for the deleteVideo mutation */
+export type DeleteVideoInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']>;
+  /** The ID of the Video to delete */
+  id: Scalars['ID'];
+};
+
+/** The payload for the deleteVideo mutation */
+export type DeleteVideoPayload = {
+  __typename?: 'DeleteVideoPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']>;
+  /** The object before it was deleted */
+  video?: Maybe<Video>;
 };
 
 /** The discussion setting type */
@@ -2333,11 +2485,7 @@ export type Event_Eventprops = AcfFieldGroup & {
   duration?: Maybe<Scalars['Float']>;
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>;
-  /**
-   * تاریخ شروع رویداد را اینجا وارد کنید
-   * برای تبدیل تاریخ شمسی به قمری میتوانید از سایت time.ir اقدام کنید
-   */
-  startingFrom?: Maybe<Scalars['String']>;
+  venue?: Maybe<Scalars['String']>;
 };
 
 /** The general setting type */
@@ -3056,7 +3204,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Category | Event | Page | Post | Tag;
+export type MenuItemObjectUnion = Category | Event | Page | Post | Tag | Video;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = {
@@ -5142,6 +5290,8 @@ export type RootMutation = {
   createTag?: Maybe<CreateTagPayload>;
   /** The payload for the createUser mutation */
   createUser?: Maybe<CreateUserPayload>;
+  /** The payload for the createVideo mutation */
+  createVideo?: Maybe<CreateVideoPayload>;
   /** The payload for the deleteCategory mutation */
   deleteCategory?: Maybe<DeleteCategoryPayload>;
   /** The payload for the deleteComment mutation */
@@ -5160,6 +5310,8 @@ export type RootMutation = {
   deleteTag?: Maybe<DeleteTagPayload>;
   /** The payload for the deleteUser mutation */
   deleteUser?: Maybe<DeleteUserPayload>;
+  /** The payload for the deleteVideo mutation */
+  deleteVideo?: Maybe<DeleteVideoPayload>;
   /** Increase the count. */
   increaseCount?: Maybe<Scalars['Int']>;
   /** The payload for the login mutation */
@@ -5194,6 +5346,8 @@ export type RootMutation = {
   updateTag?: Maybe<UpdateTagPayload>;
   /** The payload for the updateUser mutation */
   updateUser?: Maybe<UpdateUserPayload>;
+  /** The payload for the updateVideo mutation */
+  updateVideo?: Maybe<UpdateVideoPayload>;
 };
 
 
@@ -5252,6 +5406,12 @@ export type RootMutationCreateUserArgs = {
 
 
 /** The root mutation */
+export type RootMutationCreateVideoArgs = {
+  input: CreateVideoInput;
+};
+
+
+/** The root mutation */
 export type RootMutationDeleteCategoryArgs = {
   input: DeleteCategoryInput;
 };
@@ -5302,6 +5462,12 @@ export type RootMutationDeleteTagArgs = {
 /** The root mutation */
 export type RootMutationDeleteUserArgs = {
   input: DeleteUserInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteVideoArgs = {
+  input: DeleteVideoInput;
 };
 
 
@@ -5404,6 +5570,12 @@ export type RootMutationUpdateTagArgs = {
 /** The root mutation */
 export type RootMutationUpdateUserArgs = {
   input: UpdateUserInput;
+};
+
+
+/** The root mutation */
+export type RootMutationUpdateVideoArgs = {
+  input: UpdateVideoInput;
 };
 
 /** The root entry point into the Graph */
@@ -5519,6 +5691,15 @@ export type RootQuery = {
   userRoles?: Maybe<RootQueryToUserRoleConnection>;
   /** Connection between the RootQuery type and the User type */
   users?: Maybe<RootQueryToUserConnection>;
+  /** An object of the Video Type. آرشیو صوتی تصویری کانون دانش آموختگان */
+  video?: Maybe<Video>;
+  /**
+   * A Video object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  videoBy?: Maybe<Video>;
+  /** Connection between the RootQuery type and the Video type */
+  videos?: Maybe<RootQueryToVideoConnection>;
   /** Returns the current user */
   viewer?: Maybe<User>;
   /** Fields of the &#039;WritingSettings&#039; settings group */
@@ -5902,6 +6083,33 @@ export type RootQueryUsersArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<RootQueryToUserConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryVideoArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  idType?: InputMaybe<VideoIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryVideoByArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['String']>;
+  uri?: InputMaybe<Scalars['String']>;
+  videoId?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryVideosArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<RootQueryToVideoConnectionWhereArgs>;
 };
 
 /** Connection between the RootQuery type and the category type */
@@ -6576,6 +6784,8 @@ export type RootQueryToPostConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to only include sticky posts */
+  onlySticky?: InputMaybe<Scalars['Boolean']>;
   /** What paramater to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -6916,6 +7126,84 @@ export type RootQueryToUserRoleConnectionEdge = {
   node?: Maybe<UserRole>;
 };
 
+/** Connection between the RootQuery type and the Video type */
+export type RootQueryToVideoConnection = {
+  __typename?: 'RootQueryToVideoConnection';
+  /** Edges for the RootQueryToVideoConnection connection */
+  edges?: Maybe<Array<Maybe<RootQueryToVideoConnectionEdge>>>;
+  /** The nodes of the connection, without the edges */
+  nodes?: Maybe<Array<Maybe<Video>>>;
+  /** Information about pagination in a connection. */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type RootQueryToVideoConnectionEdge = {
+  __typename?: 'RootQueryToVideoConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node?: Maybe<Video>;
+};
+
+/** Arguments for filtering the RootQueryToVideoConnection connection */
+export type RootQueryToVideoConnectionWhereArgs = {
+  /** Category ID */
+  categoryId?: InputMaybe<Scalars['Int']>;
+  /** Array of category IDs, used to display objects from one category OR another */
+  categoryIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Use Category Slug */
+  categoryName?: InputMaybe<Scalars['String']>;
+  /** Array of category IDs, used to display objects from one category OR another */
+  categoryNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: InputMaybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Tag Slug */
+  tag?: InputMaybe<Scalars['String']>;
+  /** Use Tag ID */
+  tagId?: InputMaybe<Scalars['String']>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of tag slugs, used to display objects from one tag OR another */
+  tagSlugAnd?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of tag slugs, used to exclude objects in specified tags */
+  tagSlugIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
 /** Input for the sendPasswordResetEmail mutation */
 export type SendPasswordResetEmailInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -7016,6 +7304,8 @@ export type Tag = DatabaseIdentifier & MenuItemLinkable & Node & TermNode & Unif
   termTaxonomyId?: Maybe<Scalars['Int']>;
   /** The unique resource identifier path */
   uri?: Maybe<Scalars['String']>;
+  /** Connection between the tag type and the Video type */
+  videos?: Maybe<TagToVideoConnection>;
 };
 
 
@@ -7064,6 +7354,16 @@ export type TagPostsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<TagToPostConnectionWhereArgs>;
+};
+
+
+/** The tag type */
+export type TagVideosArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TagToVideoConnectionWhereArgs>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -7309,6 +7609,84 @@ export type TagToTaxonomyConnectionEdge = {
   __typename?: 'TagToTaxonomyConnectionEdge';
   /** The node of the connection, without the edges */
   node?: Maybe<Taxonomy>;
+};
+
+/** Connection between the tag type and the Video type */
+export type TagToVideoConnection = {
+  __typename?: 'TagToVideoConnection';
+  /** Edges for the TagToVideoConnection connection */
+  edges?: Maybe<Array<Maybe<TagToVideoConnectionEdge>>>;
+  /** The nodes of the connection, without the edges */
+  nodes?: Maybe<Array<Maybe<Video>>>;
+  /** Information about pagination in a connection. */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type TagToVideoConnectionEdge = {
+  __typename?: 'TagToVideoConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node?: Maybe<Video>;
+};
+
+/** Arguments for filtering the TagToVideoConnection connection */
+export type TagToVideoConnectionWhereArgs = {
+  /** Category ID */
+  categoryId?: InputMaybe<Scalars['Int']>;
+  /** Array of category IDs, used to display objects from one category OR another */
+  categoryIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Use Category Slug */
+  categoryName?: InputMaybe<Scalars['String']>;
+  /** Array of category IDs, used to display objects from one category OR another */
+  categoryNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: InputMaybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Tag Slug */
+  tag?: InputMaybe<Scalars['String']>;
+  /** Use Tag ID */
+  tagId?: InputMaybe<Scalars['String']>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of tag IDs, used to display objects from one tag OR another */
+  tagNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of tag slugs, used to display objects from one tag OR another */
+  tagSlugAnd?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of tag slugs, used to exclude objects in specified tags */
+  tagSlugIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']>;
 };
 
 /** A taxonomy object */
@@ -7986,6 +8364,43 @@ export type UpdateUserPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** The User object mutation type. */
   user?: Maybe<User>;
+};
+
+/** Input for the updateVideo mutation */
+export type UpdateVideoInput = {
+  /** Set connections between the Video and categories */
+  categories?: InputMaybe<VideoCategoriesInput>;
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']>;
+  /** The excerpt of the object */
+  excerpt?: InputMaybe<Scalars['String']>;
+  /** The ID of the Video object */
+  id: Scalars['ID'];
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Set connections between the Video and tags */
+  tags?: InputMaybe<VideoTagsInput>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']>;
+};
+
+/** The payload for the updateVideo mutation */
+export type UpdateVideoPayload = {
+  __typename?: 'UpdateVideoPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The Post object mutation type. */
+  video?: Maybe<Video>;
 };
 
 /** A User object */
@@ -8670,6 +9085,417 @@ export enum UsersConnectionSearchColumnEnum {
   Url = 'URL'
 }
 
+/** The Video type */
+export type Video = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable & {
+  __typename?: 'Video';
+  /** Connection between the Video type and the category type */
+  categories?: Maybe<VideoToCategoryConnection>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String'];
+  /** The unique resource identifier path */
+  databaseId: Scalars['Int'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** The excerpt of the post. */
+  excerpt?: Maybe<Scalars['String']>;
+  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+  /** The database identifier for the featured image node assigned to the content node */
+  featuredImageDatabaseId?: Maybe<Scalars['Int']>;
+  /** Globally unique ID of the featured image assigned to the node */
+  featuredImageId?: Maybe<Scalars['ID']>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']>;
+  /** The globally unique identifier of the video object. */
+  id: Scalars['ID'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']>;
+  /** Connection between the Video type and the Video type */
+  preview?: Maybe<VideoToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']>;
+  /** Added to the GraphQL Schema because the ACF Field Group &quot;video attrs&quot; was set to Show in GraphQL. */
+  speakers?: Maybe<Video_Speakers>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']>;
+  /** Connection between the Video type and the tag type */
+  tags?: Maybe<VideoToTagConnection>;
+  /** The template assigned to a node of content */
+  template?: Maybe<ContentTemplate>;
+  /** Connection between the Video type and the TermNode type */
+  terms?: Maybe<VideoToTermNodeConnection>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  videoId: Scalars['Int'];
+};
+
+
+/** The Video type */
+export type VideoCategoriesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VideoToCategoryConnectionWhereArgs>;
+};
+
+
+/** The Video type */
+export type VideoContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The Video type */
+export type VideoEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The Video type */
+export type VideoEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** The Video type */
+export type VideoExcerptArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The Video type */
+export type VideoTagsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VideoToTagConnectionWhereArgs>;
+};
+
+
+/** The Video type */
+export type VideoTermsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VideoToTermNodeConnectionWhereArgs>;
+};
+
+
+/** The Video type */
+export type VideoTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** Set relationships between the Video to categories */
+export type VideoCategoriesInput = {
+  /** If true, this will append the category to existing related categories. If false, this will replace existing relationships. Default true. */
+  append?: InputMaybe<Scalars['Boolean']>;
+  /** The input list of items to set. */
+  nodes?: InputMaybe<Array<InputMaybe<VideoCategoriesNodeInput>>>;
+};
+
+/** List of categories to connect the Video to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
+export type VideoCategoriesNodeInput = {
+  /** The description of the category. This field is used to set a description of the category if a new one is created during the mutation. */
+  description?: InputMaybe<Scalars['String']>;
+  /** The ID of the category. If present, this will be used to connect to the Video. If no existing category exists with this ID, no connection will be made. */
+  id?: InputMaybe<Scalars['ID']>;
+  /** The name of the category. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
+  name?: InputMaybe<Scalars['String']>;
+  /** The slug of the category. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+export enum VideoIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Set relationships between the Video to tags */
+export type VideoTagsInput = {
+  /** If true, this will append the tag to existing related tags. If false, this will replace existing relationships. Default true. */
+  append?: InputMaybe<Scalars['Boolean']>;
+  /** The input list of items to set. */
+  nodes?: InputMaybe<Array<InputMaybe<VideoTagsNodeInput>>>;
+};
+
+/** List of tags to connect the Video to. If an ID is set, it will be used to create the connection. If not, it will look for a slug. If neither are valid existing terms, and the site is configured to allow terms to be created during post mutations, a term will be created using the Name if it exists in the input, then fallback to the slug if it exists. */
+export type VideoTagsNodeInput = {
+  /** The description of the tag. This field is used to set a description of the tag if a new one is created during the mutation. */
+  description?: InputMaybe<Scalars['String']>;
+  /** The ID of the tag. If present, this will be used to connect to the Video. If no existing tag exists with this ID, no connection will be made. */
+  id?: InputMaybe<Scalars['ID']>;
+  /** The name of the tag. This field is used to create a new term, if term creation is enabled in nested mutations, and if one does not already exist with the provided slug or ID or if a slug or ID is not provided. If no name is included and a term is created, the creation will fallback to the slug field. */
+  name?: InputMaybe<Scalars['String']>;
+  /** The slug of the tag. If no ID is present, this field will be used to make a connection. If no existing term exists with this slug, this field will be used as a fallback to the Name field when creating a new term to connect to, if term creation is enabled as a nested mutation. */
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+/** Connection between the Video type and the category type */
+export type VideoToCategoryConnection = {
+  __typename?: 'VideoToCategoryConnection';
+  /** Edges for the VideoToCategoryConnection connection */
+  edges?: Maybe<Array<Maybe<VideoToCategoryConnectionEdge>>>;
+  /** The nodes of the connection, without the edges */
+  nodes?: Maybe<Array<Maybe<Category>>>;
+  /** Information about pagination in a connection. */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type VideoToCategoryConnectionEdge = {
+  __typename?: 'VideoToCategoryConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node?: Maybe<Category>;
+};
+
+/** Arguments for filtering the VideoToCategoryConnection connection */
+export type VideoToCategoryConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Connection between the Video type and the Video type */
+export type VideoToPreviewConnectionEdge = {
+  __typename?: 'VideoToPreviewConnectionEdge';
+  /** The node of the connection, without the edges */
+  node?: Maybe<Video>;
+};
+
+/** Connection between the Video type and the tag type */
+export type VideoToTagConnection = {
+  __typename?: 'VideoToTagConnection';
+  /** Edges for the VideoToTagConnection connection */
+  edges?: Maybe<Array<Maybe<VideoToTagConnectionEdge>>>;
+  /** The nodes of the connection, without the edges */
+  nodes?: Maybe<Array<Maybe<Tag>>>;
+  /** Information about pagination in a connection. */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type VideoToTagConnectionEdge = {
+  __typename?: 'VideoToTagConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node?: Maybe<Tag>;
+};
+
+/** Arguments for filtering the VideoToTagConnection connection */
+export type VideoToTagConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Connection between the Video type and the TermNode type */
+export type VideoToTermNodeConnection = {
+  __typename?: 'VideoToTermNodeConnection';
+  /** Edges for the VideoToTermNodeConnection connection */
+  edges?: Maybe<Array<Maybe<VideoToTermNodeConnectionEdge>>>;
+  /** The nodes of the connection, without the edges */
+  nodes?: Maybe<Array<Maybe<TermNode>>>;
+  /** Information about pagination in a connection. */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type VideoToTermNodeConnectionEdge = {
+  __typename?: 'VideoToTermNodeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node?: Maybe<TermNode>;
+};
+
+/** Arguments for filtering the VideoToTermNodeConnection connection */
+export type VideoToTermNodeConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: InputMaybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: InputMaybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: InputMaybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: InputMaybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: InputMaybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: InputMaybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: InputMaybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Direction the connection should be ordered in */
+  order?: InputMaybe<OrderEnum>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: InputMaybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: InputMaybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: InputMaybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: InputMaybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** The Taxonomy to filter terms by */
+  taxonomies?: InputMaybe<Array<InputMaybe<TaxonomyEnum>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Field Group */
+export type Video_Speakers = AcfFieldGroup & {
+  __typename?: 'Video_Speakers';
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>;
+  speakers?: Maybe<Scalars['String']>;
+};
+
 /** Information about pagination in a connection. */
 export type WpPageInfo = {
   __typename?: 'WPPageInfo';
@@ -8693,6 +9519,15 @@ export type WritingSettings = {
   /** Convert emoticons like :-) and :-P to graphics on display. */
   useSmilies?: Maybe<Scalars['Boolean']>;
 };
+
+export type EventRegistrationMutationVariables = Exact<{
+  clientMutationId?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']>;
+  commentOn?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type EventRegistrationMutation = { __typename?: 'RootMutation', createComment?: { __typename?: 'CreateCommentPayload', success?: boolean | null, comment?: { __typename?: 'Comment', approved?: boolean | null, karma?: number | null, id: string, dateGmt?: string | null, content?: string | null, databaseId: number } | null } | null };
 
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
@@ -8722,20 +9557,43 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = { __typename?: 'RootMutation', updateUser?: { __typename?: 'UpdateUserPayload', clientMutationId?: string | null, user?: { __typename?: 'User', id: string, firstName?: string | null } | null } | null };
 
-export type EventQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['ID']>;
-  authorEmail: Scalars['String'];
+export type EventParticipantsQueryVariables = Exact<{
+  id: Scalars['ID'];
 }>;
 
 
-export type EventQuery = { __typename?: 'RootQuery', event?: { __typename?: 'Event', date?: string | null, title?: string | null, id: string, content?: string | null, commentCount?: number | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', link?: string | null, sourceUrl?: string | null } | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', name?: string | null, link?: string | null } | null } | null> | null } | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, startingFrom?: string | null } | null, comments?: { __typename?: 'EventToCommentConnection', nodes?: Array<{ __typename?: 'Comment', approved?: boolean | null, type?: string | null, content?: string | null } | null> | null } | null } | null };
+export type EventParticipantsQuery = { __typename?: 'RootQuery', event?: { __typename?: 'Event', comments?: { __typename?: 'EventToCommentConnection', nodes?: Array<{ __typename?: 'Comment', author?: { __typename?: 'CommentToCommenterConnectionEdge', node?: { __typename?: 'CommentAuthor', email?: string | null, id: string, name?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } | { __typename?: 'User', email?: string | null, id: string, name?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null } | null } | null } | null> | null } | null } | null };
 
-export type EventsQueryVariables = Exact<{ [key: string]: never; }>;
+export type EventQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+}>;
 
 
-export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, excerpt?: string | null, title?: string | null, commentCount?: number | null } | null> | null } | null };
+export type EventQuery = { __typename?: 'RootQuery', event?: { __typename?: 'Event', date?: string | null, title?: string | null, id: string, content?: string | null, commentCount?: number | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', link?: string | null, sourceUrl?: string | null } | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', name?: string | null, link?: string | null } | null } | null> | null } | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null } | null };
+
+export type EventsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null };
 
 export type FetchMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, occupation?: { __typename?: 'User_Occupation', occupation?: string | null } | null } | null };
+
+export type VideoQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type VideoQuery = { __typename?: 'RootQuery', video?: { __typename?: 'Video', id: string, content?: string | null, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null };
+
+export type VideosQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+  parent?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type VideosQuery = { __typename?: 'RootQuery', categories?: { __typename?: 'RootQueryToCategoryConnection', edges?: Array<{ __typename?: 'RootQueryToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', content?: string | null, id: string, date?: string | null, title?: string | null, featuredImageId?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null> | null } | null } | null } | null> | null } | null };

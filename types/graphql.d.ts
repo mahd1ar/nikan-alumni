@@ -1,4 +1,13 @@
 
+declare module '*/event-registration.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const EventRegistration: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/login.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -26,6 +35,15 @@ declare module '*/update-user.gql' {
 }
     
 
+declare module '*/event-participants.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const eventParticipants: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/event.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -48,6 +66,24 @@ declare module '*/fetch-me.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const fetchMe: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/video.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const video: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/videos.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const videos: DocumentNode;
 
   export default defaultDocument;
 }

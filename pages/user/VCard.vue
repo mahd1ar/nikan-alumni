@@ -261,10 +261,10 @@
             <div class="py-5 px-3 h-72">
               <client-only>
                 <l-map
-                  @click="clickmap"
                   style="height: 100%"
                   :zoom="11"
                   :center="[35.826165, 50.964831]"
+                  @click="clickmap"
                 >
                   <l-tile-layer
                     url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
@@ -468,14 +468,6 @@ export default Vue.extend({
       marker_lat_lng: [35.826165, 50.964831] as [number, number],
     }
   },
-  methods: {
-    clickmap(ev: any) {
-      // @ts-ignore
-      this.$refs.marker!.setLatLng([ev.latlng.lat, ev.latlng.lng])
-
-      // this.$nuxt.$on emit
-    },
-  },
   mounted() {
     // @ts-ignore
     window.l = this
@@ -512,6 +504,14 @@ export default Vue.extend({
     //   })
     // }
     // })
+  },
+  methods: {
+    clickmap(ev: any) {
+      // @ts-ignore
+      this.$refs.marker!.setLatLng([ev.latlng.lat, ev.latlng.lng])
+
+      // this.$nuxt.$on emit
+    },
   },
 })
 </script>

@@ -8,6 +8,31 @@
       >
         <div class="flex flex-row gap-1">
           <div class="flex items-center">
+            <div
+              class="lg:hidden text-neutral-700 rounded-full py-2 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
+              @click="openMobileMenu"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="img"
+                class="w-5 h-5"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                >
+                  <circle cx="8" cy="2.5" r=".75" />
+                  <circle cx="8" cy="8" r=".75" />
+                  <circle cx="8" cy="13.5" r=".75" />
+                </g>
+              </svg>
+            </div>
             <nuxt-link
               to="/login"
               class="text-neutral-700 rounded-full py-2 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
@@ -30,8 +55,8 @@
               </svg>
             </nuxt-link>
             <div
-              @click="$emit('openModal')"
               class="text-neutral-700 rounded-full py-2 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
+              @click="$emit('openModal')"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -51,13 +76,19 @@
               </svg>
             </div>
           </div>
-          <div
-            class="text-neutral-600 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
-            v-for="(i, index) in menu"
-            :key="index"
-          >
-            {{ i }}
-          </div>
+          <!-- class="text-neutral-600 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer" -->
+          <nav id="navigation" class="flex justify-center font-bold">
+            <div class="menu-top_menu-container hidden lg:flex">
+              <ul id="menu-top_menu" class="menu">
+                <menu-item
+                  v-for="(menuitem, index) in menu"
+                  :key="index"
+                  :menu="menuitem"
+                  class="h-full flex-center"
+                ></menu-item>
+              </ul>
+            </div>
+          </nav>
         </div>
 
         <figure class="relative">
@@ -72,23 +103,21 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapGetters, mapActions } from 'vuex'
+
 export default Vue.extend({
   data() {
     return {
       search: {
         show: false,
       },
-      menu: [
-        'معرفی',
-        'کتابخانه',
-        'رویداد ها',
-        'رسانه',
-        'انواع بیمه',
-        'نشریه کاربرگ',
-        'بانک اطلاعات',
-        'پروفایل اعضا',
-      ],
     }
+  },
+  computed: {
+    ...mapGetters({ menu: 'navigation/menu' }),
+  },
+  methods: {
+    ...mapActions({ openMobileMenu: 'navigation/openMobileMenu' }),
   },
 })
 </script>

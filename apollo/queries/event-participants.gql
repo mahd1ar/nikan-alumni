@@ -1,0 +1,18 @@
+query eventParticipants($id: ID! ) {
+  event(id: $id) {
+    comments {
+      nodes {
+        author {
+          node {
+            email
+            id
+            name
+            avatar {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 <template>
   <transition name="v-openwindow">
     <div
-      class="bg-[#242F3F] inline-flex justify-center items-center gap-3 p-2 rounded"
       v-if="isLoading"
+      class="bg-[#242F3F] inline-flex justify-center items-center gap-3 p-2 rounded"
     >
       <div>
         <span class="loader"><span class="loader-inner"></span></span>

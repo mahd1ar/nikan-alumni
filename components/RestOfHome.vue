@@ -1,50 +1,58 @@
 <template>
   <div>
     <section class="bg-[#faf9f9] py-8">
-      <div class="flex container gap-4 mx-auto">
-        <div class="w-8/12 flex flex-col">
-          <div class="flex gap-4 flex-row-reverse justify-end">
-            <div class="flex flex-col gap-2">
-              <div class="text-xl text-tm-black">
-                رویداد پیش رو
-                <span
-                  class="text-sm bg-red-50 text-red-600 mx-2 py-1 px-2 rounded-lg font-light font-samim"
-                >
-                  <div
-                    class="w-2 h-2 font-samim rounded bg-red-600 animate-pulse inline-block"
-                  ></div>
-                  در حال برگزاری</span
-                >
-              </div>
-              <h1 class="text-3xl text-tm-black font-bold before:hidden">
-                مسابقات فوتسال بین دوره ای
-              </h1>
-              <div>
-                <div class="text-tm-gray flex items-center gap-2 text-sm">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    class="w-4 h-4"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
+      <count-down
+        v-if="upcommingEvents.length"
+        v-slot="{ status, time }"
+        :starting-from="upcommingEvents[0].wpdate"
+        :duration="upcommingEvents[0].duration"
+      >
+        <div class="flex container gap-4 mx-auto">
+          <div class="w-8/12 flex flex-col">
+            <div class="flex gap-4 flex-row-reverse justify-end">
+              <div class="flex flex-col gap-2">
+                <div class="text-xl text-tm-black">
+                  رویداد پیش رو
+                  <span
+                    v-show="status === 0"
+                    class="text-sm bg-red-50 text-red-600 mx-2 py-1 px-2 rounded-lg font-light font-samim"
                   >
-                    <g
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                    >
-                      <circle cx="12" cy="10" r="3" />
-                      <path
-                        d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z"
-                      />
-                    </g>
-                  </svg>
-                  <span> سالن فوتسال نیکان </span>
+                    <div
+                      class="w-2 h-2 font-samim rounded bg-red-600 animate-pulse inline-block"
+                    ></div>
+
+                    در حال برگزاری</span
+                  >
                 </div>
-                <!-- <div
+                <h1 class="text-3xl text-tm-black font-bold before:hidden">
+                  {{ upcommingEvents[0].title }}
+                </h1>
+                <div>
+                  <div class="text-tm-gray flex items-center gap-2 text-sm">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="img"
+                      class="w-4 h-4"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      >
+                        <circle cx="12" cy="10" r="3" />
+                        <path
+                          d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z"
+                        />
+                      </g>
+                    </svg>
+                    <span>{{ upcommingEvents[0].location }} </span>
+                  </div>
+                  <!-- <div
                   class="text-tm-gray bg-gray-50 inline-flex items-center gap-1 mt-2 rounded-md"
                 >
                   <svg
@@ -62,56 +70,59 @@
                   </svg>
                   <span> کارگروه نشاط و سرگرمی </span>
                 </div> -->
+                </div>
+              </div>
+              <div class="w-16 rounded text-center">
+                <div class="bg-gray-200 py-2">
+                  <div>{{ upcommingEvents[0].faFormattedDate[2] }}</div>
+
+                  <div>{{ upcommingEvents[0].faFormattedDate[1] }}</div>
+                </div>
+                <div class="bg-gray-900 text-white">
+                  {{ upcommingEvents[0].faFormattedDate[0] }}
+                </div>
               </div>
             </div>
-            <div class="w-16 rounded text-center">
-              <div class="bg-gray-200 py-2">
-                <div>18</div>
+            <div class="flex flex-row-reverse gap-8 mt-20">
+              <div
+                v-if="time"
+                class="w-9/12 grid grid-cols-4 text-3xl text-right"
+                dir="ltr"
+              >
+                <div class="flex flex-col">
+                  <span> {{ time.day }} :</span>
+                  <span class="text-base text-gray-500">روز</span>
+                </div>
 
-                <div>اسفند</div>
+                <div class="flex flex-col">
+                  <span>{{ time.hour }} :</span>
+                  <span class="text-base text-gray-500">ساعت</span>
+                </div>
+                <div class="flex flex-col">
+                  <span>{{ time.min }} :</span>
+                  <span class="text-base text-gray-500">دقیقه</span>
+                </div>
+                <div class="flex flex-col">
+                  <span> {{ time.sec }} </span>
+                  <span class="text-base text-gray-500">ثانیه</span>
+                </div>
               </div>
-              <div class="bg-gray-900 text-white">2022</div>
+              <div
+                class="w-3/12 bg-tm-yellow hover:bg-yellow-300 shadow-lg shadow-yellow-500/50 cursor-pointer text-white text-lg font-semibold text-center rounded flex-center"
+              >
+                مشاهده رویداد
+              </div>
             </div>
           </div>
-          <div class="flex flex-row-reverse gap-8 mt-20">
-            <div class="w-9/12 grid grid-cols-4 text-3xl text-right" dir="ltr">
-              <div class="flex flex-col">
-                <span>5 :</span>
-                <span class="text-base text-gray-500">روز</span>
-              </div>
-              <div class="flex flex-col">
-                <span>45 :</span>
-                <span class="text-base text-gray-500">ساعت</span>
-              </div>
-              <div class="flex flex-col">
-                <span>22 :</span>
-                <span class="text-base text-gray-500">دقیقه</span>
-              </div>
-              <div class="flex flex-col">
-                <!-- <transition name="counter" mode="out-in"> -->
-                <span>
-                  {{ counter.fname }}
-                </span>
-
-                <!-- </transition> -->
-                <span class="text-base text-gray-500">ثانیه</span>
-              </div>
-            </div>
-            <div
-              class="w-3/12 bg-tm-yellow hover:bg-yellow-300 shadow-lg shadow-yellow-500/50 cursor-pointer text-white text-lg font-semibold text-center rounded flex-center"
-            >
-              مشاهده رویداد
-            </div>
+          <div class="w-4/12">
+            <img
+              class="rounded-md w-full object-cover max-h-full"
+              src="test/one.jfif"
+              alt=""
+            />
           </div>
         </div>
-        <div class="w-4/12">
-          <img
-            class="rounded-md w-full object-cover max-h-full"
-            src="test/one.jfif"
-            alt=""
-          />
-        </div>
-      </div>
+      </count-down>
     </section>
 
     <section class="text-gray-600 body-font overflow-hidden">
@@ -208,7 +219,7 @@
               <!-- <div class="h-1 w-20 bg-cyan-500 rounded"></div> -->
             </div>
             <div
-              v-for="(e, index) in events"
+              v-for="(e, index) in testevents"
               :key="index"
               class="px-12 w-full flex flex-col items-start"
             >
@@ -218,7 +229,7 @@
                     class="w-20 flex-shrink-0 flex flex-col justify-center items-center text-center leading-none bg-[#fffaea] py-4 rounded-md"
                   >
                     <span
-                      class="text-[#ffc400] text-lg font-semibold w-12 pb-2 mb-2 border-b-2 border-gray-200"
+                      class="text-[#ffc400] text-lg font-semibold w-12 pb-2 mb-2 border-b-2 border-tm-yellow"
                       >12</span
                     >
                     <span
@@ -242,8 +253,8 @@
                       {{ e.title }}
                     </h2>
                     <p
-                      class="leading-relaxed mb-5 hover:underline cursor-pointer"
                       v-snip="3"
+                      class="leading-relaxed mb-5 hover:underline cursor-pointer"
                     >
                       {{ e.body }}
                     </p>
@@ -284,6 +295,245 @@
                 مشاهده تمام رویداد ها
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="relative"
+      style="background: #fafafa; background-image: url(/pattern-1.svg)"
+    >
+      <div class="relative max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-16 lg:items-center"
+        >
+          <div class="max-w-lg mx-auto text-center lg:text-left lg:mx-0">
+            <h2 class="text-3xl font-bold sm:text-4xl">
+              Find your career path
+            </h2>
+
+            <p class="mt-4 text-gray-600">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vero
+              aliquid sint distinctio iure ipsum cupiditate? Quis, odit
+              assumenda? Deleniti quasi inventore, libero reiciendis minima
+              aliquid tempora. Obcaecati, autem.
+            </p>
+
+            <a
+              class="inline-flex items-center px-8 py-3 mt-8 text-white bg-cyan-500 border border-cyan-500 rounded hover:bg-transparent hover:text-cyan-600 active:text-cyan-500 focus:outline-none focus:ring"
+              href="/get-started"
+            >
+              <svg
+                class="w-5 h-5 ml-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+              <span class="text-sm font-medium"> Get Started </span>
+            </a>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <a
+              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              href="/accountant"
+            >
+              <span class="inline-block p-3 rounded-lg bg-gray-50">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  ></path>
+                </svg>
+              </span>
+
+              <h6 class="mt-2 font-bold">Accountant</h6>
+
+              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+                Lorem ipsum dolor sit amet consectetur.
+              </p>
+            </a>
+
+            <a
+              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              href="/accountant"
+            >
+              <span class="inline-block p-3 rounded-lg bg-gray-50">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  ></path>
+                </svg>
+              </span>
+
+              <h6 class="mt-2 font-bold">Accountant</h6>
+
+              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+                Lorem ipsum dolor sit amet consectetur.
+              </p>
+            </a>
+
+            <a
+              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              href="/accountant"
+            >
+              <span class="inline-block p-3 rounded-lg bg-gray-50">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  ></path>
+                </svg>
+              </span>
+
+              <h6 class="mt-2 font-bold">Accountant</h6>
+
+              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+                Lorem ipsum dolor sit amet consectetur.
+              </p>
+            </a>
+
+            <a
+              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              href="/accountant"
+            >
+              <span class="inline-block p-3 rounded-lg bg-gray-50">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  ></path>
+                </svg>
+              </span>
+
+              <h6 class="mt-2 font-bold">Accountant</h6>
+
+              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+                Lorem ipsum dolor sit amet consectetur.
+              </p>
+            </a>
+
+            <a
+              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              href="/accountant"
+            >
+              <span class="inline-block p-3 rounded-lg bg-gray-50">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  ></path>
+                </svg>
+              </span>
+
+              <h6 class="mt-2 font-bold">Accountant</h6>
+
+              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+                Lorem ipsum dolor sit amet consectetur.
+              </p>
+            </a>
+
+            <a
+              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              href="/accountant"
+            >
+              <span class="inline-block p-3 rounded-lg bg-gray-50">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path
+                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  ></path>
+                </svg>
+              </span>
+
+              <h6 class="mt-2 font-bold">Accountant</h6>
+
+              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+                Lorem ipsum dolor sit amet consectetur.
+              </p>
+            </a>
           </div>
         </div>
       </div>
@@ -696,12 +946,33 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { WpUpcommingEvents } from '~/data/AxiosTypes'
+import {
+  timeout,
+  toIndiaDigits,
+  wordpressDateToFormattedJalali,
+  wordpressDateToJalali,
+} from '~/data/utils'
+import { Dict } from '~/data/utils/dictionary'
+import gqlEventsQuery from '@/apollo/queries/events.gql'
+import { EventsQuery, EventsQueryVariables } from '~/types/types'
+import { Event } from '@/data/GlobslTypes'
+
+enum EventStatus {
+  ahead = -1,
+  current,
+  passed,
+}
+interface EventWithStatus extends Event {
+  eventStatus: EventStatus
+}
+
 export default Vue.extend({
   data() {
     return {
-      counter: {
-        fname: 59,
-      },
+      upcommingEvents: [] as Event[],
+      events: [] as EventWithStatus[],
+
       news: [
         {
           title: 'کاربرگ شماره 5 منتشر شد',
@@ -720,7 +991,7 @@ export default Vue.extend({
                 آرتمیا تحولی در صنعت شیلات`,
         },
       ],
-      events: [
+      testevents: [
         {
           title: 'دورهمی شب چله نیکانیان',
           body: `
@@ -788,8 +1059,7 @@ export default Vue.extend({
           'fullscreen',
         ],
       },
-      videourl:
-        'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
+      videourl: 'http://194.5.205.148/vid/TedNikan1.mp4',
 
       media: [
         {
@@ -815,15 +1085,99 @@ export default Vue.extend({
       ],
     }
   },
+  async fetch() {
+    const variables: EventsQueryVariables = { first: 5 }
+    const { data } = await this.$apollo.query<EventsQuery>({
+      query: gqlEventsQuery,
+      variables,
+    })
+
+    data.events?.nodes?.forEach((i) => {
+      const ev = {} as EventWithStatus
+
+      ev.id = i!.databaseId
+      ev.gqlid = i!.id
+      ev.title = i?.title || ''
+      ev.imageLink = i?.featuredImage?.node?.sourceUrl || ''
+      ev.commentCount = i?.commentCount
+        ? toIndiaDigits(i.commentCount)
+        : toIndiaDigits(0)
+      ev.wpdate = i!.date!
+      ev.date = wordpressDateToJalali(i!.date!)
+        .map((i) => toIndiaDigits(i))
+        .join('/')
+      ev.faFormattedDate = wordpressDateToFormattedJalali(i!.date!)
+      ev.duration = i?.eventProps?.duration || 0
+      ev.location = i?.eventProps?.venue || ''
+
+      const startingFrom = ~~(new Date(ev.wpdate).getTime() / 1000)
+      const now = ~~(Date.now() / 1000)
+      const duration = ev.duration * 24 * 3600
+      let status: EventStatus
+
+      if (startingFrom > now) {
+        status = EventStatus.ahead
+      } else if (startingFrom + duration > now) {
+        status = EventStatus.current
+      } else {
+        status = EventStatus.passed
+      }
+
+      ev.eventStatus = status
+      console.log(ev)
+      this.events.push(ev)
+      if (ev.eventStatus === EventStatus.current) this.upcommingEvents.push(ev)
+    })
+  },
   mounted() {
-    setInterval(() => {
-      const n = this.counter.fname
-      // console.log(this.counter.fst)
-      this.counter.fname = n > 0 ? n - 1 : 59
-    }, 1000)
+    // @ts-ignore
+    window.home = this
+    this.getUpcommingEvents()
+    console.log(process.env.MEDIA_CAT_ID)
+  },
+  methods: {
+    async getUpcommingEvents(tryingThreshold = 3) {
+      try {
+        if (this.upcommingEvents.length > 0) return
+
+        const { data } = await this.$axios.get<WpUpcommingEvents[]>(
+          'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent'
+        )
+        const d: Event[] = data
+          .map((e) => ({
+            id: e.ID,
+            gqlid: e.gqlid,
+            title: e.post_title,
+            commentCount: e.comment_count,
+            imageLink: e.featured_image || '',
+            date: wordpressDateToJalali(e.post_date)
+              .map((i) => toIndiaDigits(i))
+              .join(' / '),
+            faFormattedDate: wordpressDateToFormattedJalali(e.post_date),
+            wpdate: e.post_date,
+            location: 'LOCATION',
+            category: e.category.length ? e.category[0].name : '',
+            duration: e.duration ? parseFloat(e.duration) : 0.0,
+          }))
+          .sort(
+            ({ wpdate: a }, { wpdate: b }) =>
+              new Date(a).getTime() - new Date(b).getTime()
+          )
+
+        d.forEach((i) => {
+          this.upcommingEvents.push(i)
+        })
+      } catch (error) {
+        if (tryingThreshold > 0) {
+          await timeout(1500)
+          this.getUpcommingEvents(tryingThreshold - 1)
+        } else {
+          this.$about.error({ title: Dict.general_err, body: error })
+        }
+      }
+    },
   },
 })
 </script>
 
-<style >
-</style>
+<style></style>

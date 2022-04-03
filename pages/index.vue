@@ -3,7 +3,7 @@
     <!-- search -->
     <client-only>
       <transition name="v-fade">
-        <float-search @closeModal="search.show = false" v-if="search.show" />
+        <float-search v-if="search.show" @closeModal="search.show = false" />
       </transition>
     </client-only>
 
@@ -34,7 +34,7 @@
                     <br />
                     <span class="text-cyan-300"> نیکان </span>
                   </div>
-                  <p class="text-white text-lg">
+                  <p class="text-white text-lg leading-7">
                     محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و
                     ایجاد بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها
                   </p>
@@ -176,18 +176,15 @@ HSBC Bank Middle East
     }
   },
   mounted() {
-    // @ts-ignore
-    window.l = this
     setInterval(() => {
       const n = this.counter.fname
-      // console.log(this.counter.fst)
       this.counter.fname = n > 0 ? n - 1 : 59
     }, 1000)
   },
 })
 </script>
 
-<style >
+<style>
 .m-blur-background {
   background: linear-gradient(
     90deg,

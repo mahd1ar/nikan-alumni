@@ -19,9 +19,17 @@
 #   }
 # }
 
-mutation Login($username: String!, $password: String!, $clientMutationId: String = "") {
+mutation Login(
+  $username: String!
+  $password: String!
+  $clientMutationId: String = ""
+) {
   login(
-    input: {username: $username, password: $password, clientMutationId: $clientMutationId}
+    input: {
+      username: $username
+      password: $password
+      clientMutationId: $clientMutationId
+    }
   ) {
     authToken
     refreshToken

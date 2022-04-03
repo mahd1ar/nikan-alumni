@@ -29,20 +29,20 @@
             </svg>
           </label>
           <input
-            @blur="inputFocused"
-            @focus="inputFocused"
-            @input="input"
-            v-model="searchValue"
             id="search"
+            v-model="searchValue"
             name="search"
             placeholder="جست و جو کنید..."
             class="focus-within:outline-none w-full px-2 bg-opacity-0"
             type="text"
+            @blur="inputFocused"
+            @focus="inputFocused"
+            @input="input"
           />
         </div>
         <i
-          @click="close"
           class="w-20 flex-center flex-shrink-0 border-2 text-gray-400 cursor-pointer"
+          @click="close"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -257,7 +257,6 @@
   </div>
 </template>
 
-
 <script lang="ts">
 import Vue from 'vue'
 
@@ -312,6 +311,9 @@ const VueSearch = Vue.extend({
       ],
     }
   },
+  mounted() {
+    // console.log(this)
+  },
   methods: {
     input() {},
     inputFocused() {
@@ -322,14 +324,10 @@ const VueSearch = Vue.extend({
       this.searchValue = ''
     },
   },
-  mounted() {
-    // console.log(this)
-  },
 })
 
 export default VueSearch
 </script>
-
 
 <style scoped>
 a:hover {

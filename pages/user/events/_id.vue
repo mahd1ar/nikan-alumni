@@ -1,9 +1,100 @@
 <template>
   <div class="relative bg-gray-100 flex-grow">
+    <modal
+      @yes="regEvent"
+      :type="modal.success ? 'success' : 'error'"
+      :open.sync="modal.isOpen"
+      :confirm="modal.confirm"
+    >
+      <template #title> {{ modal.title }} </template>
+      <template #body> <div v-html="modal.body"></div> </template>
+    </modal>
+
+    <modal
+      type="about"
+      :ok="participantsModal.closeText"
+      :open.sync="participantsModal.isOpen"
+      :confirm="false"
+    >
+      <template #title> {{ participantsModal.title }} </template>
+      <template #body>
+        <div class="flex flex-col gap-1">
+          <div class="text-red-500 font-bold" v-if="totalRegistrants === 0">
+            {{ participantsModal.nobodySignUpForThis }}
+          </div>
+
+          <div
+            class="text-cyan-500 font-bold"
+            v-if="participantsModal.body.length === 0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              role="img"
+              class="w-10 h-10 mx-auto"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="18" cy="12" r="0" fill="currentColor">
+                <animate
+                  attributeName="r"
+                  begin=".67"
+                  calcMode="spline"
+                  dur="1.5s"
+                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                  repeatCount="indefinite"
+                  values="0;2;0;0"
+                />
+              </circle>
+              <circle cx="12" cy="12" r="0" fill="currentColor">
+                <animate
+                  attributeName="r"
+                  begin=".33"
+                  calcMode="spline"
+                  dur="1.5s"
+                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                  repeatCount="indefinite"
+                  values="0;2;0;0"
+                />
+              </circle>
+              <circle cx="6" cy="12" r="0" fill="currentColor">
+                <animate
+                  attributeName="r"
+                  begin="0"
+                  calcMode="spline"
+                  dur="1.5s"
+                  keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                  repeatCount="indefinite"
+                  values="0;2;0;0"
+                />
+              </circle>
+            </svg>
+          </div>
+
+          <div
+            v-for="(user, index) in participantsModal.body"
+            :key="index"
+            class="flex flex-row items-center gap-2 border border-cyan-200 p-2 rounded-md bg-cyan-50"
+          >
+            <img class="w-10 h-10 rounded-full" :src="user.avatar" />
+
+            <div class="flex flex-col items-start">
+              <div class="font-semibold">
+                {{ user.firstName + ' ' }}
+              </div>
+              <div class="text-gray-500 text-xs">
+                {{ user.email }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </modal>
+
     <header
       class="entry-header entry-header--style-3 relative pt-16 z-10 md:py-20 lg:py-28 bg-neutral-900 dark:bg-black"
     >
-      <div class="dark container relative z-10">
+      <div class="container relative z-10">
         <div class="max-w-screen-md">
           <div class="nc-SingleHeader space-y-5">
             <!-- CATEGORIES -->
@@ -33,7 +124,7 @@
               class="flex flex-col lg:flex-row justify-between lg:items-end space-y-5 lg:space-y-0 lg:space-x-5"
             >
               <div
-                class="nc-PostMeta2 nc-PostMeta2-2 flex items-center text-neutral-700 text-left dark:text-neutral-200 text-sm leading-none flex-shrink-0"
+                class="gap-2 flex items-center text-neutral-700 text-left dark:text-neutral-200 text-sm leading-none flex-shrink-0"
                 data-nc-id="PostMeta2"
               >
                 <a
@@ -43,11 +134,24 @@
                   <div
                     class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center overflow-hidden text-neutral-100 uppercase font-semibold rounded-full shadow-inner h-10 w-10 sm:h-11 sm:w-11 text-xl ring-1 ring-white dark:ring-neutral-900"
                   >
-                    <img
-                      class="absolute inset-0 w-full h-full object-cover"
-                      src="https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/qxevdflbl8a-1-200x300.jpg"
-                      alt="ncmaz"
-                    />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="img"
+                      width="1em"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8s8 3.589 8 8s-3.589 8-8 8z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M11 11h2v6h-2zm0-4h2v2h-2z"
+                      />
+                    </svg>
                   </div>
                 </a>
                 <div class="ml-3">
@@ -56,12 +160,12 @@
                       class="block font-semibold"
                       href="https://ncmaz.chisnghiax.com/author/ncmaz/"
                     >
-                      ncmaz
+                      {{ category }}
                     </a>
                   </div>
                   <div class="text-xs mt-[6px]">
                     <span class="text-neutral-700 dark:text-neutral-300">
-                      Sep 05, 2021
+                      {{ date }}
                     </span>
 
                     <span class="mx-2 font-semibold">·</span>
@@ -76,40 +180,36 @@
                 </div>
               </div>
 
-              <div
-                class="nc-SingleMetaAction2 flex flex-row space-x-2.5 items-center"
-              >
+              <div class="flex flex-row space-x-2.5 items-center gap-2">
                 <!-- VIEWS COUNT -->
-                <div
-                  class="nc-SingleMetaAction2__views relative sm:min-w-[68px] rounded-full text-neutral-6000 bg-neutral-50 dark:text-neutral-200 dark:bg-neutral-800 flex items-center justify-center pl-2 pr-3 h-7 sm:h-8 text-xs sm:text-sm focus:outline-none"
-                  title="Views"
+                <button
+                  @click="getEventParticipants"
+                  class="relative sm:min-w-[68px] rounded-full transition-colors text-neutral-200 bg-neutral-800 hover:bg-neutral-500 items-center justify-center pl-2 pr-3 h-7 sm:h-8 text-xs sm:text-sm hidden sm:flex"
+                  title="تعداد ثبت نام کنندگان"
                 >
-                  <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
+                    class="w-5 h-5"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 20 20"
+                  >
+                    <circle cx="6" cy="6" r="3" fill="currentColor" />
+                    <circle cx="14" cy="6" r="3" fill="currentColor" />
                     <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.2"
-                      d="M19.25 12C19.25 13 17.5 18.25 12 18.25C6.5 18.25 4.75 13 4.75 12C4.75 11 6.5 5.75 12 5.75C17.5 5.75 19.25 11 19.25 12Z"
-                    ></path>
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="2.25"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.2"
-                    ></circle>
+                      fill="currentColor"
+                      d="M6 10c-3.31 0-6 1.79-6 4v2h6v-2c0-1.48 1.21-2.77 3-3.46c-.88-.35-1.91-.54-3-.54zm8 0c-3.31 0-6 1.79-6 4v2h12v-2c0-2.21-2.69-4-6-4z"
+                    />
                   </svg>
-                  <span class="ml-1 text-neutral-900 dark:text-neutral-200">
-                    6402
+                  <span class="mr-2">
+                    {{ totalRegistrantsFa }}
                   </span>
-                </div>
+                </button>
 
                 <!-- COMMENT COUNTS -->
-                <a
-                  class="nc-SingleMetaAction2__comments group relative sm:min-w-[68px] rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 items-center justify-center pl-2 pr-3 h-7 sm:h-8 text-xs sm:text-sm focus:outline-none hidden sm:flex"
+                <button
+                  class="relative sm:min-w-[68px] rounded-full transition-colors text-neutral-200 bg-neutral-800 items-center justify-center pl-2 pr-3 h-7 sm:h-8 text-xs sm:text-sm hidden sm:flex"
                   title="Comments"
                   href="https://ncmaz.chisnghiax.com/sint-est-autem-quibusdam-asperiores-occaecati-voluptatem/#comments"
                 >
@@ -141,11 +241,12 @@
                     ></path>
                   </svg>
                   <span
-                    class="ml-1 text-neutral-900 dark:text-neutral-200 group-hover:text-teal-600"
+                    class="mr-1 text-neutral-900 dark:text-neutral-200 group-hover:text-teal-600"
                   >
-                    0
+                    {{ duration }}
+                    {{ delimiter }}
                   </span>
-                </a>
+                </button>
 
                 <!-- DIVIDER -->
                 <div class="px-1">
@@ -154,74 +255,96 @@
                   ></div>
                 </div>
 
-                <!-- LIKE BUTTON -->
-                <div class="ncmaz-button-like-post relative text-xs sm:text-sm">
-                  <button
-                    class="simplefavorite-button has-count"
-                    data-postid="326"
-                    data-siteid="1"
-                    data-groupid="1"
-                    data-favoritecount="40"
-                    style=""
+                <div v-if="canRegister" class="relative inline-block text-left">
+                  <div
+                    class="relative rounded-3xl py-1 px-2 flex gap-2 items-center justify-center transition-all duration-300"
+                    :style="regBtnStyle"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    v-if="$apollo.loading"
                   >
-                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                      <path
-                        fill-rule="evenodd"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1"
-                        d="M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                    <span class="simplefavorite-button-count">40</span>
-                  </button>
-                </div>
-
-                <!-- DROPDOWN SHARE -->
-                <div>
-                  <div class="relative inline-block text-left">
-                    <button
-                      class="nc-PostCardDropdownShare relative rounded-full flex items-center justify-center focus:outline-none bg-neutral-50 hover:bg-blue-50 hover:text-blue-700 dark:hover:text-blue-700 dark:text-neutral-100 dark:bg-neutral-800 dark:hover:bg-blue-100 transition-colors duration-300 h-7 w-7 sm:h-8 sm:w-8"
-                      title="Share with"
-                      id="headlessui-menu-button-4"
-                      type="button"
-                      aria-haspopup="true"
-                      aria-expanded="false"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="img"
+                      class="w-7 h-7"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
                     >
-                      <div>
-                        <svg
-                          width="24"
-                          height="24"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1"
-                            d="M4.75 14.75V16.25C4.75 17.9069 6.09315 19.25 7.75 19.25H16.25C17.9069 19.25 19.25 17.9069 19.25 16.25V14.75"
-                          ></path>
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1"
-                            d="M12 14.25L12 5"
-                          ></path>
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1"
-                            d="M8.75 8.25L12 4.75L15.25 8.25"
-                          ></path>
-                        </svg>
-                      </div>
-                    </button>
+                      <circle cx="18" cy="12" r="0" fill="currentColor">
+                        <animate
+                          attributeName="r"
+                          begin=".67"
+                          calcMode="spline"
+                          dur="1.5s"
+                          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                          repeatCount="indefinite"
+                          values="0;2;0;0"
+                        />
+                      </circle>
+                      <circle cx="12" cy="12" r="0" fill="currentColor">
+                        <animate
+                          attributeName="r"
+                          begin=".33"
+                          calcMode="spline"
+                          dur="1.5s"
+                          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                          repeatCount="indefinite"
+                          values="0;2;0;0"
+                        />
+                      </circle>
+                      <circle cx="6" cy="12" r="0" fill="currentColor">
+                        <animate
+                          attributeName="r"
+                          begin="0"
+                          calcMode="spline"
+                          dur="1.5s"
+                          keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"
+                          repeatCount="indefinite"
+                          values="0;2;0;0"
+                        />
+                      </circle>
+                    </svg>
                   </div>
+
+                  <button
+                    v-else
+                    class="relative rounded-3xl py-2 px-4 flex gap-2 items-center justify-center transition-all duration-300"
+                    title="Share with"
+                    :style="regBtnStyle"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    @click="askForConfirmRegEvent"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="img"
+                      class="w-5 h-5 flex-shrink-0"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        cx="11"
+                        cy="8"
+                        r="2"
+                        fill="currentColor"
+                        opacity=".3"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M5 18h4.99L9 17l.93-.94C7.55 16.33 5.2 17.37 5 18z"
+                        opacity=".3"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M11 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2s-2-.9-2-2s.9-2 2-2zm-1 12H5c.2-.63 2.55-1.67 4.93-1.94h.03l.46-.45L12 14.06a9.34 9.34 0 0 0-1-.06c-2.67 0-8 1.34-8 4v2h9l-2-2zm10.6-5.5l-5.13 5.17l-2.07-2.08L12 17l3.47 3.5L22 13.91z"
+                      />
+                    </svg>
+
+                    {{ regBtnMessage }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -236,24 +359,20 @@
           class="hidden md:block absolute top-0 rigth-0 bottom-0 w-1/5 from-neutral-900 dark:from-black bg-gradient-to-l"
         ></div>
 
-        <img
+        <!-- <img
           width="2250"
           height="1500"
           src="https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2.jpeg"
           class="block w-full h-full object-cover wp-post-image"
           alt=""
           loading="lazy"
-          srcset="
-            https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2.jpeg           2250w,
-            https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2-500x333.jpeg    500w,
-            https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2-1024x683.jpeg  1024w,
-            https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2-768x512.jpeg    768w,
-            https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2-1536x1024.jpeg 1536w,
-            https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2-2048x1365.jpeg 2048w,
-            https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2-1320x880.jpeg  1320w,
-            https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2-300x200.jpeg    300w
-          "
-          sizes="(max-width: 2250px) 100vw, 2250px"
+        /> -->
+        <img
+          v-if="image"
+          :src="image"
+          class="block w-full h-full object-cover"
+          alt=""
+          loading="lazy"
         />
       </div>
     </header>
@@ -268,35 +387,176 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import onLoggedOut from '@/mixins/on-logged-out'
 import { Dict } from '~/data/utils/dictionary'
-import query from '@/apollo/queries/event.gql'
-import { EventQuery, EventQueryVariables } from '~/types/types'
+
+import regEvent from '@/apollo/mutation/event-registration.gql'
+
+import {
+  EventParticipantsQuery,
+  EventParticipantsQueryVariables,
+  EventRegistrationMutation,
+  EventRegistrationMutationVariables,
+} from '~/types/types'
+import { toIndiaDigits } from '~/data/utils'
+import onLoggedOut from '~/mixins/on-logged-out'
+import participants from '@/apollo/queries/event-participants.gql'
+
+interface WPRestEvent {
+  comment_ID: string
+  comment_agent: string
+  comment_approved: string
+  comment_author: string
+  comment_author_IP: string
+  comment_author_email: string
+  comment_author_url: string
+  comment_content: string
+  comment_date: string
+  comment_date_gmt: string
+  comment_karma: string
+  comment_parent: string
+  comment_post_ID: string
+  comment_type: string
+  user_id: string
+}
+
+export interface Category {
+  term_id: number
+  name: string
+  slug: string
+  term_group: number
+  term_taxonomy_id: number
+  taxonomy: string
+  description: string
+  parent: number
+  count: number
+  filter: string
+}
+
+export interface WpUpcommingEvent {
+  iD: number
+  post_author: string
+  post_date: string
+  post_date_gmt: string
+  post_content: string
+  post_title: string
+  post_excerpt: string
+  post_status: string
+  comment_status: string
+  ping_status: string
+  post_password: string
+  post_name: string
+  to_ping: string
+  pinged: string
+  post_modified: string
+  post_modified_gmt: string
+  post_content_filtered: string
+  post_parent: number
+  guid: string
+  menu_order: number
+  post_type: string
+  post_mime_type: string
+  comment_count: string
+  filter: string
+  gqlid: string
+  featured_image: string
+  category: Category[]
+  duration: string
+}
+
+enum commentStatus {
+  Approved = '1',
+  halt = '0',
+  spam = 'SPAM',
+  trashed = 'TRASH',
+}
 
 export default Vue.extend({
   mixins: [onLoggedOut],
   layout: 'dashboard',
   middleware: ['authentication'],
+  props: {
+    canRegister: { type: Boolean, default: true },
+  },
   data() {
     return {
+      participantsModal: {
+        isOpen: false,
+        title: '',
+        body: [] as { firstName: string; avatar: string; email: string }[],
+        closeText: '',
+        nobodySignUpForThis: '',
+      },
+      modal: {
+        isOpen: false,
+        title: '',
+        body: '',
+        confirm: true,
+        success: true,
+      },
+      postId: null as null | string,
       title: '',
       content: '',
+      category: '',
+      image: '',
+      totalRegistrants: 0 as number,
+      duration: '1', // day
+      delimiter: null as 'روز' | 'ساعت' | null,
+      date: '',
+      registrationStatus: null as
+        | 'registerd'
+        | 'notregisterd'
+        | 'halt'
+        | 'not approved'
+        | null,
     }
   },
   async fetch() {
     try {
-      console.log('user email : ', this.$store.state.authentication.user.email)
-      const variables: EventQueryVariables = {
-        id: this.$route.params.id,
-        authorEmail: this.$store.state.authentication.user.email,
-      }
-      const { data } = await this.$apollo.query<EventQuery>({
-        query,
-        variables,
-      })
+      // const variables: EventQueryVariables = {
+      //   id: decodeURIComponent(this.$route.params.id),
+      // }
 
-      this.title = data.event?.title || ''
-      this.content = data.event?.content || ''
+      // const { data } = await this.$apollo.query<EventQuery>({
+      //   query,
+      //   variables,
+      // })
+      const { data } = await this.$axios.get<WpUpcommingEvent>(
+        'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent/' +
+          this.$route.params.id
+      )
+      console.log(data)
+
+      if (!data) return
+
+      this.title = data.post_title || ''
+      this.content = data.post_content || ''
+
+      if (data.category.length) {
+        this.category = data.category[0].name || ''
+      }
+
+      this.image = data.featured_image || ''
+
+      this.totalRegistrants = Number(data.comment_count) || 0
+
+      let duration = ''
+      if (data.duration) {
+        const d = parseFloat(data.duration)
+
+        if (d) {
+          if (d < 1) {
+            duration = toIndiaDigits(Math.ceil(d * 24))
+            this.delimiter = 'ساعت'
+          } else {
+            duration = toIndiaDigits(d)
+            this.delimiter = 'روز'
+          }
+        }
+      }
+
+      this.duration = duration
+
+      this.date = data.post_date || ''
     } catch (error) {
       if (process.client)
         this.$about.error({ title: Dict.fetch_err, body: String(error) })
@@ -305,14 +565,197 @@ export default Vue.extend({
     }
   },
 
+  computed: {
+    totalRegistrantsFa() {
+      const x = toIndiaDigits(this.totalRegistrants)
+      return x
+    },
+    regBtnMessage() {
+      let btn = ''
+      if (this.registrationStatus === 'notregisterd') btn = Dict.event_reg_now
+      else if (this.registrationStatus === 'registerd') btn = Dict.event_reg
+      else if (this.registrationStatus === 'halt') btn = Dict.event_reg_halt
+
+      return btn
+    },
+    regBtnStyle() {
+      let style = {
+        backgroundImage: 'linear-gradient(to left,#0e2f2e, #233646)',
+        color: '#9bdde0',
+        boxShadow: '0px 0px 10px 0px rgb(0 0 0)',
+        fontWeight: 100,
+      }
+
+      if (this.registrationStatus === 'registerd')
+        style = {
+          backgroundImage: 'linear-gradient(to left,#0e2f2e, #233646)',
+          color: '#9bdde0',
+          fontWeight: 100,
+          boxShadow: '0px 0px 10px 0px rgb(0 0 0)',
+        }
+      else if (this.registrationStatus === 'halt')
+        style = {
+          fontWeight: 100,
+          backgroundImage: 'linear-gradient(to left,#c3e6e3, #58d5dd)',
+          color: '#112829',
+          boxShadow: '0px 0px 10px 0px rgb(0 0 0)',
+        }
+      else if (this.registrationStatus === 'notregisterd')
+        style = {
+          backgroundImage: 'linear-gradient(to left,#ff9800, #ffeb3b)',
+          color: '#372f16',
+          boxShadow: '0px 0px 20px 0px rgb(207 194 147 / 55%)',
+          fontWeight: 900,
+        }
+
+      return style
+    },
+  },
+
   mounted() {
     // @ts-ignore
     window.id = this
+    if (this.canRegister) this.getRegistrationStatus()
   },
 
-  methods: {},
+  methods: {
+    async getEventParticipants() {
+      this.participantsModal.isOpen = true
+      this.participantsModal.title = Dict.event_modal_partic_title
+      this.participantsModal.closeText = Dict.event_modal_partic_close
+      this.participantsModal.nobodySignUpForThis =
+        Dict.event_modal_partic_nobody_signup_for_this
+
+      const variables: EventParticipantsQueryVariables = {
+        id: this.$route.params.id,
+      }
+
+      try {
+        const { data } = await this.$apollo.query<EventParticipantsQuery>({
+          query: participants,
+          variables,
+          fetchPolicy: 'no-cache',
+        })
+
+        if (data.event?.comments?.nodes) {
+          this.participantsModal.body.splice(
+            0,
+            this.participantsModal.body.length
+          )
+          data.event.comments.nodes.forEach((i) => {
+            this.participantsModal.body.push({
+              firstName: i?.author?.node?.name || '',
+              avatar: i?.author?.node?.avatar?.url || '',
+              email: i?.author?.node?.email || '',
+            })
+          })
+        }
+      } catch (error) {
+        console.error(error)
+        this.$about.error({ title: Dict.general_err, body: String(error) })
+        this.participantsModal.isOpen = false
+      }
+    },
+    async getRegistrationStatus() {
+      try {
+        const { data } = await this.$axios.post<WPRestEvent[]>(
+          `https://nikan-alumni.org/wp-json/myplugin/v1/event`,
+          {
+            event_id: decodeURIComponent(this.$route.params.id),
+            user_id: this.$store.state.authentication.user.id,
+          }
+        )
+
+        if (data.length > 0) {
+          if (data[0].comment_approved === commentStatus.Approved) {
+            this.registrationStatus = 'registerd'
+          } else if (data[0].comment_approved === commentStatus.halt) {
+            this.registrationStatus = 'halt'
+          } else {
+            this.registrationStatus = 'not approved'
+          }
+        } else {
+          this.registrationStatus = 'notregisterd'
+        }
+
+        console.log(data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    askForConfirmRegEvent() {
+      if (this.registrationStatus === 'notregisterd') {
+        this.modal.confirm = true
+        this.modal.isOpen = true
+        this.modal.success = true
+        this.modal.title = 'تایید'
+        this.modal.body = `برای ثبت نام در  رویداد "${this.title}" مطمئن هستید؟`
+      }
+    },
+    async regEvent() {
+      const variables: EventRegistrationMutationVariables = {
+        clientMutationId: String(~~(Math.random() * 10000)),
+        content: '[REG] i like to regester',
+        commentOn: 10,
+      }
+      try {
+        const responce = await this.$apollo.mutate<EventRegistrationMutation>({
+          mutation: regEvent,
+          variables,
+        })
+        const data = responce.data
+
+        if (data?.createComment) {
+          if (data.createComment.success) {
+            this.modal.isOpen = true
+            this.modal.title = 'موفقیت آمیز'
+            this.modal.body =
+              'ثبت نام شما در رویداد' +
+              this.title +
+              'موفقیت آمیز بود ' +
+              '<br />' +
+              'به امید دیدار شما در این رویداد'
+
+            this.modal.confirm = false
+            this.modal.success = true
+            this.getRegistrationStatus()
+
+            this.totalRegistrants++
+          } else {
+            this.modal.isOpen = true
+            this.modal.title = Dict.general_err
+            this.modal.body =
+              'در فرایند ثبت نام شما خطایی رخ داده' +
+                'پیام خطا : ' +
+                '<br />' +
+                responce.errors?.join(',') || ''
+
+            this.modal.confirm = false
+            this.modal.success = false
+          }
+
+          if (data.createComment.comment) {
+            console.log('comment is')
+            console.log(data.createComment.comment)
+          } else {
+            console.log('waiting to approve')
+          }
+        }
+      } catch (error) {
+        this.modal.isOpen = true
+        this.modal.title = Dict.general_err
+        this.modal.body =
+          'در فرایند ثبت نام شما خطایی رخ داده' +
+          'پیام خطا : ' +
+          '<br />' +
+          String(error)
+
+        this.modal.confirm = false
+        this.modal.success = false
+      }
+    },
+  },
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

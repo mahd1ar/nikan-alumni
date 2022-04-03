@@ -52,7 +52,7 @@ export default Vue.extend({
 })
 </script>
 
-<style >
+<style>
 /* WP */
 
 .content .wp-block-columns {

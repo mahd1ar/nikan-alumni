@@ -68,7 +68,7 @@ export default Vue.extend({
 })
 </script>
 
-<style >
+<style>
 /* .m-title:after {
   content: '';
   position: absolute;

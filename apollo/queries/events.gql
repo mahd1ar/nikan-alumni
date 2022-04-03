@@ -1,10 +1,29 @@
-query events {
-  events(first: 10) {
+query events($first: Int = 10) {
+  events(first: $first, where: {orderby: {field: DATE, order: ASC}}) {
     nodes {
       id
-      excerpt(format: RAW)
+      databaseId
       title(format: RENDERED)
       commentCount
+      date
+      eventProps {
+        duration
+        venue
+      }
+      categories {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+        }
+      }
     }
   }
 }

@@ -2,7 +2,6 @@ import { gql } from 'graphql-tag'
 
 import { LocalScheme } from '~auth/runtime'
 
-
 export class RefreshController {
   $auth
   _refreshPromise = null
@@ -44,19 +43,18 @@ export class RefreshController {
 
 const LOGIN_MUTATION = gql`
   mutation Login($username: String!, $password: String!) {
-    login(input: { username: $username , password: $password }) {
+    login(input: { username: $username, password: $password }) {
       authToken
       refreshToken
-          user {
-      jwtAuthExpiration
-      jwtAuthToken
-      jwtRefreshToken
-      jwtUserSecret
-    }
+      user {
+        jwtAuthExpiration
+        jwtAuthToken
+        jwtRefreshToken
+        jwtUserSecret
+      }
     }
   }
 `
-
 
 export const LOGOUT_MUTATION = gql`
   mutation LogOutMutation {
@@ -75,17 +73,13 @@ export const USER_DETAILS_QUERY = gql`
   }
 `
 
-
-
 export default class GraphQLScheme extends LocalScheme {
-
   constructor(auth, options) {
     super(auth, options)
     this.refreshController = new RefreshController(this)
   }
 
   async login(credentials, { reset = true } = {}) {
-
     const {
       apolloProvider: { defaultClient: apolloClient },
       $apolloHelpers,
@@ -117,7 +111,7 @@ export default class GraphQLScheme extends LocalScheme {
   }
 
   refreshTokens() {
-    console.log("refreshTokens called")
+    console.log('refreshTokens called')
     // Token and refresh token are required but not available
     if (!this.check().valid) {
       return Promise.resolve()
@@ -138,13 +132,13 @@ export default class GraphQLScheme extends LocalScheme {
     }
 
     const data = {
-      [this.options.refreshToken.data]: this.refreshToken.sync()
+      [this.options.refreshToken.data]: this.refreshToken.sync(),
     }
 
     return this.$apollo
       .mutate({
         mutation: refreshTokenMutation,
-        variables: data
+        variables: data,
       })
       .then(({ data }) => {
         return data.refreshToken
@@ -166,9 +160,7 @@ export default class GraphQLScheme extends LocalScheme {
       })
   }
 
-
   fetchUser() {
-
     const {
       apolloProvider: { defaultClient: apolloClient },
     } = this.$auth.ctx.app

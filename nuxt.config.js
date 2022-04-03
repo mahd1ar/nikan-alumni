@@ -6,17 +6,13 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '@/assets/css/main.css',
-  ],
+  css: ['@/assets/css/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -35,6 +31,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     '@nuxt/postcss8',
+    '@nuxtjs/dotenv',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -43,28 +40,30 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    "@nuxtjs/apollo",
+    '@nuxtjs/apollo',
     // '@nuxtjs/auth-next'
     'nuxt-leaflet',
     'cookie-universal-nuxt',
   ],
 
   apollo: {
-    tokenName: "nuxt-apollo", // specify token name
+    tokenName: 'nuxt-apollo', // specify token name
     cookieAttributes: {
-      expires: 7 // optional, default: 7 (days)
+      expires: 7, // optional, default: 7 (days)
     },
     defaultOptions: {
       $query: {
-        fetchPolicy: "network-only",
-        errorPolicy: "all"
+        fetchPolicy: 'network-only',
+        errorPolicy: 'all',
+        loadingKey: 'loading',
       }
     },
-    watchLoading: "~/plugins/loadingHandler.js",
+    includeNodeModules: true,
+    watchLoading: '~/plugins/apollo-watch-loading-handler.js',
     errorHandler: '~/plugins/apollo-error-handler.js',
 
     clientConfigs: {
-      default: "~/plugins/apollo-client-config.js",
+      default: '~/plugins/apollo-client-config.js',
       //  {
       //   httpEndpoint: 'http://localhost/woonuxt/graphql'
       // },
@@ -72,18 +71,16 @@ export default {
     }
   },
 
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'https://nikan-alumni.org',
   },
-
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
-    }
+      lang: 'en',
+    },
   },
 
   // auth: {
@@ -100,15 +97,14 @@ export default {
   //   },
   // },
 
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate/dist/rules"],
+    transpile: ['vee-validate/dist/rules'],
     postcss: {
       plugins: {
         tailwindcss: {},
         autoprefixer: {},
       },
     },
-  }
+  },
 }

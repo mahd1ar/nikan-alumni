@@ -1,8 +1,8 @@
 # nikan-final
 
 ## convention:
-comments with `[REG]` are stans for registeration
 
+comments with `[REG]` are stans for registeration
 
 ## Build Setup
 

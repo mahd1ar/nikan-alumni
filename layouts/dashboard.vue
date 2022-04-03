@@ -264,9 +264,9 @@
           </p>
         </a>
         <button
-          @click="open_t = !open_t"
           type="button"
           class="bg-gray-200 p-3 rounded-md"
+          @click="open_t = !open_t"
         >
           <svg
             v-show="!open_t"
@@ -390,6 +390,7 @@
       v-if="$nuxt.context.isDev"
       class="fixed opacity-50 top-10 left-10 z-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
     >
+      <div class="text-white">loading : {{ loading }}</div>
       <div
         class="p-1"
         :class="{ 'bg-red-200': !isLoggedIn, 'bg-green-200': isLoggedIn }"
@@ -419,7 +420,6 @@ import { mapGetters } from 'vuex'
 export default Vue.extend({
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Dashboard',
-
   data() {
     return {
       open_t: false,
@@ -439,7 +439,12 @@ export default Vue.extend({
       ],
     }
   },
-  computed: { ...mapGetters({ isLoggedIn: 'authentication/isLoggedIn' }) },
+  computed: {
+    ...mapGetters({
+      isLoggedIn: 'authentication/isLoggedIn',
+      loading: 'loading',
+    }),
+  },
   mounted() {},
 })
 </script>

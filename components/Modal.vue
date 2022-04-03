@@ -49,9 +49,9 @@
 
               <!--Body-->
               <div
+                v-if="!confirm"
                 class="text-center text-lg"
                 style="--count: 1"
-                v-if="!confirm"
               >
                 <div v-if="type === 'success'">
                   <svg
@@ -108,14 +108,14 @@
                 class="main-modal__buttons flex justify-end pt-2 gap-2"
               >
                 <button
-                  @click="$emit('cancel') && close()"
                   class="px-4 py-1 rounded hover:bg-gray-100 text-gray-500"
+                  @click="$emit('cancel') && close()"
                 >
                   {{ cancel }}
                 </button>
                 <button
-                  @click="$emit('yes') && close()"
                   class="px-4 py-1 rounded hover:bg-green-400 bg-green-500 text-green-50"
+                  @click="$emit('yes') && close()"
                 >
                   {{ yes }}
                 </button>
@@ -128,8 +128,10 @@
                 class="main-modal__buttons flex justify-end pt-2 gap-2"
               >
                 <button
+                  :class="`px-4 py-1 rounded hover:bg-opacity-50 flex-grow ${
+                    type === 'about' ? 'bg-slate-300' : 'bg-white'
+                  } bg-opacity-25`"
                   @click="$emit('ok') && close()"
-                  class="px-4 py-1 rounded hover:bg-opacity-50 flex-grow bg-white bg-opacity-25"
                 >
                   {{ ok }}
                 </button>
@@ -166,6 +168,7 @@ export default Vue.extend({
       default: Dict.btn_yes,
     },
   },
+
   methods: {
     close() {
       this.$emit('update:open', false)
@@ -174,7 +177,7 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped >
+<style scoped>
 .main-modal__container {
   @apply relative border bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto;
 }

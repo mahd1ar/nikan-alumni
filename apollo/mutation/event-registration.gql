@@ -1,0 +1,23 @@
+mutation EventRegistration(
+  $clientMutationId: String = ""
+  $content: String = "[REG]"
+  $commentOn: Int
+) {
+  createComment(
+    input: {
+      content: $content
+      commentOn: $commentOn
+      clientMutationId: $clientMutationId
+    }
+  ) {
+    success
+    comment {
+      approved
+      karma
+      id
+      dateGmt
+      content(format: RENDERED)
+      databaseId
+    }
+  }
+}

@@ -1,4 +1,5 @@
-query Event($id: ID = "cG9zdDoxMA==", $authorEmail: String!) {
+# , $authorEmail: String!
+query Event($id: ID = "cG9zdDoxMA==") {
   event(id: $id) {
     date
     title(format: RENDERED)
@@ -21,14 +22,14 @@ query Event($id: ID = "cG9zdDoxMA==", $authorEmail: String!) {
     }
     eventProps {
       duration
-      startingFrom
+      venue
     }
-    comments(where: {authorEmail: $authorEmail}) {
-      nodes {
-        approved
-        type
-        content(format: RAW)
-      }
-    }
+    # comments(where: {authorEmail: $authorEmail }) {
+    #   nodes {
+    #     approved
+    #     type
+    #     content(format: RAW)
+    #   }
+    # }
   }
 }

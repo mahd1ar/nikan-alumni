@@ -1,6 +1,18 @@
-mutation updateUser($id: ID!, $occupation: String, $firstName: String , $lastName: String, $description: String) {
+mutation updateUser(
+  $id: ID!
+  $occupation: String
+  $firstName: String
+  $lastName: String
+  $description: String
+) {
   updateUser(
-    input: {id: $id, occupation: $occupation, firstName:$firstName, lastName: $lastName, description: $description}
+    input: {
+      id: $id
+      occupation: $occupation
+      firstName: $firstName
+      lastName: $lastName
+      description: $description
+    }
   ) {
     clientMutationId
     user {

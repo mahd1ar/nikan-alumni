@@ -1,0 +1,11 @@
+query video($id: ID! ) {
+  video(id: $id) {
+    id
+    content
+    title(format: RENDERED)
+    date
+    speakers {
+      speakers
+    }
+  }
+}
