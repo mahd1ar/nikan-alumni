@@ -1,78 +1,607 @@
 <template>
   <div dir="rtl">
-    <section class="text-gray-600 body-font mt-10">
-      <div class="container px-5 mx-auto">
-        <div class="flex flex-wrap w-full mb-20">
-          <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
-            <h1 class="text-2xl font-medium title-font mb-2 text-gray-900">
-              آرشیو ویدئوی کانون دانش آموختگان
-            </h1>
-            <div class="h-1 w-20 bg-indigo-500 rounded"></div>
-          </div>
-          <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">
-            ساعت ها محتوای آموزشی مناسب برای خانواده و... quinoa yuccie synth
-            meditation iPhone intelligentsia prism tofu. Viral gochujang bitters
-            dreamcatcher.
-          </p>
-        </div>
-
-        <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
-          <div
-            class="flex flex-col w-full"
-            v-for="item in items"
-            :key="item.categoryId"
-          >
-            <h1 class="mt-8 mb-4 text-2xl font-bold px-4">
-              {{ item.category }}
-            </h1>
-
-            <div class="flex flex-wrap">
-              <div
-                v-for="(v, index) in item.videos"
-                :key="index"
-                class="lg:w-4/12 md:w-1/2 p-4 w-full"
-              >
-                <nuxt-link
-                  :to="v.href"
-                  class="block relative h-48 rounded overflow-hidden"
-                  :data-id="v.dataId"
-                >
-                  <!-- <canvas
-                      alt=""
-                      class="object-cover object-center w-full h-full block"
-                      width="420"
-                      height="260"
-                    ></canvas> -->
-                  <video v-if="v.src" class="object-none" :src="v.src"></video>
-
-                  <transition name="expand">
-                    <div
-                      class="absolute p-1 text-yellow-100 bg-gray-800 bottom-3 right-3 text-xs rounded"
-                      v-if="v.duration"
-                    >
-                      {{ v.duration }}
-                    </div>
-                  </transition>
-                </nuxt-link>
-                <div class="mt-4">
-                  <h3
-                    class="text-gray-500 text-xs tracking-widest title-font mb-1"
+    <!-- component -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.rawgit.com/shuvroroy/youtube-clone/883c8d9a/public/css/main.css"
+    />
+    <div class="bg-white font-sans">
+      <div class="h-112 bg-cover">
+        <img
+          src="https://yt3.ggpht.com/HR5bTyedjHyoOd9h2zty2OAqZ3MFM6T7_R48jhdd2rQE2aSPHOD2B-ibdv-yLSTy4_AAF6XdoCk=w2560-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no"
+          alt="banner"
+        />
+      </div>
+      <div class="bg-grey-lighter -mt-1">
+        <div class="container mx-auto">
+          <div class="flex items-center justify-between py-4 px-16">
+            <div class="flex items-center">
+              <img
+                class="h-24 w-24 rounded-full"
+                src="https://yt3.ggpht.com/-5ny40r8qe90/AAAAAAAAAAI/AAAAAAAAAAA/IrloZ_OeiYc/s288-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                alt="channel_logo"
+              />
+              <div class="mr-6">
+                <div class="flex items-center text-2xl font-normal">
+                  <span>Fun Fun Function</span>
+                  <span
+                    class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                    >&#10003;</span
                   >
-                    {{ item.category }}
-                    .
-                    {{ v.date }}
-                  </h3>
-                  <h2 class="text-gray-900 title-font text-lg font-medium">
-                    {{ v.title }}
-                  </h2>
-                  <p class="">{{ v.speakers }}</p>
+                </div>
+                <p class="font-hairline mt-2 text-sm">126,014 subscribers</p>
+              </div>
+            </div>
+            <div class="text-grey-dark">
+              <button
+                class="bg-grey-light text-grey-darker mr-4 appearance-none px-3 py-2 text-sm uppercase"
+              >
+                Subscribed 126K
+              </button>
+              <span><i class="fa fa-bell fa-lg" aria-hidden="true"></i></span>
+            </div>
+          </div>
+          <div class="px-16">
+            <ul class="list-reset flex">
+              <li
+                class="border-grey-dark border-b-2 border-solid py-3 px-8 text-center"
+              >
+                <a href="#" class="text-black">Home</a>
+              </li>
+              <li class="py-3 px-8 text-center">
+                <a href="#" class="hover:text-black">Videos</a>
+              </li>
+              <li class="py-3 px-8 text-center">
+                <a href="#" class="hover:text-black">Playlists</a>
+              </li>
+              <li class="py-3 px-8 text-center">
+                <a href="#" class="hover:text-black">Community</a>
+              </li>
+              <li class="py-3 px-8 text-center">
+                <a href="#" class="hover:text-black">Channels</a>
+              </li>
+              <li class="py-3 px-8 text-center">
+                <a href="#" class="hover:text-black">About</a>
+              </li>
+              <li class="py-3 px-8 text-center">
+                <i class="fa fa-search fa-lg text-grey-dark"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container mx-auto flex">
+        <div class="mx-16 w-3/4 py-6">
+          <div class="border-b pb-8">
+            <div class="flex">
+              <div class="flex w-3/4">
+                <div>
+                  <img
+                    class="block w-full"
+                    src="https://i.ytimg.com/vi/Kcie9rbbb4s/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCbowulw74TtG_RM8mhfoyq3tya9A"
+                    alt=""
+                  />
+                </div>
+                <div class="pl-4">
+                  <p class="mb-1 h-6 w-64 truncate text-sm font-medium">
+                    Habitual negative thoughts
+                  </p>
+                  <p class="text-grey-darker text-xs">
+                    <span>Fun Fun Function</span>
+                    <span>&middot;</span>
+                    <span>7.5 views</span>
+                    <span>&middot;</span>
+                    <span>2 days ago</span>
+                  </p>
+                </div>
+              </div>
+              <div class="w-1/4">
+                <div>
+                  <img
+                    class="w-100 block"
+                    src="https://i.ytimg.com/vi/TubVp9nn32Q/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUxQM30HpBNOg3UpiPQUISQgwSlg"
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <p class="my-2 text-sm font-medium">
+                    TDD with Wallaby.js Part 2
+                  </p>
+                  <p class="text-grey-darker mb-1 text-xs">Fun Fun Function</p>
+                  <p class="text-grey-darker text-xs">
+                    <span>186 views</span>
+                    <span>&middot;</span>
+                    <span>3 hours ago</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-b">
+            <h3 class="py-6 text-base font-medium">
+              Best of Fun Fun Function
+              <span class="text-grey-dark ml-3 uppercase">Play all</span>
+            </h3>
+            <div class="relative mb-4 flex">
+              <div
+                class="text-grey-dark pin-r absolute -mr-3 mt-8 h-10 w-10 rounded-full bg-white text-center shadow-md"
+              >
+                <i class="fa fa-chevron-right mt-3" aria-hidden="true"></i>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Higher-order functions - Part 1 of Functional Programming
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    336K views &middot; 2 years ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Higher-order functions - Part 1 of Functional Programming
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    336K views &middot; 2 years ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Higher-order functions - Part 1 of Functional Programming
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    336K views &middot; 2 years ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Higher-order functions - Part 1 of Functional Programming
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    336K views &middot; 2 years ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-b">
+            <h3 class="py-6 text-base font-medium">
+              Uploads
+              <span class="text-grey-dark ml-3 uppercase">Play all</span>
+            </h3>
+            <div class="relative mb-4 flex">
+              <div
+                class="text-grey-dark pin-r absolute -mr-3 mt-8 h-10 w-10 rounded-full bg-white text-center shadow-md"
+              >
+                <i class="fa fa-chevron-right mt-3" aria-hidden="true"></i>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/C8p7rHwctAg/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDnbDWPH7Ef-OV7CVWii7v-0RuSBw"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4 mt-1">
+                  <h4 class="text-sm font-medium">
+                    Commit editor settings to version control? - Fun Fun
+                    Function
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    5.3K views &middot; 4 days ago
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/C8p7rHwctAg/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDnbDWPH7Ef-OV7CVWii7v-0RuSBw"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4 mt-1">
+                  <h4 class="text-sm font-medium">
+                    Commit editor settings to version control? - Fun Fun
+                    Function
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    5.3K views &middot; 4 days ago
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/C8p7rHwctAg/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDnbDWPH7Ef-OV7CVWii7v-0RuSBw"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4 mt-1">
+                  <h4 class="text-sm font-medium">
+                    Commit editor settings to version control? - Fun Fun
+                    Function
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    5.3K views &middot; 4 days ago
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/C8p7rHwctAg/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDnbDWPH7Ef-OV7CVWii7v-0RuSBw"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4 mt-1">
+                  <h4 class="text-sm font-medium">
+                    Commit editor settings to version control? - Fun Fun
+                    Function
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    5.3K views &middot; 4 days ago
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-b">
+            <div class="py-6">
+              <h3 class="text-base font-medium">
+                MPJ's Musings
+                <span class="text-grey-dark ml-3 uppercase">Play all</span>
+              </h3>
+              <p
+                class="text-grey-dark mt-2 max-w-md text-sm font-normal leading-loose"
+              >
+                More "soft" episodes about software, creativity, motivation, and
+                career.
+              </p>
+            </div>
+            <div class="relative mb-4 flex">
+              <div
+                class="text-grey-dark pin-r absolute -mr-3 mt-8 h-10 w-10 rounded-full bg-white text-center shadow-md"
+              >
+                <i class="fa fa-chevron-right mt-3" aria-hidden="true"></i>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/gXfOdwduXqY/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUglms6KZMul1UMpuBfFPM5Ddocw"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Why remote working is so hard
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    20K views &middot; 2 months ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/gXfOdwduXqY/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUglms6KZMul1UMpuBfFPM5Ddocw"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Why remote working is so hard
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    20K views &middot; 2 months ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/gXfOdwduXqY/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUglms6KZMul1UMpuBfFPM5Ddocw"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Why remote working is so hard
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    20K views &middot; 2 months ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/gXfOdwduXqY/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUglms6KZMul1UMpuBfFPM5Ddocw"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Why remote working is so hard
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    20K views &middot; 2 months ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-b">
+            <div class="py-6">
+              <h3 class="text-base font-medium">
+                Functional programming in Javascript
+                <span class="text-grey-dark ml-3 uppercase">Play all</span>
+              </h3>
+              <p
+                class="text-grey-dark mt-2 max-w-md text-sm font-normal leading-loose"
+              >
+                This is a collection of the videos from FunFunFunction that is
+                specifically about functional programming in JavaScript
+              </p>
+            </div>
+            <div class="relative mb-4 flex">
+              <div
+                class="text-grey-dark pin-r absolute -mr-3 mt-8 h-10 w-10 rounded-full bg-white text-center shadow-md"
+              >
+                <i class="fa fa-chevron-right mt-3" aria-hidden="true"></i>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Higher-order functions - Part 1 of Functional Programming in
+                    JavaScript
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    20K views &middot; 2 months ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Higher-order functions - Part 1 of Functional Programming in
+                    JavaScript
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    20K views &middot; 2 months ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Higher-order functions - Part 1 of Functional Programming in
+                    JavaScript
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    20K views &middot; 2 months ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
+                </div>
+              </div>
+              <div class="mr-1 flex-1">
+                <div>
+                  <img
+                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    alt=""
+                  />
+                </div>
+                <div class="mb-4">
+                  <h4 class="text-sm font-medium">
+                    Higher-order functions - Part 1 of Functional Programming in
+                    JavaScript
+                  </h4>
+                  <p class="font-hairline text-grey-darker mt-2 text-sm">
+                    Fun Fun Function
+                    <span
+                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
+                      >&#10003;</span
+                    >
+                  </p>
+                  <p class="font-hairline text-grey-darker mt-1 text-xs">
+                    20K views &middot; 2 months ago
+                  </p>
+                  <p
+                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
+                  >
+                    CC
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -83,7 +612,7 @@ import { VideosQuery, VideosQueryVariables } from '~/types/types'
 // eslint-disable-next-line camelcase
 import { gregorian_to_jalali, timeout, toIndiaDigits } from '~/data/utils'
 
-function checkStatus(url: string): Promise<string | null> {
+function getSize(url: string): Promise<string | null> {
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest()
     request.open('HEAD', url, true)
@@ -114,6 +643,7 @@ interface Video {
   dataId: string
   _content?: string
   src?: string
+  loaded: boolean
 }
 
 const secToHour = (secs: number) => {
@@ -197,6 +727,7 @@ export default Vue.extend({
               v.src = src
             }
             v.duration = ''
+            v.loaded = false
             vl.videos.push(v)
           })
           this.items.push(vl)
@@ -204,38 +735,54 @@ export default Vue.extend({
       })
     }
   },
+  mounted() {
+    getSize('http://194.5.205.148/vid/TedNikan1.mp4#t=200')
+  },
 
   watch: {
     items() {
-      this.getVideoMeta()
+      // this.getVideoMeta()
     },
   },
   methods: {
-    async getVideoMeta() {
-      await timeout(2000)
-
-      this.items.forEach((i) => {
-        i.videos.forEach((v) => {
-          if (!v.src) return
-
-          const videoElement = document.querySelector(
-            `[data-id="${v.dataId}"] video`
-          ) as HTMLVideoElement
-
-          if (!videoElement) return
-
-          if (videoElement.duration) {
-            v.duration = secToHour(videoElement.duration)
-            return
-          }
-
-          console.log(videoElement)
-          videoElement.onloadedmetadata = () => {
-            v.duration = secToHour(videoElement.duration)
-          }
-        })
-      })
-    },
+    // getpic(video: HTMLVideoElement) {
+    //   const canvas = this.$refs.canvas! as HTMLCanvasElement
+    //   canvas
+    //     .getContext('2d')!
+    //     .drawImage(video, 0, 0, video.videoWidth, video.videoHeight)
+    //   return canvas.toDataURL()
+    // },
+    // async getVideoMeta() {
+    //   await timeout(2000)
+    //   this.items.forEach((i) => {
+    //     i.videos.forEach((v) => {
+    //       if (!v.src) return
+    //       // const videoElement = document.querySelector(
+    //       //   `[data-id="${v.dataId}"] video`
+    //       // ) as HTMLVideoElement
+    //       const videoElement = document.createElement('video')
+    //       videoElement.preload = 'metadata'
+    //       videoElement.src = v.src
+    //       videoElement.buffered.start(2)
+    //       console.log('asdasdasd : ', this.getpic(videoElement))
+    //       videoElement.remove()
+    //       // if (!videoElement) return
+    //       // if (videoElement.duration) {
+    //       //   v.duration = secToHour(videoElement.duration)
+    //       //   return
+    //       // }
+    //       console.log(videoElement)
+    //       videoElement.onloadedmetadata = () => {
+    //         v.duration = secToHour(videoElement.duration)
+    //         console.log('durition : ', v.duration)
+    //         console.log('asdasdasd : ', this.getpic(videoElement))
+    //         console.log('bufferds : ', videoElement.buffered)
+    //         alert('remove')
+    //         videoElement.remove()
+    //       }
+    //     })
+    //   })
+    // },
   },
 })
 </script>

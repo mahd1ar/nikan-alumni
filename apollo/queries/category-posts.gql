@@ -1,0 +1,38 @@
+query categoryPosts($id: ID = "uncategorized", $first: Int = 10) {
+  category(id: $id, idType: SLUG) {
+    id
+    databaseId
+    count
+    name
+    slug
+    children(first: 10) {
+      nodes {
+        name
+        slug
+      }
+    }
+    posts(first: $first) {
+      edges {
+        node {
+          id
+          databaseId
+          title
+          date
+          content(format: RENDERED)
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
+    categoryAttrs {
+      categoryAttrs {
+        altText
+        sourceUrl
+      }
+    }
+    description
+  }
+}

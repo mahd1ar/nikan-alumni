@@ -1,9 +1,9 @@
 <template>
-  <div class="relative bg-gray-100 h-full flex-grow">
+  <div class="relative h-full flex-grow bg-gray-100">
     <!-- Start Nav -->
 
-    <main class="container mx-w-6xl mx-auto py-4">
-      <div class="text-center text-3xl mb-8 mt-2">upcomming Events</div>
+    <main class="mx-w-6xl container mx-auto py-4">
+      <div class="mb-8 mt-2 text-center text-3xl">upcomming Events</div>
 
       <client-only>
         <transition-group tag="div" name="v-fade">
@@ -11,7 +11,7 @@
             v-for="(e, index) in events"
             :key="e.id"
             :style="{ '--count': index }"
-            class="relative max-w-2xl mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+            class="relative mx-auto mb-10 max-w-2xl overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-800"
           >
             <nuxt-link
               class=""
@@ -19,11 +19,11 @@
             >
               <img
                 v-if="e.imageLink"
-                class="object-cover w-full h-64"
+                class="h-64 w-full object-cover"
                 :src="e.imageLink"
               />
 
-              <div class="left-5 top-5 absolute">
+              <div class="absolute left-5 top-5">
                 <count-down :duration="2" :startingFrom="e.wpdate">
                   <!-- v-slot="{ time }"
                   <pre>{{ time }}</pre> -->
@@ -34,7 +34,7 @@
                 <div>
                   <div
                     dir="rtl"
-                    class="text-xs flex gap-2 font-medium text-blue-600 dark:text-blue-400"
+                    class="flex gap-2 text-xs font-medium text-blue-600 dark:text-blue-400"
                   >
                     <b> {{ e.category }} </b>
                     <b> . </b>
@@ -44,7 +44,7 @@
                   </div>
                   <a
                     href="#"
-                    class="block mt-2 text-2xl font-semibold text-gray-800 transition-colors duration-200 transform dark:text-white hover:text-gray-600 hover:underline"
+                    class="mt-2 block transform text-2xl font-semibold text-gray-800 transition-colors duration-200 hover:text-gray-600 hover:underline dark:text-white"
                   >
                     {{ e.title }}</a
                   >
@@ -58,7 +58,7 @@
                     <div class="flex items-center">
                       <a
                         href="#"
-                        class="text-xs mx-2 text-gray-700 dark:text-gray-200"
+                        class="mx-2 text-xs text-gray-700 dark:text-gray-200"
                       >
                         تا به حال
 

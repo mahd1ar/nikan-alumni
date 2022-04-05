@@ -1,0 +1,13 @@
+query Posts($first: Int = 10, $categoryName: String = "Uncategorized") {
+  posts(first: $first, where: { categoryName: $categoryName }) {
+    edges {
+      node {
+        id
+        databaseId
+        title
+        content(format: RENDERED)
+        date
+      }
+    }
+  }
+}

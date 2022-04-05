@@ -1,0 +1,26 @@
+query categoryEvents($id: ID = "uncategorized", $first: Int = 10) {
+  category(id: $id, idType: SLUG) {
+    id
+    count
+    name
+    slug
+    videos(first: $first) {
+      edges {
+        node {
+          id
+          title
+          date
+          content(format: RENDERED)
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+          speakers {
+            speakers
+          }
+        }
+      }
+    }
+  }
+}

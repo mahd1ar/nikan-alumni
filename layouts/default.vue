@@ -1,8 +1,9 @@
 <template>
   <div>
+    <!-- DEBUGG -->
     <div
       v-if="$nuxt.context.isDev"
-      class="fixed opacity-50 top-10 left-10 z-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
+      class="fixed top-10 left-10 z-50 opacity-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
     >
       <div
         class="p-1"
@@ -17,269 +18,35 @@
       <span class="hidden 2xl:block">2xl</span>
     </div>
 
-    <nav dir="rtl" class="bg-gray-800" v-if="$route.path !== '/'">
-      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div class="relative flex items-center justify-between h-16">
-          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <!-- Mobile menu button-->
-            <button
-              type="button"
-              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-            >
-              <span class="sr-only">Open main menu</span>
-              <!--
-            Icon when menu is closed.
-
-            Heroicon name: outline/menu
-
-            Menu open: "hidden", Menu closed: "block"
-          -->
-              <svg
-                class="block h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              <!--
-            Icon when menu is open.
-
-            Heroicon name: outline/x
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
-              <svg
-                class="hidden h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <div
-            class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
-          >
-            <div class="flex-shrink-0 flex items-center">
-              <nuxt-link
-                to="/login"
-                class="text-white rounded-full py-2 hover:bg-gray-700 flex-center px-2 font-bold cursor-pointer"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  class="w-5 h-5"
-                  role="img"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 16 16"
-                >
-                  <g fill="currentColor">
-                    <path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z" />
-                    <path
-                      fill-rule="evenodd"
-                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-                    />
-                  </g>
-                </svg>
-              </nuxt-link>
-              <div
-                class="text-white rounded-full py-2 hover:bg-gray-700 flex-center px-2 font-bold cursor-pointer"
-                @click="$emit('openModal')"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="img"
-                  class="w-5 h-5"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-width="2"
-                    d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div id="sec-navigation" class="hidden sm:block sm:mr-6">
-              <div class="flex space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <div
-                  v-for="(m, index) in menu"
-                  :key="index"
-                  :class="`menu-item ${
-                    m.hasSubmenu ? 'menu-item-has-children' : ''
-                  }`"
-                  aria-current="page"
-                >
-                  <nuxt-link :to="m.href">
-                    {{ m.title }}
-                  </nuxt-link>
-
-                  <ul class="sub-menu">
-                    <menu-item
-                      v-for="(menuitem, index2) in m.submenu"
-                      :key="index2"
-                      :menu="menuitem"
-                    ></menu-item>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-          >
-            <!-- Profile dropdown -->
-            <div class="ml-3 relative">
-              <div>
-                <button
-                  type="button"
-                  class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                  id="user-menu-button"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                >
-                  <span class="sr-only">Open user menu</span>
-                  <img
-                    class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </button>
-              </div>
-
-              <!--
-            Dropdown menu, show/hide based on menu state.
-
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
-              <div
-                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="user-menu-button"
-                tabindex="-1"
-                v-show="isOpenUserController"
-              >
-                <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-0"
-                  >Your Profile</a
-                >
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-1"
-                  >Settings</a
-                >
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-2"
-                  >Sign out</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile menu, show/hide based on menu state. -->
-      <div class="sm:hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1">
-          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-          <a
-            href="#"
-            class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-            aria-current="page"
-            >Dashboard</a
-          >
-
-          <a
-            href="#"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >Team</a
-          >
-
-          <a
-            href="#"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >Projects</a
-          >
-
-          <a
-            href="#"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >Calendar</a
-          >
-        </div>
-      </div>
-    </nav>
-
+    <!-- spinnet toast -->
     <client-only>
-      <div class="m-auto fixed bottom-10 right-20 z-30">
+      <div class="fixed bottom-10 right-20 z-30 m-auto">
         <about />
         <square-loader />
       </div>
     </client-only>
 
     <!-- MOBILE MENU -->
-
     <div
       v-show="isOpenMobileMenu"
       dir="rtl"
-      class="fixed inset-0 z-20 w-full h-full"
+      class="fixed inset-0 z-20 h-full w-full"
     >
       <!-- overlay -->
       <dir
-        class="absolute top-0 left-0 bg-black bg-opacity-30 w-full h-full m-0"
+        class="absolute top-0 left-0 m-0 h-full w-full bg-black bg-opacity-30"
         @click.stop="closeMobileMenu"
       ></dir>
-      <div class="relative flex flex-row bg-white max-w-sm h-full">
+      <div class="relative flex h-full max-w-sm flex-row bg-white">
         <div class="" style="background-color: #eff5f7; color: #5f6b85">
           <div>
-            <ul class="p-4 flex flex-col h-full gap-2">
+            <ul class="flex h-full flex-col gap-2 p-4">
               <li
                 v-for="(menuitem, index) in menu"
                 :key="index"
                 :class="{
-                  'bg-white rounded p-3 cursor-pointer transition-all border hover:bg-slate-50': true,
-                  ' border-cyan-200 border': index === mobileMenu.selected[0],
+                  'cursor-pointer rounded border bg-white p-3 transition-all hover:bg-slate-50': true,
+                  ' border border-cyan-200': index === mobileMenu.selected[0],
                   'opacity-70': index !== mobileMenu.selected[0],
                 }"
                 @click="select(index, 0)"
@@ -311,11 +78,11 @@
             </svg>
           </div> -->
 
-          <div class="text-right text-xl px-1">
+          <div class="px-1 text-right text-xl">
             {{ menu[mobileMenu.selected[0]].title }}
           </div>
 
-          <hr class="divide-y-4 divide-slate-800 my-5" />
+          <hr class="my-5 divide-y-4 divide-slate-800" />
           <client-only>
             <transition-group
               tag="ul"
@@ -325,13 +92,13 @@
               <li
                 v-for="(sm, index2) in menu[mobileMenu.selected[0]].submenu"
                 :key="index2 * 100 + 5"
-                class="bg-slate-50 p-2 rounded-md overflow-hidden"
+                class="overflow-hidden rounded-md bg-slate-50 p-2"
                 :style="{
                   '--count': index2,
                   '--max': menu[mobileMenu.selected[0]].submenu.length,
                 }"
               >
-                <div class="flex justify-between gap-2 items-center">
+                <div class="flex items-center justify-between gap-2">
                   {{ sm.title }}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -359,7 +126,7 @@
 
             <div
               v-show="menu[mobileMenu.selected[0]].hasSubmenu === false"
-              class="bg-cyan-50 text-cyan-800 p-2 rounded-md flex justify-between gap-2 items-center"
+              class="flex items-center justify-between gap-2 rounded-md bg-cyan-50 p-2 text-cyan-800"
             >
               ورود به بخش
               {{ menu[mobileMenu.selected[0]].title }}
@@ -385,17 +152,264 @@
       </div>
     </div>
 
-    <Nuxt />
+    <div class="flex min-h-screen flex-col">
+      <nav v-if="$route.path !== '/'" dir="rtl" class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div class="relative flex h-16 items-center justify-between">
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <!-- Mobile menu button-->
+              <button
+                type="button"
+                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+              >
+                <span class="sr-only">Open main menu</span>
+                <!--
+            Icon when menu is closed.
+
+            Heroicon name: outline/menu
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+                <svg
+                  class="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+                <!--
+            Icon when menu is open.
+
+            Heroicon name: outline/x
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+                <svg
+                  class="hidden h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+            >
+              <div class="flex flex-shrink-0 items-center">
+                <nuxt-link
+                  v-if="!isLoggedIn"
+                  to="/login"
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-white hover:bg-gray-700"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    class="h-5 w-5"
+                    role="img"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 16 16"
+                  >
+                    <g fill="currentColor">
+                      <path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z" />
+                      <path
+                        fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                      />
+                    </g>
+                  </svg>
+                </nuxt-link>
+                <div
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-white hover:bg-gray-700"
+                  @click="$emit('openModal')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
+                    class="h-5 w-5"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-width="2"
+                      d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div id="sec-navigation" class="hidden sm:mr-6 sm:block">
+                <div class="flex space-x-4">
+                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                  <div
+                    v-for="(m, index) in menu"
+                    :key="index"
+                    :class="`menu-item ${
+                      m.hasSubmenu ? 'menu-item-has-children' : ''
+                    }`"
+                    aria-current="page"
+                  >
+                    <nuxt-link :to="m.href">
+                      {{ m.title }}
+                    </nuxt-link>
+
+                    <ul class="sub-menu">
+                      <menu-item
+                        v-for="(menuitem, index2) in m.submenu"
+                        :key="index2"
+                        :menu="menuitem"
+                      ></menu-item>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+            >
+              <!-- Profile dropdown -->
+              <div class="relative ml-3">
+                <div>
+                  <button
+                    v-if="isLoggedIn"
+                    id="user-menu-button"
+                    type="button"
+                    class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    @click="toggleUserController($event)"
+                  >
+                    <span class="sr-only">Open user menu</span>
+                    <img
+                      class="h-8 w-8 rounded-full"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    />
+                  </button>
+                </div>
+
+                <!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+                <client-only>
+                  <div
+                    v-click-outside="closeController"
+                    @click="closeController"
+                    v-if="isOpenUserController"
+                    class="absolute left-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="user-menu-button"
+                    tabindex="-1"
+                  >
+                    <!-- Active: "bg-gray-100", Not Active: "" -->
+                    <a
+                      id="user-menu-item-0"
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                      tabindex="-1"
+                      >Your Profile</a
+                    >
+                    <a
+                      id="user-menu-item-1"
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                      tabindex="-1"
+                      >Settings</a
+                    >
+                    <div
+                      @click="signOut"
+                      class="block cursor-pointer px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                      tabindex="-1"
+                    >
+                      Sign out
+                    </div>
+                  </div>
+                </client-only>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div id="mobile-menu" class="sm:hidden">
+          <div class="space-y-1 px-2 pt-2 pb-3">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a
+              href="#"
+              class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+              aria-current="page"
+              >Dashboard</a
+            >
+
+            <a
+              href="#"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Team</a
+            >
+
+            <a
+              href="#"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Projects</a
+            >
+
+            <a
+              href="#"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Calendar</a
+            >
+          </div>
+        </div>
+      </nav>
+      <Nuxt class="flex-1" @error="nuxtonError" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
+// @ts-ignore
+import vClickOutside from 'v-click-outside'
 
 export default Vue.extend({
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Default',
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
   data() {
     return {
       isOpenUserController: false,
@@ -409,14 +423,12 @@ export default Vue.extend({
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href:
-          'https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css',
+        href: 'https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css',
       },
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href:
-          'https://cdn.jsdelivr.net/gh/rastikerdar/samim-font@v4.0.5/dist/font-face.css',
+        href: 'https://cdn.jsdelivr.net/gh/rastikerdar/samim-font@v4.0.5/dist/font-face.css',
       },
 
       {
@@ -431,8 +443,7 @@ export default Vue.extend({
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href:
-          'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap',
       },
     ],
   },
@@ -452,9 +463,28 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions({ closeMobileMenu: 'navigation/closeMobileMenu' }),
+    nuxtonError(e: Error) {
+      console.log('nuxt err')
+      console.log(e)
+    },
+    closeController() {
+      this.isOpenUserController = false
+    },
+    signOut() {
+      // TODO : make a dialog and ask theme
+      this.$authentication().logout()
+      // TODO : display notification after loggin out!
+    },
     select(i: number, level: number) {
       this.mobileMenu.selected.splice(level, level + 1)
       this.mobileMenu.selected.splice(level, 0, i)
+    },
+
+    toggleUserController(val?: boolean) {
+      console.log(val)
+      if (val === undefined)
+        this.isOpenUserController = !this.isOpenUserController
+      else this.isOpenUserController = val
     },
   },
 })
@@ -496,18 +526,20 @@ export default Vue.extend({
   // 			bg-white;
   // }
 
+  @apply font-samim;
+
   .sub-menu {
-    @apply invisible
-				absolute
+    @apply invisible absolute
 				top-full
-				left-0
-				max-w-xs
+
+				min-w-max max-w-xs translate-y-10
+				transform
 				overflow-ellipsis
-				transform translate-y-10 border shadow-lg;
+				border opacity-0 shadow-lg;
   }
 
   .menu-item {
-    @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
+    @apply rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white;
 
     &:hover {
       @apply bg-gray-900 text-white;
@@ -518,7 +550,7 @@ export default Vue.extend({
     }
 
     .menu-item {
-      @apply text-gray-700 hover:bg-gray-100 rounded-none;
+      @apply rounded-none text-gray-700 hover:bg-gray-100;
     }
   }
 
@@ -549,9 +581,9 @@ export default Vue.extend({
     }
 
     &:hover > .sub-menu {
-      @apply visible w-72   
-			overflow-ellipsis bg-white transform translate-y-0
-			transition-all right-0;
+      @apply visible right-0 z-10  w-72
+			translate-y-0 transform overflow-ellipsis bg-white
+			opacity-100 transition-all duration-500;
 
       .sub-menu {
         @apply top-0

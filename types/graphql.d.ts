@@ -35,6 +35,24 @@ declare module '*/update-user.gql' {
 }
     
 
+declare module '*/category-events.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const categoryEvents: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/category-posts.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const categoryPosts: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/event-participants.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -66,6 +84,15 @@ declare module '*/fetch-me.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const fetchMe: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/posts.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Posts: DocumentNode;
 
   export default defaultDocument;
 }

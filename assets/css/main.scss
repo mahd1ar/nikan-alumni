@@ -73,7 +73,7 @@
   }
 
   .menu-item {
-    @apply w-full cursor-pointer whitespace-nowrap rounded-md text-neutral-700 px-3;
+    @apply w-full cursor-pointer whitespace-nowrap rounded-md px-3 text-neutral-700;
 
     &:hover {
       @apply bg-gray-100 py-2;
@@ -111,9 +111,9 @@
     }
 
     &:hover > .sub-menu {
-      @apply visible w-72   
-			overflow-ellipsis bg-white opacity-100
-			transition-all;
+      @apply visible z-10 
+			w-72 overflow-ellipsis bg-white
+			opacity-100 transition-all;
 
       .sub-menu {
         @apply top-0

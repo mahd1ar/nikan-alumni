@@ -11,8 +11,8 @@
     </div> -->
 
     <!-- hero section -->
-    <div class="w-full flex flex-col">
-      <div class="flex flex-col h-full w-full relative">
+    <div class="flex w-full flex-col">
+      <div class="relative flex h-full w-full flex-col">
         <div class="relative h-full">
           <!-- <img
             class="w-full h-full object-cover object-bottom absolute top-0 left-0"
@@ -20,44 +20,44 @@
             alt=""
           /> -->
           <video
-            class="w-full h-full object-cover object-bottom absolute top-0 left-0"
-            src="test/output_Trim.mp4"
+            class="absolute top-0 left-0 h-full w-full object-cover object-bottom"
+            src="test/output.webm"
             muted
             loop
             autoplay
           ></video>
-          <div class="top-0 left-0 h-full w-full relative">
-            <div class="h-full relative w-full">
+          <div class="relative top-0 left-0 h-full w-full">
+            <div class="relative h-full w-full">
               <home-navigation></home-navigation>
               <div
-                class="m-blur-background w-full h-full absolute top-0 left-0"
+                class="m-blur-background absolute top-0 left-0 h-full w-full"
               ></div>
               <div
-                class="mx-auto h-full flex flex-row-reverse container relative"
+                class="container relative mx-auto flex h-full flex-row-reverse"
               >
-                <div class="w-5/12 flex-center">
+                <div class="flex-center w-5/12">
                   <div
-                    class="flex flex-col gap-6 justify-center bg-slate-900 bg-opacity-0 my-24 p-4 rounded-md"
+                    class="my-24 flex flex-col justify-center gap-6 rounded-md bg-slate-900 bg-opacity-0 p-4"
                   >
-                    <div class="text-5xl text-right font-bold text-gray-50">
+                    <div class="text-right text-5xl font-bold text-gray-50">
                       کانون
                       <br />
                       دانش آموختگان
                       <br />
                       نیکان
                     </div>
-                    <p class="text-white text-lg">
+                    <p class="text-lg text-white">
                       محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و
                       ایجاد بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها
                     </p>
                     <div class="text-sm">
                       <button
-                        class="inline-flex text-white bg-cyan-500 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-600 rounded"
+                        class="inline-flex rounded border-0 bg-cyan-500 py-2 px-6 text-white hover:bg-cyan-600 focus:outline-none"
                       >
                         درباره کانون دانش آموختگان
                       </button>
                       <button
-                        class="ml-4 inline-flex text-white bg-gray-100 bg-opacity-20 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded"
+                        class="ml-4 inline-flex rounded border-0 bg-gray-100 bg-opacity-20 py-2 px-6 text-white hover:bg-gray-200 focus:outline-none"
                       >
                         تماس با ما
                       </button>

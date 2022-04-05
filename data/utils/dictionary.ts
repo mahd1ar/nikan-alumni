@@ -17,5 +17,7 @@ export enum Dict {
   event_modal_partic_title = "لیست شرکت کنندگان در این رویداد",
   event_modal_partic_close = "بستن این پنجره",
   event_modal_partic_nobody_signup_for_this = "هنوز کسی برای این رویداد ثبت نام نکرده",
+  P404 = "page not fount",
+  E404 = "content not fount"
 
 }
