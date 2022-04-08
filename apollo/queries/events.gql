@@ -1,5 +1,5 @@
 query events($first: Int = 10) {
-  events(first: $first, where: {orderby: {field: DATE, order: ASC}}) {
+  events(first: $first, where: { orderby: { field: DATE, order: ASC } }) {
     nodes {
       id
       databaseId

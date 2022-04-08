@@ -1,5 +1,5 @@
-query eventParticipants($id: ID! ) {
-  event(id: $id) {
+query eventParticipants($id: ID!) {
+  event(id: $id, idType: DATABASE_ID) {
     comments {
       nodes {
         author {

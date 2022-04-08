@@ -735,14 +735,14 @@ export default Vue.extend({
       })
     }
   },
-  mounted() {
-    getSize('http://194.5.205.148/vid/TedNikan1.mp4#t=200')
-  },
 
   watch: {
     items() {
       // this.getVideoMeta()
     },
+  },
+  mounted() {
+    getSize('http://194.5.205.148/vid/TedNikan1.mp4#t=200')
   },
   methods: {
     // getpic(video: HTMLVideoElement) {

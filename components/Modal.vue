@@ -5,7 +5,7 @@
         <div
           v-if="open"
           dir="rtl"
-          class="main-modal fixed w-full h-100 inset-0 z-30 overflow-hidden flex justify-center items-center"
+          class="main-modal h-100 fixed inset-0 z-30 flex w-full items-center justify-center overflow-hidden"
         >
           <!-- overlay -->
           <div
@@ -21,9 +21,9 @@
               'main-modal__container--error': !confirm && type === 'error',
             }"
           >
-            <div class="modal-content py-4 text-left px-6">
+            <div class="modal-content py-4 px-6 text-left">
               <!--Title-->
-              <div class="flex justify-between items-center pb-3">
+              <div class="flex items-center justify-between pb-3">
                 <div
                   v-if="confirm"
                   style="--count: 1"
@@ -32,7 +32,7 @@
                   <slot name="title"></slot>
                 </div>
 
-                <div class="modal-close cursor-pointer z-50" @click="close()">
+                <div class="modal-close z-50 cursor-pointer" @click="close()">
                   <svg
                     class="fill-current"
                     xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
-                    class="w-20 h-20 mx-auto"
+                    class="mx-auto h-20 w-20"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 36 36"
                   >
@@ -75,7 +75,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
-                    class="w-20 h-20 mx-auto p-1"
+                    class="mx-auto h-20 w-20 p-1"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 24 24"
                   >
@@ -105,16 +105,16 @@
               <div
                 v-if="confirm"
                 style="--count: 3"
-                class="main-modal__buttons flex justify-end pt-2 gap-2"
+                class="main-modal__buttons flex justify-end gap-2 pt-2"
               >
                 <button
-                  class="px-4 py-1 rounded hover:bg-gray-100 text-gray-500"
+                  class="rounded px-4 py-1 text-gray-500 hover:bg-gray-100"
                   @click="$emit('cancel') && close()"
                 >
                   {{ cancel }}
                 </button>
                 <button
-                  class="px-4 py-1 rounded hover:bg-green-400 bg-green-500 text-green-50"
+                  class="rounded bg-green-500 px-4 py-1 text-green-50 hover:bg-green-400"
                   @click="$emit('yes') && close()"
                 >
                   {{ yes }}
@@ -125,10 +125,10 @@
               <div
                 v-if="!confirm"
                 style="--count: 3"
-                class="main-modal__buttons flex justify-end pt-2 gap-2"
+                class="main-modal__buttons flex justify-end gap-2 pt-2"
               >
                 <button
-                  :class="`px-4 py-1 rounded hover:bg-opacity-50 flex-grow ${
+                  :class="`flex-grow rounded px-4 py-1 hover:bg-opacity-50 ${
                     type === 'about' ? 'bg-slate-300' : 'bg-white'
                   } bg-opacity-25`"
                   @click="$emit('ok') && close()"
@@ -172,6 +172,7 @@ export default Vue.extend({
   methods: {
     close() {
       this.$emit('update:open', false)
+      this.$emit('closed', false)
     },
   },
 })
@@ -179,15 +180,20 @@ export default Vue.extend({
 
 <style scoped>
 .main-modal__container {
-  @apply relative border bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto;
+  @apply relative z-50 mx-auto max-h-[80%] w-11/12 overflow-y-hidden rounded border bg-white shadow-lg md:max-w-md;
+}
+
+.main-modal__body {
+  max-height: calc(80vh - 77px - 94px);
+  overflow: auto;
 }
 
 .main-modal__container--success {
-  @apply bg-gradient-to-tr from-green-800 bg-green-600 border-green-900 text-white;
+  @apply border-green-900 bg-green-600 bg-gradient-to-tr from-green-800 text-white;
 }
 
 .main-modal__container--error {
-  @apply bg-gradient-to-tr from-red-800 bg-red-600 border-red-900 text-white;
+  @apply border-red-900 bg-red-600 bg-gradient-to-tr from-red-800 text-white;
 }
 
 .anime-enter-active .main-modal__container,

@@ -1,5 +1,5 @@
-query videos ($first: Int = 8, $parent: Int = 5) {
- categories(where: {parent: $parent}) {
+query videos($first: Int = 8, $parent: Int = 5) {
+  categories(where: { parent: $parent }) {
     edges {
       node {
         id

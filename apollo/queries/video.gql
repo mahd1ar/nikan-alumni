@@ -1,4 +1,4 @@
-query video($id: ID! ) {
+query video($id: ID!, $first: Int = 3) {
   video(id: $id) {
     id
     content
@@ -6,6 +6,14 @@ query video($id: ID! ) {
     date
     speakers {
       speakers
+    }
+    categories(first: $first) {
+      nodes {
+        name
+        slug
+        databaseId
+        id
+      }
     }
   }
 }

@@ -20,7 +20,7 @@ export const getters: GetterTree<RootState, RootState> = {
 export const mutations: MutationTree<RootState> = {
   LOADING(state, v: number) {
     state.isLoading = v
-  }
+  },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -49,5 +49,5 @@ export const actions: ActionTree<RootState, RootState> = {
   },
   loadingEnded({ commit }) {
     commit('LOADING', true)
-  }
+  },
 }

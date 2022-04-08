@@ -1,15 +1,15 @@
 <template>
-  <div class="h-screen w-full flex-center">
+  <div class="flex-center h-screen w-full">
     <div class="container mx-auto">
       <div
-        class="flex max-w-sm mx-auto my-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl"
+        class="mx-auto my-auto flex max-w-sm overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 lg:max-w-4xl"
       >
         <div
           :class="
             loaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
           "
           style="background-image: url('img/login.jpg')"
-          class="hidden bg-cover lg:block lg:w-1/2 transition-all transform-gpu duration-700 ease-out"
+          class="hidden transform-gpu bg-cover transition-all duration-700 ease-out lg:block lg:w-1/2"
         >
           <!-- <iframe
             src="https://www.google.com/maps/embed?pb=!4v1646566186841!6m8!1m7!1sCAoSLEFGMVFpcFAtVTBuUUdLSl9KOFRVSHBVOVc2c3NLeGJaSElQaWkzbGh3V0I4!2m2!1d35.7882112!2d51.42718499999999!3f280!4f20!5f0.7820865974627469"
@@ -19,12 +19,12 @@
             class="w-full h-full"
           ></iframe> -->
           <nuxt-link
-            class="mt-2 cursor-pointer ml-2 hover:bg-opacity-50 px-4 py-2 bg-white bg-opacity-25 rounded-md inline-flex"
+            class="mt-2 ml-2 inline-flex cursor-pointer rounded-md bg-white bg-opacity-25 px-4 py-2 hover:bg-opacity-50"
             to="/"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 mr-1"
+              class="mr-1 h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -45,19 +45,19 @@
           :class="
             loaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
           "
-          class="w-full px-6 py-8 md:px-8 lg:w-1/2 transition-all transform-gpu duration-700 ease-out"
+          class="w-full transform-gpu px-6 py-8 transition-all duration-700 ease-out md:px-8 lg:w-1/2"
         >
           <h2
-            class="text-2xl font-naskh font-semibold text-center text-gray-700 dark:text-white"
+            class="text-center font-naskh text-2xl font-semibold text-gray-700 dark:text-white"
             @click="h"
           >
             کانون دانش آموختگان نیکان
           </h2>
 
           <p
-            class="mb-16 text-base text-center mt-2 text-gray-600 dark:text-gray-200"
+            class="mb-16 mt-2 text-center text-base text-gray-600 dark:text-gray-200"
           >
-            برای ادامه مطلب حساب کاربری خود وارد شوید
+            برای ادامه مطالب وارد حساب کاربری خود وارد شوید
           </p>
 
           <!-- <a
@@ -86,12 +86,12 @@
             </span>
           </a> -->
 
-          <div class="flex items-center justify-between mt-4">
+          <div class="mt-4 flex items-center justify-between">
             <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
 
             <a
               href="#"
-              class="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline"
+              class="text-center text-xs uppercase text-gray-500 hover:underline dark:text-gray-400"
             >
               login with email</a
             >
@@ -101,14 +101,14 @@
 
           <div class="mt-4">
             <label
-              class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+              class="mb-2 block text-sm font-medium text-gray-600 dark:text-gray-200"
               for="LoggingEmailAddress"
               >Email Address</label
             >
             <input
               id="LoggingEmailAddress"
               v-model="user.username"
-              class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+              class="block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
               type="email"
             />
           </div>
@@ -116,13 +116,13 @@
           <div class="mt-4">
             <div class="flex justify-between">
               <label
-                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+                class="mb-2 block text-sm font-medium text-gray-600 dark:text-gray-200"
                 for="loggingPassword"
                 >Password</label
               >
               <a
                 href="#"
-                class="text-xs text-gray-500 dark:text-gray-300 hover:underline"
+                class="text-xs text-gray-500 hover:underline dark:text-gray-300"
                 >Forget Password?</a
               >
             </div>
@@ -130,7 +130,7 @@
             <input
               id="loggingPassword"
               v-model="user.password"
-              class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+              class="block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
               type="password"
             />
           </div>
@@ -146,19 +146,19 @@
 
           <div class="mt-8">
             <button
-              class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+              class="w-full transform rounded bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
               @click="login()"
             >
               Login
             </button>
           </div>
 
-          <div class="flex items-center justify-between mt-4">
+          <div class="mt-4 flex items-center justify-between">
             <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
             <a
               href="#"
-              class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
+              class="text-xs uppercase text-gray-500 hover:underline dark:text-gray-400"
               >or sign up</a
             >
 
@@ -172,6 +172,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+// eslint-disable vue/multi-word-component-names
 
 // declare module hcaptcha {
 //   export function close(): void
@@ -230,7 +231,9 @@ export default Vue.extend({
   },
   mounted() {
     // @ts-ignore
-    this.loaded = true
+    this.$nextTick(() => {
+      this.loaded = true
+    })
   },
 
   methods: {

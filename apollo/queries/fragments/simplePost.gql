@@ -1,0 +1,8 @@
+fragment simplePost on Post {
+  id
+  databaseId
+  title(format: RENDERED)
+  date
+  content(format: RENDERED)
+  contentTypeName
+}

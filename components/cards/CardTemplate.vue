@@ -12,7 +12,7 @@
     </h1>
     <p class="mb-3 leading-relaxed">
       <client-only>
-        <content-field :isExcerpt="true" :html="content" />
+        <content-field :is-excerpt="true" :html="content" />
       </client-only>
     </p>
     <a class="inline-flex items-center text-indigo-500"

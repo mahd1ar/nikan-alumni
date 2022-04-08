@@ -19,61 +19,126 @@ export const toIndiaDigits = (num: string | number): string => {
   })
 }
 
-export function gregorian_to_jalali(gy: number, gm: number, gd: number): [number, number, number] {
-  let jy, jm, jd, days;
-  const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-  const gy2 = (gm > 2) ? (gy + 1) : gy;
-  days = 355666 + (365 * gy) + ~~((gy2 + 3) / 4) - ~~((gy2 + 99) / 100) + ~~((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
-  jy = -1595 + (33 * ~~(days / 12053));
-  days %= 12053;
-  jy += 4 * ~~(days / 1461);
-  days %= 1461;
+export function gregorian_to_jalali(
+  gy: number,
+  gm: number,
+  gd: number
+): [number, number, number] {
+  let jy, jm, jd, days
+  const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
+  const gy2 = gm > 2 ? gy + 1 : gy
+  days =
+    355666 +
+    365 * gy +
+    ~~((gy2 + 3) / 4) -
+    ~~((gy2 + 99) / 100) +
+    ~~((gy2 + 399) / 400) +
+    gd +
+    g_d_m[gm - 1]
+  jy = -1595 + 33 * ~~(days / 12053)
+  days %= 12053
+  jy += 4 * ~~(days / 1461)
+  days %= 1461
   if (days > 365) {
-    jy += ~~((days - 1) / 365);
-    days = (days - 1) % 365;
+    jy += ~~((days - 1) / 365)
+    days = (days - 1) % 365
   }
   if (days < 186) {
-    jm = 1 + ~~(days / 31);
-    jd = 1 + (days % 31);
+    jm = 1 + ~~(days / 31)
+    jd = 1 + (days % 31)
   } else {
-    jm = 7 + ~~((days - 186) / 30);
-    jd = 1 + ((days - 186) % 30);
+    jm = 7 + ~~((days - 186) / 30)
+    jd = 1 + ((days - 186) % 30)
   }
-  return [jy, jm, jd];
+  return [jy, jm, jd]
 }
 
-
-
-export const wordpressDateToJalali = (wpdate: string): [number, number, number,] => {
-  const delemiter = (wpdate.search("T") > -1) ? "T" : " "
-  const d = wpdate.split(delemiter)[0].split("-").map(i => Number(i));
+export const wordpressDateToJalali = (
+  wpdate: string
+): [number, number, number] => {
+  const delemiter = wpdate.search('T') > -1 ? 'T' : ' '
+  const d = wpdate
+    .split(delemiter)[0]
+    .split('-')
+    .map((i) => Number(i))
   return gregorian_to_jalali(d[0], d[1], d[2])
-
 }
 
 export const wordpressDateToFormattedJalali = (wpdate: string): string[] => {
-  const delemiter = (wpdate.search("T") > -1) ? "T" : " "
-  const d = wpdate.split(delemiter)[0].split("-").map(i => Number(i));
-  const months =
-    [
-      "فروردین",
-      "اردیبهشت",
-      "خرداد",
-      "تیر",
-      "مرداد",
-      "شهریور",
-      "مهر",
-      "آبان",
-      "آذر",
-      "دی",
-      "بهمن",
-      "اسفند"]
+  const delemiter = wpdate.search('T') > -1 ? 'T' : ' '
+  const d = wpdate
+    .split(delemiter)[0]
+    .split('-')
+    .map((i) => Number(i))
+  const months = [
+    'فروردین',
+    'اردیبهشت',
+    'خرداد',
+    'تیر',
+    'مرداد',
+    'شهریور',
+    'مهر',
+    'آبان',
+    'آذر',
+    'دی',
+    'بهمن',
+    'اسفند',
+  ]
 
-
-  return gregorian_to_jalali(d[0], d[1], d[2]).map((i, index) => index === 1 ? months[i - 1] : toIndiaDigits(i))
+  return gregorian_to_jalali(d[0], d[1], d[2]).map((i, index) =>
+    index === 1 ? months[i - 1] : toIndiaDigits(i)
+  )
 }
 
 export const twoDigits = (n: number) => (n / 10).toFixed(1).replace('.', '')
+
+export const filterCategory = (cats: string[]) =>
+  cats.filter(
+    (i) => process.env.MOTHERCATEGORIES?.split(',').includes(i) === false
+  )
+
+export const htmlEscape = (str: string) => (
+
+  String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+)
+
+
+export class BioHandler {
+  static delimiter = "~"
+  static url_delimiter = ";"
+  static supportedSocialMedias = ['instagram', 'linkedin', "twitter"]
+  static compose(str: string, urls: string[]) {
+    str = htmlEscape(str).replaceAll(this.delimiter, '');
+    urls = urls.map(m => m.replaceAll(this.url_delimiter, '')).filter(Boolean);
+    return str + this.delimiter + urls.join(this.url_delimiter)
+  }
+
+  static decompose(bio: string) {
+
+    const [biography, urls = ""] = bio.split(this.delimiter);
+
+    type supportedSocialMediasType = typeof this.supportedSocialMedias[number]
+
+    const socialMedias = this.supportedSocialMedias.reduce((a, v) => ({ ...a, [v]: "" }), {} as { [K in supportedSocialMediasType]: string })
+
+    urls.split(this.url_delimiter).filter(Boolean).forEach(url => {
+
+      const findedSocialMedia = this.supportedSocialMedias.find(sm => url.search(sm) > -1)
+      if (findedSocialMedia) {
+        socialMedias[findedSocialMedia] = url
+      }
+    })
+
+
+    return { biography, socialMedias }
+  }
+}
+
 
 // function jalali_to_gregorian(jy, jm, jd) {
 //   var sal_a, gy, gm, gd, days;

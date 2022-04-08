@@ -11,8 +11,12 @@ query fetchMe {
     nicename
     databaseId
     username
-    occupation {
+    url
+    user_acf {
       occupation
+      mobile
+      jobLocation
+      gen
     }
   }
 }

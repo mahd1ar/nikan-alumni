@@ -1,5 +1,21 @@
 # nikan-final
 
+# routes are like:
+
+nikan-alumni
+
+post types are :
+
+- post
+- video
+- event
+
+routes are like
+
+- post/12
+- post/category/
+- post/category/categoryname
+
 ## convention:
 
 comments with `[REG]` are stans for registeration

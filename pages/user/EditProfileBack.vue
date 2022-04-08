@@ -1,10 +1,220 @@
 <template>
   <div class="relative bg-gray-100 antialiased">
+    <!-- Start Nav -->
+    <modal :open.sync="modal.isOpen" :confirm="true" @yes="save">
+      <template #title>
+        <h1>
+          {{ modal.title }}
+        </h1>
+      </template>
+      <template #body>
+        {{ modal.body }}
+      </template>
+    </modal>
+
+    <!-- End Nav -->
     <!-- Start Main -->
     <main class="mx-w-6xl container mx-auto py-4">
       <div class="flex flex-col space-y-8">
         <!-- First Row -->
-
+        <div
+          class="grid grid-cols-1 gap-y-4 px-4 md:grid-cols-4 md:gap-6 xl:grid-cols-5 xl:p-0"
+        >
+          <div
+            class="rounded-2xl border border-gray-50 bg-white p-6 md:col-span-2 xl:col-span-3"
+          >
+            <div class="flex flex-col space-y-6 md:h-full md:justify-between">
+              <div class="flex justify-between">
+                <span
+                  class="text-xs font-semibold uppercase tracking-wider text-gray-500"
+                >
+                  Main Account
+                </span>
+                <span
+                  class="text-xs font-semibold uppercase tracking-wider text-gray-500"
+                >
+                  Available Funds
+                </span>
+              </div>
+              <div class="flex items-center justify-between gap-2 md:gap-4">
+                <div class="flex flex-col space-y-4">
+                  <h2
+                    class="font-bold leading-tight tracking-widest text-gray-800"
+                  >
+                    Derol's Savings Account
+                  </h2>
+                  <div class="flex items-center gap-4">
+                    <p class="text-lg tracking-wider text-gray-600">
+                      **** **** *321
+                    </p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <h2
+                  class="text-lg font-black tracking-wider text-gray-700 md:text-xl xl:text-3xl"
+                >
+                  <span class="md:text-xl">$</span>
+                  92,817.45
+                </h2>
+              </div>
+              <div class="flex gap-2 md:gap-4">
+                <a
+                  href="#"
+                  class="w-full rounded-lg bg-blue-600 px-5 py-3 text-center text-xs font-semibold tracking-wider text-white hover:bg-blue-800 md:w-auto"
+                >
+                  Transfer Money
+                </a>
+                <a
+                  href="#"
+                  class="w-full rounded-lg bg-blue-50 px-5 py-3 text-center text-xs font-semibold tracking-wider text-blue-600 hover:bg-blue-600 hover:text-white md:w-auto"
+                >
+                  Link Account
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-span-2 flex flex-col justify-between rounded-2xl bg-gradient-to-r from-blue-500 to-blue-800 p-6"
+          >
+            <div class="flex flex-col">
+              <p class="font-bold text-white">Lorem ipsum dolor sit amet</p>
+              <p
+                class="mt-1 max-w-sm text-xs font-light leading-tight text-gray-50 md:text-sm"
+              >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+                soluta saepe consequuntur facilis ab a. Molestiae ad saepe
+                assumenda praesentium rem dolore? Exercitationem, neque
+                obcaecati?
+              </p>
+            </div>
+            <div class="flex items-end justify-between">
+              <a
+                href="#"
+                class="rounded-lg bg-blue-800 px-4 py-3 text-xs font-semibold tracking-wider text-white hover:bg-blue-600 hover:text-white"
+              >
+                Learn More
+              </a>
+              <img
+                src="assets/calendar.png"
+                alt="calendar"
+                class="h-24 w-auto object-cover"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- End First Row -->
+        <!-- Start Second Row -->
+        <!-- <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-4 xl:p-0 gap-4 xl:gap-6"
+          >
+            <div
+              class="col-span-1 md:col-span-2 lg:col-span-4 flex justify-between"
+            >
+              <h2
+                class="text-xs md:text-sm text-gray-700 font-bold tracking-wide md:tracking-wider"
+              >
+                Expenses By Category
+              </h2>
+              <a href="#" class="text-xs text-gray-800 font-semibold uppercase"
+                >More</a
+              >
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-gray-50">
+              <div class="flex justify-between items-start">
+                <div class="flex flex-col">
+                  <p class="text-xs text-gray-600 tracking-wide">
+                    Foods & Beverages
+                  </p>
+                  <h3 class="mt-1 text-lg text-blue-500 font-bold">$ 818</h3>
+                  <span class="mt-4 text-xs text-gray-500"
+                    >Last Transaction 3 Hours ago</span
+                  >
+                </div>
+                <div class="bg-blue-500 p-2 md:p-1 xl:p-2 rounded-md">
+                  <img
+                    src="assets/dish-2.png"
+                    alt="icon"
+                    class="w-auto h-8 md:h-6 xl:h-8 object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-gray-50">
+              <div class="flex justify-between items-start">
+                <div class="flex flex-col">
+                  <p class="text-xs text-gray-600 tracking-wide">Groceries</p>
+                  <h3 class="mt-1 text-lg text-green-500 font-bold">$ 8,918</h3>
+                  <span class="mt-4 text-xs text-gray-500"
+                    >Last Transaction 3 Days ago</span
+                  >
+                </div>
+                <div class="bg-green-500 p-2 md:p-1 xl:p-2 rounded-md">
+                  <img
+                    src="assets/grocery.png"
+                    alt="icon"
+                    class="w-auto h-8 md:h-6 xl:h-8 object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-gray-50">
+              <div class="flex justify-between items-start">
+                <div class="flex flex-col">
+                  <p class="text-xs text-gray-600 tracking-wide">Gaming</p>
+                  <h3 class="mt-1 text-lg text-yellow-500 font-bold">
+                    $ 1,223
+                  </h3>
+                  <span class="mt-4 text-xs text-gray-600"
+                    >Last Transaction 4 Days ago</span
+                  >
+                </div>
+                <div class="bg-yellow-500 p-2 md:p-1 xl:p-2 rounded-md">
+                  <img
+                    src="assets/gaming.png"
+                    alt="icon"
+                    class="w-auto h-8 md:h-6 xl:h-8 object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-gray-50">
+              <div class="flex justify-between items-start">
+                <div class="flex flex-col">
+                  <p class="text-xs text-gray-600 tracking-wide">
+                    Trip & Holiday
+                  </p>
+                  <h3 class="mt-1 text-lg text-indigo-500 font-bold">
+                    $ 5,918
+                  </h3>
+                  <span class="mt-4 text-xs text-gray-500"
+                    >Last Transaction 1 Month ago</span
+                  >
+                </div>
+                <div class="bg-indigo-500 p-2 md:p-1 xl:p-2 rounded-md">
+                  <img
+                    src="assets/holiday.png"
+                    alt="icon"
+                    class="w-auto h-8 md:h-6 xl:h-8 object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div> -->
+        <!-- End Second Row -->
+        <!-- Start Third Row -->
         <div
           class="grid grid-cols-1 items-start gap-y-4 px-4 md:grid-cols-5 md:gap-6 xl:p-0"
         >
@@ -15,7 +225,27 @@
               Summary Transactions
             </h2>
           </div>
-
+          <div
+            class="col-span-2 flex flex-col space-y-6 rounded-xl border border-gray-50 bg-white p-6"
+          >
+            <div
+              class="flex grid grid-cols-1 items-center justify-between md:grid-cols-2 xl:grid-cols-3"
+            >
+              <div class="cursor-pointer border p-4">
+                <span class="text-xs font-semibold text-gray-500">Daily</span>
+                <h2 class="font-bold tracking-wider text-gray-800">$ 27.80</h2>
+              </div>
+              <div class="cursor-pointer border p-4">
+                <span class="text-xs font-semibold text-gray-500">Weekly</span>
+                <h2 class="font-bold tracking-wider text-gray-800">$ 192.92</h2>
+              </div>
+              <div class="cursor-pointer border p-4">
+                <span class="text-xs font-semibold text-gray-500">Monthly</span>
+                <h2 class="font-bold tracking-wider text-gray-800">$ 501.10</h2>
+              </div>
+            </div>
+            <canvas id="myChart"></canvas>
+          </div>
           <div
             class="col-span-3 flex flex-col space-y-6 rounded-xl border border-gray-50 bg-white p-6"
           >
@@ -94,34 +324,6 @@
 
                   <validation-provider
                     v-slot="{ errors }"
-                    name="mobile"
-                    :rules="{ regex: /^(\d|\+)\d+$/, min: 11, max: 15 }"
-                  >
-                    <div>
-                      <label class="text-gray-700" for="lastname">
-                        تلفن همراه
-                      </label>
-                      <input
-                        id="lastname"
-                        v-model="user.mobile"
-                        type="text"
-                        dir="ltr"
-                        :class="{
-                          'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
-                          'border-gray-200': !errors[0],
-                          'border-red-500': errors[0],
-                        }"
-                      />
-                      <span
-                        v-if="errors[0] !== undefined"
-                        class="mx-2 mt-2 text-xs text-red-500"
-                        >{{ errors[0] }}</span
-                      >
-                    </div>
-                  </validation-provider>
-
-                  <validation-provider
-                    v-slot="{ errors }"
                     name="description"
                     rules="max:225"
                   >
@@ -165,26 +367,6 @@
                     />
                   </div>
 
-                  <div
-                    class="flex gap-2 flex-row-reverse items-center justify-end"
-                  >
-                    <label class="text-sm" for="location"> آدرس محل کار </label>
-                    <input
-                      id="location"
-                      v-model="location.show"
-                      type="checkbox"
-                    />
-                  </div>
-                  {{ socialMedias }}
-                  <transition name="v-openwindow">
-                    <map-picker
-                      v-show="location.show"
-                      :lat.sync="location.default.x"
-                      :lng.sync="location.default.y"
-                      :disabled="false"
-                    ></map-picker>
-                  </transition>
-
                   <validation-provider
                     v-slot="{ errors }"
                     name="occupation"
@@ -225,58 +407,13 @@
           </div>
         </div>
         <!-- End Third Row -->
-        <div class="mx-auto max-w-md gap-y-4 px-4 md:gap-6 xl:p-0">
-          <div
-            class="col-span-2 flex flex-col justify-between rounded bg-gradient-to-r from-blue-500 to-blue-800 p-6"
-          >
-            <div class="flex flex-col">
-              <p class="font-bold text-white">
-                مشاهده ی کارت کارت ویزیت انلاین
-              </p>
-
-              <nuxt-link
-                class="mt-4 flex flex-row-reverse items-center justify-center gap-2 text-gray-50"
-                to="/user/vcard"
-              >
-                <p class="max-w-sm text-xs font-light leading-tight md:text-sm">
-                  <code> https://nikan-alumni.com/user/vcard/35 </code>
-                </p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  style="color: #f3f4f6"
-                  class="ml-auto"
-                  role="img"
-                  width="2em"
-                  height="2em"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"
-                  />
-                </svg>
-              </nuxt-link>
-            </div>
-          </div>
-        </div>
       </div>
     </main>
-    <modal :open.sync="modal.isOpen" :confirm="true" @yes="save">
-      <template #title>
-        <h1>
-          {{ modal.title }}
-        </h1>
-      </template>
-      <template #body>
-        {{ modal.body }}
-      </template>
-    </modal>
   </div>
 </template>
 
 <script lang="ts">
+import gql from 'graphql-tag'
 import Vue from 'vue'
 import {
   ValidationProvider,
@@ -287,11 +424,13 @@ import {
 import * as rules from 'vee-validate/dist/rules'
 import onLoggedOut from '@/mixins/on-logged-out'
 import fetchMe from '@/apollo/queries/fetch-me.gql'
-import { FetchMeQuery, UpdateUserMutationVariables } from '~/types/types'
+import {
+  FetchMeQuery,
+  UpdateUserMutation,
+  UpdateUserMutationVariables,
+} from '~/types/types'
 import updateUserMutation from '@/apollo/mutation/update-user.gql'
 import { Dict } from '~/data/utils/dictionary'
-import MapPicker from '~/components/form/MapPicker.vue'
-import { BioHandler } from '~/data/utils'
 
 for (const [rule, validation] of Object.entries(rules)) {
   extend(rule, {
@@ -314,16 +453,10 @@ interface UserObject {
   avatar: string
   occupation: string
   description: string
-  mobile: string
-  jobLocation: string
-}
-const tehranLocation = {
-  x: 35.6967329,
-  y: 51.2097332,
 }
 
 export default Vue.extend({
-  components: { ValidationProvider, ValidationObserver, MapPicker },
+  components: { ValidationProvider, ValidationObserver },
   mixins: [onLoggedOut],
   layout: 'dashboard',
   middleware: ['authentication'],
@@ -337,15 +470,6 @@ export default Vue.extend({
       open: false,
       open_t: false,
       userTemplate: {} as UserObject,
-      location: {
-        default: {
-          // this is tehran location
-          x: 0,
-          y: 0,
-        },
-        show: true,
-      },
-      socialMedias: { instagram: '', linkedin: '', twitter: '' },
       user: {
         id: '',
         firstName: '',
@@ -354,12 +478,9 @@ export default Vue.extend({
         email: '',
         description: '',
         occupation: '',
-        mobile: '',
-        jobLocation: '',
       } as UserObject,
     }
   },
-
   async fetch() {
     try {
       const { data } = await this.$apollo.query<FetchMeQuery>({
@@ -377,27 +498,7 @@ export default Vue.extend({
         user.email = data.viewer.email || ''
         user.avatar = data.viewer.avatar?.url || ''
         user.occupation = data.viewer.user_acf?.occupation || ''
-        user.mobile = data.viewer.user_acf?.mobile || ''
-        const description = data.viewer.description || ''
-        const { biography, socialMedias } = BioHandler.decompose(description)
-        user.description = biography
-        this.socialMedias.instagram = socialMedias.instagram
-        this.socialMedias.linkedin = socialMedias.linkedin
-        this.socialMedias.twitter = socialMedias.twitter
-
-        user.jobLocation = ''
-        this.location.show = false
-        if (data.viewer.user_acf?.jobLocation) {
-          const latlng = data.viewer.user_acf.jobLocation.split(',')
-          if (latlng.length === 2) {
-            if (parseFloat(latlng[0]) && parseFloat(latlng[1])) {
-              user.jobLocation = data.viewer.user_acf.jobLocation
-              this.location.show = true
-              this.location.default.x = parseFloat(latlng[0])
-              this.location.default.y = parseFloat(latlng[1])
-            }
-          }
-        }
+        user.description = data.viewer.description || ''
 
         this.userTemplate = Object.freeze(user)
 
@@ -411,31 +512,10 @@ export default Vue.extend({
       console.error(error)
     }
   },
-  watch: {
-    'location.show'(nval: boolean) {
-      if (nval && !this.location.default.x) {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              this.location.default.x = position.coords.latitude
-              this.location.default.y = position.coords.longitude
-            },
-            () => {
-              this.location.default.x = tehranLocation.x
-              this.location.default.y = tehranLocation.y
-            }
-          )
-        } else {
-          this.location.default.x = tehranLocation.x
-          this.location.default.y = tehranLocation.y
-        }
-      }
-    },
-  },
 
   mounted() {
     // @ts-ignore
-    window.eu = this
+    window.edit = this
   },
 
   methods: {
@@ -447,15 +527,8 @@ export default Vue.extend({
       let flag = true
 
       const updatedUser = {} as UpdateUserMutationVariables
-      updatedUser.clientMutationId = 'upusr' + ~~(Math.random() * 1000)
+
       updatedUser.id = this.userTemplate.id
-      this.user.jobLocation =
-        this.location.default.x + ',' + this.location.default.y
-
-      const urls = Object.entries(this.socialMedias).map((i) => i[1])
-      this.user.description = BioHandler.compose(this.user.description, urls)
-
-      console.log(this.userTemplate)
 
       let k: keyof UserObject
       // let k: keyof UpdateUserMutationVariables
@@ -472,24 +545,42 @@ export default Vue.extend({
         this.$about.info({ title: Dict.form_no_changes })
         return false
       } else {
-        console.log({ updatedUser })
-        return
         try {
-          await this.$apollo.mutate({
+          await this.$apollo.mutate<UpdateUserMutation>({
             mutation: updateUserMutation,
             variables: updatedUser,
           })
-          this.$about.success({
-            title: 'SUCCESS',
-            body: Dict.UPDATE_USER_SUCESS,
-          })
+          this.$about.success({ title: 'SUCCESS', body: 'UPDATE_USER_SUCESS' })
 
           await this.$fetch()
         } catch (error) {
           console.error(error)
-          this.$about.error({ title: Dict.UPDATE_USER_ERR })
+          this.$about.error({ title: 'UPDATE_USER_ERR' })
         }
       }
+    },
+    async submit() {
+      const mutation = gql`
+        mutation changeuser {
+          updateUser(
+            input: {
+              id: "dXNlcjox"
+              lastName: "tokhmekhar"
+              occupation: "anatr mantar"
+            }
+          ) {
+            clientMutationId
+            user {
+              id
+              firstName
+              lastName
+            }
+          }
+        }
+      `
+
+      const d = await this.$apollo.mutate({ mutation })
+      console.log(d)
     },
   },
 })

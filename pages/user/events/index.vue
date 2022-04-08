@@ -24,7 +24,7 @@
               />
 
               <div class="absolute left-5 top-5">
-                <count-down :duration="2" :startingFrom="e.wpdate">
+                <count-down :duration="2" :starting-from="e.wpdate">
                   <!-- v-slot="{ time }"
                   <pre>{{ time }}</pre> -->
                 </count-down>

@@ -3,7 +3,7 @@
     <div
       v-for="notif in notifs"
       :key="notif.id"
-      class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg my-2"
+      class="my-2 rounded-lg border border-gray-300 bg-white p-3 shadow-lg"
     >
       <div class="flex flex-row">
         <div class="px-2">
@@ -13,7 +13,7 @@
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
             role="img"
-            class="w-5 h-5 text-green-500"
+            class="h-5 w-5 text-green-500"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 16 16"
           >
@@ -35,7 +35,7 @@
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
             role="img"
-            class="w-5 h-5 text-red-500"
+            class="h-5 w-5 text-red-500"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 24 24"
           >
@@ -52,7 +52,7 @@
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
             role="img"
-            class="w-5 h-5 text-yellow-500"
+            class="h-5 w-5 text-yellow-500"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 24 24"
           >

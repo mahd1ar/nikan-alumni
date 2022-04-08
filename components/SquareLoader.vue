@@ -2,7 +2,7 @@
   <transition name="v-openwindow">
     <div
       v-if="isLoading"
-      class="bg-[#242F3F] inline-flex justify-center items-center gap-3 p-2 rounded"
+      class="inline-flex items-center justify-center gap-3 rounded bg-[#242F3F] p-2"
     >
       <div>
         <span class="loader"><span class="loader-inner"></span></span>

@@ -8,44 +8,44 @@
     </client-only>
 
     <!-- hero section -->
-    <div class="h-screen w-full flex flex-col">
+    <div class="flex h-screen w-full flex-col">
       <!-- <nuxt-link to="login">++++</nuxt-link> -->
-      <div class="flex flex-col h-full w-full relative">
+      <div class="relative flex h-full w-full flex-col">
         <div class="relative h-full">
           <img
-            class="w-full h-full object-cover object-bottom absolute top-0 left-0"
+            class="absolute top-0 left-0 h-full w-full object-cover object-bottom"
             src="img/IMG_4141(ACR v8.1)F-2MP.jpg"
             alt=""
           />
-          <div class="top-0 left-0 h-full w-full relative">
-            <div class="h-full relative w-full">
+          <div class="relative top-0 left-0 h-full w-full">
+            <div class="relative h-full w-full">
               <home-navigation @openModal="search.show = true" />
               <div
-                class="m-blur-background w-full h-full absolute top-0 left-0"
+                class="m-blur-background absolute top-0 left-0 h-full w-full"
               ></div>
               <div
-                class="mx-auto h-full flex flex-row-reverse container relative"
+                class="container relative mx-auto flex h-full flex-row-reverse"
               >
-                <div class="flex flex-col gap-6 justify-center w-5/12">
-                  <div class="text-5xl text-right font-bold text-gray-50">
+                <div class="flex w-5/12 flex-col justify-center gap-6">
+                  <div class="text-right text-5xl font-bold text-gray-50">
                     کانون
                     <br />
                     دانش آموختگان
                     <br />
                     <span class="text-cyan-300"> نیکان </span>
                   </div>
-                  <p class="text-white text-lg leading-7">
+                  <p class="text-lg leading-7 text-white">
                     محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و
                     ایجاد بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها
                   </p>
                   <div class="text-sm">
                     <button
-                      class="inline-flex text-white bg-cyan-500 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-600 rounded"
+                      class="inline-flex rounded border-0 bg-cyan-500 py-2 px-6 text-white hover:bg-cyan-600 focus:outline-none"
                     >
                       درباره کانون دانش آموختگان
                     </button>
                     <button
-                      class="ml-4 inline-flex text-white bg-gray-100 bg-opacity-20 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded"
+                      class="ml-4 inline-flex rounded border-0 bg-gray-100 bg-opacity-20 py-2 px-6 text-white hover:bg-gray-200 focus:outline-none"
                     >
                       تماس با ما
                     </button>

@@ -1,7 +1,7 @@
 <template>
   <div
     dir="rtl"
-    class="min-h-screen bg-gray-50 py-6 flex flex-col justify-center relative overflow-hidden sm:py-40"
+    class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-40"
   >
     <img
       class="absolute top-0 left-0"
@@ -17,15 +17,15 @@
     />
 
     <div
-      class="container mx-auto flex flex-col-reverse md:flex-row items-start gap-7 relative"
+      class="container relative mx-auto flex flex-col-reverse items-start gap-7 md:flex-row"
     >
       <div
-        class="lg:w-9/12 md:w-7/12 w-full bg-white rounded-xl overflow-hidden flex flex-col"
+        class="flex w-full flex-col overflow-hidden rounded-xl bg-white md:w-7/12 lg:w-9/12"
       >
         <div class="px-7 pt-7">
           <div class="flex flex-col">
             <h1 class="text-3xl">درباره من</h1>
-            <div class="w-10 h-1 bg-cyan-400 my-5"></div>
+            <div class="my-5 h-1 w-10 bg-cyan-400"></div>
           </div>
 
           <div class="my-3 min-h-[120px]">
@@ -35,22 +35,22 @@
             doloremque saepe asperiores.
           </div>
         </div>
-        <div class="px-7 pb-7 bg-slate-100 h-full">
-          <div class="flex flex-col mt-5">
+        <div class="h-full bg-slate-100 px-7 pb-7">
+          <div class="mt-5 flex flex-col">
             <h1 class="text-3xl">تماس با من</h1>
-            <div class="w-10 h-1 bg-cyan-400 my-5"></div>
+            <div class="my-5 h-1 w-10 bg-cyan-400"></div>
           </div>
           <!-- cards -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 my-3">
+          <div class="my-3 grid grid-cols-1 gap-2 lg:grid-cols-2">
             <div
-              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden"
+              class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
-              <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
+              <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
-                  class="w-8 h-8"
+                  class="h-8 w-8"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 48 48"
                 >
@@ -61,13 +61,13 @@
                 </svg>
               </div>
 
-              <div class="px-2 text-slate-700 relative">
+              <div class="relative px-2 text-slate-700">
                 <span
-                  class="flex items-center relative gap-2 justify-start text-lg font-bold"
+                  class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
                   <span> تماس با تلفن همراه </span>
                   <svg
-                    class="top-0.5 relative"
+                    class="relative top-0.5"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
@@ -87,14 +87,14 @@
             </div>
 
             <div
-              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden"
+              class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
-              <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
+              <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
-                  class="w-8 h-8"
+                  class="h-8 w-8"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 20 20"
                 >
@@ -105,13 +105,13 @@
                 </svg>
               </div>
 
-              <div class="px-2 text-slate-700 relative">
+              <div class="relative px-2 text-slate-700">
                 <span
-                  class="flex items-center relative gap-2 justify-start text-lg font-bold"
+                  class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
                   <span> تماس با تلفن همراه </span>
                   <svg
-                    class="top-0.5 relative"
+                    class="relative top-0.5"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
@@ -131,14 +131,14 @@
             </div>
 
             <div
-              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden"
+              class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
-              <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
+              <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
-                  class="w-8 h-8"
+                  class="h-8 w-8"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 24 24"
                 >
@@ -149,13 +149,13 @@
                 </svg>
               </div>
 
-              <div class="px-2 text-slate-700 relative">
+              <div class="relative px-2 text-slate-700">
                 <span
-                  class="flex items-center relative gap-2 justify-start text-lg font-bold"
+                  class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
                   <span> ارسال ایمیل </span>
                   <svg
-                    class="top-0.5 relative"
+                    class="relative top-0.5"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
@@ -171,7 +171,7 @@
                   </svg>
                 </span>
                 <span
-                  class="text-ellipsis whitespace-nowrap overflow-hidden w-full inline-block"
+                  class="inline-block w-full overflow-hidden text-ellipsis whitespace-nowrap"
                 >
                   a.mahdiyar7@yahoo.com سیشصثبصضثبصثب صثبصثبصثب
                 </span>
@@ -179,14 +179,14 @@
             </div>
 
             <div
-              class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden"
+              class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
-              <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
+              <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
-                  class="w-8 h-8"
+                  class="h-8 w-8"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 24 24"
                 >
@@ -197,14 +197,14 @@
                 </svg>
               </div>
 
-              <div class="px-2 text-slate-700 relative">
+              <div class="relative px-2 text-slate-700">
                 <span
-                  class="flex items-center relative gap-2 justify-start text-lg font-bold"
+                  class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
                   <span> وب سایت </span>
 
                   <svg
-                    class="top-0.5 relative"
+                    class="relative top-0.5"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
@@ -225,15 +225,15 @@
           </div>
 
           <div
-            class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm flex p-3 rounded overflow-hidden mt-2 flex-col"
+            class="mt-2 flex cursor-pointer flex-col overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
           >
             <div class="flex items-start">
-              <div class="p-3 bg-cyan-50 text-cyan-400 rounded-lg">
+              <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
-                  class="w-8 h-8 shrink-0"
+                  class="h-8 w-8 shrink-0"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 1024 1024"
                 >
@@ -248,9 +248,9 @@
                 </svg>
               </div>
 
-              <div class="px-2 text-slate-700 relative">
+              <div class="relative px-2 text-slate-700">
                 <span
-                  class="flex items-center relative gap-2 justify-start text-lg font-bold"
+                  class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
                   <span> نشانی محل کار </span>
                 </span>
@@ -258,7 +258,7 @@
               </div>
             </div>
 
-            <div class="py-5 px-3 h-72">
+            <div class="h-72 py-5 px-3">
               <client-only>
                 <l-map
                   style="height: 100%"
@@ -280,7 +280,7 @@
                           top: 4px;
                           stroke: white;
                         "
-                        class="w-8 h-8 shrink-0 text-cyan-400"
+                        class="h-8 w-8 shrink-0 text-cyan-400"
                         aria-hidden="true"
                         role="img"
                         width="1em"
@@ -305,33 +305,33 @@
           </div>
         </div>
       </div>
-      <div class="lg:w-3/12 md:w-5/12 w-full bg-white flex flex-col rounded-xl">
+      <div class="flex w-full flex-col rounded-xl bg-white md:w-5/12 lg:w-3/12">
         <div class="px-7">
           <div
-            class="h-20 relative flex justify-center items-center mx-auto max-w-xs"
+            class="relative mx-auto flex h-20 max-w-xs items-center justify-center"
           >
             <img
-              class="absolute rounded-3xl bottom-0"
+              class="absolute bottom-0 rounded-3xl"
               src="https://avatars.githubusercontent.com/u/32998122?v=4"
               alt=""
             />
           </div>
-          <div class="text-3xl text-center my-6 text-[#44566c] font-semibold">
+          <div class="my-6 text-center text-3xl font-semibold text-[#44566c]">
             مهدیار اناری
           </div>
           <div
-            class="my-3 text-center bg-slate-100 rounded-3xl py-2 px-4 text-[#44566c] flex justify-center items-center"
+            class="my-3 flex items-center justify-center rounded-3xl bg-slate-100 py-2 px-4 text-center text-[#44566c]"
           >
             وب دولوپر
           </div>
           <div
-            class="text-gray-700 flex justify-center items-center gap-3 py-3 mb-3"
+            class="mb-3 flex items-center justify-center gap-3 py-3 text-gray-700"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-5 h-5"
+              class="h-5 w-5"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 24 24"
             >
@@ -345,7 +345,7 @@
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-5 h-5"
+              class="h-5 w-5"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 512 512"
             >
@@ -358,7 +358,7 @@
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-5 h-5"
+              class="h-5 w-5"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 1024 1024"
             >
@@ -370,14 +370,14 @@
           </div>
         </div>
         <div
-          class="px-7 bg-slate-100 text-[#44566c] flex flex-col gap-3 py-8 mt-auto rounded-b-xl shrink-0"
+          class="mt-auto flex shrink-0 flex-col gap-3 rounded-b-xl bg-slate-100 px-7 py-8 text-[#44566c]"
         >
-          <div class="flex gap-1 items-center">
+          <div class="flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-5 h-5 shrink-0"
+              class="h-5 w-5 shrink-0"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 1024 1024"
             >
@@ -393,12 +393,12 @@
             <span>ایران، تهران</span>
           </div>
 
-          <div class="flex gap-1 items-center">
+          <div class="flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-5 h-5 shrink-0"
+              class="h-5 w-5 shrink-0"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 24 24"
             >
@@ -413,14 +413,14 @@
                 />
               </g>
             </svg>
-            <a class="text-ellipsis overflow-hidden">a.mahdiyar@yahoo.com</a>
+            <a class="overflow-hidden text-ellipsis">a.mahdiyar@yahoo.com</a>
           </div>
-          <div class="flex gap-1 items-center">
+          <div class="flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-5 h-5 shrink-0"
+              class="h-5 w-5 shrink-0"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 20 20"
             >
@@ -431,12 +431,12 @@
             </svg>
             <span>091012124368</span>
           </div>
-          <div class="flex gap-1 items-center">
+          <div class="flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-5 h-5 shrink-0"
+              class="h-5 w-5 shrink-0"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 20 20"
             >
@@ -449,7 +449,7 @@
           </div>
 
           <button
-            class="bg-cyan-400 hover:bg-cyan-500 text-lg font-bold text-cyan-50 cursor-pointer rounded-lg py-2"
+            class="cursor-pointer rounded-lg bg-cyan-400 py-2 text-lg font-bold text-cyan-50 hover:bg-cyan-500"
           >
             اضافه به مخاطبین
           </button>
@@ -463,6 +463,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+  layout: 'rawlayout',
   data() {
     return {
       marker_lat_lng: [35.826165, 50.964831] as [number, number],

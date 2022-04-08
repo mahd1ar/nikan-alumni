@@ -1,10 +1,8 @@
+#import "./fragments/category.gql"
+
 query categoryPosts($id: ID = "uncategorized", $first: Int = 10) {
   category(id: $id, idType: SLUG) {
-    id
-    databaseId
-    count
-    name
-    slug
+    ...categoryAttributes
     children(first: 10) {
       nodes {
         name

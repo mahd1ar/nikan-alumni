@@ -3,7 +3,6 @@ import { onError } from 'apollo-link-error'
 import { Dict } from '~/data/utils/dictionary'
 
 const apolloClientConfig = (ctx) => {
-
   const errorLink = onError(({ networkError, graphQLErrors }) => {
     if (networkError) {
       if (process.client) ctx.$about.error({ title: Dict.net_err })

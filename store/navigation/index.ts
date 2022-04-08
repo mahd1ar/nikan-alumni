@@ -207,7 +207,7 @@ const initialState = {
     {
       title: 'رویداد ها',
       hasSubmenu: true,
-      href: '',
+      href: 'event/category',
       svg: SVG.EVENT,
       submenu: [
         {
@@ -218,7 +218,7 @@ const initialState = {
         {
           title: 'کارگروه نشاط و سرگرمی',
           hasSubmenu: false,
-          href: '',
+          href: 'event/category/entertainment-and-entertainment',
         },
         {
           title: 'کارگروه امور خیریه و عام المنفعه',
