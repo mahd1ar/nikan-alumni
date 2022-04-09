@@ -82,7 +82,7 @@
             :user-info="edituser"
           />
 
-          <div class="w-5/12 bg-green-50 shadow overflow-hidden sm:rounded-lg">
+          <div class="w-5/12 overflow-hidden">
             <div class="px-4 py-5 sm:px-6">
               <h3 class="text-lg leading-6 font-medium text-green-900">
                 رویداد های من
@@ -98,7 +98,30 @@
                   :key="index"
                   class="bg-green-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                 >
-                  <dt class="text-sm font-medium text-gray-500">
+                  <dt
+                    class="text-sm flex items-center gap-2 font-medium text-gray-500"
+                  >
+                    <div style="color: #41bf6d">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        class="w-6 h-6"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                      >
+                        <g
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="m15 16l-2.414-2.414A2 2 0 0 1 12 12.172V6" />
+                        </g>
+                      </svg>
+                    </div>
                     {{ e.date }}
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -116,6 +139,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import gql from 'graphql-tag'
 import fetchMe from '@/apollo/queries/fetch-me.gql'
 import onLoggedOut from '~/mixins/on-logged-out'
 import { FetchMeQuery, UpdateUserMutationVariables } from '~/types/types'
@@ -123,7 +147,6 @@ import { UserFullProfile } from '@/data/GlobslTypes'
 import { BioHandler, toIndiaDigits, wordpressDateToJalali } from '~/data/utils'
 import UserInfoCard from '~/components/user-profile/UserInfoCard.vue'
 import updateUserMutationgql from '@/apollo/mutation/update-user.gql'
-import gql from 'graphql-tag'
 
 export default Vue.extend({
   components: { UserInfoCard },
