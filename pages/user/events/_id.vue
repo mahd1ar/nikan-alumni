@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-gray-100 flex-grow">
+  <div class="relative flex-grow bg-gray-100">
     <modal
       @yes="regEvent"
       :type="modal.success ? 'success' : 'error'"
@@ -19,19 +19,19 @@
       <template #title> {{ participantsModal.title }} </template>
       <template #body>
         <div class="flex flex-col gap-1">
-          <div class="text-red-500 font-bold" v-if="totalRegistrants === 0">
+          <div class="font-bold text-red-500" v-if="totalRegistrants === 0">
             {{ participantsModal.nobodySignUpForThis }}
           </div>
 
           <div
-            class="text-cyan-500 font-bold"
+            class="font-bold text-cyan-500"
             v-if="participantsModal.body.length === 0"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-10 h-10 mx-auto"
+              class="mx-auto h-10 w-10"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 24 24"
             >
@@ -74,15 +74,15 @@
           <div
             v-for="(user, index) in participantsModal.body"
             :key="index"
-            class="flex flex-row items-center gap-2 border border-cyan-200 p-2 rounded-md bg-cyan-50"
+            class="flex flex-row items-center gap-2 rounded-md border border-cyan-200 bg-cyan-50 p-2"
           >
-            <img class="w-10 h-10 rounded-full" :src="user.avatar" />
+            <img class="h-10 w-10 rounded-full" :src="user.avatar" />
 
             <div class="flex flex-col items-start">
               <div class="font-semibold">
                 {{ user.firstName + ' ' }}
               </div>
-              <div class="text-gray-500 text-xs">
+              <div class="text-xs text-gray-500">
                 {{ user.email }}
               </div>
             </div>
@@ -92,7 +92,7 @@
     </modal>
 
     <header
-      class="entry-header entry-header--style-3 relative pt-16 z-10 md:py-20 lg:py-28 bg-neutral-900 dark:bg-black"
+      class="entry-header entry-header--style-3 relative z-10 bg-neutral-900 pt-16 dark:bg-black md:py-20 lg:py-28"
     >
       <div class="container relative z-10">
         <div class="max-w-screen-md">
@@ -108,7 +108,7 @@
 
             <!-- TITLE -->
             <h1
-              class="entry-title text-neutral-900 font-semibold text-3xl md:text-4xl md:!leading-[120%] lg:text-5xl dark:text-neutral-100 max-w-4xl"
+              class="entry-title max-w-4xl text-3xl font-semibold text-neutral-900 dark:text-neutral-100 md:text-4xl md:!leading-[120%] lg:text-5xl"
             >
               {{ title }}
             </h1>
@@ -121,10 +121,10 @@
 
             <!-- META -->
             <div
-              class="flex flex-col lg:flex-row justify-between lg:items-end space-y-5 lg:space-y-0 lg:space-x-5"
+              class="flex flex-col justify-between space-y-5 lg:flex-row lg:items-end lg:space-y-0 lg:space-x-5"
             >
               <div
-                class="gap-2 flex items-center text-neutral-700 text-left dark:text-neutral-200 text-sm leading-none flex-shrink-0"
+                class="flex flex-shrink-0 items-center gap-2 text-left text-sm leading-none text-neutral-700 dark:text-neutral-200"
                 data-nc-id="PostMeta2"
               >
                 <a
@@ -132,7 +132,7 @@
                   href="https://ncmaz.chisnghiax.com/author/ncmaz/"
                 >
                   <div
-                    class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center overflow-hidden text-neutral-100 uppercase font-semibold rounded-full shadow-inner h-10 w-10 sm:h-11 sm:w-11 text-xl ring-1 ring-white dark:ring-neutral-900"
+                    class="wil-avatar relative inline-flex h-10 w-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-full text-xl font-semibold uppercase text-neutral-100 shadow-inner ring-1 ring-white dark:ring-neutral-900 sm:h-11 sm:w-11"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +163,7 @@
                       {{ category }}
                     </a>
                   </div>
-                  <div class="text-xs mt-[6px]">
+                  <div class="mt-[6px] text-xs">
                     <span class="text-neutral-700 dark:text-neutral-300">
                       {{ date }}
                     </span>
@@ -180,18 +180,18 @@
                 </div>
               </div>
 
-              <div class="flex flex-row space-x-2.5 items-center gap-2">
+              <div class="flex flex-row items-center gap-2 space-x-2.5">
                 <!-- VIEWS COUNT -->
                 <button
                   @click="getEventParticipants"
-                  class="relative sm:min-w-[68px] rounded-full transition-colors text-neutral-200 bg-neutral-800 hover:bg-neutral-500 items-center justify-center pl-2 pr-3 h-7 sm:h-8 text-xs sm:text-sm hidden sm:flex"
+                  class="relative hidden h-7 items-center justify-center rounded-full bg-neutral-800 pl-2 pr-3 text-xs text-neutral-200 transition-colors hover:bg-neutral-500 sm:flex sm:h-8 sm:min-w-[68px] sm:text-sm"
                   title="تعداد ثبت نام کنندگان"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
-                    class="w-5 h-5"
+                    class="h-5 w-5"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 20 20"
                   >
@@ -209,7 +209,7 @@
 
                 <!-- COMMENT COUNTS -->
                 <button
-                  class="relative sm:min-w-[68px] rounded-full transition-colors text-neutral-200 bg-neutral-800 items-center justify-center pl-2 pr-3 h-7 sm:h-8 text-xs sm:text-sm hidden sm:flex"
+                  class="relative hidden h-7 items-center justify-center rounded-full bg-neutral-800 pl-2 pr-3 text-xs text-neutral-200 transition-colors sm:flex sm:h-8 sm:min-w-[68px] sm:text-sm"
                   title="Comments"
                   href="https://ncmaz.chisnghiax.com/sint-est-autem-quibusdam-asperiores-occaecati-voluptatem/#comments"
                 >
@@ -241,7 +241,7 @@
                     ></path>
                   </svg>
                   <span
-                    class="mr-1 text-neutral-900 dark:text-neutral-200 group-hover:text-teal-600"
+                    class="mr-1 text-neutral-900 group-hover:text-teal-600 dark:text-neutral-200"
                   >
                     {{ duration }}
                     {{ delimiter }}
@@ -251,13 +251,13 @@
                 <!-- DIVIDER -->
                 <div class="px-1">
                   <div
-                    class="border-l border-neutral-200 dark:border-neutral-700 h-6"
+                    class="h-6 border-l border-neutral-200 dark:border-neutral-700"
                   ></div>
                 </div>
 
                 <div v-if="canRegister" class="relative inline-block text-left">
                   <div
-                    class="relative rounded-3xl py-1 px-2 flex gap-2 items-center justify-center transition-all duration-300"
+                    class="relative flex items-center justify-center gap-2 rounded-3xl py-1 px-2 transition-all duration-300"
                     :style="regBtnStyle"
                     aria-haspopup="true"
                     aria-expanded="false"
@@ -267,7 +267,7 @@
                       xmlns="http://www.w3.org/2000/svg"
                       aria-hidden="true"
                       role="img"
-                      class="w-7 h-7"
+                      class="h-7 w-7"
                       preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 24 24"
                     >
@@ -309,9 +309,12 @@
 
                   <button
                     v-else
-                    class="relative rounded-3xl py-2 px-4 flex gap-2 items-center justify-center transition-all duration-300"
+                    class="relative flex items-center justify-center gap-2 rounded-3xl py-2 px-4 transition-all duration-300"
                     title="Share with"
                     :style="regBtnStyle"
+                    :class="{
+                      'rainbow-shadow': registrationStatus === 'notregisterd',
+                    }"
                     type="button"
                     aria-haspopup="true"
                     aria-expanded="false"
@@ -321,7 +324,7 @@
                       xmlns="http://www.w3.org/2000/svg"
                       aria-hidden="true"
                       role="img"
-                      class="w-5 h-5 flex-shrink-0"
+                      class="h-5 w-5 flex-shrink-0"
                       preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 24 24"
                     >
@@ -353,10 +356,10 @@
       </div>
 
       <div
-        class="mt-8 md:mt-0 md:absolute md:top-0 md:left-0 md:bottom-0 md:w-1/2 lg:w-2/5 2xl:w-1/3"
+        class="mt-8 md:absolute md:top-0 md:left-0 md:bottom-0 md:mt-0 md:w-1/2 lg:w-2/5 2xl:w-1/3"
       >
         <div
-          class="hidden md:block absolute top-0 rigth-0 bottom-0 w-1/5 from-neutral-900 dark:from-black bg-gradient-to-l"
+          class="rigth-0 absolute top-0 bottom-0 hidden w-1/5 bg-gradient-to-l from-neutral-900 dark:from-black md:block"
         ></div>
 
         <!-- <img
@@ -370,7 +373,7 @@
         <img
           v-if="image"
           :src="image"
-          class="block w-full h-full object-cover"
+          class="block h-full w-full object-cover"
           alt=""
           loading="lazy"
         />
@@ -378,7 +381,7 @@
     </header>
 
     <!-- Start Main -->
-    <main class="container mx-w-6xl mx-auto py-4">
+    <main class="mx-w-6xl container mx-auto py-4">
       <content-field :html="content"></content-field>
     </main>
   </div>
@@ -584,7 +587,7 @@ export default Vue.extend({
         color: '#9bdde0',
         boxShadow: '0px 0px 10px 0px rgb(0 0 0)',
         fontWeight: 100,
-      }
+      } as { [key: string]: string | number }
 
       if (this.registrationStatus === 'registerd')
         style = {
@@ -600,13 +603,16 @@ export default Vue.extend({
           color: '#112829',
           boxShadow: '0px 0px 10px 0px rgb(0 0 0)',
         }
-      else if (this.registrationStatus === 'notregisterd')
+      else if (this.registrationStatus === 'notregisterd') {
         style = {
-          backgroundImage: 'linear-gradient(to left,#ff9800, #ffeb3b)',
-          color: '#372f16',
-          boxShadow: '0px 0px 20px 0px rgb(207 194 147 / 55%)',
-          fontWeight: 900,
+          borderRadius: '0px',
+          width: '229px',
+          fontSize: '14px',
+          fontWeight: 100,
+          height: '37px',
+          color: '#ddd9d9',
         }
+      }
 
       return style
     },
@@ -758,4 +764,55 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.rainbow-shadow {
+  --rainbow-gradient-shadow: linear-gradient(
+    45deg,
+    #007cf0,
+    #00dfd8,
+    #ff0080,
+    #007cf0
+  );
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  width: 400px;
+  height: 100px;
+  background: #000;
+}
+.rainbow-shadow:before,
+.rainbow-shadow:after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background: var(--rainbow-gradient-shadow);
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: animate 20s linear infinite;
+}
+
+.rainbow-shadow:after {
+  filter: blur(20px);
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 300% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+</style>
