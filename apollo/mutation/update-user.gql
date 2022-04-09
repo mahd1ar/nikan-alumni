@@ -4,6 +4,9 @@ mutation updateUser(
   $firstName: String
   $lastName: String
   $description: String
+  $mobile: String
+  $jobLocation: String
+  $clientMutationId: String!
 ) {
   updateUser(
     input: {
@@ -12,6 +15,9 @@ mutation updateUser(
       firstName: $firstName
       lastName: $lastName
       description: $description
+      mobile: $mobile
+      jobLocation: $jobLocation
+      clientMutationId: $clientMutationId
     }
   ) {
     clientMutationId

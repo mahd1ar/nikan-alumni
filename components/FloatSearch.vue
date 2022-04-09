@@ -1,21 +1,21 @@
 <template>
-  <div class="fixed top-0 left-0 flex-center w-screen h-screen z-20 text-white">
+  <div class="flex-center fixed top-0 left-0 z-20 h-screen w-screen text-white">
     <div
-      class="absolute w-full h-full bg-gradient-to-br from-slate-900 to-slate-700 opacity-75"
+      class="absolute h-full w-full bg-gradient-to-br from-slate-900 to-slate-700 opacity-75"
     ></div>
     <div
-      class="relative p-12 w-10/12 bg-gray-50 flex flex-col rounded-md max-h-screen overflow-auto"
+      class="relative flex max-h-screen w-10/12 flex-col overflow-auto rounded-md bg-gray-50 p-12"
     >
       <div class="flex gap-2">
         <div
-          class="w-full flex text-tm-black p-4 rounded-md gap-4 border-2 border-cyan-500 bg-white sticky top-0 z-10"
+          class="sticky top-0 z-10 flex w-full gap-4 rounded-md border-2 border-cyan-500 bg-white p-4 text-tm-black"
         >
           <label for="search">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="w-10 h-10 text-cyan-500"
+              class="h-10 w-10 text-cyan-500"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 24 24"
             >
@@ -33,7 +33,7 @@
             v-model="searchValue"
             name="search"
             placeholder="جست و جو کنید..."
-            class="focus-within:outline-none w-full px-2 bg-opacity-0"
+            class="w-full bg-opacity-0 px-2 focus-within:outline-none"
             type="text"
             @blur="inputFocused"
             @focus="inputFocused"
@@ -41,7 +41,7 @@
           />
         </div>
         <i
-          class="w-20 flex-center flex-shrink-0 border-2 text-gray-400 cursor-pointer"
+          class="flex-center w-20 flex-shrink-0 cursor-pointer border-2 text-gray-400"
           @click="close"
         >
           <svg
@@ -60,17 +60,17 @@
           </svg>
         </i>
       </div>
-      <section v-if="searchValue" class="text-gray-600 body-font">
-        <div class="container px-5 pt-12 mx-auto transition-all">
-          <div class="flex flex-wrap -m-4">
-            <div class="p-4 lg:w-1/4 sm:w-1/2 w-full">
+      <section v-if="searchValue" class="body-font text-gray-600">
+        <div class="container mx-auto px-5 pt-12 transition-all">
+          <div class="-m-4 flex flex-wrap">
+            <div class="w-full p-4 sm:w-1/2 lg:w-1/4">
               <h2
-                class="font-medium title-font tracking-widest text-cyan-700 mb-4 text-sm text-center sm:text-right"
+                class="title-font mb-4 text-center text-sm font-medium tracking-widest text-cyan-700 sm:text-right"
               >
                 نتایج
               </h2>
               <nav
-                class="flex flex-col sm:items-start sm:text-left text-right items-center -mb-1 space-y-2.5"
+                class="-mb-1 flex flex-col items-center space-y-2.5 text-right sm:items-start sm:text-left"
               >
                 <a
                   v-for="(g, id) in [1, 2, 3]"
@@ -78,7 +78,7 @@
                   class="flex items-start text-sm"
                 >
                   <span
-                    class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                    class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                   >
                   </span>
                   <span dir="ltr" class="text-right">
@@ -91,32 +91,32 @@
         </div>
       </section>
 
-      <section v-else class="text-gray-600 body-font">
+      <section v-else class="body-font text-gray-600">
         <div
-          class="container px-5 pt-12 mx-auto transition-all"
+          class="container mx-auto px-5 pt-12 transition-all"
           :style="{ opacity: inputIsFocused ? 0.4 : 1 }"
         >
-          <div class="text-center mb-20">
+          <div class="mb-20 text-center">
             <h2
-              class="sm:text-3xl font-naskh text-2xl font-medium text-center title-font text-gray-900 mb-4"
+              class="title-font mb-4 text-center font-naskh text-2xl font-medium text-gray-900 sm:text-3xl"
             >
               دسترسی سریع به محتوا وب سایت
             </h2>
-            <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+            <p class="mx-auto text-base leading-relaxed lg:w-3/4 xl:w-2/4">
               Blue bottle crucifix vinyl post-ironic four dollar toast vegan
               taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh
               mi pug.
             </p>
           </div>
-          <div class="flex flex-wrap -m-4">
-            <div class="p-4 lg:w-1/4 sm:w-1/2 w-full">
+          <div class="-m-4 flex flex-wrap">
+            <div class="w-full p-4 sm:w-1/2 lg:w-1/4">
               <h2
-                class="font-medium title-font tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-right"
+                class="title-font mb-4 text-center text-sm font-medium tracking-widest text-gray-900 sm:text-right"
               >
                 SHOOTING STARS
               </h2>
               <nav
-                class="flex flex-col sm:items-start sm:text-left text-right items-center -mb-1 space-y-2.5"
+                class="-mb-1 flex flex-col items-center space-y-2.5 text-right sm:items-start sm:text-left"
               >
                 <a
                   v-for="(g, id) in group"
@@ -124,7 +124,7 @@
                   class="flex items-start text-sm"
                 >
                   <span
-                    class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                    class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                   >
                   </span>
                   <span class="text-right">
@@ -134,14 +134,14 @@
               </nav>
             </div>
 
-            <div class="p-4 lg:w-1/4 sm:w-1/2 w-full">
+            <div class="w-full p-4 sm:w-1/2 lg:w-1/4">
               <h2
-                class="font-medium title-font tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-right"
+                class="title-font mb-4 text-center text-sm font-medium tracking-widest text-gray-900 sm:text-right"
               >
                 SHOOTING STARS
               </h2>
               <nav
-                class="flex flex-col sm:items-start sm:text-left text-right items-center -mb-1 space-y-2.5"
+                class="-mb-1 flex flex-col items-center space-y-2.5 text-right sm:items-start sm:text-left"
               >
                 <a
                   v-for="(v, id) in mediaArchive"
@@ -149,7 +149,7 @@
                   class="flex items-start text-sm"
                 >
                   <span
-                    class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                    class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                   >
                   </span>
                   <span class="text-right">
@@ -159,14 +159,14 @@
               </nav>
             </div>
 
-            <div class="p-4 lg:w-1/4 sm:w-1/2 w-full">
+            <div class="w-full p-4 sm:w-1/2 lg:w-1/4">
               <h2
-                class="font-bold title-font tracking-widest text-tm-black mb-4 text-sm text-center sm:text-right"
+                class="title-font mb-4 text-center text-sm font-bold tracking-widest text-tm-black sm:text-right"
               >
                 کتابخانه
               </h2>
               <nav
-                class="flex flex-col sm:items-start sm:text-left text-right items-center -mb-1 space-y-2.5"
+                class="-mb-1 flex flex-col items-center space-y-2.5 text-right sm:items-start sm:text-left"
               >
                 <a
                   v-for="(v, id) in library"
@@ -174,7 +174,7 @@
                   class="flex items-start text-sm"
                 >
                   <span
-                    class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                    class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                   >
                   </span>
                   <span class="text-right">
@@ -184,33 +184,33 @@
               </nav>
             </div>
 
-            <div class="p-4 lg:w-1/4 sm:w-1/2 w-full flex flex-col gap-7">
+            <div class="flex w-full flex-col gap-7 p-4 sm:w-1/2 lg:w-1/4">
               <div>
                 <h2
-                  class="font-bold title-font tracking-widest text-tm-black mb-4 text-sm text-center sm:text-right"
+                  class="title-font mb-4 text-center text-sm font-bold tracking-widest text-tm-black sm:text-right"
                 >
                   شورای مرکزی
                 </h2>
                 <nav
-                  class="flex flex-col sm:items-start sm:text-left text-right items-center -mb-1 space-y-2.5"
+                  class="-mb-1 flex flex-col items-center space-y-2.5 text-right sm:items-start sm:text-left"
                 >
                   <a class="flex items-start text-sm">
                     <span
-                      class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                      class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                     >
                     </span>
                     <span class="text-right"> دور اول </span>
                   </a>
                   <a class="flex items-start text-sm">
                     <span
-                      class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                      class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                     >
                     </span>
                     <span class="text-right"> دور دوم </span>
                   </a>
                   <a class="flex items-start text-sm">
                     <span
-                      class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                      class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                     >
                     </span>
                     <span class="text-right"> دور سوم </span>
@@ -219,30 +219,30 @@
               </div>
               <div>
                 <h2
-                  class="font-bold title-font tracking-widest text-tm-black mb-4 text-sm text-center sm:text-right"
+                  class="title-font mb-4 text-center text-sm font-bold tracking-widest text-tm-black sm:text-right"
                 >
                   شورای مرکزی
                 </h2>
                 <nav
-                  class="flex flex-col sm:items-start sm:text-left text-right items-center -mb-1 space-y-2.5"
+                  class="-mb-1 flex flex-col items-center space-y-2.5 text-right sm:items-start sm:text-left"
                 >
                   <a class="flex items-start text-sm">
                     <span
-                      class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                      class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                     >
                     </span>
                     <span class="text-right"> دور اول </span>
                   </a>
                   <a class="flex items-start text-sm">
                     <span
-                      class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                      class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                     >
                     </span>
                     <span class="text-right"> دور دوم </span>
                   </a>
                   <a class="flex items-start text-sm">
                     <span
-                      class="bg-blue-100 w-2 h-2 ml-2 mt-2 rounded-full inline-flex items-center justify-center"
+                      class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                     >
                     </span>
                     <span class="text-right"> دور سوم </span>
@@ -331,6 +331,6 @@ export default VueSearch
 
 <style scoped>
 a:hover {
-  @apply underline cursor-pointer;
+  @apply cursor-pointer underline;
 }
 </style>

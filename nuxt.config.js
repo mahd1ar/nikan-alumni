@@ -56,7 +56,7 @@ export default {
         fetchPolicy: 'network-only',
         errorPolicy: 'all',
         loadingKey: 'loading',
-      }
+      },
     },
     includeNodeModules: true,
     watchLoading: '~/plugins/apollo-watch-loading-handler.js',
@@ -68,7 +68,7 @@ export default {
       //   httpEndpoint: 'http://localhost/woonuxt/graphql'
       // },
       // authenticationType: 'Bearer',
-    }
+    },
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

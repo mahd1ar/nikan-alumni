@@ -44,7 +44,7 @@ class LoginStrategy {
     this.refreshHandler()
   }
 
-  public fetchMe() {}
+  public fetchMe() { }
 
   private loginHandler(response: LoginMutation) {
     localStorage.setItem(
@@ -117,7 +117,7 @@ class LoginStrategy {
     await this.logout()
 
     try {
-      this.ctx.$boxLoading.startLoading('در حال احراز هویت')
+      this.ctx.$boxLoading.startLoading('لطفا شکیبا باشید ')
 
       const { data: response } =
         await this.ctx.app.apolloProvider.defaultClient.mutate<
@@ -177,7 +177,11 @@ class LoginStrategy {
     } else throw new Error('empty token')
   }
 
-  public async logout() {
+  public signout() {
+    this.logout()
+  }
+
+  private async logout() {
     await this.ctx.store.dispatch('authentication/logout')
     await this.ctx.$apolloHelpers.onLogout()
     this.clearStorage()

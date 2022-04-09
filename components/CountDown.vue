@@ -4,13 +4,13 @@
       <span
         v-for="(countDown, index) in time"
         :key="index"
-        class="w-10 h-10 bg-white bg-opacity-50 rounded flex flex-col justify-center items-center"
+        class="flex h-10 w-10 flex-col items-center justify-center rounded bg-white bg-opacity-50"
       >
-        <span class="text-black font-bold -mb-1">
+        <span class="-mb-1 font-bold text-black">
           {{ countDown }}
         </span>
 
-        <span class="font-extralight text-xs text-gray-800 -mb-1">
+        <span class="-mb-1 text-xs font-extralight text-gray-800">
           {{ titles[index] }}
         </span>
       </span>

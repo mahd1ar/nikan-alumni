@@ -1,8 +1,8 @@
 <template>
   <section dir="rtl" class="body-font relative bg-slate-800 text-gray-900">
-    <div class="container mt-10 flex flex-col gap-4">
+    <div class="container mx-auto mt-10 flex flex-col gap-4 px-0">
       <div class="flex gap-2">
-        <div class="w-8/12 bg-white bg-opacity-10">
+        <div class="w-8/12 bg-cyan-600 bg-opacity-5">
           <client-only>
             <div class="aspect-video">
               <vue-plyr ref="plyr" :options="playerOptions">
@@ -17,9 +17,7 @@
               </vue-plyr>
             </div>
           </client-only>
-          <h1
-            class="flex h-20 items-center font-vazir text-3xl font-bold text-cyan-300"
-          >
+          <h1 class="flex h-20 items-center p-4 text-xl text-cyan-300">
             {{ video.title }}
           </h1>
         </div>
@@ -31,19 +29,19 @@
             از همین دسته
           </div>
           <div
-            v-for="i in 4"
-            :key="i"
-            class="cursor-pointer border-b border-slate-600 bg-white/5 text-sm"
+            v-for="(i, index) in moreVideso"
+            :key="index"
+            class="cursor-pointer border-b border-slate-600 bg-[#09345a57] text-sm transition-all hover:bg-[#1d3755]"
           >
             <div class="flex flex-col gap-1 p-2 px-4">
               <div class="mt-2 text-base text-white">
-                {{ video.title }}
+                {{ i.title }}
               </div>
               <div class="textext-xs text-slate-300">
-                {{ video.speakers }}
+                {{ i.speakers }}
               </div>
-              <div class="text-xs text-slate-300">
-                {{ video.date }}
+              <div class="text-xs text-slate-400">
+                {{ i.date }}
               </div>
             </div>
           </div>
@@ -55,7 +53,7 @@
     </div>
 
     <div>
-      <content-field :remove-tags="['video']" :html="video.content" />
+      <!-- <content-field :remove-tags="['video']" :html="video.content" /> -->
       <pre>
 
       {{ video }}
@@ -67,7 +65,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import videogql from '@/apollo/queries/video.gql'
-import { VideoQuery, VideoQueryVariables } from '~/types/types'
+// TODO : compose a beter query V
+import videocatsgql from '@/apollo/queries/category-videos.gql'
+import {
+  VideoQuery,
+  VideoQueryVariables,
+  CategoryVideosQuery,
+} from '~/types/types'
+import { filterCategory, wordpressDateToFormattedJalali } from '~/data/utils'
+
+interface SuggestedVideos {
+  title: string
+  speakers: string
+  date: string
+}
 
 export default Vue.extend({
   name: 'MediaPlayer',
@@ -81,7 +92,10 @@ export default Vue.extend({
         date: '',
         content: '',
         speakers: '',
+        categoryName: '',
+        categorySlug: '',
       },
+      moreVideso: [] as SuggestedVideos[],
       playerOptions: {
         controls: [
           'play-large',
@@ -116,12 +130,28 @@ export default Vue.extend({
       this.video.id = data.video.id
       this.video.title = data.video.title || ''
       this.video.content = data.video.content || ''
-      this.video.date = data.video.date || ''
+      this.video.date = data.video.date
+        ? wordpressDateToFormattedJalali(data.video.date).join(' / ')
+        : ''
       this.video.speakers = data.video.speakers?.speakers || ''
+
+      if (data.video.categories?.nodes) {
+        if (data.video.categories.nodes.length > 0) {
+          const categories = data.video.categories.nodes.map((i) =>
+            i?.slug ? i.slug : i?.name ? i.name : ''
+          )
+          const cats = filterCategory(categories)
+          this.video.categorySlug = cats[0]
+          // TODO mayby you need category bane later
+          this.video.categoryName = cats[0]
+        }
+      }
     } else this.$nuxt.error({ statusCode: 404, message: 'not found' })
   },
 
   mounted() {
+    this.getSimilarVideos()
+    // TODO : remove this bolshit
     const div = document.createElement('div')
     div.innerHTML = this.video.content
 
@@ -134,6 +164,31 @@ export default Vue.extend({
     this.video.content = div.innerHTML
     div.remove()
   },
-  methods: {},
+  methods: {
+    async getSimilarVideos() {
+      if (this.video.categorySlug === '') {
+        return
+      }
+
+      const variables: VideoQueryVariables = {
+        id: this.video.categorySlug,
+        first: 5,
+      }
+      const { data } = await this.$apollo.query<CategoryVideosQuery>({
+        query: videocatsgql,
+        variables,
+      })
+      console.log(data)
+
+      if (data.category?.videos?.nodes)
+        data.category.videos.nodes.forEach((i) => {
+          this.moreVideso.push({
+            title: i?.title || '',
+            speakers: i?.speakers?.speakers || '',
+            date: wordpressDateToFormattedJalali(i!.date!).join(' / '),
+          })
+        })
+    },
+  },
 })
 </script>

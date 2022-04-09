@@ -1,0 +1,32 @@
+query categoryVideos($id: ID = "uncategorized", $first: Int = 10) {
+  category(id: $id, idType: SLUG) {
+    id
+    databaseId
+    count
+    name
+    slug
+    children(first: 10) {
+      nodes {
+        name
+        slug
+      }
+    }
+    categoryAttrs {
+      categoryAttrs {
+        altText
+        sourceUrl
+      }
+    }
+    description
+    videos(first: $first) {
+      nodes {
+        id
+        title
+        date
+        speakers {
+          speakers
+        }
+      }
+    }
+  }
+}

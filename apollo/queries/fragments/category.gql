@@ -1,0 +1,8 @@
+fragment categoryAttributes on Category {
+  id
+  databaseId
+  name
+  slug
+  count
+  description
+}

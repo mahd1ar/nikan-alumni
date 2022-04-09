@@ -1,4 +1,3 @@
-
 export default (isLoading, countModifier, nuxtContext) => {
   // isLoading += countModifier
   // let loading = nuxtContext.$store.state.loading

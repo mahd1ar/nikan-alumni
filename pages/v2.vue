@@ -11,19 +11,19 @@
     </div>
 
     <!-- hero section -->
-    <div class="h-screen w-full flex flex-col">
-      <div class="flex flex-col h-full w-full relative">
-        <div class="bg-cyan-700 h-8">
+    <div class="flex h-screen w-full flex-col">
+      <div class="relative flex h-full w-full flex-col">
+        <div class="h-8 bg-cyan-700">
           <div class="container mx-auto h-full w-full">
-            <div class="text-cyan-50 text-sm flex h-full gap-4 justify-between">
+            <div class="flex h-full justify-between gap-4 text-sm text-cyan-50">
               <div
-                class="flex-center bg-black bg-opacity-50 hover:bg-opacity-20 px-2 cursor-pointer gap-2"
+                class="flex-center cursor-pointer gap-2 bg-black bg-opacity-50 px-2 hover:bg-opacity-20"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
-                  class="w-5 h-5"
+                  class="h-5 w-5"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 24 24"
                 >
@@ -77,18 +77,18 @@
         </div>
         <nav class="h-24">
           <div
-            class="container mx-auto flex flex-row gap-1 h-full items-stretch justify-between"
+            class="container mx-auto flex h-full flex-row items-stretch justify-between gap-1"
           >
             <div class="flex flex-row gap-1">
               <div class="flex items-center">
                 <div
-                  class="text-neutral-700 rounded-full py-2 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
-                    class="w-5 h-5"
+                    class="h-5 w-5"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 16 16"
                   >
@@ -102,13 +102,13 @@
                   </svg>
                 </div>
                 <div
-                  class="text-neutral-700 rounded-full py-2 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
-                    class="w-5 h-5"
+                    class="h-5 w-5"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 24 24"
                   >
@@ -125,14 +125,14 @@
               <div
                 v-for="(i, index) in menu"
                 :key="index"
-                class="text-neutral-700 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
+                class="flex-center cursor-pointer px-2 font-bold text-neutral-700 hover:bg-gray-100"
               >
                 {{ i }}
               </div>
             </div>
 
             <figure class="relative">
-              <div class="h-full left-0 py-1 rounded-md bg-white z-10">
+              <div class="left-0 z-10 h-full rounded-md bg-white py-1">
                 <img class="h-full" src="img/logo_only.png" alt="" />
               </div>
             </figure>
@@ -140,38 +140,38 @@
         </nav>
         <div class="relative h-full">
           <img
-            class="w-full h-full object-cover object-bottom absolute top-0 left-0"
+            class="absolute top-0 left-0 h-full w-full object-cover object-bottom"
             src="img/IMG_4141(ACR v8.1)F-2MP.jpg"
             alt=""
           />
-          <div class="top-0 left-0 h-full w-full relative">
-            <div class="h-full relative w-full">
+          <div class="relative top-0 left-0 h-full w-full">
+            <div class="relative h-full w-full">
               <div
-                class="m-blur-background w-full h-full absolute top-0 left-0"
+                class="m-blur-background absolute top-0 left-0 h-full w-full"
               ></div>
               <div
-                class="mx-auto h-full flex flex-row-reverse container relative"
+                class="container relative mx-auto flex h-full flex-row-reverse"
               >
-                <div class="flex flex-col gap-6 justify-center w-5/12">
-                  <div class="text-5xl text-right font-bold text-gray-50">
+                <div class="flex w-5/12 flex-col justify-center gap-6">
+                  <div class="text-right text-5xl font-bold text-gray-50">
                     کانون
                     <br />
                     دانش آموختگان
                     <br />
                     نیکان
                   </div>
-                  <p class="text-white text-lg">
+                  <p class="text-lg text-white">
                     محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و
                     ایجاد بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها
                   </p>
                   <div class="text-sm">
                     <button
-                      class="inline-flex text-white bg-cyan-500 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-600 rounded"
+                      class="inline-flex rounded border-0 bg-cyan-500 py-2 px-6 text-white hover:bg-cyan-600 focus:outline-none"
                     >
                       درباره کانون دانش آموختگان
                     </button>
                     <button
-                      class="ml-4 inline-flex text-white bg-gray-100 bg-opacity-20 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded"
+                      class="ml-4 inline-flex rounded border-0 bg-gray-100 bg-opacity-20 py-2 px-6 text-white hover:bg-gray-200 focus:outline-none"
                     >
                       تماس با ما
                     </button>
@@ -185,29 +185,29 @@
     </div>
 
     <section class="bg-[#faf9f9] py-8">
-      <div class="flex container gap-4 mx-auto">
-        <div class="w-8/12 flex flex-col">
-          <div class="flex gap-4 flex-row-reverse justify-end">
+      <div class="container mx-auto flex gap-4">
+        <div class="flex w-8/12 flex-col">
+          <div class="flex flex-row-reverse justify-end gap-4">
             <div class="flex flex-col gap-2">
               <div class="text-xl text-tm-black">رویداد پیش رو</div>
-              <h1 class="text-3xl text-tm-black font-bold">
+              <h1 class="text-3xl font-bold text-tm-black">
                 مسابقات فوتسال بین دوره ای
                 <span
-                  class="text-sm bg-red-50 text-red-600 mx-2 py-1 px-2 rounded-lg font-light font-samim"
+                  class="mx-2 rounded-lg bg-red-50 py-1 px-2 font-samim text-sm font-light text-red-600"
                 >
                   <div
-                    class="w-2 h-2 font-samim rounded bg-red-600 animate-pulse inline-block"
+                    class="inline-block h-2 w-2 animate-pulse rounded bg-red-600 font-samim"
                   ></div>
                   در حال برگزاری</span
                 >
               </h1>
               <div>
-                <div class="text-tm-gray flex items-center gap-2 text-sm">
+                <div class="flex items-center gap-2 text-sm text-tm-gray">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                     role="img"
-                    class="w-4 h-4"
+                    class="h-4 w-4"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 24 24"
                   >
@@ -255,8 +255,8 @@
               <div class="bg-gray-900 text-white">2022</div>
             </div>
           </div>
-          <div class="flex flex-row-reverse gap-8 mt-20">
-            <div class="w-9/12 grid grid-cols-4 text-3xl text-right" dir="ltr">
+          <div class="mt-20 flex flex-row-reverse gap-8">
+            <div class="grid w-9/12 grid-cols-4 text-right text-3xl" dir="ltr">
               <div class="flex flex-col">
                 <span>5 :</span>
                 <span class="text-base text-gray-500">روز</span>
@@ -280,7 +280,7 @@
               </div>
             </div>
             <div
-              class="w-3/12 bg-tm-yellow hover:bg-yellow-300 cursor-pointer text-white text-lg font-semibold text-center rounded flex-center"
+              class="flex-center w-3/12 cursor-pointer rounded bg-tm-yellow text-center text-lg font-semibold text-white hover:bg-yellow-300"
             >
               مشاهده رویداد
             </div>
@@ -288,7 +288,7 @@
         </div>
         <div class="w-4/12">
           <img
-            class="rounded-md w-full object-cover"
+            class="w-full rounded-md object-cover"
             src="test/one.jfif"
             alt=""
           />
@@ -296,50 +296,50 @@
       </div>
     </section>
 
-    <section class="text-gray-600 body-font overflow-hidden">
-      <div class="container px-5 py-12 mx-auto">
+    <section class="body-font overflow-hidden text-gray-600">
+      <div class="container mx-auto px-5 py-12">
         <!-- -m-12 -->
         <div class="flex">
           <div class="w-1/2">
-            <div class="w-full mr-12 mb-6">
+            <div class="mr-12 mb-6 w-full">
               <h1
-                class="sm:text-3xl text-2xl font-medium title-font mb-3 text-tm-black"
+                class="title-font mb-3 text-2xl font-medium text-tm-black sm:text-3xl"
               >
                 اعلانات
               </h1>
-              <div class="h-1 w-20 bg-cyan-500 rounded"></div>
+              <div class="h-1 w-20 rounded bg-cyan-500"></div>
             </div>
 
             <div
               v-for="(n, index) in news"
               :key="index"
-              class="px-12 py-4 w-full flex flex-col items-start"
+              class="flex w-full flex-col items-start px-12 py-4"
             >
-              <div class="flex gap-3 items-start">
+              <div class="flex items-start gap-3">
                 <img
-                  class="w-4/12 object-cover aspect-square rounded"
+                  class="aspect-square w-4/12 rounded object-cover"
                   src="test/one.jfif"
                   alt=""
                 />
                 <div class="w-8/12">
                   <span
-                    class="inline-block py-1 px-2 rounded bg-cyan-50 text-cyan-500 text-xs font-medium tracking-widest"
+                    class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500"
                     >کارگروه کسب و کار</span
                   >
                   <h2
-                    class="text-xl title-font font-medium text-gray-900 mt-4 mb-4"
+                    class="title-font mt-4 mb-4 text-xl font-medium text-gray-900"
                   >
                     {{ n.title }}
                   </h2>
                   <!-- <p class="leading-relaxed mb-8" v-html="n.body"></p> -->
                   <div
-                    class="flex items-center flex-wrap pb-4 mb-4 border-b-2 border-gray-100 mt-auto w-full"
+                    class="mb-4 mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4"
                   >
-                    <a class="text-cyan-500 inline-flex items-center"
+                    <a class="inline-flex items-center text-cyan-500"
                       >ادامه مطلب
 
                       <svg
-                        class="w-4 h-4 mr-2 transform rotate-180"
+                        class="mr-2 h-4 w-4 rotate-180 transform"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                         stroke-width="2"
@@ -352,7 +352,7 @@
                       </svg>
                     </a>
                     <span
-                      class="text-gray-400 ml-3 inline-flex items-center mr-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200"
+                      class="ml-3 mr-auto inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400"
                     >
                       <!-- <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -381,30 +381,30 @@
             </div>
           </div>
           <div class="w-1/2">
-            <div class="w-full mr-12 mb-6">
+            <div class="mr-12 mb-6 w-full">
               <h1
-                class="sm:text-3xl text-2xl font-medium title-font mb-3 text-tm-black"
+                class="title-font mb-3 text-2xl font-medium text-tm-black sm:text-3xl"
               >
                 اخبار و رویداد ها
               </h1>
-              <div class="h-1 w-20 bg-cyan-500 rounded"></div>
+              <div class="h-1 w-20 rounded bg-cyan-500"></div>
             </div>
             <div
               v-for="(e, index) in events"
               :key="index"
-              class="px-12 w-full flex flex-col items-start"
+              class="flex w-full flex-col items-start px-12"
             >
               <div class="py-4 px-4">
-                <div class="h-full flex items-start gap-4">
+                <div class="flex h-full items-start gap-4">
                   <div
-                    class="w-20 flex-shrink-0 flex flex-col justify-center items-center text-center leading-none bg-[#fffaea] py-4 rounded-md"
+                    class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none"
                   >
                     <span
-                      class="text-[#ffc400] text-lg font-semibold w-12 pb-2 mb-2 border-b-2 border-gray-200"
+                      class="mb-2 w-12 border-b-2 border-gray-200 pb-2 text-lg font-semibold text-[#ffc400]"
                       >12</span
                     >
                     <span
-                      class="font-medium text-tm-black title-font leading-none"
+                      class="title-font font-medium leading-none text-tm-black"
                       >اردیبهشت</span
                     >
                     <!-- <span
@@ -414,18 +414,18 @@
                   </div>
                   <div class="flex-grow pl-6">
                     <h2
-                      class="tracking-widest text-xs title-font font-medium text-black mb-1"
+                      class="title-font mb-1 text-xs font-medium tracking-widest text-black"
                     >
                       CATEGORY
                     </h2>
                     <h2
-                      class="title-font text-xl font-medium text-gray-900 mb-3"
+                      class="title-font mb-3 text-xl font-medium text-gray-900"
                     >
                       {{ e.title }}
                     </h2>
                     <p
                       v-snip="3"
-                      class="leading-relaxed mb-5 hover:underline cursor-pointer"
+                      class="mb-5 cursor-pointer leading-relaxed hover:underline"
                     >
                       {{ e.body }}
                     </p>
@@ -447,13 +447,13 @@
             </div>
             <div class="flex-center">
               <button
-                class="text-cyan-600 mx-auto flex flex-row-reverse items-center gap-4 bg-cyan-50 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-500 hover:text-white transition-all rounded text-base shadow-lg shadow-cyan-200/30"
+                class="mx-auto flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
-                  class="w-5 h-5"
+                  class="h-5 w-5"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 16 16"
                 >
@@ -471,50 +471,50 @@
       </div>
     </section>
 
-    <section class="text-gray-600 body-font relative">
+    <section class="body-font relative text-gray-600">
       <img
-        class="absolute top-0 object-cover object-center w-full h-full filter grayscale opacity-10"
+        class="absolute top-0 h-full w-full object-cover object-center opacity-10 grayscale filter"
         src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg"
         alt="stats"
       />
-      <div class="container px-5 py-12 mx-auto flex flex-wrap relative">
+      <div class="container relative mx-auto flex flex-wrap px-5 py-12">
         <div
-          class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10"
+          class="-mx-4 mt-auto mb-auto flex flex-wrap content-start sm:w-2/3 sm:pr-10 lg:w-1/2"
         >
-          <div class="w-full sm:p-4 px-4 mb-6">
-            <h1 class="title-font text-2xl font-medium mb-2 text-gray-900">
+          <div class="mb-6 w-full px-4 sm:p-4">
+            <h1 class="title-font mb-2 text-2xl font-medium text-gray-900">
               معرفی مجموعه
             </h1>
-            <div class="h-1 w-20 bg-cyan-500 rounded"></div>
-            <div class="leading-relaxed mt-4">
+            <div class="h-1 w-20 rounded bg-cyan-500"></div>
+            <div class="mt-4 leading-relaxed">
               موسسه فرهنگی نیکان در سال ۱۳۴۷ توسط مرحوم علامه کرباسچیان و عده‌ای
               دیگر از دل‌سوختگان تعلیم و تربیت اسلامی تأسیس گردید. در این موسسه
               سعی می‌شود محصلان به گونه‌ای در ابعاد مختلف تربیت شوند که با
               توانمندی روحی و جسمی و برخورداری از بهداشت روانی لازم، زندگی دنیوی
             </div>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-            <h2 class="title-font font-medium text-3xl text-gray-900">2.7K</h2>
+          <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <h2 class="title-font text-3xl font-medium text-gray-900">2.7K</h2>
             <p class="leading-relaxed">فارغ التحصیل</p>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-            <h2 class="title-font font-medium text-3xl text-gray-900">1.8K</h2>
+          <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <h2 class="title-font text-3xl font-medium text-gray-900">1.8K</h2>
             <p class="leading-relaxed">رویداد</p>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-            <h2 class="title-font font-medium text-3xl text-gray-900">35</h2>
+          <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <h2 class="title-font text-3xl font-medium text-gray-900">35</h2>
             <p class="leading-relaxed">Downloads</p>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-            <h2 class="title-font font-medium text-3xl text-gray-900">4</h2>
+          <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <h2 class="title-font text-3xl font-medium text-gray-900">4</h2>
             <p class="leading-relaxed">پروژه خیریه</p>
           </div>
         </div>
         <div
-          class="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0"
+          class="mt-6 w-full overflow-hidden rounded-lg sm:mt-0 sm:w-1/3 lg:w-1/2"
         >
           <img
-            class="object-cover object-center w-full h-full transform scale-100 hover:scale-125 transition duration-500 ease-in-out cursor-pointer"
+            class="h-full w-full scale-100 transform cursor-pointer object-cover object-center transition duration-500 ease-in-out hover:scale-125"
             src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg"
             alt="stats"
           />
@@ -522,18 +522,18 @@
       </div>
     </section>
 
-    <section class="text-gray-50 bg-gray-900">
-      <div class="container flex flex-row-reverse px-5 py-24 mx-auto gap-4">
-        <div class="w-1/2 flex flex-wrap -m-2">
-          <div v-for="i in [1, 2, 3, 4]" :key="i" class="p-2 w-full">
+    <section class="bg-gray-900 text-gray-50">
+      <div class="container mx-auto flex flex-row-reverse gap-4 px-5 py-24">
+        <div class="-m-2 flex w-1/2 flex-wrap">
+          <div v-for="i in [1, 2, 3, 4]" :key="i" class="w-full p-2">
             <div
-              class="h-full flex items-center border-gray-700 border p-4 rounded-md"
+              class="flex h-full items-center rounded-md border border-gray-700 p-4"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-10 p-2 h-10 object-cover object-center flex-shrink-0 rounded-full ml-4 bg-white text-cyan-700 shadow-lg shadow-cyan-500/50"
+                class="ml-4 h-10 w-10 flex-shrink-0 rounded-full bg-white object-cover object-center p-2 text-cyan-700 shadow-lg shadow-cyan-500/50"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 36 36"
               >
@@ -547,7 +547,7 @@
 
               <div class="flex-grow">
                 <h2
-                  class="text-yellow-100 title-font font-medium drop-shadow-2xl shadow-yellow-500/50"
+                  class="title-font font-medium text-yellow-100 shadow-yellow-500/50 drop-shadow-2xl"
                   style="text-shadow: 1px 1px 9px #dee3f0"
                 >
                   Holden Caulfield

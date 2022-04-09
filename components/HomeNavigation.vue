@@ -1,22 +1,22 @@
 <template>
-  <nav class="h-24 relative z-10 top-8">
+  <nav class="relative top-8 z-10 h-24">
     <div
       class="container mx-auto h-full overflow-x-clip lg:max-w-[1104px] lg:px-10 xl:px-0"
     >
       <div
-        class="flex flex-row gap-1 h-full w-full bg-white px-4 rounded items-stretch justify-between"
+        class="flex h-full w-full flex-row items-stretch justify-between gap-1 rounded bg-white px-4"
       >
         <div class="flex flex-row gap-1">
           <div class="flex items-center">
             <div
-              class="lg:hidden text-neutral-700 rounded-full py-2 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
+              class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100 lg:hidden"
               @click="openMobileMenu"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-5 h-5"
+                class="h-5 w-5"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
               >
@@ -35,13 +35,13 @@
             </div>
             <nuxt-link
               to="/login"
-              class="text-neutral-700 rounded-full py-2 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
+              class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-5 h-5"
+                class="h-5 w-5"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
               >
@@ -55,14 +55,14 @@
               </svg>
             </nuxt-link>
             <div
-              class="text-neutral-700 rounded-full py-2 hover:bg-gray-100 flex-center px-2 font-bold cursor-pointer"
+              class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
               @click="$emit('openModal')"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-5 h-5"
+                class="h-5 w-5"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 24 24"
               >
@@ -84,7 +84,7 @@
                   v-for="(menuitem, index) in menu"
                   :key="index"
                   :menu="menuitem"
-                  class="h-full flex-center"
+                  class="flex-center h-full"
                 ></menu-item>
               </ul>
             </div>
@@ -92,7 +92,7 @@
         </div>
 
         <figure class="relative">
-          <div class="h-full left-0 py-3 rounded-md bg-white z-10">
+          <div class="left-0 z-10 h-full rounded-md bg-white py-3">
             <img class="h-full" src="img/logo_only.png" alt="" />
           </div>
         </figure>

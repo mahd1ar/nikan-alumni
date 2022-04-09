@@ -2496,6 +2496,12 @@ export type Event_Eventprops = AcfFieldGroup & {
   duration?: Maybe<Scalars['Float']>;
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>;
+  /**
+   * مقدار صفر یعنی رویداد مجانی
+   * هزینه بیشتر از صفر یعنی باید مبلغ اعلام شده پرداخت و به دبیرخانه اطلاع داده بشود
+   * در صورتی که این خانه برابر با مقدار منفی قرار داده شود یعنی این رویداد قابلیت ثبت نام ندارد
+   */
+  price?: Maybe<Scalars['Float']>;
   venue?: Maybe<Scalars['String']>;
 };
 
@@ -8209,7 +8215,6 @@ export type UpdatePostInput = {
   content?: InputMaybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']>;
-  example?: InputMaybe<Scalars['String']>;
   /** The excerpt of the object */
   excerpt?: InputMaybe<Scalars['String']>;
   /** The ID of the post object */
@@ -8341,10 +8346,12 @@ export type UpdateUserInput = {
   id: Scalars['ID'];
   /** User's Jabber account. */
   jabber?: InputMaybe<Scalars['String']>;
+  jobLocation?: InputMaybe<Scalars['String']>;
   /** The user's last name. */
   lastName?: InputMaybe<Scalars['String']>;
   /** User's locale. */
   locale?: InputMaybe<Scalars['String']>;
+  mobile?: InputMaybe<Scalars['String']>;
   /** A string that contains a URL-friendly name for the user. The default is the user's username. */
   nicename?: InputMaybe<Scalars['String']>;
   /** The user's nickname, defaults to the user's username. */
@@ -8469,8 +8476,6 @@ export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdenti
   nicename?: Maybe<Scalars['String']>;
   /** Nickname of the user. */
   nickname?: Maybe<Scalars['String']>;
-  /** Added to the GraphQL Schema because the ACF Field Group &quot;اشتغال&quot; was set to Show in GraphQL. */
-  occupation?: Maybe<User_Occupation>;
   /** Connection between the User type and the page type */
   pages?: Maybe<UserToPageConnection>;
   /** Connection between the User type and the post type */
@@ -8492,6 +8497,8 @@ export type User = Commenter & DatabaseIdentifier & Node & UniformResourceIdenti
    * @deprecated Deprecated in favor of the databaseId field
    */
   userId?: Maybe<Scalars['Int']>;
+  /** Added to the GraphQL Schema because the ACF Field Group &quot;مشخضات کاربر&quot; was set to Show in GraphQL. */
+  user_acf?: Maybe<User_UserAcf>;
   /** Username for the user. This field is equivalent to WP_User-&gt;user_login. */
   username?: Maybe<Scalars['String']>;
 };
@@ -9047,11 +9054,19 @@ export type UserToUserRoleConnectionEdge = {
 };
 
 /** Field Group */
-export type User_Occupation = AcfFieldGroup & {
-  __typename?: 'User_Occupation';
+export type User_UserAcf = AcfFieldGroup & {
+  __typename?: 'User_UserAcf';
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>;
+  gen?: Maybe<Scalars['String']>;
+  /**
+   * طول و عرض جغرافیایی
+   * lat_lng
+   */
+  jobLocation?: Maybe<Scalars['String']>;
+  mobile?: Maybe<Scalars['String']>;
   occupation?: Maybe<Scalars['String']>;
+  premium?: Maybe<Scalars['Boolean']>;
 };
 
 /** Field to order the connection by */
@@ -9563,6 +9578,9 @@ export type UpdateUserMutationVariables = Exact<{
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
+  mobile?: InputMaybe<Scalars['String']>;
+  jobLocation?: InputMaybe<Scalars['String']>;
+  clientMutationId: Scalars['String'];
 }>;
 
 
@@ -9582,7 +9600,15 @@ export type CategoryPostsQueryVariables = Exact<{
 }>;
 
 
-export type CategoryPostsQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, databaseId: number, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, children?: { __typename?: 'CategoryToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null } | null> | null } | null, posts?: { __typename?: 'CategoryToPostConnection', edges?: Array<{ __typename?: 'CategoryToPostConnectionEdge', node?: { __typename?: 'Post', id: string, databaseId: number, title?: string | null, date?: string | null, content?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', sourceUrl?: string | null } | null } | null } | null } | null> | null } | null, categoryAttrs?: { __typename?: 'Category_Categoryattrs', categoryAttrs?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null };
+export type CategoryPostsQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', description?: string | null, id: string, databaseId: number, name?: string | null, slug?: string | null, count?: number | null, children?: { __typename?: 'CategoryToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null } | null> | null } | null, posts?: { __typename?: 'CategoryToPostConnection', edges?: Array<{ __typename?: 'CategoryToPostConnectionEdge', node?: { __typename?: 'Post', id: string, databaseId: number, title?: string | null, date?: string | null, content?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', sourceUrl?: string | null } | null } | null } | null } | null> | null } | null, categoryAttrs?: { __typename?: 'Category_Categoryattrs', categoryAttrs?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null };
+
+export type CategoryVideosQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type CategoryVideosQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, databaseId: number, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, children?: { __typename?: 'CategoryToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null } | null> | null } | null, categoryAttrs?: { __typename?: 'Category_Categoryattrs', categoryAttrs?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', id: string, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null> | null } | null } | null };
 
 export type EventParticipantsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -9608,7 +9634,13 @@ export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'R
 export type FetchMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, occupation?: { __typename?: 'User_Occupation', occupation?: string | null } | null } | null };
+export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, url?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, user_acf?: { __typename?: 'User_UserAcf', occupation?: string | null, mobile?: string | null, jobLocation?: string | null, gen?: string | null } | null } | null };
+
+export type CategoryAttributesFragment = { __typename?: 'Category', id: string, databaseId: number, name?: string | null, slug?: string | null, count?: number | null, description?: string | null };
+
+export type FullPostFragment = { __typename?: 'Post', id: string, databaseId: number, title?: string | null, date?: string | null, content?: string | null, contentTypeName: string, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null };
+
+export type SimplePostFragment = { __typename?: 'Post', id: string, databaseId: number, title?: string | null, date?: string | null, content?: string | null, contentTypeName: string };
 
 export type PostsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -9620,10 +9652,11 @@ export type PostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'Roo
 
 export type VideoQueryVariables = Exact<{
   id: Scalars['ID'];
+  first?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type VideoQuery = { __typename?: 'RootQuery', video?: { __typename?: 'Video', id: string, content?: string | null, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null };
+export type VideoQuery = { __typename?: 'RootQuery', video?: { __typename?: 'Video', id: string, content?: string | null, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, categories?: { __typename?: 'VideoToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null, databaseId: number, id: string } | null> | null } | null } | null };
 
 export type VideosQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;

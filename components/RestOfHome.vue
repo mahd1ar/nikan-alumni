@@ -7,33 +7,33 @@
         :starting-from="upcommingEvents[0].wpdate"
         :duration="upcommingEvents[0].duration"
       >
-        <div class="flex container gap-4 mx-auto">
-          <div class="w-8/12 flex flex-col">
-            <div class="flex gap-4 flex-row-reverse justify-end">
+        <div class="container mx-auto flex gap-4">
+          <div class="flex w-8/12 flex-col">
+            <div class="flex flex-row-reverse justify-end gap-4">
               <div class="flex flex-col gap-2">
                 <div class="text-xl text-tm-black">
                   رویداد پیش رو
                   <span
                     v-show="status === 0"
-                    class="text-sm bg-red-50 text-red-600 mx-2 py-1 px-2 rounded-lg font-light font-samim"
+                    class="mx-2 rounded-lg bg-red-50 py-1 px-2 font-samim text-sm font-light text-red-600"
                   >
                     <div
-                      class="w-2 h-2 font-samim rounded bg-red-600 animate-pulse inline-block"
+                      class="inline-block h-2 w-2 animate-pulse rounded bg-red-600 font-samim"
                     ></div>
 
                     در حال برگزاری</span
                   >
                 </div>
-                <h1 class="text-3xl text-tm-black font-bold before:hidden">
+                <h1 class="text-3xl font-bold text-tm-black before:hidden">
                   {{ upcommingEvents[0].title }}
                 </h1>
                 <div>
-                  <div class="text-tm-gray flex items-center gap-2 text-sm">
+                  <div class="flex items-center gap-2 text-sm text-tm-gray">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       aria-hidden="true"
                       role="img"
-                      class="w-4 h-4"
+                      class="h-4 w-4"
                       preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 24 24"
                     >
@@ -83,10 +83,10 @@
                 </div>
               </div>
             </div>
-            <div class="flex flex-row-reverse gap-8 mt-20">
+            <div class="mt-20 flex flex-row-reverse gap-8">
               <div
                 v-if="time"
-                class="w-9/12 grid grid-cols-4 text-3xl text-right"
+                class="grid w-9/12 grid-cols-4 text-right text-3xl"
                 dir="ltr"
               >
                 <div class="flex flex-col">
@@ -108,7 +108,7 @@
                 </div>
               </div>
               <div
-                class="w-3/12 bg-tm-yellow hover:bg-yellow-300 shadow-lg shadow-yellow-500/50 cursor-pointer text-white text-lg font-semibold text-center rounded flex-center"
+                class="flex-center w-3/12 cursor-pointer rounded bg-tm-yellow text-center text-lg font-semibold text-white shadow-lg shadow-yellow-500/50 hover:bg-yellow-300"
               >
                 مشاهده رویداد
               </div>
@@ -116,7 +116,7 @@
           </div>
           <div class="w-4/12">
             <img
-              class="rounded-md w-full object-cover max-h-full"
+              class="max-h-full w-full rounded-md object-cover"
               src="test/one.jfif"
               alt=""
             />
@@ -125,14 +125,14 @@
       </count-down>
     </section>
 
-    <section class="text-gray-600 body-font overflow-hidden">
-      <div class="container px-5 py-12 mx-auto">
+    <section class="body-font overflow-hidden text-gray-600">
+      <div class="container mx-auto px-5 py-12">
         <!-- -m-12 -->
         <div class="flex">
           <div class="w-1/2">
-            <div class="w-full mr-12 mb-6">
+            <div class="mr-12 mb-6 w-full">
               <h1
-                class="sm:text-3xl text-2xl font-medium title-font mb-3 text-tm-black"
+                class="title-font mb-3 text-2xl font-medium text-tm-black sm:text-3xl"
               >
                 اعلانات
               </h1>
@@ -142,33 +142,33 @@
             <div
               v-for="(n, index) in news"
               :key="index"
-              class="px-12 py-4 w-full flex flex-col items-start"
+              class="flex w-full flex-col items-start px-12 py-4"
             >
-              <div class="flex gap-3 items-start">
+              <div class="flex items-start gap-3">
                 <img
-                  class="w-4/12 object-cover aspect-square rounded"
+                  class="aspect-square w-4/12 rounded object-cover"
                   src="test/one.jfif"
                   alt=""
                 />
                 <div class="w-8/12">
                   <span
-                    class="inline-block py-1 px-2 rounded bg-cyan-50 text-cyan-500 text-xs font-medium tracking-widest"
+                    class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500"
                     >کارگروه کسب و کار</span
                   >
                   <h2
-                    class="text-xl title-font font-medium text-gray-900 mt-4 mb-4"
+                    class="title-font mt-4 mb-4 text-xl font-medium text-gray-900"
                   >
                     {{ n.title }}
                   </h2>
                   <!-- <p class="leading-relaxed mb-8" v-html="n.body"></p> -->
                   <div
-                    class="flex items-center flex-wrap pb-4 mb-4 border-b-2 border-gray-100 mt-auto w-full"
+                    class="mb-4 mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4"
                   >
-                    <a class="text-cyan-500 inline-flex items-center"
+                    <a class="inline-flex items-center text-cyan-500"
                       >ادامه مطلب
 
                       <svg
-                        class="w-4 h-4 mr-2 transform rotate-180"
+                        class="mr-2 h-4 w-4 rotate-180 transform"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                         stroke-width="2"
@@ -181,7 +181,7 @@
                       </svg>
                     </a>
                     <span
-                      class="text-gray-400 ml-3 inline-flex items-center mr-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200"
+                      class="ml-3 mr-auto inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400"
                     >
                       <!-- <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -210,9 +210,9 @@
             </div>
           </div>
           <div class="w-1/2">
-            <div class="w-full mr-12 mb-6">
+            <div class="mr-12 mb-6 w-full">
               <h1
-                class="sm:text-3xl text-2xl font-medium title-font mb-3 text-tm-black"
+                class="title-font mb-3 text-2xl font-medium text-tm-black sm:text-3xl"
               >
                 اخبار و رویداد ها
               </h1>
@@ -221,19 +221,19 @@
             <div
               v-for="(e, index) in testevents"
               :key="index"
-              class="px-12 w-full flex flex-col items-start"
+              class="flex w-full flex-col items-start px-12"
             >
               <div class="py-4 px-4">
-                <div class="h-full flex items-start gap-4">
+                <div class="flex h-full items-start gap-4">
                   <div
-                    class="w-20 flex-shrink-0 flex flex-col justify-center items-center text-center leading-none bg-[#fffaea] py-4 rounded-md"
+                    class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none"
                   >
                     <span
-                      class="text-[#ffc400] text-lg font-semibold w-12 pb-2 mb-2 border-b-2 border-tm-yellow"
+                      class="mb-2 w-12 border-b-2 border-tm-yellow pb-2 text-lg font-semibold text-[#ffc400]"
                       >12</span
                     >
                     <span
-                      class="font-medium text-tm-black title-font leading-none"
+                      class="title-font font-medium leading-none text-tm-black"
                       >اردیبهشت</span
                     >
                     <!-- <span
@@ -243,18 +243,18 @@
                   </div>
                   <div class="flex-grow pl-6">
                     <h2
-                      class="tracking-widest text-xs title-font font-medium text-black mb-1"
+                      class="title-font mb-1 text-xs font-medium tracking-widest text-black"
                     >
                       CATEGORY
                     </h2>
                     <h2
-                      class="title-font text-xl font-medium text-gray-900 mb-3"
+                      class="title-font mb-3 text-xl font-medium text-gray-900"
                     >
                       {{ e.title }}
                     </h2>
                     <p
                       v-snip="3"
-                      class="leading-relaxed mb-5 hover:underline cursor-pointer"
+                      class="mb-5 cursor-pointer leading-relaxed hover:underline"
                     >
                       {{ e.body }}
                     </p>
@@ -276,13 +276,13 @@
             </div>
             <div class="flex-center">
               <button
-                class="text-cyan-600 mx-auto flex flex-row-reverse items-center gap-4 bg-cyan-50 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-500 hover:text-white transition-all rounded text-base shadow-lg shadow-cyan-200/30"
+                class="mx-auto flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   role="img"
-                  class="w-5 h-5"
+                  class="h-5 w-5"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 16 16"
                 >
@@ -306,9 +306,9 @@
     >
       <div class="relative max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-16 lg:items-center"
+          class="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16"
         >
-          <div class="max-w-lg mx-auto text-center lg:text-left lg:mx-0">
+          <div class="mx-auto max-w-lg text-center lg:mx-0 lg:text-left">
             <h2 class="text-3xl font-bold sm:text-4xl">
               Find your career path
             </h2>
@@ -321,11 +321,11 @@
             </p>
 
             <a
-              class="inline-flex items-center px-8 py-3 mt-8 text-white bg-cyan-500 border border-cyan-500 rounded hover:bg-transparent hover:text-cyan-600 active:text-cyan-500 focus:outline-none focus:ring"
+              class="mt-8 inline-flex items-center rounded border border-cyan-500 bg-cyan-500 px-8 py-3 text-white hover:bg-transparent hover:text-cyan-600 focus:outline-none focus:ring active:text-cyan-500"
               href="/get-started"
             >
               <svg
-                class="w-5 h-5 ml-3"
+                class="ml-3 h-5 w-5"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -344,12 +344,12 @@
 
           <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <a
-              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
               href="/accountant"
             >
-              <span class="inline-block p-3 rounded-lg bg-gray-50">
+              <span class="inline-block rounded-lg bg-gray-50 p-3">
                 <svg
-                  class="w-6 h-6"
+                  class="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -370,18 +370,18 @@
 
               <h6 class="mt-2 font-bold">Accountant</h6>
 
-              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
               </p>
             </a>
 
             <a
-              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
               href="/accountant"
             >
-              <span class="inline-block p-3 rounded-lg bg-gray-50">
+              <span class="inline-block rounded-lg bg-gray-50 p-3">
                 <svg
-                  class="w-6 h-6"
+                  class="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -402,18 +402,18 @@
 
               <h6 class="mt-2 font-bold">Accountant</h6>
 
-              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
               </p>
             </a>
 
             <a
-              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
               href="/accountant"
             >
-              <span class="inline-block p-3 rounded-lg bg-gray-50">
+              <span class="inline-block rounded-lg bg-gray-50 p-3">
                 <svg
-                  class="w-6 h-6"
+                  class="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -434,18 +434,18 @@
 
               <h6 class="mt-2 font-bold">Accountant</h6>
 
-              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
               </p>
             </a>
 
             <a
-              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
               href="/accountant"
             >
-              <span class="inline-block p-3 rounded-lg bg-gray-50">
+              <span class="inline-block rounded-lg bg-gray-50 p-3">
                 <svg
-                  class="w-6 h-6"
+                  class="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -466,18 +466,18 @@
 
               <h6 class="mt-2 font-bold">Accountant</h6>
 
-              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
               </p>
             </a>
 
             <a
-              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
               href="/accountant"
             >
-              <span class="inline-block p-3 rounded-lg bg-gray-50">
+              <span class="inline-block rounded-lg bg-gray-50 p-3">
                 <svg
-                  class="w-6 h-6"
+                  class="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -498,18 +498,18 @@
 
               <h6 class="mt-2 font-bold">Accountant</h6>
 
-              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
               </p>
             </a>
 
             <a
-              class="block p-4 border border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-gray-200 hover:ring-1 hover:ring-gray-200 bg-white"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
               href="/accountant"
             >
-              <span class="inline-block p-3 rounded-lg bg-gray-50">
+              <span class="inline-block rounded-lg bg-gray-50 p-3">
                 <svg
-                  class="w-6 h-6"
+                  class="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -530,7 +530,7 @@
 
               <h6 class="mt-2 font-bold">Accountant</h6>
 
-              <p class="hidden sm:mt-1 sm:text-sm sm:text-gray-600 sm:block">
+              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
               </p>
             </a>
@@ -539,50 +539,50 @@
       </div>
     </section>
 
-    <section class="text-gray-600 body-font relative">
+    <section class="body-font relative text-gray-600">
       <img
-        class="absolute top-0 object-cover object-center w-full h-full filter grayscale opacity-10"
+        class="absolute top-0 h-full w-full object-cover object-center opacity-10 grayscale filter"
         src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg"
         alt="stats"
       />
-      <div class="container px-5 py-12 mx-auto flex flex-wrap relative">
+      <div class="container relative mx-auto flex flex-wrap px-5 py-12">
         <div
-          class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10"
+          class="-mx-4 mt-auto mb-auto flex flex-wrap content-start sm:w-2/3 sm:pr-10 lg:w-1/2"
         >
-          <div class="w-full sm:p-4 px-4 mb-6">
-            <h1 class="title-font text-2xl font-medium mb-2 text-gray-900">
+          <div class="mb-6 w-full px-4 sm:p-4">
+            <h1 class="title-font mb-2 text-2xl font-medium text-gray-900">
               معرفی مجموعه
             </h1>
             <!-- <div class="h-1 w-20 bg-cyan-500 rounded"></div> -->
-            <div class="leading-relaxed mt-4">
+            <div class="mt-4 leading-relaxed">
               موسسه فرهنگی نیکان در سال ۱۳۴۷ توسط مرحوم علامه کرباسچیان و عده‌ای
               دیگر از دل‌سوختگان تعلیم و تربیت اسلامی تأسیس گردید. در این موسسه
               سعی می‌شود محصلان به گونه‌ای در ابعاد مختلف تربیت شوند که با
               توانمندی روحی و جسمی و برخورداری از بهداشت روانی لازم، زندگی دنیوی
             </div>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-            <h2 class="title-font font-medium text-3xl text-gray-900">2.7K</h2>
+          <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <h2 class="title-font text-3xl font-medium text-gray-900">2.7K</h2>
             <p class="leading-relaxed">فارغ التحصیل</p>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-            <h2 class="title-font font-medium text-3xl text-gray-900">1.8K</h2>
+          <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <h2 class="title-font text-3xl font-medium text-gray-900">1.8K</h2>
             <p class="leading-relaxed">رویداد</p>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-            <h2 class="title-font font-medium text-3xl text-gray-900">35</h2>
+          <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <h2 class="title-font text-3xl font-medium text-gray-900">35</h2>
             <p class="leading-relaxed">Downloads</p>
           </div>
-          <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-            <h2 class="title-font font-medium text-3xl text-gray-900">4</h2>
+          <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <h2 class="title-font text-3xl font-medium text-gray-900">4</h2>
             <p class="leading-relaxed">پروژه خیریه</p>
           </div>
         </div>
         <div
-          class="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0"
+          class="mt-6 w-full overflow-hidden rounded-lg sm:mt-0 sm:w-1/3 lg:w-1/2"
         >
           <img
-            class="object-cover object-center w-full h-full transform scale-100 hover:scale-125 transition duration-500 ease-in-out cursor-pointer"
+            class="h-full w-full scale-100 transform cursor-pointer object-cover object-center transition duration-500 ease-in-out hover:scale-125"
             src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg"
             alt="stats"
           />
@@ -590,27 +590,27 @@
       </div>
     </section>
 
-    <section class="text-gray-50 bg-slate-900">
+    <section class="bg-slate-900 text-gray-50">
       <div
-        class="container flex flex-wrap flex-row-reverse px-5 py-24 mx-auto gap-4"
+        class="container mx-auto flex flex-row-reverse flex-wrap gap-4 px-5 py-24"
       >
         <div class="w-full">
           <h1
-            class="sm:text-3xl text-2xl text-white font-bold title-font text-center mb-8 before:bg-white before:shadow before:shadow-cyan-500"
+            class="title-font mb-8 text-center text-2xl font-bold text-white before:bg-white before:shadow before:shadow-cyan-500 sm:text-3xl"
           >
             آرشیو رسانه
           </h1>
         </div>
-        <div class="w-2/5 flex flex-wrap -m-2">
-          <div v-for="(i, index) in media" :key="index" class="p-2 w-full">
+        <div class="-m-2 flex w-2/5 flex-wrap">
+          <div v-for="(i, index) in media" :key="index" class="w-full p-2">
             <div
-              class="h-full flex items-center border-gray-700 border px-4 py-2 rounded-md hover:bg-slate-800 bg-opacity-10 transform hover:-translate-y-2 transition-all hover:shadow-sm hover:shadow-yellow-200/50 translate-y-0 cursor-pointer"
+              class="flex h-full translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 px-4 py-2 transition-all hover:-translate-y-2 hover:bg-slate-800 hover:shadow-sm hover:shadow-yellow-200/50"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-10 p-2 h-10 object-cover object-center flex-shrink-0 rounded-full ml-4 bg-white text-cyan-700 shadow-lg shadow-cyan-500/50"
+                class="ml-4 h-10 w-10 flex-shrink-0 rounded-full bg-white object-cover object-center p-2 text-cyan-700 shadow-lg shadow-cyan-500/50"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 36 36"
               >
@@ -622,29 +622,29 @@
                 <path fill="none" d="M0 0h36v36H0z" />
               </svg>
 
-              <div class="flex-grow flex">
-                <div class="w-3/5 flex flex-col gap-2">
+              <div class="flex flex-grow">
+                <div class="flex w-3/5 flex-col gap-2">
                   <h2
-                    class="text-yellow-100 title-font font-medium drop-shadow-2xl shadow-yellow-500/50 text-sm"
+                    class="title-font text-sm font-medium text-yellow-100 shadow-yellow-500/50 drop-shadow-2xl"
                     style="text-shadow: 1px 1px 9px #dee3f0"
                   >
                     {{ i.subject }}
                   </h2>
-                  <div class="text-slate-400 flex gap-4 text-xs">
+                  <div class="flex gap-4 text-xs text-slate-400">
                     <span>
                       {{ i.cat }}
                     </span>
                   </div>
                 </div>
                 <div
-                  class="w-2/5 flex flex-col items-start gap-2 text-slate-400 text-sx"
+                  class="text-sx flex w-2/5 flex-col items-start gap-2 text-slate-400"
                 >
                   <div class="flex-center gap-1 text-sm">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       aria-hidden="true"
                       role="img"
-                      class="w-4 h-4"
+                      class="h-4 w-4"
                       preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 24 24"
                     >
@@ -661,7 +661,7 @@
                       xmlns="http://www.w3.org/2000/svg"
                       aria-hidden="true"
                       role="img"
-                      class="w-4 h-4"
+                      class="h-4 w-4"
                       preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 24 24"
                     >
@@ -676,9 +676,9 @@
               </div>
             </div>
           </div>
-          <div class="w-full text-center px-2">
+          <div class="w-full px-2 text-center">
             <button
-              class="flex mx-auto w-full flex-center gap-4 py-4 mt-8 bg-slate-800 text-slate-200 hover:bg-white hover:border-white transition shadow-md shadow-white/5 hover:shadow-lg hover:shadow-cyan-300/50 hover:text-cyan-600 px-8 focus:outline-none border border-slate-500 rounded text-lg"
+              class="flex-center mx-auto mt-8 flex w-full gap-4 rounded border border-slate-500 bg-slate-800 py-4 px-8 text-lg text-slate-200 shadow-md shadow-white/5 transition hover:border-white hover:bg-white hover:text-cyan-600 hover:shadow-lg hover:shadow-cyan-300/50 focus:outline-none"
             >
               ورود به بخش آرشیو رسانه
 
@@ -698,7 +698,7 @@
           </div>
         </div>
 
-        <div class="w-3/5 flex flex-col">
+        <div class="flex w-3/5 flex-col">
           <client-only>
             <div class="aspect-video">
               <vue-plyr ref="plyr" :options="playerOptions">
@@ -717,9 +717,9 @@
             </div>
           </client-only>
           <div
-            class="bg-gradient-to-tr from-slate-500/5 to-slate-100/5 bg-opacity-5 p-4"
+            class="bg-opacity-5 bg-gradient-to-tr from-slate-500/5 to-slate-100/5 p-4"
           >
-            <h2 class="text-yellow-100 text-2xl mt-4 mb-2">
+            <h2 class="mt-4 mb-2 text-2xl text-yellow-100">
               {{ media[0].subject }}
             </h2>
             <div class="mb-4">
@@ -731,23 +731,23 @@
           </div>
         </div>
       </div>
-      <div class="h-48 flex-center mt-10">
+      <div class="flex-center mt-10 h-48">
         <img
-          class="h-full object-contain filter grayscale opacity-40"
+          class="h-full object-contain opacity-40 grayscale filter"
           src="img/logo_only.png"
           alt=""
         />
       </div>
 
-      <footer class="text-gray-600 body-font">
+      <footer class="body-font text-gray-600">
         <div
-          class="container text-slate-300 px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col"
+          class="container mx-auto flex flex-col flex-wrap px-5 py-24 text-slate-300 md:flex-row md:flex-nowrap md:items-center lg:items-start"
         >
           <div
-            class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left"
+            class="mx-auto w-64 flex-shrink-0 text-center md:mx-0 md:text-left"
           >
             <a
-              class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+              class="title-font flex items-center justify-center font-medium text-gray-900 md:justify-start"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -756,7 +756,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                class="w-10 h-10 text-white p-2 bg-blue-500 rounded-full"
+                class="h-10 w-10 rounded-full bg-blue-500 p-2 text-white"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -770,15 +770,15 @@
             </p>
           </div>
           <div
-            class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center"
+            class="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pl-20 md:text-left"
           >
-            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+            <div class="w-full px-4 md:w-1/2 lg:w-1/4">
               <h2
-                class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"
+                class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900"
               >
                 CATEGORIES
               </h2>
-              <nav class="list-none mb-10">
+              <nav class="mb-10 list-none">
                 <li>
                   <a class="">First Link</a>
                 </li>
@@ -793,13 +793,13 @@
                 </li>
               </nav>
             </div>
-            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+            <div class="w-full px-4 md:w-1/2 lg:w-1/4">
               <h2
-                class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"
+                class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900"
               >
                 CATEGORIES
               </h2>
-              <nav class="list-none mb-10">
+              <nav class="mb-10 list-none">
                 <li>
                   <a class="">First Link</a>
                 </li>
@@ -814,13 +814,13 @@
                 </li>
               </nav>
             </div>
-            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+            <div class="w-full px-4 md:w-1/2 lg:w-1/4">
               <h2
-                class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"
+                class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900"
               >
                 CATEGORIES
               </h2>
-              <nav class="list-none mb-10">
+              <nav class="mb-10 list-none">
                 <li>
                   <a class="">First Link</a>
                 </li>
@@ -835,13 +835,13 @@
                 </li>
               </nav>
             </div>
-            <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+            <div class="w-full px-4 md:w-1/2 lg:w-1/4">
               <h2
-                class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"
+                class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900"
               >
                 CATEGORIES
               </h2>
-              <nav class="list-none mb-10">
+              <nav class="mb-10 list-none">
                 <li>
                   <a class="">First Link</a>
                 </li>
@@ -860,20 +860,20 @@
         </div>
         <div class="bg-slate-700">
           <div
-            class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"
+            class="container mx-auto flex flex-col flex-wrap py-4 px-5 sm:flex-row"
           >
-            <p class="text-slate-50 text-sm text-center sm:text-left">
+            <p class="text-center text-sm text-slate-50 sm:text-left">
               © 2020 Tailblocks —
               <a
                 href="https://twitter.com/knyttneve"
                 rel="noopener noreferrer"
-                class="text-gray-600 ml-1"
+                class="ml-1 text-gray-600"
                 target="_blank"
                 >@knyttneve</a
               >
             </p>
             <span
-              class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start"
+              class="mt-2 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start"
             >
               <a class="text-slate-50">
                 <svg
@@ -881,7 +881,7 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  class="w-5 h-5"
+                  class="h-5 w-5"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -895,7 +895,7 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  class="w-5 h-5"
+                  class="h-5 w-5"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -910,7 +910,7 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  class="w-5 h-5"
+                  class="h-5 w-5"
                   viewBox="0 0 24 24"
                 >
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
@@ -926,7 +926,7 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="0"
-                  class="w-5 h-5"
+                  class="h-5 w-5"
                   viewBox="0 0 24 24"
                 >
                   <path

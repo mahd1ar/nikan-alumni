@@ -53,6 +53,15 @@ declare module '*/category-posts.gql' {
 }
     
 
+declare module '*/category-videos.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const categoryVideos: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/event-participants.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -84,6 +93,33 @@ declare module '*/fetch-me.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const fetchMe: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/category.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const categoryAttributes: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/fullPost.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const fullPost: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/simplePost.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const simplePost: DocumentNode;
 
   export default defaultDocument;
 }

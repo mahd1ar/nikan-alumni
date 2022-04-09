@@ -1,10 +1,10 @@
 <template>
   <div class="relative flex-grow bg-gray-100">
     <modal
-      @yes="regEvent"
       :type="modal.success ? 'success' : 'error'"
       :open.sync="modal.isOpen"
       :confirm="modal.confirm"
+      @yes="regEvent"
     >
       <template #title> {{ modal.title }} </template>
       <template #body> <div v-html="modal.body"></div> </template>
@@ -15,18 +15,23 @@
       :ok="participantsModal.closeText"
       :open.sync="participantsModal.isOpen"
       :confirm="false"
+      @closed="participantsModal.body.length = 0"
     >
       <template #title> {{ participantsModal.title }} </template>
       <template #body>
         <div class="flex flex-col gap-1">
+          <<<<<<< HEAD
           <div class="font-bold text-red-500" v-if="totalRegistrants === 0">
-            {{ participantsModal.nobodySignUpForThis }}
-          </div>
+            =======
+            <div v-if="totalRegistrants === 0" class="font-bold text-red-500">
+              >>>>>>> 3bd3bbf60f39479137e88e92f51574d21c50f2cc
+              {{ participantsModal.nobodySignUpForThis }}
+            </div>
 
-          <div
-            class="font-bold text-cyan-500"
-            v-if="participantsModal.body.length === 0"
-          >
+            <div <<<<<<< HEAD class="font-bold text-cyan-500" ======= >>>>>>>
+            3bd3bbf60f39479137e88e92f51574d21c50f2cc
+            v-if="participantsModal.body.length === 0" class="font-bold
+            text-cyan-500" >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
@@ -121,7 +126,7 @@
 
             <!-- META -->
             <div
-              class="flex flex-col justify-between space-y-5 lg:flex-row lg:items-end lg:space-y-0 lg:space-x-5"
+              class="flex flex-col justify-around space-y-5 lg:flex-row lg:items-end lg:space-y-0 lg:space-x-5"
             >
               <div
                 class="flex flex-shrink-0 items-center gap-2 text-left text-sm leading-none text-neutral-700 dark:text-neutral-200"
@@ -154,8 +159,8 @@
                     </svg>
                   </div>
                 </a>
-                <div class="ml-3">
-                  <div class="flex items-center">
+                <div class="mr-3 text-right">
+                  <div class="flex items-center text-right">
                     <a
                       class="block font-semibold"
                       href="https://ncmaz.chisnghiax.com/author/ncmaz/"
@@ -168,14 +173,13 @@
                       {{ date }}
                     </span>
 
-                    <span class="mx-2 font-semibold">·</span>
+                    <!-- <span class="mx-2 font-semibold">·</span>
                     <span class="text-neutral-700 dark:text-neutral-300">
                       <span class="span-reading-time rt-reading-time"
                         ><span class="rt-label rt-prefix"></span>
                         <span class="rt-time"> 3</span>
-                        <span class="rt-label rt-postfix">min read</span></span
-                      >
-                    </span>
+                        <span class="rt-label rt-postfix">min read</span></span>
+                    </span> -->
                   </div>
                 </div>
               </div>
@@ -183,9 +187,9 @@
               <div class="flex flex-row items-center gap-2 space-x-2.5">
                 <!-- VIEWS COUNT -->
                 <button
-                  @click="getEventParticipants"
-                  class="relative hidden h-7 items-center justify-center rounded-full bg-neutral-800 pl-2 pr-3 text-xs text-neutral-200 transition-colors hover:bg-neutral-500 sm:flex sm:h-8 sm:min-w-[68px] sm:text-sm"
+                  class="relative hidden h-7 items-center justify-center gap-2 rounded-full bg-neutral-800 pl-2 pr-3 text-xs text-neutral-200 transition-colors hover:bg-neutral-500 sm:flex sm:h-8 sm:min-w-[68px] sm:text-sm"
                   title="تعداد ثبت نام کنندگان"
+                  @click="getEventParticipants"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -193,16 +197,15 @@
                     role="img"
                     class="h-5 w-5"
                     preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 20 20"
+                    viewBox="0 0 24 24"
                   >
-                    <circle cx="6" cy="6" r="3" fill="currentColor" />
-                    <circle cx="14" cy="6" r="3" fill="currentColor" />
                     <path
                       fill="currentColor"
-                      d="M6 10c-3.31 0-6 1.79-6 4v2h6v-2c0-1.48 1.21-2.77 3-3.46c-.88-.35-1.91-.54-3-.54zm8 0c-3.31 0-6 1.79-6 4v2h12v-2c0-2.21-2.69-4-6-4z"
+                      fill-rule="evenodd"
+                      d="M8 13a3 3 0 1 1 0-6a3 3 0 0 1 0 6Zm8 0a3 3 0 1 1 0-6a3 3 0 0 1 0 6Zm-8 2a7.98 7.98 0 0 1 6 2.708V19H2v-1.292A7.98 7.98 0 0 1 8 15Zm8 4v-2.048l-.5-.567a10.057 10.057 0 0 0-1.25-1.193A8.028 8.028 0 0 1 16 15a7.98 7.98 0 0 1 6 2.708V19h-6Z"
                     />
                   </svg>
-                  <span class="mr-2">
+                  <span class="">
                     {{ totalRegistrantsFa }}
                   </span>
                 </button>
@@ -240,8 +243,9 @@
                       d="M15.5 11C15.5 11.2761 15.2761 11.5 15 11.5C14.7239 11.5 14.5 11.2761 14.5 11C14.5 10.7239 14.7239 10.5 15 10.5C15.2761 10.5 15.5 10.7239 15.5 11Z"
                     ></path>
                   </svg>
+
                   <span
-                    class="mr-1 text-neutral-900 group-hover:text-teal-600 dark:text-neutral-200"
+                    class="mr-1 whitespace-nowrap text-neutral-900 group-hover:text-teal-600 dark:text-neutral-200"
                   >
                     {{ duration }}
                     {{ delimiter }}
@@ -257,11 +261,11 @@
 
                 <div v-if="canRegister" class="relative inline-block text-left">
                   <div
+                    v-if="$apollo.loading"
                     class="relative flex items-center justify-center gap-2 rounded-3xl py-1 px-2 transition-all duration-300"
                     :style="regBtnStyle"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    v-if="$apollo.loading"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -309,7 +313,7 @@
 
                   <button
                     v-else
-                    class="relative flex items-center justify-center gap-2 rounded-3xl py-2 px-4 transition-all duration-300"
+                    class="relative flex items-center justify-center gap-2 whitespace-nowrap rounded-3xl py-2 px-4 transition-all duration-300"
                     title="Share with"
                     :style="regBtnStyle"
                     :class="{
@@ -400,7 +404,11 @@ import {
   EventRegistrationMutation,
   EventRegistrationMutationVariables,
 } from '~/types/types'
-import { toIndiaDigits } from '~/data/utils'
+import {
+  toIndiaDigits,
+  wordpressDateToFormattedJalali,
+  wordpressDateToJalali,
+} from '~/data/utils'
 import onLoggedOut from '~/mixins/on-logged-out'
 import participants from '@/apollo/queries/event-participants.gql'
 
@@ -466,6 +474,24 @@ export interface WpUpcommingEvent {
   duration: string
 }
 
+export interface WPRegedUsers {
+  comment_ID: string
+  comment_post_ID: string
+  comment_author: string
+  comment_author_email: string
+  comment_author_url: string
+  comment_author_IP: string
+  comment_date: string
+  comment_date_gmt: string
+  comment_content: string
+  comment_karma: string
+  comment_approved: string
+  comment_agent: string
+  comment_type: string
+  comment_parent: string
+  user_id: string
+}
+
 enum commentStatus {
   Approved = '1',
   halt = '0',
@@ -527,7 +553,6 @@ export default Vue.extend({
         'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent/' +
           this.$route.params.id
       )
-      console.log(data)
 
       if (!data) return
 
@@ -559,7 +584,7 @@ export default Vue.extend({
 
       this.duration = duration
 
-      this.date = data.post_date || ''
+      this.date = wordpressDateToJalali(data.post_date).join('/') || ''
     } catch (error) {
       if (process.client)
         this.$about.error({ title: Dict.fetch_err, body: String(error) })
@@ -626,35 +651,32 @@ export default Vue.extend({
 
   methods: {
     async getEventParticipants() {
+      // TODO : dont show modal if non has registerrd
       this.participantsModal.isOpen = true
       this.participantsModal.title = Dict.event_modal_partic_title
       this.participantsModal.closeText = Dict.event_modal_partic_close
       this.participantsModal.nobodySignUpForThis =
         Dict.event_modal_partic_nobody_signup_for_this
-
-      const variables: EventParticipantsQueryVariables = {
-        id: this.$route.params.id,
-      }
-
       try {
-        const { data } = await this.$apollo.query<EventParticipantsQuery>({
-          query: participants,
-          variables,
-          fetchPolicy: 'no-cache',
+        const { data } = await this.$axios.post<WPRegedUsers[]>(
+          'wp-json/myplugin/v1/getregisteredusers',
+          {
+            'event-id': this.$route.params.id,
+          }
+        )
+
+        console.log(data)
+
+        data.forEach((i) => {
+          this.participantsModal.body.push({
+            firstName: i?.comment_author || 'firstname',
+            avatar: '', // TODO  : get avatar url
+            email: i?.comment_author_email || '-',
+          })
         })
 
-        if (data.event?.comments?.nodes) {
-          this.participantsModal.body.splice(
-            0,
-            this.participantsModal.body.length
-          )
-          data.event.comments.nodes.forEach((i) => {
-            this.participantsModal.body.push({
-              firstName: i?.author?.node?.name || '',
-              avatar: i?.author?.node?.avatar?.url || '',
-              email: i?.author?.node?.email || '',
-            })
-          })
+        if (data.length === 0) {
+          this.participantsModal.isOpen = false
         }
       } catch (error) {
         console.error(error)
@@ -671,7 +693,7 @@ export default Vue.extend({
             user_id: this.$store.state.authentication.user.id,
           }
         )
-
+        console.log(data)
         if (data.length > 0) {
           if (data[0].comment_approved === commentStatus.Approved) {
             this.registrationStatus = 'registerd'
@@ -702,7 +724,7 @@ export default Vue.extend({
       const variables: EventRegistrationMutationVariables = {
         clientMutationId: String(~~(Math.random() * 10000)),
         content: '[REG] i like to regester',
-        commentOn: 10,
+        commentOn: Number(encodeURIComponent(this.$route.params.id!)),
       }
       try {
         const responce = await this.$apollo.mutate<EventRegistrationMutation>({
