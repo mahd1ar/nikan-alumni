@@ -32,15 +32,6 @@ class LoginStrategy {
   constructor(ctx: Context) {
     // this._attemptToRefreshTheToken = this.attemptToRefreshTheTokenThreshold
     this.ctx = ctx
-
-    // const exp = this.getCookie(Authentication.expiration)
-
-    // if (exp && parseInt(exp) - Date.now() > 0) {
-    //     console.log("there is time ...")
-    //     // settime out for refresh token
-    //     return
-    // }
-
     this.refreshHandler()
   }
 
@@ -51,6 +42,8 @@ class LoginStrategy {
       Authentication.refreshToken,
       String(response.login?.refreshToken)
     )
+
+    this.setCookie('trt', String(response.login?.refreshToken), 9999)
 
     console.log(
       'refreshtokenis',
@@ -92,7 +85,8 @@ class LoginStrategy {
           await timeout(4000)
           this.refreshHandler()
         } else {
-          this.logout()
+          console.log("wath the fuck is happening")
+          // this.logout()
           flag = true
         }
       }
@@ -154,7 +148,7 @@ class LoginStrategy {
   }
 
   public async refresh() {
-    console.log('DoRefresh')
+    console.log('Refreshing...')
     await this.ctx.app.apolloProvider.defaultClient.clearStore()
     await this.ctx.$apolloHelpers.onLogout()
 

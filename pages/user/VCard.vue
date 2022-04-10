@@ -463,7 +463,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  layout: 'rawlayout',
+  layout: 'RawLayout',
   data() {
     return {
       marker_lat_lng: [35.826165, 50.964831] as [number, number],

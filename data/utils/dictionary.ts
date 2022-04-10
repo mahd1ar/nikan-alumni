@@ -9,6 +9,8 @@ export enum Dict {
   auth_kickout = 'auth out kicking out',
   dashboard_saveinfo_title = 'confirm',
   dashboard_saveinfo_body = 'u r about to update your info... are u sure ??',
+  dashboard_signout_title = 'خروج از حساب کاربری',
+  dashboard_signout_body = 'آیا از خروج از حساب کاربری خود اطمینان دارید ؟ ',
   form_no_changes = 'FORM NO CHANGES',
   event_reg_now = 'در این رویداد ثبت نام کنید',
   event_reg = 'شما در این رویداد شرکت کردید',
