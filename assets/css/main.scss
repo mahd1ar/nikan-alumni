@@ -41,6 +41,20 @@
   transition: transform 0.2s;
 }
 
+.v-slide-rigth-enter-active,
+.v-slide-rigth-leave-active {
+  transition: all 0.2s;
+transform: translateX(-20px);
+
+  transition-delay: calc(var(--count) * 75ms);
+}
+.v-slide-rigth-enter, .v-slide-rigth-leave-to  {
+  opacity: 0;
+}
+.v-slide-rigth-move {
+  transition: transform 0.2s;
+}
+
 /* h1 {
   font-family: 'Noto Naskh Arabic', serif;
 

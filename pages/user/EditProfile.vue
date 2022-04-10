@@ -166,7 +166,7 @@
                   </div>
 
                   <div
-                    class="flex gap-2 flex-row-reverse items-center justify-end"
+                    class="flex flex-row-reverse items-center justify-end gap-2"
                   >
                     <label class="text-sm" for="location"> آدرس محل کار </label>
                     <input
@@ -317,10 +317,6 @@ interface UserObject {
   mobile: string
   jobLocation: string
 }
-const tehranLocation = {
-  x: 35.6967329,
-  y: 51.2097332,
-}
 
 export default Vue.extend({
   components: { ValidationProvider, ValidationObserver, MapPicker },
@@ -329,11 +325,6 @@ export default Vue.extend({
   middleware: ['authentication'],
   data() {
     return {
-      modal: {
-        isOpen: false,
-        title: Dict.dashboard_saveinfo_title,
-        body: Dict.dashboard_saveinfo_body,
-      },
       open: false,
       open_t: false,
       userTemplate: {} as UserObject,
@@ -439,10 +430,6 @@ export default Vue.extend({
   },
 
   methods: {
-    confirm() {
-      this.modal.isOpen = true
-    },
-
     async save() {
       let flag = true
 

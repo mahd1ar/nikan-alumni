@@ -9,7 +9,7 @@
     <h1>hi</h1>
     <button @click="login">login</button>
     <button @click="getMe">getMe</button>
-    <nuxt-link to="user/editprofile">edit profile</nuxt-link>
+    <nuxt-link to="user/userprofile">edit profile</nuxt-link>
   </div>
 </template>
 

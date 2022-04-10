@@ -224,7 +224,7 @@ export default Vue.extend({
 
           this.$router.push(decodeURIComponent(nextPath))
         } else {
-          this.$router.push('/user/editprofile')
+          this.$router.push('/user/userprofile')
         }
       }
     },

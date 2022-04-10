@@ -430,7 +430,7 @@ export default Vue.extend({
         },
         {
           title: 'اطلاعات شخصی',
-          link: '/user/editprofile',
+          link: '/user/userprofile',
         },
         {
           title: 'رویداد ها',

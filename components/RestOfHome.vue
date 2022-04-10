@@ -1172,7 +1172,7 @@ export default Vue.extend({
           await timeout(1500)
           this.getUpcommingEvents(tryingThreshold - 1)
         } else {
-          this.$about.error({ title: Dict.general_err, body: error })
+          this.$about.error({ title: Dict.general_err, body: String(error) })
         }
       }
     },

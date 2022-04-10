@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+  <div class="overflow-hidden bg-white shadow sm:rounded-lg">
     <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">
         اطلاعات عمومی کاربر
       </h3>
       <p class="mt-1 max-w-2xl text-sm text-gray-500">
@@ -16,14 +16,14 @@
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">نام کامل</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
             {{ userInfo.firstName }}
             {{ userInfo.lastName }}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-sm font-medium text-gray-500">ایمیل</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
             {{ userInfo.email }}
           </dd>
         </div>
@@ -31,13 +31,13 @@
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">اشتغال</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
             {{ userInfo.occupation }}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt class="text-sm font-medium text-gray-500">موبایل</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
             {{ userInfo.mobile }}
           </dd>
         </div>
@@ -46,7 +46,7 @@
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">وبسایت</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
             {{ userInfo.url }}
           </dd>
         </div>
@@ -55,7 +55,7 @@
           <dt class="text-sm font-medium text-gray-500">بیوگرافی</dt>
           <dd
             style="min-height: 100px"
-            class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+            class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"
           >
             {{ userInfo.bio }}
           </dd>
@@ -65,7 +65,7 @@
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">محل اشتغال</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
             <map-picker
               :lat="userInfo.jobLocation.lat"
               :lng="userInfo.jobLocation.lng"
@@ -83,6 +83,7 @@ import MapPicker from '../form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
 
 export default Vue.extend({
+  name: 'UserInfoCard',
   props: {
     userInfo: {
       type: Object as PropType<UserFullProfile>,
@@ -95,5 +96,4 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
