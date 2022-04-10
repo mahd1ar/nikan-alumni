@@ -88,7 +88,7 @@
                 رویداد های من
               </h3>
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                شما در این رویداد ها شرکت کرده اید
+                در رویداد (های) پیش رو شرکت کرده اید
               </p>
             </div>
             <div class="border-t border-gray-200">
@@ -96,7 +96,8 @@
                 <div
                   v-for="(e, index) in userRegisterdInThis"
                   :key="index"
-                  class="bg-green-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                  style="background: aliceblue"
+                  class="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                 >
                   <dt
                     class="text-sm flex items-center gap-2 font-medium text-gray-500"
