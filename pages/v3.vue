@@ -460,33 +460,65 @@ HSBC Bank Middle East
         'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
     }
   },
-  mounted() {
+  async mounted() {
+    anime({
+      targets: '.st0,.st1,.st2',
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutSine',
+      // direction: 'reverse',
+      async begin() {
+        document.querySelector('.st0').style.transition = 'all ease 6s'
+        document.querySelector('.st0').style.fill = '#ffffff00'
+        await timeout(5000)
+        document.querySelector('.st0').style.fill = '#06b6d488'
+      },
+      duration: 11500,
+      delay: (_, i) => {
+        return i * 400
+      },
+    })
+
+    await timeout(9000)
+
+    return
     const tl = anime.timeline({
       autoplay: false,
       loop: true,
-      direction: 'alternate',
+      direction: 'reverse',
+
+      // direction: 'alternate',
+      // duration: 15000,
       loopComplete: async (i) => {
         i.pause()
-        await timeout(3000)
+        await timeout(20000)
         i.play()
       },
     })
     tl.add({
-      targets: '.st0,st1,st2,#Layer_1 path',
+      targets: '#Layer_1 path',
       strokeDashoffset: [0, anime.setDashoffset],
       easing: 'easeInOutSine',
-      stroke: ['red', 'green'],
-      fill: ['red', 'green'],
+
       duration: 6500,
-      // update() {
-      //   console.log(333)
+      // update(i) {
+      // console.log(i.progress)
+      // console.log(i.direction)
       // },
+      begin() {
+        console.log('begin')
+        document.querySelector('.st0').style.transition = 'all ease 6s'
+        document.querySelector('.st0').style.fill = '#ffffff00'
+      },
+      loopComplete() {},
       complete: () => {
+        document.querySelector('.st0').style.fill = '#06b6d488'
+        // document.querySelector('.st0').style.fill = 'green'
         // const path = document.querySelector('.st0') as HTMLElement
         // path.style.fill = '#26b7c498'
       },
+
       delay: (_, i) => {
-        return i * 50
+        return i * 150
       },
     })
     // .add({
@@ -499,7 +531,7 @@ HSBC Bank Middle East
     //     return i * 250
     //   },
     // })
-    tl.seek(6000)
+    // tl.seek(6000)
     tl.play()
 
     setInterval(() => {

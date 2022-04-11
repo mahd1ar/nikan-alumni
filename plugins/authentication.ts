@@ -86,7 +86,7 @@ class LoginStrategy {
           this.refreshHandler()
         } else {
           console.log("wath the fuck is happening")
-          // this.logout()
+          this.logout()
           flag = true
         }
       }

@@ -117,7 +117,7 @@
           <div class="w-4/12">
             <img
               class="max-h-full w-full rounded-md object-cover"
-              src="test/one.jfif"
+              src="test/val.jpg"
               alt=""
             />
           </div>
@@ -309,23 +309,24 @@
           class="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16"
         >
           <div class="mx-auto max-w-lg text-center lg:mx-0 lg:text-left">
-            <h2 class="text-3xl font-bold sm:text-4xl">
-              Find your career path
+            <h2 class="text-3xl font-bold sm:text-4xl text-right">
+              کارگروه خود را پیدا کنید
             </h2>
 
-            <p class="mt-4 text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vero
-              aliquid sint distinctio iure ipsum cupiditate? Quis, odit
-              assumenda? Deleniti quasi inventore, libero reiciendis minima
-              aliquid tempora. Obcaecati, autem.
+            <p class="mt-4 text-gray-600 text-right">
+              کانون دانش آموختگان نیکان در زمینه های متعدد و متنوعی در قالب
+              کارگروه های مختلف فعالیت می کند. هر کدام از این کارگروه ها با هدف
+              خاصی تاسیس شده اند تا به بهترین نحو رویداد های مرتبط با خود را
+              برگزار کنند.
             </p>
 
             <a
               class="mt-8 inline-flex items-center rounded border border-cyan-500 bg-cyan-500 px-8 py-3 text-white hover:bg-transparent hover:text-cyan-600 focus:outline-none focus:ring active:text-cyan-500"
               href="/get-started"
             >
+              <span class="text-sm font-medium"> شروع کنید </span>
               <svg
-                class="ml-3 h-5 w-5"
+                class="mr-3 h-5 w-5 transition rotate-180"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -338,13 +339,12 @@
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-              <span class="text-sm font-medium"> Get Started </span>
             </a>
           </div>
 
           <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <a
-              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
               href="/accountant"
             >
               <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -368,15 +368,15 @@
                 </svg>
               </span>
 
-              <h6 class="mt-2 font-bold">Accountant</h6>
+              <h6 class="mt-2 font-bold">کارگروه نشاط و سرگرمی</h6>
 
-              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+              <!-- <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
-              </p>
+              </p> -->
             </a>
 
             <a
-              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
               href="/accountant"
             >
               <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -400,15 +400,15 @@
                 </svg>
               </span>
 
-              <h6 class="mt-2 font-bold">Accountant</h6>
+              <h6 class="mt-2 font-bold">کارگروه کسب و کار</h6>
 
-              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+              <!-- <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
-              </p>
+              </p> -->
             </a>
 
             <a
-              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
               href="/accountant"
             >
               <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -432,15 +432,15 @@
                 </svg>
               </span>
 
-              <h6 class="mt-2 font-bold">Accountant</h6>
+              <h6 class="mt-2 font-bold">کارگروه علم و فرهنگ</h6>
 
-              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+              <!-- <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
-              </p>
+              </p> -->
             </a>
 
             <a
-              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
               href="/accountant"
             >
               <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -464,15 +464,15 @@
                 </svg>
               </span>
 
-              <h6 class="mt-2 font-bold">Accountant</h6>
+              <h6 class="mt-2 font-bold">کارگروه سلامت و خانواده</h6>
 
-              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+              <!-- <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
-              </p>
+              </p> -->
             </a>
 
             <a
-              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
               href="/accountant"
             >
               <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -496,15 +496,15 @@
                 </svg>
               </span>
 
-              <h6 class="mt-2 font-bold">Accountant</h6>
+              <h6 class="mt-2 font-bold">کارگروه خیریه و عام المنفعه</h6>
 
-              <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+              <!-- <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
-              </p>
+              </p> -->
             </a>
 
             <a
-              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+              class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
               href="/accountant"
             >
               <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -528,11 +528,11 @@
                 </svg>
               </span>
 
-              <h6 class="mt-2 font-bold">Accountant</h6>
-
+              <h6 class="mt-2 font-bold">کارگروه روابط عمومی</h6>
+              <!-- 
               <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
                 Lorem ipsum dolor sit amet consectetur.
-              </p>
+              </p> -->
             </a>
           </div>
         </div>

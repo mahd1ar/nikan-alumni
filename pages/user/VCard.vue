@@ -17,7 +17,7 @@
     />
 
     <div
-      class="container relative mx-auto flex flex-col-reverse items-start gap-7 md:flex-row"
+      class="container relative mx-auto flex flex-col-reverse items-start gap-7 md:flex-row top-20 sm:top-0"
     >
       <div
         class="flex w-full flex-col overflow-hidden rounded-xl bg-white md:w-7/12 lg:w-9/12"
@@ -60,6 +60,7 @@
 
               <a
                 :href="'tel:' + user.mobile"
+                target="_system"
                 class="relative px-2 text-slate-700"
               >
                 <span
@@ -181,7 +182,9 @@
               </a>
             </div>
 
-            <div
+            <a
+              href="https://netdom.ir"
+              target="_blank"
               class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
               <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
@@ -224,7 +227,7 @@
                 </span>
                 <span> netdom.ir </span>
               </div>
-            </div>
+            </a>
           </div>
 
           <div
@@ -285,7 +288,7 @@
             class="relative mx-auto flex h-20 max-w-xs items-center justify-center"
           >
             <img
-              class="absolute bottom-0 rounded-3xl"
+              class="absolute w-40 h-40 bottom-0 rounded-3xl"
               src="https://avatars.githubusercontent.com/u/32998122?v=4"
               alt=""
             />
@@ -423,6 +426,7 @@
           </div>
 
           <button
+            @click="addToContacts"
             class="cursor-pointer rounded-lg bg-cyan-400 py-2 text-lg font-bold text-cyan-50 hover:bg-cyan-500"
           >
             اضافه به مخاطبین
@@ -439,6 +443,7 @@ import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
 import { BioHandler, LocationHandler } from '~/data/utils'
 import { Dict } from '~/data/utils/dictionary'
+
 export interface Avatar_url {
   24: string
   48: string
@@ -524,6 +529,25 @@ export default Vue.extend({
       // console.log(error)
       this.$nuxt.error({ statusCode: 404, message: Dict.P404 })
     }
+  },
+  methods: {
+    addToContacts() {
+      const query = new URLSearchParams()
+
+      if (this.user.firstName) query.set('firstname', this.user.firstName)
+
+      if (this.user.lastName) query.set('lastname', this.user.lastName)
+
+      if (this.user.email) query.set('email', this.user.email)
+
+      if (this.user.mobile) query.set('mobile', this.user.mobile)
+
+      if (this.user.occupation) query.set('occupation', this.user.occupation)
+
+      console.log(query.toString)
+
+      window.open('http://194.5.205.148:3000/?' + query.toString())
+    },
   },
 })
 </script>

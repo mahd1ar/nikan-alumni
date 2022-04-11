@@ -11,7 +11,7 @@
         >
           <div class="">
             <h2 class="text-lg font-semibold capitalize text-gray-700">
-              Account settings
+              اطلاعات کاربر
             </h2>
 
             <ValidationObserver v-slot="{ invalid }" tag="form">

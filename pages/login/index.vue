@@ -2,13 +2,13 @@
   <div class="flex-center h-screen w-full">
     <div class="container mx-auto">
       <div
-        class="mx-auto my-auto flex max-w-sm overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800 lg:max-w-4xl"
+        class="mx-auto my-auto flex max-w-sm overflow-hidden rounded-lg shadow-lg bg-gray-800 lg:max-w-4xl"
       >
         <div
           :class="
             loaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
           "
-          style="background-image: url('img/login.jpg')"
+          style="background-image: url('yard.jpg')"
           class="hidden transform-gpu bg-cover transition-all duration-700 ease-out lg:block lg:w-1/2"
         >
           <!-- <iframe
