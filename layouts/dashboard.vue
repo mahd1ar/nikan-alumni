@@ -374,7 +374,7 @@ export default Vue.extend({
       nav: [
         {
           title: 'اطلاعات کاربر',
-          link: '/user/editprofile',
+          link: '/user/userprofile',
         },
         {
           title: 'رویداد ها',

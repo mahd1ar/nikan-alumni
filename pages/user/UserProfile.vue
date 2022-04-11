@@ -184,7 +184,8 @@
           >
             <user-info-edit
               :loading="$fetchState.pending"
-              :user="edituser"
+              :user.sync="edituser"
+              @saveProfile="update"
             ></user-info-edit>
           </div>
 
@@ -262,7 +263,7 @@ export default Vue.extend({
 
   data() {
     return {
-      activeTabIndex: 1,
+      activeTabIndex: 0,
       userRegisterdInThis: [] as { eventName: string; date: string }[],
       showuser: {} as UserFullProfile,
       edituser: {} as UserFullProfile,
@@ -295,6 +296,8 @@ export default Vue.extend({
         lng: 0,
       }
       // this.location.show = false
+      userTemplate.jobLocation.lat = 0
+      userTemplate.jobLocation.lng = 0
       if (data.viewer.user_acf?.jobLocation) {
         const latlng = data.viewer.user_acf.jobLocation.split(',')
         if (latlng.length === 2) {
@@ -416,32 +419,35 @@ export default Vue.extend({
         this.showuser.jobLocation.lat,
         this.showuser.jobLocation.lng,
       ].join(',')
-      const location2 = [
-        this.edituser.jobLocation.lat,
-        this.edituser.jobLocation.lng,
-      ].join(',')
+      const location2 =
+        this.edituser.jobLocation.lat === 0 &&
+        this.edituser.jobLocation.lng === 0
+          ? ''
+          : [this.edituser.jobLocation.lat, this.edituser.jobLocation.lng].join(
+              ','
+            )
 
       if (location1 !== location2) {
         contentChangedFlag = true
         updateUserMutationVariables.jobLocation = location2
       }
 
-      if (this.showuser.firstName === this.edituser.firstName) {
+      if (this.showuser.firstName !== this.edituser.firstName) {
         contentChangedFlag = true
         updateUserMutationVariables.firstName = this.edituser.firstName
       }
 
-      if (this.showuser.lastName === this.edituser.lastName) {
+      if (this.showuser.lastName !== this.edituser.lastName) {
         contentChangedFlag = true
         updateUserMutationVariables.lastName = this.edituser.lastName
       }
 
-      if (this.showuser.mobile === this.edituser.mobile) {
+      if (this.showuser.mobile !== this.edituser.mobile) {
         contentChangedFlag = true
         updateUserMutationVariables.mobile = this.edituser.mobile
       }
 
-      if (this.showuser.occupation === this.edituser.occupation) {
+      if (this.showuser.occupation !== this.edituser.occupation) {
         contentChangedFlag = true
         updateUserMutationVariables.occupation = this.edituser.occupation
       }
@@ -464,6 +470,8 @@ export default Vue.extend({
           mutation: updateUserMutationgql,
           variables: mutVar,
         })
+
+        this.$about.success({ title: 'اطلاعات با موفقیت به روز شد' })
       } catch (error) {
         alert(error)
       }

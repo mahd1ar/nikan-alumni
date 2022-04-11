@@ -1,31 +1,14 @@
 <template>
-  <main class="mx-w-6xl container mx-auto py-4">
+  <main class="mx-w-6xl container mx-auto">
     <div class="flex flex-col space-y-8">
       <!-- First Row -->
 
       <div
         class="grid grid-cols-1 items-start gap-y-4 px-4 md:grid-cols-5 md:gap-6 xl:p-0"
       >
-        <div class="col-start-1 col-end-5">
-          <h2 class="text-xs font-bold tracking-wide text-gray-800 md:text-sm">
-            Summary Transactions
-          </h2>
-        </div>
-
         <div
           class="col-span-3 flex flex-col space-y-6 rounded-xl border border-gray-50 bg-white p-6"
         >
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold tracking-wide text-gray-600">
-              Latest Transactions
-            </h2>
-            <a
-              href="#"
-              class="rounded bg-blue-100 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-blue-500 hover:bg-blue-300"
-              >More</a
-            >
-          </div>
-
           <div class="">
             <h2 class="text-lg font-semibold capitalize text-gray-700">
               Account settings
@@ -147,7 +130,7 @@
 
                 <div>
                   <label class="text-gray-700" for="emailAddress"
-                    >Email Address</label
+                    >آدرس ایمیل</label
                   >
                   <input
                     id="emailAddress"
@@ -169,11 +152,13 @@
                   />
                 </div>
                 {{ editUser.socialMedias }}
+                {{ editUser.jobLocation.lat }}
+                {{ editUser.jobLocation.lng }}
                 <transition name="v-openwindow">
                   <map-picker
-                    v-show="location.show"
-                    :lat="editUser.jobLocation.lat"
-                    :lng="editUser.jobLocation.lng"
+                    v-if="location.show"
+                    :lat.sync="editUser.jobLocation.lat"
+                    :lng.sync="editUser.jobLocation.lng"
                     :disabled="false"
                   ></map-picker>
                 </transition>
@@ -194,8 +179,97 @@
                         'border-gray-200': !errors[0],
                         'border-red-500': errors[0],
                       }"
-                      @input="xxx($event)"
                     />
+                    <span
+                      v-if="errors[0] !== undefined"
+                      class="mx-2 mt-2 text-xs text-red-500"
+                      >{{ errors[0] }}</span
+                    >
+                  </div>
+                </validation-provider>
+
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="instagram"
+                  rules="max:100"
+                >
+                  <div>
+                    <label class="text-gray-700" for="instagram"
+                      >آدرس اینستاگرام</label
+                    >
+                    <input
+                      id="instagram"
+                      v-model="editUser.socialMedias.instagram"
+                      placeholder="https://instagram.com/USERNAME"
+                      name="instagram"
+                      type="text"
+                      :class="{
+                        'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
+                        'border-gray-200': !errors[0],
+                        'border-red-500': errors[0],
+                      }"
+                    />
+
+                    <span
+                      v-if="errors[0] !== undefined"
+                      class="mx-2 mt-2 text-xs text-red-500"
+                      >{{ errors[0] }}</span
+                    >
+                  </div>
+                </validation-provider>
+
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="linkedin"
+                  rules="max:100"
+                >
+                  <div>
+                    <label class="text-gray-700" for="linkedin"
+                      >آدرس لینکدین</label
+                    >
+                    <input
+                      id="linkedin"
+                      v-model="editUser.socialMedias.linkedin"
+                      placeholder="https://www.linkedin.com/in/USERNAME/"
+                      name="linkedin"
+                      type="text"
+                      :class="{
+                        'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
+                        'border-gray-200': !errors[0],
+                        'border-red-500': errors[0],
+                      }"
+                    />
+
+                    <span
+                      v-if="errors[0] !== undefined"
+                      class="mx-2 mt-2 text-xs text-red-500"
+                      >{{ errors[0] }}</span
+                    >
+                  </div>
+                </validation-provider>
+
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="twitter"
+                  rules="max:100"
+                >
+                  <div>
+                    <label class="text-gray-700" for="twitter"
+                      >آدرس توییتر</label
+                    >
+                    <input
+                      id="twitter"
+                      v-model="editUser.socialMedias.twitter"
+                      placeholder="https://twitter.com/USERNAME"
+                      name="twitter"
+                      type="text"
+                      :class="{
+                        'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
+                        'border-gray-200': !errors[0],
+                        'border-red-500': errors[0],
+                      }"
+                    />
+
                     <span
                       v-if="errors[0] !== undefined"
                       class="mx-2 mt-2 text-xs text-red-500"
@@ -218,42 +292,18 @@
           </div>
         </div>
       </div>
-      <!-- End Third Row -->
-      <div class="mx-auto max-w-md gap-y-4 px-4 md:gap-6 xl:p-0">
-        <div
-          class="col-span-2 flex flex-col justify-between rounded bg-gradient-to-r from-blue-500 to-blue-800 p-6"
-        >
-          <div class="flex flex-col">
-            <p class="font-bold text-white">مشاهده ی کارت کارت ویزیت انلاین</p>
-
-            <nuxt-link
-              class="mt-4 flex flex-row-reverse items-center justify-center gap-2 text-gray-50"
-              to="/user/vcard"
-            >
-              <p class="max-w-sm text-xs font-light leading-tight md:text-sm">
-                <code> https://nikan-alumni.com/user/vcard/35 </code>
-              </p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                style="color: #f3f4f6"
-                class="ml-auto"
-                role="img"
-                width="2em"
-                height="2em"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill="currentColor"
-                  d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"
-                />
-              </svg>
-            </nuxt-link>
-          </div>
-        </div>
-      </div>
     </div>
+
+    <modal :open.sync="modal.isOpen" :confirm="true" @yes="save">
+      <template #title>
+        <h1>
+          {{ modal.title }}
+        </h1>
+      </template>
+      <template #body>
+        {{ modal.body }}
+      </template>
+    </modal>
   </main>
 </template>
 
@@ -266,6 +316,7 @@ import {
   configure,
 } from 'vee-validate'
 import * as rules from 'vee-validate/dist/rules'
+// @ts-ignore
 import isEqual from 'lodash.isequal'
 import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
@@ -289,6 +340,26 @@ const tehranLocation = {
   y: 51.2097332,
 }
 
+export class cloneable {
+  public static deepCopy<T>(source: T): T {
+    return Array.isArray(source)
+      ? source.map((item) => this.deepCopy(item))
+      : source instanceof Date
+      ? new Date(source.getTime())
+      : source && typeof source === 'object'
+      ? Object.getOwnPropertyNames(source).reduce((o, prop) => {
+          Object.defineProperty(
+            o,
+            prop,
+            Object.getOwnPropertyDescriptor(source, prop)!
+          )
+          o[prop] = this.deepCopy((source as { [key: string]: any })[prop])
+          return o
+        }, Object.create(Object.getPrototypeOf(source)))
+      : (source as T)
+  }
+}
+
 export default Vue.extend({
   components: { ValidationProvider, ValidationObserver, MapPicker },
   props: {
@@ -297,15 +368,29 @@ export default Vue.extend({
   },
   data() {
     return {
-      model: {
+      modal: {
         isOpen: false,
         title: Dict.dashboard_saveinfo_title,
         body: Dict.dashboard_saveinfo_body,
       },
       location: {
-        show: true,
+        show: false,
       },
       editUser: {} as UserFullProfile,
+    }
+  },
+  fetch() {
+    let user = {} as UserFullProfile
+
+    user = { ...this.user }
+    user.jobLocation = { ...this.user.jobLocation }
+    user.socialMedias = { ...this.user.socialMedias }
+    this.editUser = user
+
+    if (this.editUser.jobLocation.lat === 0) {
+      this.location.show = false
+    } else {
+      this.location.show = true
     }
   },
   watch: {
@@ -327,26 +412,11 @@ export default Vue.extend({
           this.editUser.jobLocation.lng = tehranLocation.y
         }
       }
-    },
-  },
-  created() {
-    const user = {} as UserFullProfile
-    let k: keyof typeof user
-
-    for (k in this.user) {
-      if (typeof k === 'object') {
-        user[k] = Object.assign({}, this.user[k])
-      } else if (typeof k === 'string' || typeof k === 'number') {
-        // @ts-ignore
-        user[k] = this.user[k]
+      if (nval === false) {
+        this.editUser.jobLocation.lat = 0
+        this.editUser.jobLocation.lng = 0
       }
-    }
-
-    this.editUser = user
-
-    if (this.editUser.jobLocation.lat === 0) {
-      this.location.show = false
-    }
+    },
   },
   mounted() {
     // @ts-ignore
@@ -354,12 +424,26 @@ export default Vue.extend({
   },
   methods: {
     confirm() {
-      this.model.isOpen = true
+      this.modal.isOpen = true
     },
     save() {
       // let flag = true
 
-      console.log(isEqual(this.user, this.editUser))
+      if (isEqual(this.user, this.editUser) === false) {
+        this.$emit('update:user', this.editUser)
+        this.$emit('saveProfile')
+      } else {
+        this.$about.info({ title: Dict.form_no_changes, time: 5000 })
+      }
+      // console.log(
+      //   'is eq social media',
+      //   isEqual(this.user.socialMedias, this.editUser.socialMedias)
+      // )
+      // console.log(
+      //   'is eq jobloca',
+      //   isEqual(this.user.jobLocation, this.editUser.jobLocation)
+      // )
+      // console.log(this.user.jobLocation, this.editUser.jobLocation)
 
       // this.editUser.jobLocation =
       //   this.location.default.x + ',' + this.location.default.y

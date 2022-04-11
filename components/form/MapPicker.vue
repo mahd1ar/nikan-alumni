@@ -1,5 +1,5 @@
 <template>
-  <div class="h-48 z-0">
+  <div class="z-0 h-48">
     <client-only>
       <l-map
         ref="map"
@@ -72,6 +72,7 @@ export default Vue.extend({
       if (this.disabled === false) {
         // @ts-ignore
         this.$refs.marker!.setLatLng([ev.latlng.lat, ev.latlng.lng])
+
         this.$emit('update:lat', ev.latlng.lat)
         this.$emit('update:lng', ev.latlng.lng)
       }

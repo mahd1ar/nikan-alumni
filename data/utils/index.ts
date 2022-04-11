@@ -121,8 +121,8 @@ export class BioHandler {
   static decompose(bio: string) {
 
     const [biography, urls = ""] = bio.split(this.delimiter);
-
-    type supportedSocialMediasType = typeof this.supportedSocialMedias[number]
+    const x = this.supportedSocialMedias
+    type supportedSocialMediasType = typeof x[number]
 
     const socialMedias = this.supportedSocialMedias.reduce((a, v) => ({ ...a, [v]: "" }), {} as { [K in supportedSocialMediasType]: string })
 
@@ -139,6 +139,29 @@ export class BioHandler {
   }
 }
 
+export class LocationHandler {
+  static decompose(langlat: string) {
+    const res = langlat.split(",").map(i => i.trim()).filter(Boolean)
+    if (res.length === 2) {
+      if (parseFloat(res[0]) && parseFloat(res[1]))
+        return {
+          lat: parseFloat(res[0]),
+          lng: parseFloat(res[1])
+        }
+
+    }
+
+    return {
+      lat: 0,
+      lng: 0
+    }
+  }
+
+  static compose(input: { lng: number, lat: number }): string {
+    return input.lat + "," + input.lng
+  }
+
+}
 
 // function jalali_to_gregorian(jy, jm, jd) {
 //   var sal_a, gy, gm, gd, days;

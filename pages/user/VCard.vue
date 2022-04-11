@@ -29,10 +29,7 @@
           </div>
 
           <div class="my-3 min-h-[120px]">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic ullam
-            sapiente unde aliquam repellat dolores deleniti modi qui! Ex,
-            itaque. Totam praesentium porro culpa eius explicabo deleniti
-            doloremque saepe asperiores.
+            {{ user.bio }}
           </div>
         </div>
         <div class="h-full bg-slate-100 px-7 pb-7">
@@ -61,7 +58,10 @@
                 </svg>
               </div>
 
-              <div class="relative px-2 text-slate-700">
+              <a
+                :href="'tel:' + user.mobile"
+                class="relative px-2 text-slate-700"
+              >
                 <span
                   class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
@@ -82,8 +82,8 @@
                     />
                   </svg>
                 </span>
-                <span> 09101214368 </span>
-              </div>
+                <span> {{ user.mobile }} </span>
+              </a>
             </div>
 
             <div
@@ -105,11 +105,11 @@
                 </svg>
               </div>
 
-              <div class="relative px-2 text-slate-700">
+              <a href="tel:02188344345" class="relative px-2 text-slate-700">
                 <span
                   class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
-                  <span> تماس با تلفن همراه </span>
+                  <span> تماس با تلفن محل کار </span>
                   <svg
                     class="relative top-0.5"
                     xmlns="http://www.w3.org/2000/svg"
@@ -126,8 +126,8 @@
                     />
                   </svg>
                 </span>
-                <span> 09101214368 </span>
-              </div>
+                <span> 02188344345 </span>
+              </a>
             </div>
 
             <div
@@ -149,7 +149,10 @@
                 </svg>
               </div>
 
-              <div class="relative px-2 text-slate-700">
+              <a
+                :href="`mailto:${user.email}`"
+                class="relative px-2 text-slate-700"
+              >
                 <span
                   class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
@@ -173,9 +176,9 @@
                 <span
                   class="inline-block w-full overflow-hidden text-ellipsis whitespace-nowrap"
                 >
-                  a.mahdiyar7@yahoo.com سیشصثبصضثبصثب صثبصثبصثب
+                  {{ user.email }}
                 </span>
-              </div>
+              </a>
             </div>
 
             <div
@@ -248,59 +251,30 @@
                 </svg>
               </div>
 
-              <div class="relative px-2 text-slate-700">
+              <div
+                v-if="
+                  user.jobLocation &&
+                  user.jobLocation.lat !== 0 &&
+                  user.jobLocation.lng !== 0
+                "
+                class="relative px-2 text-slate-700"
+              >
                 <span
                   class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
-                  <span> نشانی محل کار </span>
+                  <span> آدرس محل کار </span>
                 </span>
-                <span> ستیدنستدی سرنی نس ن سنت شدزشصم نشرتثرش </span>
+                <!-- <span> ستیدنستدی سرنی نس ن سنت شدزشصم نشرتثرش </span> -->
               </div>
             </div>
 
             <div class="h-72 py-5 px-3">
-              <client-only>
-                <l-map
-                  style="height: 100%"
-                  :zoom="11"
-                  :center="[35.826165, 50.964831]"
-                  @click="clickmap"
-                >
-                  <l-tile-layer
-                    url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-                  ></l-tile-layer>
-                  <l-marker ref="marker" :lat-lng="marker_lat_lng">
-                    <l-icon>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        style="
-                          transform: translate3d(50%, -100%, 0px);
-                          position: relative;
-                          right: 4px;
-                          top: 4px;
-                          stroke: white;
-                        "
-                        class="h-8 w-8 shrink-0 text-cyan-400"
-                        aria-hidden="true"
-                        role="img"
-                        width="1em"
-                        height="1em"
-                        preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 32 32"
-                      >
-                        <path
-                          fill="none"
-                          d="m16 7l1.912 3.667l4.088.506l-3 2.753l.6 4.074l-3.6-2.292L12.4 18l.6-4.074l-3-2.753l4.2-.506L16 7z"
-                        />
-                        <path
-                          fill="currentColor"
-                          d="M16 2A11.013 11.013 0 0 0 5 13a10.889 10.889 0 0 0 2.216 6.6s.3.395.349.452L16 30l8.439-9.953c.044-.053.345-.447.345-.447l.001-.003A10.885 10.885 0 0 0 27 13A11.013 11.013 0 0 0 16 2Zm3.6 16L16 15.709L12.4 18l.6-4.074l-3-2.753l4.2-.507L16 7l1.912 3.667l4.088.506l-3 2.753Z"
-                        />
-                      </svg>
-                    </l-icon>
-                  </l-marker>
-                </l-map>
-              </client-only>
+              <map-picker
+                :lat="user.jobLocation.lat"
+                :lng="user.jobLocation.lng"
+                :zoom="13"
+                :disabled="true"
+              ></map-picker>
             </div>
           </div>
         </div>
@@ -317,12 +291,12 @@
             />
           </div>
           <div class="my-6 text-center text-3xl font-semibold text-[#44566c]">
-            مهدیار اناری
+            {{ user.firstName + ' ' + user.lastName }}
           </div>
           <div
             class="my-3 flex items-center justify-center rounded-3xl bg-slate-100 py-2 px-4 text-center text-[#44566c]"
           >
-            وب دولوپر
+            {{ user.occupation }}
           </div>
           <div
             class="mb-3 flex items-center justify-center gap-3 py-3 text-gray-700"
@@ -413,7 +387,7 @@
                 />
               </g>
             </svg>
-            <a class="overflow-hidden text-ellipsis">a.mahdiyar@yahoo.com</a>
+            <a class="overflow-hidden text-ellipsis">{{ user.email }}</a>
           </div>
           <div class="flex items-center gap-1">
             <svg
@@ -429,7 +403,7 @@
                 d="M9 14a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H9ZM7 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7ZM6 4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4Z"
               />
             </svg>
-            <span>091012124368</span>
+            <span>{{ user.mobile }}</span>
           </div>
           <div class="flex items-center gap-1">
             <svg
@@ -445,7 +419,7 @@
                 d="m6.987 2.066l-.717.216a3.5 3.5 0 0 0-2.454 2.854c-.297 2.068.367 4.486 1.968 7.259c1.597 2.766 3.355 4.548 5.29 5.328a3.5 3.5 0 0 0 3.715-.705l.542-.514a2 2 0 0 0 .247-2.623l-1.356-1.88a1.5 1.5 0 0 0-1.655-.556l-2.051.627l-.053.01c-.226.033-.748-.456-1.398-1.582c-.68-1.178-.82-1.867-.633-2.045l1.043-.973a2.497 2.497 0 0 0 .575-2.85l-.662-1.471a2 2 0 0 0-2.4-1.095Zm1.49 1.505l.66 1.471a1.497 1.497 0 0 1-.344 1.71l-1.046.974C7.078 8.36 7.3 9.442 8.2 11c.846 1.466 1.618 2.19 2.448 2.064l.124-.026l2.088-.637a.5.5 0 0 1 .552.185l1.356 1.88a1 1 0 0 1-.123 1.312l-.543.514a2.5 2.5 0 0 1-2.653.503c-1.698-.684-3.303-2.311-4.798-4.9C5.152 9.3 4.545 7.093 4.806 5.278a2.5 2.5 0 0 1 1.753-2.039l.717-.216a1 1 0 0 1 1.2.548Z"
               />
             </svg>
-            <span>091012124368</span>
+            <span>02188344345</span>
           </div>
 
           <button
@@ -461,58 +435,95 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import MapPicker from '~/components/form/MapPicker.vue'
+import { UserFullProfile } from '~/data/GlobslTypes'
+import { BioHandler, LocationHandler } from '~/data/utils'
+import { Dict } from '~/data/utils/dictionary'
+export interface Avatar_url {
+  24: string
+  48: string
+  96: string
+}
+
+export interface Acf {
+  occupation: string
+  job_location: string
+  mobile: string
+  gen: string
+  premium: boolean
+}
+
+export interface Self {
+  href: string
+}
+
+export interface Collection {
+  href: string
+}
+
+export interface _link {
+  self: Self[]
+  collection: Collection[]
+}
+
+export interface WPRestuser {
+  id: number
+  name: string
+  url: string
+  description: string
+  link: string
+  slug: string
+  avatar_urls: Avatar_url
+  meta: any[]
+  acf: Acf
+  _links: _link
+}
 
 export default Vue.extend({
   layout: 'RawLayout',
+  components: {
+    MapPicker,
+  },
   data() {
     return {
-      marker_lat_lng: [35.826165, 50.964831] as [number, number],
+      user: {
+        jobLocation: { lat: 0, lng: 0 },
+      } as UserFullProfile,
     }
   },
-  mounted() {
-    // @ts-ignore
-    window.l = this
-    // let map
-    // let pin
-    // const tilesURL = 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-    // const mapAttrib =
-    //   '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
-    // function MapCreate() {
-    //   // create map instance
-    //   if (!(typeof map == 'object')) {
-    //     map = L.map('map', {
-    //       center: [40, 0],
-    //       zoom: 3,
-    //     })
-    //   } else {
-    //     map.setZoom(3).panTo([40, 0])
-    //   }
-    //   // create the tile layer with correct attribution
-    //   L.tileLayer(tilesURL, {
-    //     attribution: mapAttrib,
-    //     maxZoom: 19,
-    //   }).addTo(map)
-    // }
-    // map.on('click', function (ev) {
-    // if (typeof pin == 'object') {
-    //   pin.setLatLng(ev.latlng)
-    // } else {
-    //   pin = L.marker(ev.latlng, { riseOnHover: true, draggable: true })
-    //   pin.addTo(map)
-    //   pin.on('drag', function (ev) {
-    //     console.log(ev.latlng.lng)
-    //     console.log(ev.latlng.lat)
-    //   })
-    // }
-    // })
-  },
-  methods: {
-    clickmap(ev: any) {
-      // @ts-ignore
-      this.$refs.marker!.setLatLng([ev.latlng.lat, ev.latlng.lng])
+  async fetch() {
+    try {
+      // TODO REFORM THIS URL AND ITS BACKEND
+      const { data } = await this.$axios.get<WPRestuser[]>(
+        'https://nikan-alumni.org/wp-json/wp/v2/users?search=mahdiyaranari'
+      )
+      this.user.firstName = 'مهدیار'
+      this.user.lastName = 'اناری'
+      this.user.email = 'a.mahdiyar7@yahoo.com'
 
-      // this.$nuxt.$on emit
-    },
+      const { biography, socialMedias } = BioHandler.decompose(
+        data[0].description
+      )
+
+      this.user.socialMedias = {
+        instagram: socialMedias.instagram || '',
+        linkedin: socialMedias.linkedin || '',
+        twitter: socialMedias.twitter || '',
+      }
+
+      this.user.bio = biography || ''
+
+      this.user.mobile = data[0].acf.mobile || ''
+      this.user.occupation = data[0].acf.occupation || ''
+      const latlng = LocationHandler.decompose(data[0].acf.job_location)
+      this.user.jobLocation.lat = latlng.lat
+      this.user.jobLocation.lng = latlng.lng
+
+      this.user.website = data[0].url
+    } catch (error) {
+      // console.log(error)
+      this.$nuxt.error({ statusCode: 404, message: Dict.P404 })
+    }
   },
 })
 </script>
