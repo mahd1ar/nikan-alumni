@@ -8359,6 +8359,7 @@ export type UpdateUserInput = {
   occupation?: InputMaybe<Scalars['String']>;
   /** A string that contains the plain text password for the user. */
   password?: InputMaybe<Scalars['String']>;
+  phone?: InputMaybe<Scalars['String']>;
   /** If true, this will refresh the users JWT secret. */
   refreshJwtUserSecret?: InputMaybe<Scalars['Boolean']>;
   /** The date the user registered. Format is Y-m-d H:i:s. */
@@ -9066,6 +9067,7 @@ export type User_UserAcf = AcfFieldGroup & {
   jobLocation?: Maybe<Scalars['String']>;
   mobile?: Maybe<Scalars['String']>;
   occupation?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
   premium?: Maybe<Scalars['Boolean']>;
 };
 
@@ -9579,6 +9581,7 @@ export type UpdateUserMutationVariables = Exact<{
   lastName?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   mobile?: InputMaybe<Scalars['String']>;
+  phone?: InputMaybe<Scalars['String']>;
   jobLocation?: InputMaybe<Scalars['String']>;
   clientMutationId: Scalars['String'];
 }>;
@@ -9634,7 +9637,7 @@ export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'R
 export type FetchMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, url?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, user_acf?: { __typename?: 'User_UserAcf', occupation?: string | null, mobile?: string | null, jobLocation?: string | null, gen?: string | null } | null } | null };
+export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, url?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, user_acf?: { __typename?: 'User_UserAcf', occupation?: string | null, mobile?: string | null, jobLocation?: string | null, gen?: string | null, phone?: string | null } | null } | null };
 
 export type CategoryAttributesFragment = { __typename?: 'Category', id: string, databaseId: number, name?: string | null, slug?: string | null, count?: number | null, description?: string | null };
 

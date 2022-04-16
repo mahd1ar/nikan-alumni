@@ -38,6 +38,7 @@ export interface UserFullProfile {
   avatar: string
   occupation: string
   mobile: string
+  phone: string
   website: string
   jobLocation: {
     lat: number

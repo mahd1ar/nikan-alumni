@@ -17,6 +17,7 @@ query fetchMe {
       mobile
       jobLocation
       gen
+      phone
     }
   }
 }

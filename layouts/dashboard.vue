@@ -3,6 +3,23 @@
     dir="rtl"
     class="relative flex min-h-screen flex-col justify-start overflow-hidden"
   >
+    <!-- DEBUGG -->
+    <div
+      v-if="$nuxt.context.isDev"
+      class="fixed top-10 left-10 z-50 opacity-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
+    >
+      <div
+        class="p-1"
+        :class="{ 'bg-red-200': !isLoggedIn, 'bg-green-200': isLoggedIn }"
+      >
+        {{ isLoggedIn ? 'logged in' : 'logged out' }}
+      </div>
+      <span class="hidden sm:block">sm</span>
+      <span class="hidden md:block">md</span>
+      <span class="hidden lg:block">lg</span>
+      <span class="hidden xl:block">xl</span>
+      <span class="hidden 2xl:block">2xl</span>
+    </div>
     <div class="border-b-2">
       <nav class="md:mx-w-6xl p-4 md:container md:mx-auto md:py-4 xl:px-0">
         <div class="hidden lg:flex lg:items-center lg:justify-between">
@@ -237,8 +254,12 @@
             class="absolute top-14 left-0 right-0 z-20 w-full rounded-md border bg-white"
           >
             <ul class="p-4">
-              <li class="rounded px-4 py-2 hover:bg-gray-200">
-                <a href="#" class="flex items-center gap-4">
+              <li
+                v-for="({ title, link }, index) in nav"
+                :key="index"
+                class="rounded px-4 py-2 hover:bg-gray-200"
+              >
+                <nuxt-link :to="link" href="#" class="flex items-center gap-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-3 w-3"
@@ -253,65 +274,8 @@
                       d="M9 5l7 7-7 7"
                     />
                   </svg>
-                  My Account
-                </a>
-              </li>
-              <li class="rounded px-4 py-2 hover:bg-gray-200">
-                <a href="#" class="flex items-center gap-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-3 w-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                  Transactions
-                </a>
-              </li>
-              <li class="rounded px-4 py-2 hover:bg-gray-200">
-                <a href="#" class="flex items-center gap-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-3 w-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                  Cards
-                </a>
-              </li>
-              <li class="rounded px-4 py-2 hover:bg-gray-200">
-                <a href="#" class="flex items-center gap-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-3 w-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                  Offers
-                </a>
+                  {{ title }}
+                </nuxt-link>
               </li>
             </ul>
           </div>

@@ -287,9 +287,10 @@
           <div
             class="relative mx-auto flex h-20 max-w-xs items-center justify-center"
           >
+            <!-- src="https://avatars.githubusercontent.com/u/32998122?v=4" -->
             <img
+              :src="user.avatar"
               class="absolute w-40 h-40 bottom-0 rounded-3xl"
-              src="https://avatars.githubusercontent.com/u/32998122?v=4"
               alt=""
             />
           </div>
@@ -426,6 +427,7 @@
           </div>
 
           <a
+            download
             target="_blank"
             :href="contact"
             class="cursor-pointer rounded-lg bg-cyan-400 py-2 text-lg font-bold text-cyan-50 hover:bg-cyan-500 text-center"
@@ -439,6 +441,7 @@
 </template>
 
 <script lang="ts">
+import { Stringifier } from 'postcss'
 import Vue from 'vue'
 import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
@@ -499,13 +502,19 @@ export default Vue.extend({
   },
   async fetch() {
     try {
+      const email = this.$route.query.email as
+        | string
+        | 'mahdiyaranari@gmail.com'
       // TODO REFORM THIS URL AND ITS BACKEND
       const { data } = await this.$axios.get<WPRestuser[]>(
-        'https://nikan-alumni.org/wp-json/wp/v2/users?search=mahdiyaranari'
+        'https://nikan-alumni.org/wp-json/wp/v2/users?search=' +
+          encodeURIComponent(email)
       )
-      this.user.firstName = 'مهدیار'
-      this.user.lastName = 'اناری'
-      this.user.email = 'a.mahdiyar7@yahoo.com'
+      this.user.firstName = data[0].name
+      this.user.lastName = ''
+      this.user.email = email // 'a.mahdiyar7@yahoo.com'
+
+      this.user.avatar = data[0].avatar_urls['96']
 
       const { biography, socialMedias } = BioHandler.decompose(
         data[0].description

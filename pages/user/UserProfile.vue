@@ -107,15 +107,15 @@
             id="page-one"
             :key="activeTabIndex"
             v-if="activeTabIndex === 0"
-            class="flex items-start gap-2"
+            class="flex flex-col md:flex-row items-start gap-2"
           >
             <user-info-card
               v-if="$fetchState.pending === false"
-              class="w-7/12"
+              class="w-full md:w-7/12"
               :user-info="edituser"
             />
 
-            <div class="w-5/12 overflow-hidden">
+            <div class="w-full md:w-5/12 overflow-hidden">
               <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">
                   رویداد های من
@@ -254,6 +254,7 @@ import { BioHandler, toIndiaDigits, wordpressDateToJalali } from '~/data/utils'
 import UserInfoCard from '~/components/user-profile/UserInfoCard.vue'
 import updateUserMutationgql from '@/apollo/mutation/update-user.gql'
 import UserInfoEdit from '~/components/form/UserInfoEdit.vue'
+import { Dict } from '~/data/utils/dictionary'
 
 export default Vue.extend({
   components: { UserInfoCard, UserInfoEdit },
@@ -284,6 +285,7 @@ export default Vue.extend({
       userTemplate.lastName = data.viewer.lastName || ''
       userTemplate.email = data.viewer.email || ''
       userTemplate.mobile = data.viewer.user_acf?.mobile || ''
+      userTemplate.phone = data.viewer.user_acf?.phone || ''
       userTemplate.occupation = data.viewer.user_acf?.occupation || ''
       userTemplate.avatar = data.viewer.avatar?.url || ''
       userTemplate.gen =
@@ -447,6 +449,11 @@ export default Vue.extend({
         updateUserMutationVariables.mobile = this.edituser.mobile
       }
 
+      if (this.showuser.phone !== this.edituser.phone) {
+        contentChangedFlag = true
+        updateUserMutationVariables.phone = this.edituser.phone
+      }
+
       if (this.showuser.occupation !== this.edituser.occupation) {
         contentChangedFlag = true
         updateUserMutationVariables.occupation = this.edituser.occupation
@@ -457,6 +464,7 @@ export default Vue.extend({
 
         return updateUserMutationVariables
       } else {
+        this.$about.info({ title: Dict.form_no_changes })
         alert('nothing changed!')
         return false
       }
@@ -464,7 +472,7 @@ export default Vue.extend({
     async update() {
       const mutVar = this.generateOutput()
       if (mutVar === false) return
-
+      // console.log(mutVar)
       try {
         await this.$apollo.mutate({
           mutation: updateUserMutationgql,
