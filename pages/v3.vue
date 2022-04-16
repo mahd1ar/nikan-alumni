@@ -11,7 +11,7 @@
     </div> -->
 
     <!-- hero section -->
-    <div class="flex w-full flex-col">
+    <div class="flex w-full flex-col z-20">
       <div class="relative flex h-full w-full flex-col">
         <div class="relative h-full">
           <!-- <img
@@ -21,21 +21,21 @@
           /> -->
           <video
             class="absolute top-0 left-0 h-full w-full object-cover object-bottom"
-            src="test/output.webm"
+            src="test/hero.webm"
             muted
             loop
             autoplay
           ></video>
           <div class="relative top-0 left-0 h-full w-full">
             <div class="relative h-full w-full">
-              <home-navigation></home-navigation>
+              <home-navigation ref="heroNav" class="sticky"></home-navigation>
               <div
                 class="m-blur-background absolute top-0 left-0 h-full w-full"
               ></div>
               <div
                 class="container relative mx-auto flex h-full flex-row-reverse"
               >
-                <div class="flex-center w-5/12">
+                <div class="flex-center w-6/12">
                   <div
                     class="my-24 flex flex-col justify-center gap-6 rounded-md bg-slate-900 bg-opacity-0 p-4"
                   >
@@ -64,15 +64,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex-center w-7/12">
+                <div class="flex-center w-6/12">
                   <svg
+                    id="nikanlogosvg"
                     version="1.1"
-                    id="Layer_1"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px"
                     y="0px"
-                    class="h-80 w-80 transition-all"
+                    class="h-80 w-80 transition-all hidden"
                     viewBox="0 0 612 792"
                     style="enable-background: new 0 0 612 792"
                     xml:space="preserve"
@@ -355,6 +355,12 @@ import { timeout } from '~/data/utils'
 
 export default Vue.extend({
   name: 'IndexPage',
+  // beforeRouteLeave(to, from, next) {
+  //   next()
+  // },
+  beforeDestroy() {
+    this.$store.dispatch('navigation/toggleDarkMenu', true)
+  },
   data() {
     return {
       menu: [
@@ -461,16 +467,43 @@ HSBC Bank Middle East
     }
   },
   async mounted() {
+    const options = {
+      // root: document.querySelector('#scrollArea'),
+      rootMargin: '100px',
+      threshold: 1.0,
+    }
+
+    const observer = new IntersectionObserver((entreis) => {
+      if (entreis[0].isIntersecting) {
+        const video = document.querySelector('video')!
+        video.play()
+        this.$store.dispatch('navigation/toggleDarkMenu', false)
+      } else {
+        const video = document.querySelector('video')!
+        video.pause()
+        this.$store.dispatch('navigation/toggleDarkMenu', true)
+      }
+    }, options)
+
+    type NavRef = InstanceType<typeof Vue>
+
+    observer.observe((this.$refs.heroNav as NavRef).$el!)
+
+    await timeout(10000)
     anime({
       targets: '.st0,.st1,.st2',
       strokeDashoffset: [anime.setDashoffset, 0],
       easing: 'easeInOutSine',
       // direction: 'reverse',
+
       async begin() {
-        document.querySelector('.st0').style.transition = 'all ease 6s'
-        document.querySelector('.st0').style.fill = '#ffffff00'
+        const svg = document.querySelector('#nikanlogosvg')! as HTMLElement
+        svg.classList.remove('hidden')
+        const st0 = document.querySelector('.st0')! as HTMLElement
+        st0.style.transition = 'all ease 6s'
+        st0.style.fill = '#ffffff00'
         await timeout(5000)
-        document.querySelector('.st0').style.fill = '#06b6d488'
+        st0.style.fill = '#06b6d488'
       },
       duration: 11500,
       delay: (_, i) => {
@@ -478,49 +511,47 @@ HSBC Bank Middle East
       },
     })
 
-    await timeout(9000)
+    // return
+    // const tl = anime.timeline({
+    //   autoplay: false,
+    //   loop: true,
+    //   direction: 'reverse',
 
-    return
-    const tl = anime.timeline({
-      autoplay: false,
-      loop: true,
-      direction: 'reverse',
+    //   // direction: 'alternate',
+    //   // duration: 15000,
+    //   loopComplete: async (i) => {
+    //     i.pause()
+    //     await timeout(20000)
+    //     i.play()
+    //   },
+    // })
+    // tl.add({
+    //   targets: '#Layer_1 path',
+    //   strokeDashoffset: [0, anime.setDashoffset],
+    //   easing: 'easeInOutSine',
 
-      // direction: 'alternate',
-      // duration: 15000,
-      loopComplete: async (i) => {
-        i.pause()
-        await timeout(20000)
-        i.play()
-      },
-    })
-    tl.add({
-      targets: '#Layer_1 path',
-      strokeDashoffset: [0, anime.setDashoffset],
-      easing: 'easeInOutSine',
+    //   duration: 6500,
+    //   // update(i) {
+    //   // console.log(i.progress)
+    //   // console.log(i.direction)
+    //   // },
+    //   begin() {
+    //     console.log('begin')
+    //     document.querySelector('.st0').style.transition = 'all ease 6s'
+    //     document.querySelector('.st0').style.fill = '#ffffff00'
+    //   },
+    //   loopComplete() {},
+    //   complete: () => {
+    //     document.querySelector('.st0').style.fill = '#06b6d488'
+    //     // document.querySelector('.st0').style.fill = 'green'
+    //     // const path = document.querySelector('.st0') as HTMLElement
+    //     // path.style.fill = '#26b7c498'
+    //   },
 
-      duration: 6500,
-      // update(i) {
-      // console.log(i.progress)
-      // console.log(i.direction)
-      // },
-      begin() {
-        console.log('begin')
-        document.querySelector('.st0').style.transition = 'all ease 6s'
-        document.querySelector('.st0').style.fill = '#ffffff00'
-      },
-      loopComplete() {},
-      complete: () => {
-        document.querySelector('.st0').style.fill = '#06b6d488'
-        // document.querySelector('.st0').style.fill = 'green'
-        // const path = document.querySelector('.st0') as HTMLElement
-        // path.style.fill = '#26b7c498'
-      },
-
-      delay: (_, i) => {
-        return i * 150
-      },
-    })
+    //   delay: (_, i) => {
+    //     return i * 150
+    //   },
+    // })
     // .add({
     //   targets: '#processor,#pixel_heart,#Text',
     //   scale: 5,
@@ -532,13 +563,13 @@ HSBC Bank Middle East
     //   },
     // })
     // tl.seek(6000)
-    tl.play()
+    // tl.play()
 
-    setInterval(() => {
-      const n = this.counter.fname
-      // console.log(this.counter.fst)
-      this.counter.fname = n > 0 ? n - 1 : 59
-    }, 1000)
+    // setInterval(() => {
+    //   const n = this.counter.fname
+    //   // console.log(this.counter.fst)
+    //   this.counter.fname = n > 0 ? n - 1 : 59
+    // }, 1000)
   },
 })
 </script>

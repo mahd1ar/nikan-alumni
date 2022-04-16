@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- DEBUGG -->
-    <!-- <div
+    <div
       v-if="$nuxt.context.isDev"
       class="fixed top-10 left-10 z-50 opacity-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
     >
@@ -16,7 +16,7 @@
       <span class="hidden lg:block">lg</span>
       <span class="hidden xl:block">xl</span>
       <span class="hidden 2xl:block">2xl</span>
-    </div> -->
+    </div>
 
     <!-- spinnet toast -->
     <client-only>
@@ -154,10 +154,11 @@
 
     <div class="flex min-h-screen flex-col">
       <transition name="animation-rollup">
+        <!-- && $route.path !== '/v3' -->
         <nav
-          v-if="$route.path !== '/' && $route.path !== '/v3'"
+          v-if="showDarkMenu && $route.path !== '/'"
           dir="rtl"
-          class="relative bg-gray-800"
+          class="sticky top-0 bg-gray-800 z-10"
         >
           <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
@@ -464,6 +465,7 @@ export default Vue.extend({
       isLoggedIn: 'authentication/isLoggedIn',
       menu: 'navigation/menu',
       isOpenMobileMenu: 'navigation/isOpenMobileMenu',
+      showDarkMenu: 'navigation/showDarkMenu',
     }),
   },
   created() {
@@ -608,13 +610,14 @@ export default Vue.extend({
 }
 
 // TODO : impl this later V
-// .animation-rollup-enter-active,
-// .animation-rollup-leave-active {
-
-// transition-delay: calc(var(--count) * 75ms);
-// }
-// .animation-rollup-enter,
-// .animation-rollup-leave-to {
-
-// }
+.animation-rollup-enter-active,
+.animation-rollup-leave-active {
+  transition: all 500ms ease;
+  transition-delay: calc(var(--count) * 75ms);
+  top: 0%;
+}
+.animation-rollup-enter,
+.animation-rollup-leave-to {
+  top: -100%;
+}
 </style>

@@ -151,17 +151,17 @@
                     type="checkbox"
                   />
                 </div>
-                {{ editUser.socialMedias }}
-                {{ editUser.jobLocation.lat }}
-                {{ editUser.jobLocation.lng }}
-                <transition name="v-openwindow">
-                  <map-picker
-                    v-if="location.show"
-                    :lat.sync="editUser.jobLocation.lat"
-                    :lng.sync="editUser.jobLocation.lng"
-                    :disabled="false"
-                  ></map-picker>
-                </transition>
+
+                <map-picker
+                  v-if="location.show"
+                  :lat.sync="editUser.jobLocation.lat"
+                  :lng.sync="editUser.jobLocation.lng"
+                  :view-from="[
+                    editUser.jobLocation.lat,
+                    editUser.jobLocation.lng,
+                  ]"
+                  :disabled="false"
+                ></map-picker>
 
                 <validation-provider
                   v-slot="{ errors }"
@@ -338,26 +338,6 @@ configure({
 const tehranLocation = {
   x: 35.6967329,
   y: 51.2097332,
-}
-
-export class cloneable {
-  public static deepCopy<T>(source: T): T {
-    return Array.isArray(source)
-      ? source.map((item) => this.deepCopy(item))
-      : source instanceof Date
-      ? new Date(source.getTime())
-      : source && typeof source === 'object'
-      ? Object.getOwnPropertyNames(source).reduce((o, prop) => {
-          Object.defineProperty(
-            o,
-            prop,
-            Object.getOwnPropertyDescriptor(source, prop)!
-          )
-          o[prop] = this.deepCopy((source as { [key: string]: any })[prop])
-          return o
-        }, Object.create(Object.getPrototypeOf(source)))
-      : (source as T)
-  }
 }
 
 export default Vue.extend({

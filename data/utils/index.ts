@@ -120,6 +120,12 @@ export class BioHandler {
 
   static decompose(bio: string) {
 
+    if (bio.search(this.delimiter) === -1)
+      return {
+        biography: bio,
+        socialMedias: { instagram: "", linkedin: "", twitter: "" }
+      }
+
     const [biography, urls = ""] = bio.split(this.delimiter);
     const x = this.supportedSocialMedias
     type supportedSocialMediasType = typeof x[number]

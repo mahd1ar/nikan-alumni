@@ -24,7 +24,7 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  nuxtServerInit({ dispatch }, { app }) {
+  nuxtServerInit({ dispatch }, { app, route }) {
     const exp = app.$cookies.get(Authentication.expiration)
 
     if (exp && parseInt(exp) - Date.now() > 0) {
@@ -42,6 +42,10 @@ export const actions: ActionTree<RootState, RootState> = {
         console.error('there is no cookie ', error)
         dispatch('authentication/clearUser')
       }
+    }
+
+    if (route.path === '/v3' || route.path === '/') {
+      dispatch('navigation/toggleDarkMenu', false)
     }
   },
   loadingStart({ commit }) {

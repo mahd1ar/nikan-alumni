@@ -471,7 +471,7 @@ export default Vue.extend({
           variables: mutVar,
         })
 
-        this.$about.success({ title: 'اطلاعات با موفقیت به روز شد' })
+        this.$about.success({ title: 'اطلاعات با موفقیت بروز شد' })
       } catch (error) {
         alert(error)
       }

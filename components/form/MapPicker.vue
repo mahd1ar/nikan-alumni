@@ -5,7 +5,7 @@
         ref="map"
         style="height: 100%"
         :zoom="zoom"
-        :center="center"
+        :center="viewFrom && viewFrom[0] ? [viewFrom[0], viewFrom[1]] : center"
         @click="changeLocation"
       >
         <l-tile-layer
@@ -47,13 +47,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
 export default Vue.extend({
   props: {
     disabled: { type: Boolean, default: true },
     lat: { type: Number, required: true },
     lng: { type: Number, required: true },
     zoom: { type: Number, default: 11 },
+    viewFrom: {
+      type: Array as PropType<number[] | undefined>,
+      default: undefined,
+    },
   },
   data() {
     return {
@@ -63,6 +67,12 @@ export default Vue.extend({
   mounted() {
     // @ts-ignore
     window.map = this
+    // if(this.viewFrom && this.viewFrom[0]){
+
+    //   this.center.push(this.viewFrom)
+    //   this.center.push(this.lng)
+
+    //   }else{
 
     this.center.push(this.lat)
     this.center.push(this.lng)
@@ -76,6 +86,10 @@ export default Vue.extend({
         this.$emit('update:lat', ev.latlng.lat)
         this.$emit('update:lng', ev.latlng.lng)
       }
+    },
+    changeView(x: number, y: number) {
+      this.center[0] = x
+      this.center[1] = y
     },
   },
 })

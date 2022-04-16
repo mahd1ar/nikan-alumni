@@ -98,7 +98,6 @@ export default Vue.extend({
       }
     },
     calcCountDown() {
-      console.log('time')
       const startingFrom = ~~(new Date(this.startingFrom).getTime() / 1000)
       const now = ~~(Date.now() / 1000)
       if (startingFrom < now) {

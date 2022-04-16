@@ -173,9 +173,13 @@ enum SVG {
 
 enum Mutations {
   toggleMobileMenu = 'TOGGLE_MOBILE_MENU',
+  toggleDarkMenu = 'TOGGLE_DARK_MENU',
 }
 
 const initialState = {
+  darkMenu: {
+    show: true
+  },
   mobileMenu: {
     isOpen: false,
   },
@@ -339,11 +343,15 @@ export type RootState = ReturnType<typeof state>
 export const getters: GetterTree<RootState, RootState> = {
   menu: (state) => state.menu,
   isOpenMobileMenu: (state) => state.mobileMenu.isOpen,
+  showDarkMenu: (state) => state.darkMenu.show,
 }
 
 export const mutations: MutationTree<RootState> = {
   [Mutations.toggleMobileMenu]: (state, nval: boolean) => {
     state.mobileMenu.isOpen = nval
+  },
+  [Mutations.toggleDarkMenu]: (state, nval: boolean) => {
+    state.darkMenu.show = nval
   },
 }
 
@@ -353,5 +361,13 @@ export const actions: ActionTree<RootState, RootState> = {
   },
   openMobileMenu: ({ commit }) => {
     commit(Mutations.toggleMobileMenu, true)
+  },
+
+  toggleDarkMenu: ({ commit, state }, val: boolean | undefined) => {
+    if (typeof val === 'undefined') {
+
+      commit(Mutations.toggleDarkMenu, !state.darkMenu.show)
+    } else
+      commit(Mutations.toggleDarkMenu, val)
   },
 }
