@@ -271,7 +271,7 @@
               </div>
             </div>
 
-            <div v-if="$fetchState.pending === false" class="h-72 py-5 px-3">
+            <div v-if="loaded === false" class="h-72 py-5 px-3">
               <map-picker
                 :lat="user.jobLocation.lat"
                 :lng="user.jobLocation.lng"
@@ -441,7 +441,6 @@
 </template>
 
 <script lang="ts">
-import { Stringifier } from 'postcss'
 import Vue from 'vue'
 import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
@@ -495,53 +494,63 @@ export default Vue.extend({
   },
   data() {
     return {
+      loaded: 0,
       user: {
         jobLocation: { lat: 0, lng: 0 },
       } as UserFullProfile,
     }
   },
-  async fetch() {
-    try {
-      const email = this.$route.query.email as
-        | string
-        | 'mahdiyaranari@gmail.com'
-
-      console.log(email)
-      // TODO REFORM THIS URL AND ITS BACKEND
-      const { data } = await this.$axios.get<WPRestuser[]>(
-        'https://nikan-alumni.org/wp-json/wp/v2/users?search=' +
-          encodeURIComponent(email)
-      )
-      this.user.firstName = data[0].name
-      this.user.lastName = ''
-      this.user.email = email // 'a.mahdiyar7@yahoo.com'
-
-      this.user.avatar = data[0].avatar_urls['96']
-
-      const { biography, socialMedias } = BioHandler.decompose(
-        data[0].description
-      )
-
-      this.user.socialMedias = {
-        instagram: socialMedias.instagram || '',
-        linkedin: socialMedias.linkedin || '',
-        twitter: socialMedias.twitter || '',
-      }
-
-      this.user.bio = biography || ''
-
-      this.user.mobile = data[0].acf.mobile || ''
-      this.user.occupation = data[0].acf.occupation || ''
-      const latlng = LocationHandler.decompose(data[0].acf.job_location)
-      this.user.jobLocation.lat = latlng.lat
-      this.user.jobLocation.lng = latlng.lng
-
-      this.user.website = data[0].url
-    } catch (error) {
-      // console.log(error)
-      this.$nuxt.error({ statusCode: 404, message: Dict.P404 })
-    }
+  mounted() {
+    this.fetchData()
   },
+  methods: {
+    async fetchData() {
+      this.loaded = 0
+      try {
+        const email = this.$route.query.email as
+          | string
+          | 'mahdiyaranari@gmail.com'
+
+        console.log(email)
+        // TODO REFORM THIS URL AND ITS BACKEND
+        const { data } = await this.$axios.get<WPRestuser[]>(
+          'https://nikan-alumni.org/wp-json/wp/v2/users?search=' +
+            encodeURIComponent(email)
+        )
+        this.user.firstName = data[0].name
+        this.user.lastName = ''
+        this.user.email = email // 'a.mahdiyar7@yahoo.com'
+
+        this.user.avatar = data[0].avatar_urls['96']
+
+        const { biography, socialMedias } = BioHandler.decompose(
+          data[0].description
+        )
+
+        this.user.socialMedias = {
+          instagram: socialMedias.instagram || '',
+          linkedin: socialMedias.linkedin || '',
+          twitter: socialMedias.twitter || '',
+        }
+
+        this.user.bio = biography || ''
+
+        this.user.mobile = data[0].acf.mobile || ''
+        this.user.occupation = data[0].acf.occupation || ''
+        const latlng = LocationHandler.decompose(data[0].acf.job_location)
+        this.user.jobLocation.lat = latlng.lat
+        this.user.jobLocation.lng = latlng.lng
+
+        this.user.website = data[0].url
+      } catch (error) {
+        // console.log(error)
+        this.$nuxt.error({ statusCode: 404, message: Dict.P404 })
+      } finally {
+        this.loaded = 1
+      }
+    },
+  },
+
   computed: {
     contact() {
       const query = new URLSearchParams()
