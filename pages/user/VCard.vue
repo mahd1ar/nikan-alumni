@@ -271,7 +271,7 @@
               </div>
             </div>
 
-            <div class="h-72 py-5 px-3">
+            <div v-if="$fetchState.pending === false" class="h-72 py-5 px-3">
               <map-picker
                 :lat="user.jobLocation.lat"
                 :lng="user.jobLocation.lng"
@@ -425,12 +425,12 @@
             <span>02188344345</span>
           </div>
 
-          <button
-            @click="addToContacts"
-            class="cursor-pointer rounded-lg bg-cyan-400 py-2 text-lg font-bold text-cyan-50 hover:bg-cyan-500"
+          <a
+            :href="contact"
+            class="cursor-pointer rounded-lg bg-cyan-400 py-2 text-lg font-bold text-cyan-50 hover:bg-cyan-500 text-center"
           >
             اضافه به مخاطبین
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -530,8 +530,8 @@ export default Vue.extend({
       this.$nuxt.error({ statusCode: 404, message: Dict.P404 })
     }
   },
-  methods: {
-    addToContacts() {
+  computed: {
+    contact() {
       const query = new URLSearchParams()
 
       if (this.user.firstName) query.set('firstname', this.user.firstName)
@@ -544,10 +544,27 @@ export default Vue.extend({
 
       if (this.user.occupation) query.set('occupation', this.user.occupation)
 
-      console.log(query.toString)
-
-      window.open('http://194.5.205.148:3000/?' + query.toString())
+      return 'http://194.5.205.148:3000/?' + query.toString()
     },
   },
+  // methods: {
+  //   addToContacts() {
+  //     const query = new URLSearchParams()
+
+  //     if (this.user.firstName) query.set('firstname', this.user.firstName)
+
+  //     if (this.user.lastName) query.set('lastname', this.user.lastName)
+
+  //     if (this.user.email) query.set('email', this.user.email)
+
+  //     if (this.user.mobile) query.set('mobile', this.user.mobile)
+
+  //     if (this.user.occupation) query.set('occupation', this.user.occupation)
+
+  //     console.log(query.toString)
+
+  //     window.open('http://194.5.205.148:3000/?' + query.toString())
+  //   },
+  // },
 })
 </script>
