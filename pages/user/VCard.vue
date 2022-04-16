@@ -505,6 +505,8 @@ export default Vue.extend({
       const email = this.$route.query.email as
         | string
         | 'mahdiyaranari@gmail.com'
+
+      console.log(email)
       // TODO REFORM THIS URL AND ITS BACKEND
       const { data } = await this.$axios.get<WPRestuser[]>(
         'https://nikan-alumni.org/wp-json/wp/v2/users?search=' +

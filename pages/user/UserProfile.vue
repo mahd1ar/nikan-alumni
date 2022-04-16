@@ -209,13 +209,13 @@
 
                   <nuxt-link
                     class="mt-4 flex flex-row-reverse items-center justify-center gap-2 text-gray-50"
-                    to="/user/vcard"
+                    to="/user/vcard?email=mahdiyaranari%40gmail.com"
                   >
                     <p
                       class="max-w-sm text-xs font-light leading-tight md:text-sm"
                     >
                       <code class="w-full">
-                        https://nikan-alumni.com/user/vcard/35
+                        https://nikan-alumni.com/user/vcard?email=mahdiyaranari%40gmail.com
                       </code>
                     </p>
                     <svg
