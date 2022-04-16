@@ -426,6 +426,7 @@
           </div>
 
           <a
+            target="_blank"
             :href="contact"
             class="cursor-pointer rounded-lg bg-cyan-400 py-2 text-lg font-bold text-cyan-50 hover:bg-cyan-500 text-center"
           >

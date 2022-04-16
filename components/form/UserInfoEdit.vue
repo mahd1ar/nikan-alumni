@@ -95,7 +95,31 @@
                     >
                   </div>
                 </validation-provider>
+                <div class="bg-gray-50 border-dashed py-5 px-3 border-2">
+                  <h3 class="text-gray-700">آپلود عکس</h3>
+                  <p class="mt-3 text-gray-500 leading-7">
+                    به منظور نمایش عکس در پروفایل میتوانید از سرویس
+                    <a
+                      target="_blank"
+                      href="https://en.gravatar.com/"
+                      class="text-blue-500 underline"
+                    >
+                      gravitar
+                    </a>
+                    استفاده کنید
+                    <br />
+                    دقت کنید که برای ایجاد حساب کاربری و آپلود عکس حتما با ایمیل
+                    <b>
+                      {{ user.email }}
+                    </b>
+                    اقدام کنید
+                  </p>
+                  <p class="text-xs mt-7">
+                    <code class="text-red-500"> * </code>
 
+                    "گرویتار" سرویس جهانی ارائه آواتار به ازای هر ایمیل
+                  </p>
+                </div>
                 <validation-provider
                   v-slot="{ errors }"
                   name="description"
@@ -137,7 +161,7 @@
                     v-model="editUser.email"
                     disabled
                     type="email"
-                    class="mt-2 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300"
+                    class="mt-2 block w-full rounded-md border border-gray-200 px-4 py-2 bg-gray-100 text-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300"
                   />
                 </div>
 
