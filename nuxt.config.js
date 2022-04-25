@@ -1,8 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nikan-final',
-    mode: 'spa',
+    title: 'nikan-alumni.com',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -24,6 +23,10 @@ export default {
     { src: '~/plugins/about.ts', mode: 'client' },
   ],
 
+  serverMiddleware: [
+    { path: '/api', handler: '~/server-middleware/backend.ts' },
+  ],
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -33,6 +36,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxt/postcss8',
     '@nuxtjs/dotenv',
+    '@nuxtjs/device',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

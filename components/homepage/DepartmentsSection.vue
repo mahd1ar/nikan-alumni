@@ -3,16 +3,16 @@
     class="relative"
     style="background: #fafafa; background-image: url(/pattern-1.svg)"
   >
-    <div class="relative max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div
-        class="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16"
+        class="mx-auto grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16"
       >
         <div class="mx-auto max-w-lg text-center lg:mx-0 lg:text-left">
-          <h2 class="text-3xl font-bold sm:text-4xl text-right">
+          <h2 class="text-right text-3xl font-bold sm:text-4xl">
             کارگروه خود را پیدا کنید
           </h2>
 
-          <p class="mt-4 text-gray-600 text-right">
+          <p class="mt-4 text-right text-gray-600">
             کانون دانش آموختگان نیکان در زمینه های متعدد و متنوعی در قالب
             کارگروه های مختلف فعالیت می کند. هر کدام از این کارگروه ها با هدف
             خاصی تاسیس شده اند تا به بهترین نحو رویداد های مرتبط با خود را
@@ -25,7 +25,7 @@
           >
             <span class="text-sm font-medium"> شروع کنید </span>
             <svg
-              class="mr-3 h-5 w-5 transition rotate-180"
+              class="mr-3 h-5 w-5 rotate-180 transition"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -43,7 +43,7 @@
 
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
           <a
-            class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
+            class="block rounded-xl border border-gray-100 bg-white p-4 text-center shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
             href="/accountant"
           >
             <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -51,7 +51,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-6 h-6"
+                class="h-6 w-6"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 24 24"
               >
@@ -88,7 +88,7 @@
           </a>
 
           <a
-            class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
+            class="block rounded-xl border border-gray-100 bg-white p-4 text-center shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
             href="/accountant"
           >
             <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -96,7 +96,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-6 h-6"
+                class="h-6 w-6"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 256 256"
               >
@@ -115,7 +115,7 @@
           </a>
 
           <a
-            class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
+            class="block rounded-xl border border-gray-100 bg-white p-4 text-center shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
             href="/accountant"
           >
             <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -123,7 +123,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-6 h-6"
+                class="h-6 w-6"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 36 36"
               >
@@ -149,7 +149,7 @@
           </a>
 
           <a
-            class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
+            class="block rounded-xl border border-gray-100 bg-white p-4 text-center shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
             href="/accountant"
           >
             <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -157,7 +157,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-6 h-6"
+                class="h-6 w-6"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 24 24"
               >
@@ -196,7 +196,7 @@
           </a>
 
           <a
-            class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
+            class="block rounded-xl border border-gray-100 bg-white p-4 text-center shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
             href="/accountant"
           >
             <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -204,7 +204,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-6 h-6"
+                class="h-6 w-6"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 24 24"
               >
@@ -254,7 +254,7 @@
           </a>
 
           <a
-            class="block rounded-xl border border-gray-100 bg-white p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring text-center"
+            class="block rounded-xl border border-gray-100 bg-white p-4 text-center shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
             href="/accountant"
           >
             <span class="inline-block rounded-lg bg-gray-50 p-3">
@@ -262,7 +262,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="w-6 h-6"
+                class="h-6 w-6"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 20 20"
               >

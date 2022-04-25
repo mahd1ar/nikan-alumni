@@ -11,34 +11,39 @@ on:
       - master
 
 jobs:
-  ci:
-    runs-on: ${{ matrix.os }}
+  build:
+    runs-on: self-hosted
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        node: [14]
+        node: [16]
 
     steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@master
+      # - name: Checkout 🛎
+      #   uses: actions/checkout@master
 
-      - name: Setup node env 🏗
-        uses: actions/setup-node@v2.1.5
-        with:
-          node-version: ${{ matrix.node }}
-          check-latest: true
+      # - name: Setup node env 🏗
+      #   uses: actions/setup-node@v2.1.5
+      #   with:
+      #     node-version: ${{ matrix.node }}
+      #     check-latest: true
 
-      - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      # - name: Cache node_modules 📦
+      #   uses: actions/cache@v2.1.4
+      #   with:
+      #     path: ~/.npm
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-
+
+      - name: stop pm2
+        run: pm2 stop "yarn start"
 
       - name: Install dependencies 👨🏻‍💻
-        run: npm ci --prefer-offline --no-audit
+        run: yarn
 
-      - name: Run linter 👀
-        run: npm run lint
+      - name: build 🏦
+        run: yarn run build
+
+      - name: start pm2 ✅
+        run: pm2 start "yarn start"

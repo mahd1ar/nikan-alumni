@@ -72,7 +72,16 @@
         >
           <dt class="text-sm font-medium text-gray-500">محل اشتغال</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+            <div
+              class="text-gray-400"
+              v-if="
+                userInfo.jobLocation.lat === 0 && userInfo.jobLocation.lng == 0
+              "
+            >
+              شما هیچ آدرسی تعیین نکرده اید
+            </div>
             <map-picker
+              v-else
               :lat="userInfo.jobLocation.lat"
               :lng="userInfo.jobLocation.lng"
               :zoom="13"

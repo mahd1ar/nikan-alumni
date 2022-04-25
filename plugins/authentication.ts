@@ -35,7 +35,7 @@ class LoginStrategy {
     this.refreshHandler()
   }
 
-  public fetchMe() { }
+  public fetchMe() {}
 
   private loginHandler(response: LoginMutation) {
     localStorage.setItem(
@@ -85,7 +85,7 @@ class LoginStrategy {
           await timeout(4000)
           this.refreshHandler()
         } else {
-          console.log("wath the fuck is happening")
+          console.log('wath the fuck is happening')
           this.logout()
           flag = true
         }

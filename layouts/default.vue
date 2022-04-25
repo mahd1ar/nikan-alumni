@@ -27,36 +27,44 @@
     </client-only>
 
     <!-- MOBILE MENU -->
-    <div
-      v-show="isOpenMobileMenu"
-      dir="rtl"
-      class="fixed inset-0 z-20 h-full w-full"
-    >
-      <!-- overlay -->
-      <dir
-        class="absolute top-0 left-0 m-0 h-full w-full bg-black bg-opacity-30"
-        @click.stop="closeMobileMenu"
-      ></dir>
-      <div class="relative flex h-full max-w-sm flex-row bg-white">
-        <div class="" style="background-color: #eff5f7; color: #5f6b85">
-          <div>
-            <ul class="flex h-full flex-col gap-2 p-4">
-              <li
-                v-for="(menuitem, index) in menu"
-                :key="index"
-                :class="{
-                  'cursor-pointer rounded border bg-white p-3 transition-all hover:bg-slate-50': true,
-                  ' border border-cyan-200': index === mobileMenu.selected[0],
-                  'opacity-70': index !== mobileMenu.selected[0],
-                }"
-                @click="select(index, 0)"
-                v-html="menuitem.svg"
-              ></li>
-            </ul>
+    <transition name="anime-mobile-menu">
+      <div
+        v-show="isOpenMobileMenu"
+        dir="rtl"
+        class="fixed inset-0 z-20 h-full w-full"
+      >
+        <!-- overlay -->
+        <dir
+          id="mmenu__overlay"
+          class="absolute top-0 left-0 m-0 h-full w-full bg-black bg-opacity-30"
+          @click.stop="closeMobileMenu"
+        ></dir>
+        <div
+          id="mmenu__cart"
+          class="relative flex h-full max-w-sm flex-row bg-white"
+        >
+          <div class="" style="background-color: #eff5f7; color: #5f6b85">
+            <div>
+              <ul class="flex h-full flex-col gap-2 p-4 overflow-hidden">
+                <li
+                  v-for="(menuitem, index) in menu"
+                  :key="index"
+                  :class="{
+                    'mmenu__icon cursor-pointer rounded border bg-white p-3 transition-all hover:bg-slate-50': true,
+                    ' border border-cyan-200': index === mobileMenu.selected[0],
+                    'opacity-70': index !== mobileMenu.selected[0],
+                  }"
+                  :style="{
+                    '--count': index,
+                  }"
+                  @click="select(index, 0)"
+                  v-html="menuitem.svg"
+                ></li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="w-full p-3">
-          <!-- <div
+          <div class="w-full p-3">
+            <!-- <div
             class="w-full flex justify-between items-center cursor-pointer px-3 py-2 rounded-md text-slate-600 bg-slate-100"
           >
             search
@@ -78,99 +86,145 @@
             </svg>
           </div> -->
 
-          <div class="px-1 text-right text-xl">
-            {{ menu[mobileMenu.selected[0]].title }}
-          </div>
-
-          <hr class="my-5 divide-y-4 divide-slate-800" />
-          <client-only>
-            <transition-group
-              tag="ul"
-              class="flex flex-col gap-1"
-              name="open-menu"
-            >
-              <li
-                v-for="(sm, index2) in menu[mobileMenu.selected[0]].submenu"
-                :key="index2 * 100 + 5"
-                class="overflow-hidden rounded-md bg-slate-50 p-2"
-                :style="{
-                  '--count': index2,
-                  '--max': menu[mobileMenu.selected[0]].submenu.length,
-                }"
-              >
-                <div class="flex items-center justify-between gap-2">
-                  {{ sm.title }}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="1em"
-                    height="1em"
-                    class="flex-shrink-0"
-                    style="transform: rotate(180deg)"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M5 21h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM5 5h14l.001 14H5V5z"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M9.293 7.707L13.586 12l-4.293 4.293l1.414 1.414L16.414 12l-5.707-5.707z"
-                    />
-                  </svg>
-                </div>
-              </li>
-            </transition-group>
-
-            <div
-              v-show="menu[mobileMenu.selected[0]].hasSubmenu === false"
-              class="flex items-center justify-between gap-2 rounded-md bg-cyan-50 p-2 text-cyan-800"
-            >
-              ورود به بخش
+            <div class="px-1 text-right text-xl">
               {{ menu[mobileMenu.selected[0]].title }}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                role="img"
-                style="transform: rotate(180deg)"
-                class="flex-shrink-0"
-                width="1em"
-                height="1em"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M3 5v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2zm6.293 2.707l1.414-1.414L16.414 12l-5.707 5.707l-1.414-1.414L13.586 12L9.293 7.707z"
-                />
-              </svg>
             </div>
-          </client-only>
+
+            <hr class="my-5 divide-y-4 divide-slate-800" />
+            <client-only>
+              <transition-group
+                tag="ul"
+                class="flex flex-col gap-1"
+                name="open-menu"
+              >
+                <li
+                  v-for="(sm, index2) in menu[mobileMenu.selected[0]].submenu"
+                  :key="index2 * 100 + 5"
+                  class="overflow-hidden rounded-md bg-slate-50 p-2"
+                  :style="{
+                    '--count': index2,
+                    '--max': menu[mobileMenu.selected[0]].submenu.length,
+                  }"
+                >
+                  <div class="flex items-center justify-between gap-2">
+                    {{ sm.title }}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="img"
+                      width="1em"
+                      height="1em"
+                      class="flex-shrink-0"
+                      style="transform: rotate(180deg)"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M5 21h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM5 5h14l.001 14H5V5z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M9.293 7.707L13.586 12l-4.293 4.293l1.414 1.414L16.414 12l-5.707-5.707z"
+                      />
+                    </svg>
+                  </div>
+                </li>
+              </transition-group>
+
+              <div
+                v-show="menu[mobileMenu.selected[0]].hasSubmenu === false"
+                class="flex items-center justify-between gap-2 rounded-md bg-cyan-50 p-2 text-cyan-800"
+              >
+                ورود به بخش
+                {{ menu[mobileMenu.selected[0]].title }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="img"
+                  style="transform: rotate(180deg)"
+                  class="flex-shrink-0"
+                  width="1em"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M3 5v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2zm6.293 2.707l1.414-1.414L16.414 12l-5.707 5.707l-1.414-1.414L13.586 12L9.293 7.707z"
+                  />
+                </svg>
+              </div>
+            </client-only>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
 
     <div class="flex min-h-screen flex-col">
       <transition name="animation-rollup">
         <!-- && $route.path !== '/v3' -->
         <nav
-          v-if="showDarkMenu && $route.path !== '/'"
+          v-if="showDarkMenu"
           dir="rtl"
-          class="sticky top-0 bg-gray-800 z-10"
+          class="sticky top-0 z-10 bg-gray-800"
         >
           <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
               <div
                 class="absolute inset-y-0 left-0 flex items-center sm:hidden"
               >
+                <nuxt-link
+                  v-if="!isLoggedIn"
+                  to="/login"
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-white hover:bg-gray-700"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    class="h-5 w-5"
+                    role="img"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 16 16"
+                  >
+                    <g fill="currentColor">
+                      <path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z" />
+                      <path
+                        fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                      />
+                    </g>
+                  </svg>
+                </nuxt-link>
+                <div
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-white"
+                  @click="$emit('openModal')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
+                    class="h-5 w-5"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-width="2"
+                      d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"
+                    />
+                  </svg>
+                </div>
+
                 <!-- Mobile menu button-->
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
                   aria-controls="mobile-menu"
                   aria-expanded="false"
+                  @click="openMobileMenu"
                 >
                   <span class="sr-only">Open main menu</span>
                   <!--
@@ -222,7 +276,7 @@
               <div
                 class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
               >
-                <div class="flex flex-shrink-0 items-center">
+                <div class="flex-shrink-0 items-center hidden sm:flex">
                   <nuxt-link
                     v-if="!isLoggedIn"
                     to="/login"
@@ -331,7 +385,7 @@
                     <div
                       v-if="isOpenUserController"
                       v-click-outside="closeController"
-                      class="absolute left-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      class="absolute right-0 sm:left-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="user-menu-button"
@@ -367,37 +421,6 @@
                   </client-only>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- Mobile menu, show/hide based on menu state. -->
-          <div id="mobile-menu" class="sm:hidden">
-            <div class="space-y-1 px-2 pt-2 pb-3">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a
-                href="#"
-                class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-                aria-current="page"
-                >Dashboard</a
-              >
-
-              <a
-                href="#"
-                class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                >Team</a
-              >
-
-              <a
-                href="#"
-                class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                >Projects</a
-              >
-
-              <a
-                href="#"
-                class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                >Calendar</a
-              >
             </div>
           </div>
         </nav>
@@ -475,8 +498,12 @@ export default Vue.extend({
     // @ts-ignore
     window.mm = this
   },
+
   methods: {
-    ...mapActions({ closeMobileMenu: 'navigation/closeMobileMenu' }),
+    ...mapActions({
+      closeMobileMenu: 'navigation/closeMobileMenu',
+      openMobileMenu: 'navigation/openMobileMenu',
+    }),
     nuxtonError(e: Error) {
       console.log('nuxt err')
       console.log(e)
@@ -505,6 +532,43 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.anime-mobile-menu {
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.4s;
+
+    #mmenu__cart {
+      transition: all 0.4s;
+    }
+
+    #mmenu__overlay {
+      transition: all 0.2s;
+      opacity: 1;
+    }
+
+    // .mmenu__icon {
+    //   transition: all 400ms ease-in;
+    //   transition-delay: calc(var(--count) * 100ms + 150ms);
+    // }
+  }
+
+  &-enter,
+  &-leave-to {
+    #mmenu__cart {
+      transform: translate3d(100%, 0, 0);
+      opacity: 0.5;
+    }
+
+    #mmenu__overlay {
+      opacity: 0;
+    }
+
+    // .mmenu__icon {
+    //   opacity: 0;
+    // }
+  }
+}
+
 .open-menu-enter-active,
 .open-menu-leave-active {
   transition: all 0.2s;

@@ -104,18 +104,20 @@
 
         <transition name="v-fade" mode="out-in">
           <div
+            v-if="activeTabIndex === 0"
             id="page-one"
             :key="activeTabIndex"
-            v-if="activeTabIndex === 0"
-            class="flex flex-col md:flex-row items-start gap-2"
+            class="flex flex-col items-start gap-2 md:flex-row"
           >
             <user-info-card
-              v-if="$fetchState.pending === false"
+              v-if="$fetchState.pending === false && !$fetchState.error"
               class="w-full md:w-7/12"
               :user-info="edituser"
             />
 
-            <div class="w-full md:w-5/12 overflow-hidden">
+            <error-card class="w-full md:sw-7/12" :error="$fetchState.error" />
+
+            <div class="w-full overflow-hidden md:w-5/12">
               <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">
                   رویداد های من
@@ -177,12 +179,13 @@
           </div>
 
           <div
-            :key="activeTabIndex"
             v-else-if="activeTabIndex === 1"
             id="page-two"
+            :key="activeTabIndex"
             class="flex items-start gap-2"
           >
             <user-info-edit
+              v-if="!$fetchState.error"
               :loading="$fetchState.pending"
               :user.sync="edituser"
               @saveProfile="update"
@@ -190,9 +193,9 @@
           </div>
 
           <div
-            :key="activeTabIndex"
             v-else-if="activeTabIndex === 2"
             id="page-two"
+            :key="activeTabIndex"
             class="flex flex-col items-start justify-start gap-2"
           >
             <div class="max-w-xl gap-y-4 px-4 md:gap-6 xl:p-0">
@@ -261,7 +264,7 @@ export default Vue.extend({
   mixins: [onLoggedOut],
   layout: 'dashboard',
   middleware: ['authentication'],
-
+  transition: 'page',
   data() {
     return {
       activeTabIndex: 0,
@@ -288,10 +291,7 @@ export default Vue.extend({
       userTemplate.phone = data.viewer.user_acf?.phone || ''
       userTemplate.occupation = data.viewer.user_acf?.occupation || ''
       userTemplate.avatar = data.viewer.avatar?.url || ''
-      userTemplate.gen =
-        data.viewer.user_acf?.gen && Number(data.viewer.user_acf.gen)
-          ? data.viewer.user_acf.gen
-          : ''
+      userTemplate.gen = '33'
       userTemplate.website = data.viewer.url || ''
       userTemplate.jobLocation = {
         lat: 0,

@@ -21,7 +21,7 @@
       <template #body>
         <div class="flex flex-col gap-1">
           <<<<<<< HEAD
-          <div class="font-bold text-red-500" v-if="totalRegistrants === 0">
+          <div v-if="totalRegistrants === 0" class="font-bold text-red-500">
             =======
             <div v-if="totalRegistrants === 0" class="font-bold text-red-500">
               >>>>>>> 3bd3bbf60f39479137e88e92f51574d21c50f2cc

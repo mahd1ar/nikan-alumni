@@ -19,7 +19,11 @@
           />
           <div class="relative top-0 left-0 h-full w-full">
             <div class="relative h-full w-full">
-              <home-navigation @openModal="search.show = true" />
+              <home-navigation
+                ref="heroNav"
+                class="sticky"
+                @openModal="search.show = true"
+              />
               <div
                 class="m-blur-background absolute top-0 left-0 h-full w-full"
               ></div>
@@ -69,95 +73,15 @@ export default Vue.extend({
   name: 'IndexPage',
   data() {
     return {
+      observer: null as null | IntersectionObserver,
+
       search: {
         show: false,
       },
-      menu: [
-        'معرفی',
-        'کتابخانه',
-        'رویداد ها',
-        'رسانه',
-        'انواع بیمه',
-        'نشریه کاربرگ',
-        'بانک اطلاعات',
-        'پروفایل اعضا',
-      ],
-      events: [
-        {
-          title: 'دورهمی شب چله نیکانیان',
-          body: `
-          در دوشنبه شب مورخ بیست و نهم آذر ماه هزار و چهارصد در محوطه ی سرپوشیده ی دبستان نیکان قریب به سیصد نفر از دانش آموختگان دورهم گرد آمدند تا یادی کنند از خاطراتشان و دیداری با یکدیگر تازه کنند.
-در ذیل تصاویری از این دورهمی...
-          `,
-        },
-        {
-          title: 'کوهنوردی و بازدید از آبشار یخ زده سنگان',
-          body: `
-          با شروع فصل زیبای بهاری، کارگروه نشاط و سرگرمی کانون دانش آموختگان نیکان برگزار کرد.
 
-تور یک روزه آبشار یخی سنگان در تاریخ چهارشنبه ۱۱ فروردین ۱۴۰۰
+      events: [],
+      news: [],
 
-دیدار از آبشار یخی سنگان(شهران.جاده امامزاده داود)
-
-حضور به صورت دورهمی با ماشین شخصی و رعایت پروتکل های بهداشتی انجام شد.
-
-مخاطبان:...
-          `,
-        },
-        {
-          title: 'شب شعر نبوی',
-          body: `
-    در روز چهارشنبه مورخ ۲۰ اسفندماه ۹۹ در محل آمفی تئاتر دبیرستان نیکان مراسم شب شعر نبوی برگزار شد.
-
-به برکت میلاد پر نور پیامبر متعال حضرت محمد مصطفی صلوات الله علیه و آله و سلم آمفی تئاتر دبیرستان نیکان بعد از حدود بیش از ۱...
-          `,
-        },
-        {
-          title: 'وبینار تامین مالی شرکتی',
-          body: `
- وبینار تامین مالی شرکتی
-
-? مدرس: دارا بوشهری
-دانش آموخته دوره ۹
-
-سوابق کاری و تحصیلی:
-? دانش آموخته MBA
-دانشگاه آمریکایی شارجه
-? مدیر بانکداری شرکتی
-HSBC Bank Middle East
-
-? مخاطبین وبینار:
-?مدیران میانی شرکتهای بزرگ
-?مدیران ارشد شرکتهای متوسط
-?مالکین شرکتهای کوچک
-
-? عناوین فرعی:
-? تامین مالی کوتاه مدت
-? تامین مالی ساختاریافته
-? تامین...`,
-        },
-      ],
-      news: [
-        {
-          title: 'کاربرگ شماره 5 منتشر شد',
-          body: `                فهرست موضوهات این هفته :
-                <br />
-                نوآوری در صنعت ساختمان
-                <br />
-                آرتمیا تحولی در صنعت شیلات`,
-        },
-        {
-          title: ' بیمه درمان تکمیلی برای بستگان درجه دو',
-          body: `                فهرست موضوهات این هفته :
-                <br />
-                نوآوری در صنعت ساختمان
-                <br />
-                آرتمیا تحولی در صنعت شیلات`,
-        },
-      ],
-      counter: {
-        fname: 59,
-      },
       playerOptions: {
         controls: [
           'play-large',
@@ -176,10 +100,27 @@ HSBC Bank Middle East
     }
   },
   mounted() {
-    setInterval(() => {
-      const n = this.counter.fname
-      this.counter.fname = n > 0 ? n - 1 : 59
-    }, 1000)
+    const options = {
+      // root: document.querySelector('#scrollArea'),
+      rootMargin: '100px',
+      threshold: 1.0,
+    }
+
+    const observer = new IntersectionObserver((entreis) => {
+      if (entreis[0].isIntersecting) {
+        console.log('isIntersecting')
+        this.$store.dispatch('navigation/toggleDarkMenu', false)
+      } else {
+        console.log('is NOT Intersecting')
+        this.$store.dispatch('navigation/toggleDarkMenu', true)
+      }
+    }, options)
+
+    type NavRef = InstanceType<typeof Vue>
+
+    this.observer = Object.freeze(observer)
+
+    this.observer.observe((this.$refs.heroNav as NavRef).$el!)
   },
 })
 </script>

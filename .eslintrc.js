@@ -11,6 +11,7 @@ module.exports = {
     'prettier',
   ],
   plugins: [],
+  ignorePatterns: ['types/types.ts'],
   // add your custom rules here
   rules: {
     'vue/multi-word-component-names': [

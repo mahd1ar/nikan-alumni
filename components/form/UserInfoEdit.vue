@@ -121,9 +121,9 @@
                   </div>
                 </validation-provider>
 
-                <div class="bg-gray-50 border-dashed py-5 px-3 border-2">
+                <div class="border-2 border-dashed bg-gray-50 py-5 px-3">
                   <h3 class="text-gray-700">آپلود عکس</h3>
-                  <p class="mt-3 text-gray-500 leading-7">
+                  <p class="mt-3 leading-7 text-gray-500">
                     به منظور نمایش عکس در پروفایل میتوانید از سرویس
                     <a
                       target="_blank"
@@ -140,7 +140,7 @@
                     </b>
                     اقدام کنید
                   </p>
-                  <p class="text-xs mt-7">
+                  <p class="mt-7 text-xs">
                     <code class="text-red-500"> * </code>
 
                     "گرویتار" سرویس جهانی ارائه آواتار به ازای هر ایمیل
@@ -187,7 +187,7 @@
                     v-model="editUser.email"
                     disabled
                     type="email"
-                    class="mt-2 block w-full rounded-md border border-gray-200 px-4 py-2 bg-gray-100 text-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300"
+                    class="mt-2 block w-full rounded-md border border-gray-200 bg-gray-100 px-4 py-2 text-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300"
                   />
                 </div>
 

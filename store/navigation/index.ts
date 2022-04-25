@@ -178,7 +178,7 @@ enum Mutations {
 
 const initialState = {
   darkMenu: {
-    show: true
+    show: true,
   },
   mobileMenu: {
     isOpen: false,
@@ -365,9 +365,7 @@ export const actions: ActionTree<RootState, RootState> = {
 
   toggleDarkMenu: ({ commit, state }, val: boolean | undefined) => {
     if (typeof val === 'undefined') {
-
       commit(Mutations.toggleDarkMenu, !state.darkMenu.show)
-    } else
-      commit(Mutations.toggleDarkMenu, val)
+    } else commit(Mutations.toggleDarkMenu, val)
   },
 }

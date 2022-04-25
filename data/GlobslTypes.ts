@@ -27,7 +27,9 @@ export interface Event extends PostScheme {
 }
 
 export interface SupportedSocialMedias {
-  instagram?: string, linkedin?: string, twitter?: string
+  instagram?: string
+  linkedin?: string
+  twitter?: string
 }
 export interface UserFullProfile {
   id: string

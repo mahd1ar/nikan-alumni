@@ -163,8 +163,8 @@
             <li>
               <div title="exit">
                 <div
-                  @click="exitModal.open = true"
                   class="flex cursor-pointer gap-2 overflow-hidden rounded-md bg-sky-50 p-1 px-3 text-sky-400 hover:bg-gray-200"
+                  @click="exitModal.open = true"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -285,7 +285,7 @@
 
     <!-- development hints -->
     <div
-      v-if="!$nuxt.context.isDev"
+      v-if="$nuxt.context.isDev"
       class="fixed top-10 left-10 z-50 opacity-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
     >
       <div class="text-white">loading : {{ loading }}</div>

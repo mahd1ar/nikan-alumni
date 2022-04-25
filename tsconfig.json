@@ -22,7 +22,8 @@
       "@nuxtjs/apollo",
       "vue-apollo/types",
       // "@nuxtjs/auth-next",
-      "nuxt-leaflet"
+      "nuxt-leaflet",
+      "@nuxtjs/device"
     ]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]

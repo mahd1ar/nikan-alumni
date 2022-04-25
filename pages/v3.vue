@@ -11,7 +11,7 @@
     </div> -->
 
     <!-- hero section -->
-    <div class="flex w-full flex-col z-20">
+    <div class="z-20 flex w-full flex-col">
       <div class="relative flex h-full w-full flex-col">
         <div class="relative h-full">
           <!-- <img
@@ -72,7 +72,7 @@
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px"
                     y="0px"
-                    class="h-80 w-80 transition-all hidden"
+                    class="hidden h-80 w-80 transition-all"
                     viewBox="0 0 612 792"
                     style="enable-background: new 0 0 612 792"
                     xml:space="preserve"
@@ -350,19 +350,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import anime from 'animejs'
+// import anime from 'animejs'
 import { timeout } from '~/data/utils'
 
 export default Vue.extend({
   name: 'IndexPage',
-  // beforeRouteLeave(to, from, next) {
-  //   next()
-  // },
-  beforeDestroy() {
-    this.$store.dispatch('navigation/toggleDarkMenu', true)
-  },
   data() {
     return {
+      observer: null as null | IntersectionObserver,
       menu: [
         'معرفی',
         'کتابخانه',
@@ -466,6 +461,13 @@ HSBC Bank Middle East
         'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
     }
   },
+  // beforeRouteLeave(to, from, next) {
+  //   next()
+  // },
+  beforeDestroy() {
+    this.$store.dispatch('navigation/toggleDarkMenu', true)
+    this.observer?.disconnect()
+  },
   async mounted() {
     const options = {
       // root: document.querySelector('#scrollArea'),
@@ -475,42 +477,45 @@ HSBC Bank Middle East
 
     const observer = new IntersectionObserver((entreis) => {
       if (entreis[0].isIntersecting) {
-        const video = document.querySelector('video')!
-        video.play()
+        // const video = document.querySelector('video')!
+        // video.play()
         this.$store.dispatch('navigation/toggleDarkMenu', false)
       } else {
-        const video = document.querySelector('video')!
-        video.pause()
+        // const video = document.querySelector('video')!
+        // video.pause()
         this.$store.dispatch('navigation/toggleDarkMenu', true)
       }
     }, options)
 
     type NavRef = InstanceType<typeof Vue>
 
-    observer.observe((this.$refs.heroNav as NavRef).$el!)
+    this.observer = Object.freeze(observer)
+
+    this.observer.observe((this.$refs.heroNav as NavRef).$el!)
 
     await timeout(10000)
-    anime({
-      targets: '.st0,.st1,.st2',
-      strokeDashoffset: [anime.setDashoffset, 0],
-      easing: 'easeInOutSine',
-      // direction: 'reverse',
+    import('animejs').then(({ default: anime }) => {
+      anime({
+        targets: '.st0,.st1,.st2',
+        strokeDashoffset: [anime.setDashoffset, 0],
+        easing: 'easeInOutSine',
+        // direction: 'reverse',
 
-      async begin() {
-        const svg = document.querySelector('#nikanlogosvg')! as HTMLElement
-        svg.classList.remove('hidden')
-        const st0 = document.querySelector('.st0')! as HTMLElement
-        st0.style.transition = 'all ease 6s'
-        st0.style.fill = '#ffffff00'
-        await timeout(5000)
-        st0.style.fill = '#06b6d488'
-      },
-      duration: 11500,
-      delay: (_, i) => {
-        return i * 400
-      },
+        async begin() {
+          const svg = document.querySelector('#nikanlogosvg')! as HTMLElement
+          svg.classList.remove('hidden')
+          const st0 = document.querySelector('.st0')! as HTMLElement
+          st0.style.transition = 'all ease 6s'
+          st0.style.fill = '#ffffff00'
+          await timeout(5000)
+          st0.style.fill = '#06b6d488'
+        },
+        duration: 11500,
+        delay: (_, i) => {
+          return i * 400
+        },
+      })
     })
-
     // return
     // const tl = anime.timeline({
     //   autoplay: false,

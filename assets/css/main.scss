@@ -44,16 +44,44 @@
 .v-slide-rigth-enter-active,
 .v-slide-rigth-leave-active {
   transition: all 0.2s;
-transform: translateX(-20px);
+  transform: translateX(-20px);
 
   transition-delay: calc(var(--count) * 75ms);
 }
-.v-slide-rigth-enter, .v-slide-rigth-leave-to  {
+.v-slide-rigth-enter,
+.v-slide-rigth-leave-to {
   opacity: 0;
 }
 .v-slide-rigth-move {
   transition: transform 0.2s;
 }
+
+.v-circle-enter-active,
+.v-circle-leave-active {
+  transition: all 0.4s;
+  clip-path: circle(100% at 50% 50%);
+}
+.v-circle-enter,
+.v-circle-leave-to {
+  opacity: 0;
+  clip-path: circle(0% at 50% 50%);
+}
+
+
+// PAGE TRANSITIONS
+
+.v-circle-enter-active,
+.v-circle-leave-active {
+  transition: all 0.4s;
+  clip-path: circle(100% at 50% 50%);
+}
+.v-circle-enter,
+.v-circle-leave-to {
+  opacity: 0;
+  clip-path: circle(0% at 50% 50%);
+}
+
+
 
 /* h1 {
   font-family: 'Noto Naskh Arabic', serif;

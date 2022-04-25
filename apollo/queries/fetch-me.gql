@@ -16,7 +16,6 @@ query fetchMe {
       occupation
       mobile
       jobLocation
-      gen
       phone
     }
   }

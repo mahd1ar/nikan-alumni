@@ -5170,6 +5170,24 @@ export type ReadingSettings = {
   postsPerPage?: Maybe<Scalars['Int']>;
 };
 
+/** The redirect */
+export type RedirectionRedirect = {
+  __typename?: 'RedirectionRedirect';
+  code?: Maybe<Scalars['Int']>;
+  groupId?: Maybe<Scalars['Int']>;
+  groupName?: Maybe<Scalars['String']>;
+  matchType?: Maybe<Scalars['String']>;
+  origin?: Maybe<Scalars['String']>;
+  target?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** The Redirects */
+export type RedirectionRedirects = {
+  __typename?: 'RedirectionRedirects';
+  redirects?: Maybe<Array<Maybe<RedirectionRedirect>>>;
+};
+
 /** Input for the refreshJwtAuthToken mutation */
 export type RefreshJwtAuthTokenInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -5678,6 +5696,8 @@ export type RootQuery = {
   posts?: Maybe<RootQueryToPostConnection>;
   /** Fields of the &#039;ReadingSettings&#039; settings group */
   readingSettings?: Maybe<ReadingSettings>;
+  /** The redirects */
+  redirection?: Maybe<RedirectionRedirects>;
   /** Connection between the RootQuery type and the EnqueuedScript type */
   registeredScripts?: Maybe<RootQueryToEnqueuedScriptConnection>;
   /** Connection between the RootQuery type and the EnqueuedStylesheet type */
@@ -9059,7 +9079,6 @@ export type User_UserAcf = AcfFieldGroup & {
   __typename?: 'User_UserAcf';
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>;
-  gen?: Maybe<Scalars['String']>;
   /**
    * طول و عرض جغرافیایی
    * lat_lng
@@ -9574,6 +9593,24 @@ export type RefreshAuthTokenMutationVariables = Exact<{
 
 export type RefreshAuthTokenMutation = { __typename?: 'RootMutation', refreshJwtAuthToken?: { __typename?: 'RefreshJwtAuthTokenPayload', authToken?: string | null } | null };
 
+export type ResetPasswordMutationVariables = Exact<{
+  key: Scalars['String'];
+  login: Scalars['String'];
+  password: Scalars['String'];
+  clientMutationId: Scalars['String'];
+}>;
+
+
+export type ResetPasswordMutation = { __typename?: 'RootMutation', resetUserPassword?: { __typename?: 'ResetUserPasswordPayload', user?: { __typename?: 'User', id: string, firstName?: string | null } | null } | null };
+
+export type SendResetPasswordMutationVariables = Exact<{
+  username: Scalars['String'];
+  clientMutationId: Scalars['String'];
+}>;
+
+
+export type SendResetPasswordMutation = { __typename?: 'RootMutation', sendPasswordResetEmail?: { __typename?: 'SendPasswordResetEmailPayload', user?: { __typename?: 'User', id: string, email?: string | null } | null } | null };
+
 export type UpdateUserMutationVariables = Exact<{
   id: Scalars['ID'];
   occupation?: InputMaybe<Scalars['String']>;
@@ -9632,12 +9669,12 @@ export type EventsQueryVariables = Exact<{
 }>;
 
 
-export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null };
+export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null };
 
 export type FetchMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, url?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, user_acf?: { __typename?: 'User_UserAcf', occupation?: string | null, mobile?: string | null, jobLocation?: string | null, gen?: string | null, phone?: string | null } | null } | null };
+export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, url?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, user_acf?: { __typename?: 'User_UserAcf', occupation?: string | null, mobile?: string | null, jobLocation?: string | null, phone?: string | null } | null } | null };
 
 export type CategoryAttributesFragment = { __typename?: 'Category', id: string, databaseId: number, name?: string | null, slug?: string | null, count?: number | null, description?: string | null };
 

@@ -17,7 +17,7 @@
     />
 
     <div
-      class="container relative mx-auto flex flex-col-reverse items-start gap-7 md:flex-row top-20 sm:top-0"
+      class="container relative top-20 mx-auto flex flex-col-reverse items-start gap-7 sm:top-0 md:flex-row"
     >
       <div
         class="flex w-full flex-col overflow-hidden rounded-xl bg-white md:w-7/12 lg:w-9/12"
@@ -290,7 +290,7 @@
             <!-- src="https://avatars.githubusercontent.com/u/32998122?v=4" -->
             <img
               :src="user.avatar"
-              class="absolute w-40 h-40 bottom-0 rounded-3xl"
+              class="absolute bottom-0 h-40 w-40 rounded-3xl"
               alt=""
             />
           </div>
@@ -430,7 +430,7 @@
             download
             target="_blank"
             :href="contact"
-            class="cursor-pointer rounded-lg bg-cyan-400 py-2 text-lg font-bold text-cyan-50 hover:bg-cyan-500 text-center"
+            class="cursor-pointer rounded-lg bg-cyan-400 py-2 text-center text-lg font-bold text-cyan-50 hover:bg-cyan-500"
           >
             اضافه به مخاطبین
           </a>
@@ -488,10 +488,10 @@ export interface WPRestuser {
 }
 
 export default Vue.extend({
-  layout: 'RawLayout',
   components: {
     MapPicker,
   },
+  layout: 'RawLayout',
   data() {
     return {
       loaded: 0,
@@ -499,6 +499,24 @@ export default Vue.extend({
         jobLocation: { lat: 0, lng: 0 },
       } as UserFullProfile,
     }
+  },
+
+  computed: {
+    contact() {
+      const query = new URLSearchParams()
+
+      if (this.user.firstName) query.set('firstname', this.user.firstName)
+
+      if (this.user.lastName) query.set('lastname', this.user.lastName)
+
+      if (this.user.email) query.set('email', this.user.email)
+
+      if (this.user.mobile) query.set('mobile', this.user.mobile)
+
+      if (this.user.occupation) query.set('occupation', this.user.occupation)
+
+      return '/api/create-contact?' + query.toString()
+    },
   },
   mounted() {
     this.fetchData()
@@ -548,24 +566,6 @@ export default Vue.extend({
       } finally {
         this.loaded = 1
       }
-    },
-  },
-
-  computed: {
-    contact() {
-      const query = new URLSearchParams()
-
-      if (this.user.firstName) query.set('firstname', this.user.firstName)
-
-      if (this.user.lastName) query.set('lastname', this.user.lastName)
-
-      if (this.user.email) query.set('email', this.user.email)
-
-      if (this.user.mobile) query.set('mobile', this.user.mobile)
-
-      if (this.user.occupation) query.set('occupation', this.user.occupation)
-
-      return 'http://194.5.205.148:3000/?' + query.toString()
     },
   },
   // methods: {

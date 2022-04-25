@@ -26,6 +26,24 @@ declare module '*/refresh.gql' {
 }
     
 
+declare module '*/reset-password.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ResetPassword: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/send-reset-password.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const sendResetPassword: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/update-user.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

@@ -97,49 +97,55 @@ export const filterCategory = (cats: string[]) =>
     (i) => process.env.MOTHERCATEGORIES?.split(',').includes(i) === false
   )
 
-export const htmlEscape = (str: string) => (
 
+
+export const htmlStrip = (str: string) => str.replace(/<\/?[^>]+(>|$)/g, "")
+
+export const htmlEscape = (str: string) =>
   String(str)
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-)
-
 
 export class BioHandler {
-  static delimiter = "~"
-  static url_delimiter = ";"
-  static supportedSocialMedias = ['instagram', 'linkedin', "twitter"]
+  static delimiter = '~'
+  static url_delimiter = ';'
+  static supportedSocialMedias = ['instagram', 'linkedin', 'twitter']
   static compose(str: string, urls: string[]) {
-    str = htmlEscape(str).replaceAll(this.delimiter, '');
-    urls = urls.map(m => m.replaceAll(this.url_delimiter, '')).filter(Boolean);
+    str = htmlEscape(str).replaceAll(this.delimiter, '')
+    urls = urls.map((m) => m.replaceAll(this.url_delimiter, '')).filter(Boolean)
     return str + this.delimiter + urls.join(this.url_delimiter)
   }
 
   static decompose(bio: string) {
-
     if (bio.search(this.delimiter) === -1)
       return {
         biography: bio,
-        socialMedias: { instagram: "", linkedin: "", twitter: "" }
+        socialMedias: { instagram: '', linkedin: '', twitter: '' },
       }
 
-    const [biography, urls = ""] = bio.split(this.delimiter);
+    const [biography, urls = ''] = bio.split(this.delimiter)
     const x = this.supportedSocialMedias
     type supportedSocialMediasType = typeof x[number]
 
-    const socialMedias = this.supportedSocialMedias.reduce((a, v) => ({ ...a, [v]: "" }), {} as { [K in supportedSocialMediasType]: string })
+    const socialMedias = this.supportedSocialMedias.reduce(
+      (a, v) => ({ ...a, [v]: '' }),
+      {} as { [K in supportedSocialMediasType]: string }
+    )
 
-    urls.split(this.url_delimiter).filter(Boolean).forEach(url => {
-
-      const findedSocialMedia = this.supportedSocialMedias.find(sm => url.search(sm) > -1)
-      if (findedSocialMedia) {
-        socialMedias[findedSocialMedia] = url
-      }
-    })
-
+    urls
+      .split(this.url_delimiter)
+      .filter(Boolean)
+      .forEach((url) => {
+        const findedSocialMedia = this.supportedSocialMedias.find(
+          (sm) => url.search(sm) > -1
+        )
+        if (findedSocialMedia) {
+          socialMedias[findedSocialMedia] = url
+        }
+      })
 
     return { biography, socialMedias }
   }
@@ -147,26 +153,27 @@ export class BioHandler {
 
 export class LocationHandler {
   static decompose(langlat: string) {
-    const res = langlat.split(",").map(i => i.trim()).filter(Boolean)
+    const res = langlat
+      .split(',')
+      .map((i) => i.trim())
+      .filter(Boolean)
     if (res.length === 2) {
       if (parseFloat(res[0]) && parseFloat(res[1]))
         return {
           lat: parseFloat(res[0]),
-          lng: parseFloat(res[1])
+          lng: parseFloat(res[1]),
         }
-
     }
 
     return {
       lat: 0,
-      lng: 0
+      lng: 0,
     }
   }
 
-  static compose(input: { lng: number, lat: number }): string {
-    return input.lat + "," + input.lng
+  static compose(input: { lng: number; lat: number }): string {
+    return input.lat + ',' + input.lng
   }
-
 }
 
 // function jalali_to_gregorian(jy, jm, jd) {
@@ -191,3 +198,7 @@ export class LocationHandler {
 //   for (gm = 0; gm < 13 && gd > sal_a[gm]; gm++) gd -= sal_a[gm];
 //   return [gy, gm, gd];
 // }
+
+export const formatError = (e: Error) => {
+  return String(e).replace('GraphQL error:', '')
+}

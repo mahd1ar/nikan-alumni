@@ -2,7 +2,7 @@
   <div class="flex-center h-screen w-full">
     <div class="container mx-auto">
       <div
-        class="mx-auto my-auto flex max-w-sm overflow-hidden rounded-lg shadow-lg bg-gray-800 lg:max-w-4xl"
+        class="mx-auto my-auto flex max-w-sm overflow-hidden rounded-lg bg-gray-800 shadow-lg lg:max-w-4xl"
       >
         <div
           :class="
@@ -41,179 +41,72 @@
           </nuxt-link>
         </div>
 
-        <div
-          :class="
-            loaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-          "
-          class="w-full transform-gpu px-6 py-8 transition-all duration-700 ease-out md:px-8 lg:w-1/2"
-        >
-          <h2
-            class="text-center font-naskh text-2xl font-semibold text-gray-700 dark:text-white"
-            @click="h"
-          >
-            کانون دانش آموختگان نیکان
-          </h2>
-
-          <p
-            class="mb-16 mt-2 text-center text-base text-gray-600 dark:text-gray-200"
-          >
-            برای ادامه مطالب وارد حساب کاربری خود وارد شوید
-          </p>
-
-          <!-- <a
-            href="#"
-            class="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-          >
-            <div class="px-4 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
-            </div>
-
-            <span class="w-5/6 px-4 py-3 font-bold text-center">
-              بازگشت به خانه
-            </span>
-          </a> -->
-
-          <div class="mt-4 flex items-center justify-between">
-            <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
-
-            <a
-              href="#"
-              class="text-center text-xs uppercase text-gray-500 hover:underline dark:text-gray-400"
-            >
-              login with email</a
-            >
-
-            <span class="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
-          </div>
-
-          <div class="mt-4">
-            <label
-              class="mb-2 block text-sm font-medium text-gray-600 dark:text-gray-200"
-              for="LoggingEmailAddress"
-              >Email Address</label
-            >
-            <input
-              id="LoggingEmailAddress"
-              v-model="user.username"
-              class="block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
-              type="email"
-            />
-          </div>
-
-          <div class="mt-4">
-            <div class="flex justify-between">
-              <label
-                class="mb-2 block text-sm font-medium text-gray-600 dark:text-gray-200"
-                for="loggingPassword"
-                >Password</label
-              >
-              <a
-                href="#"
-                class="text-xs text-gray-500 hover:underline dark:text-gray-300"
-                >Forget Password?</a
-              >
-            </div>
-
-            <input
-              id="loggingPassword"
-              v-model="user.password"
-              class="block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
-              type="password"
-            />
-          </div>
-
-          <div class="mx-auto mt-4">
-            <vue-hcaptcha
-              v-if="false"
-              theme="dark"
-              sitekey="073dbe4d-32be-4898-ad05-23a10d6e580b"
-              @verify="h"
-            ></vue-hcaptcha>
-          </div>
-
-          <div class="mt-8">
-            <button
-              class="w-full transform rounded bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
-              @click="login()"
-            >
-              Login
-            </button>
-          </div>
-
-          <div class="mt-4 flex items-center justify-between">
-            <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
-
-            <a
-              href="#"
-              class="text-xs uppercase text-gray-500 hover:underline dark:text-gray-400"
-              >or sign up</a
-            >
-
-            <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
-          </div>
-        </div>
+        <transition name="anime" mode="out-in">
+          <login-fields v-if="action === 'login'" />
+          <request-reset-password
+            v-else-if="action === 'request_for_reset_password'"
+          />
+          <reset-password v-else />
+        </transition>
       </div>
     </div>
+    <modal :open.sync="modal.isOpen" type="error" @closed="changeCard">
+      <template #title>
+        <h1>
+          {{ modal.title }}
+        </h1>
+      </template>
+      <template #body>
+        {{ modal.body }}
+      </template>
+    </modal>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-// eslint-disable vue/multi-word-component-names
 
-// declare module hcaptcha {
-//   export function close(): void
-//   export function execute(): void
-//   export function getRespKey(): string
-//   export function getResponse(): string
-//   export function remove(): void
-//   export function render(): void
-//   export function reset(): void
-//   export function setData(): void
-// }
-
-import VueHcaptcha from '@hcaptcha/vue-hcaptcha'
 import { mapGetters } from 'vuex'
-
+import LoginFields from '~/components/login/LoginFields.vue'
+import RequestResetPassword from '~/components/login/RequestResetPassword.vue'
+import ResetPassword from '~/components/login/ResetPassword.vue'
+import { Dict } from '~/data/utils/dictionary'
 export default Vue.extend({
-  components: { VueHcaptcha },
+  components: {
+    LoginFields,
+    RequestResetPassword,
+    ResetPassword,
+  },
   middleware: ['unauthenticated'],
   data() {
     return {
-      loaded: false,
-      user: { username: 'mahdiyaranari', password: 'master33' },
-    }
-  },
-  head: {
-    script: [
-      {
-        src: 'https://js.hcaptcha.com/1/api.js',
-        body: true,
-        async: true,
-        defer: true,
+      modal: {
+        isOpen: false,
+        title: '',
+        body: '',
       },
-    ],
+      // action: 'login' as 'login' | 'request_for_reset_password' | 'rp',
+      loaded: false,
+    }
   },
 
   computed: {
+    action() {
+      const action = this.$route.query.action as string | null
+
+      if (
+        action &&
+        (action === 'login' ||
+          action === 'request_for_reset_password' ||
+          action === 'rp')
+      )
+        return action
+      else return 'login'
+    },
     ...mapGetters({
       isLoggedIn: 'authentication/isLoggedIn',
     }),
   },
-
   watch: {
     isLoggedIn(newval: boolean) {
       if (newval) {
@@ -230,19 +123,43 @@ export default Vue.extend({
     },
   },
   mounted() {
-    // @ts-ignore
     this.$nextTick(() => {
       this.loaded = true
+      if (this.$route.query.error === 'invalidkey') {
+        this.modal.isOpen = true
+        this.modal.title = Dict.rp_error_invalidkey_title
+        this.modal.body = Dict.rp_error_invalidkey_body
+      }
     })
   },
 
   methods: {
-    async login() {
-      await this.$authentication().login(this.user)
-    },
-    h(e: string) {
-      console.log(e)
+    changeCard() {
+      console.log('change card')
+      this.$router.push({
+        path: '/login',
+        query: {
+          action: 'login',
+        },
+      })
     },
   },
 })
 </script>
+
+<style scoped>
+.anime-enter-active,
+.anime-leave-active {
+  transition: all 0.2s;
+  transform: translateX(0px);
+}
+.anime-enter {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.anime-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+</style>

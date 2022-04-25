@@ -23,4 +23,9 @@ export enum Dict {
   E404 = 'محتوا پیدا نشد',
   UPDATE_USER_SUCESS = 'کاربر با موفقیت بروز رسانی شد',
   UPDATE_USER_ERR = 'خطا در بروز رسانی کاربر',
+  rp_error_invalidkey_title = 'reset password invalid key',
+  rp_error_invalidkey_body = 'reset password invalid key body',
+  rp_dosenot_match = 'عدم هم خوانی با رمز عبور  ',
+  rp_min_6char = 'رمز عبور باید حداقل 8 کاراکتر داشته باشد',
+  rp_incorrect = ' incorrect',
 }

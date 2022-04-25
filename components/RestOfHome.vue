@@ -126,7 +126,7 @@
     </section>
 
     <section class="body-font overflow-hidden text-gray-600">
-      <div class="container mx-auto px-5 py-12">
+      <div class="hidden md:block container mx-auto px-5 py-12">
         <!-- -m-12 -->
         <div class="flex">
           <div class="w-1/2">
@@ -142,7 +142,7 @@
             <div
               v-for="(n, index) in news"
               :key="index"
-              class="flex w-full flex-col items-start px-12 py-4"
+              class="flex w-full flex-col items-start lg:px-12 py-4"
             >
               <div class="flex items-start gap-3">
                 <img
@@ -219,23 +219,28 @@
               <!-- <div class="h-1 w-20 bg-cyan-500 rounded"></div> -->
             </div>
             <div
-              v-for="(e, index) in testevents"
+              v-for="(e, index) in events"
               :key="index"
-              class="flex w-full flex-col items-start px-12"
+              class="flex w-full flex-col items-start lg:px-12"
             >
-              <div class="py-4 px-4">
+              <div class="py-4 px-4 pl-0">
                 <div class="flex h-full items-start gap-4">
                   <div
                     class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none"
                   >
                     <span
                       class="mb-2 w-12 border-b-2 border-tm-yellow pb-2 text-lg font-semibold text-[#ffc400]"
-                      >12</span
                     >
+                      {{ e.faFormattedDate[2] }}
+                    </span>
                     <span
                       class="title-font font-medium leading-none text-tm-black"
-                      >اردیبهشت</span
                     >
+                      {{ e.faFormattedDate[1] }}
+                    </span>
+                    <span class="mt-2 font-thin leading-none text-tm-black">
+                      {{ e.faFormattedDate[0] }}
+                    </span>
                     <!-- <span
                       class="text-gray-500 w-12 mt-2 pt-2 border-t-2 border-gray-200"
                       >1400</span
@@ -245,7 +250,7 @@
                     <h2
                       class="title-font mb-1 text-xs font-medium tracking-widest text-black"
                     >
-                      CATEGORY
+                      {{ e.category }}
                     </h2>
                     <h2
                       class="title-font mb-3 text-xl font-medium text-gray-900"
@@ -255,9 +260,8 @@
                     <p
                       v-snip="3"
                       class="mb-5 cursor-pointer leading-relaxed hover:underline"
-                    >
-                      {{ e.body }}
-                    </p>
+                      v-text="e.content"
+                    ></p>
                     <!-- <a class="inline-flex items-center">
                       <img
                         alt="blog"
@@ -294,6 +298,216 @@
 
                 مشاهده تمام رویداد ها
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- mobile tabs -->
+      <div class="md:hidden">
+        <div class="flex-center">
+          <div class="flex border-b border-gray-200 mb-10">
+            <button
+              class="h-10 flex gap-2 items-center px-4 py-2 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+              :class="
+                tabIndex === 0
+                  ? 'text-cyan-600  border-cyan-500'
+                  : 'text-gray-700  border-transparent  cursor-base  hover:border-gray-400'
+              "
+              @click="tabIndex = 0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="img"
+                width="1em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M13.341 4A5.99 5.99 0 0 0 13 6H5v14h14v-8a5.99 5.99 0 0 0 2-.341V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h9.341zM19 8a2 2 0 1 0 0-4a2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8a4 4 0 0 1 0 8z"
+                />
+              </svg>
+
+              اعلانات
+            </button>
+
+            <button
+              class="h-10 flex gap-2 items-center px-4 py-2 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+              :class="
+                tabIndex === 1
+                  ? 'text-cyan-600  border-cyan-500'
+                  : 'text-gray-700  border-transparent  cursor-base  hover:border-gray-400'
+              "
+              @click="tabIndex = 1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="img"
+                width="1em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 48 48"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="4"
+                >
+                  <path
+                    d="m21 44l-1-8m24 8V12H25l1 8l1 8l1 8l-7 8h23ZM27 28h8m-9-8h9"
+                  />
+                  <path d="M4 4h20l1 8l1 8l1 8l1 8H4V4Zm6 8h7m-7 8h8m-8 8h9" />
+                </g>
+              </svg>
+              اخبار و رویداد ها
+            </button>
+          </div>
+        </div>
+
+        <div v-show="tabIndex === 0" class="w-full">
+          <div
+            v-for="(e, index) in events"
+            :key="index"
+            class="flex w-full flex-col items-start px-12"
+          >
+            <div class="py-4 px-4">
+              <div class="flex h-full items-start gap-4">
+                <div
+                  class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none"
+                >
+                  <span
+                    class="mb-2 w-12 border-b-2 pb-2 text font-semibold text-[#ffc400]"
+                    >{{ e.faFormattedDate[2] }}</span
+                  >
+                  <span class="text-sm font-medium leading-none text-tm-black">
+                    {{ e.faFormattedDate[1] }}
+                  </span>
+                  <!-- <span
+                      class="text-gray-500 w-12 mt-2 pt-2 border-t-2 border-gray-200"
+                      >1400</span
+                    > -->
+                </div>
+                <div class="flex-grow pl-6">
+                  <h2
+                    class="title-font mb-1 text-xs tracking-widest text-gray-700"
+                  >
+                    {{ e.category }}
+                  </h2>
+                  <h2
+                    class="title-font mb-2 text-base font-medium text-gray-900"
+                  >
+                    {{ e.title }}
+                  </h2>
+                  <p
+                    v-snip="3"
+                    class="mb-5 text-sm cursor-pointer leading-relaxed hover:underline"
+                  >
+                    {{ e.content }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="py-4 px-4">
+            <button
+              class="mx-auto text-center flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="img"
+                class="h-5 w-5"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"
+                />
+              </svg>
+
+              مشاهده تمام رویداد ها
+            </button>
+          </div>
+        </div>
+
+        <div v-show="tabIndex === 1" class="w-full">
+          <div
+            v-for="(n, index) in news"
+            :key="index"
+            class="flex w-full flex-col items-start px-12 py-4"
+          >
+            <div class="flex items-stretch gap-8">
+              <div class="w-4/12 h-fit">
+                <img
+                  class="aspect-square rounded object-cover"
+                  src="test/one.jfif"
+                  alt=""
+                />
+              </div>
+              <div class="w-8/12 flex flex-col">
+                <div>
+                  <span
+                    class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500"
+                    >کارگروه کسب و کار</span
+                  >
+                </div>
+                <h2
+                  class="title-font mt-4 mb-4 text-xl font-medium text-gray-900"
+                >
+                  {{ n.title }}
+                </h2>
+                <!-- <p class="leading-relaxed mb-8" v-html="n.body"></p> -->
+                <div
+                  class="mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4"
+                >
+                  <a class="inline-flex items-center text-cyan-500"
+                    >ادامه مطلب
+
+                    <svg
+                      class="mr-2 h-4 w-4 rotate-180 transform"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12h14"></path>
+                      <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                  </a>
+                  <span
+                    class="ml-3 mr-auto inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400"
+                  >
+                    <!-- <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        class="w-6 h-6 ml-1"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M5 8h14V6H5z"
+                          opacity=".3"
+                        />
+                        <path
+                          fill="currentColor"
+                          d="M7 11h2v2H7zm12-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-4 3h2v2h-2zm-4 0h2v2h-2z"
+                        />
+                      </svg> -->
+
+                    04 بهمن 1400
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -473,6 +687,7 @@
                   :src="videourl"
                   size="720"
                   format="video/mp4"
+                  preload="none"
                 >
                   <!-- <source   /> -->
                 </video>
@@ -621,20 +836,38 @@
             </div>
           </div>
         </div>
-        <div class="bg-slate-700">
+        <div class="bg-slate-800" dir="ltr">
           <div
-            class="container mx-auto flex flex-col flex-wrap py-4 px-5 sm:flex-row"
+            class="container mx-auto flex justify-between flex-wrap py-4 px-5 sm:flex-row"
           >
-            <p class="text-center text-sm text-slate-50 sm:text-left">
-              © 2020 Tailblocks —
+            <div
+              class="text-center text-sm text-slate-50 sm:text-left font-mono flex"
+            >
+              © 2020 nikan-alumni —
               <a
-                href="https://twitter.com/knyttneve"
+                href="https://netdom.ir"
                 rel="noopener noreferrer"
-                class="ml-1 text-gray-600"
+                class="ml-1 gap-1 text-gray-400 flex-center tracking-widest"
                 target="_blank"
-                >@knyttneve</a
               >
-            </p>
+                Designed and developed by Mahdiyar Anari
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="img"
+                  width="1.3em"
+                  height="1.3em"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M5 3h14v2H5V3zm0 16H3V5h2v14zm14 0v2H5v-2h14zm0 0h2V5h-2v14zM10 8H8v2h2V8zm4 0h2v2h-2V8zm-5 6v-2H7v2h2zm6 0v2H9v-2h6zm0 0h2v-2h-2v2z"
+                  />
+                </svg>
+              </a>
+            </div>
             <span
               class="mt-2 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start"
             >
@@ -711,6 +944,7 @@
 import Vue from 'vue'
 import { WpUpcommingEvents } from '~/data/AxiosTypes'
 import {
+  htmlStrip,
   timeout,
   toIndiaDigits,
   wordpressDateToFormattedJalali,
@@ -729,14 +963,18 @@ enum EventStatus {
 }
 interface EventWithStatus extends Event {
   eventStatus: EventStatus
+  content: string
 }
 
 export default Vue.extend({
+  components: {
+    departments: DepartmentsSection,
+  },
   data() {
     return {
       upcommingEvents: [] as Event[],
       events: [] as EventWithStatus[],
-
+      tabIndex: 0 as 0 | 1,
       news: [
         {
           title: 'کاربرگ شماره 5 منتشر شد',
@@ -755,61 +993,7 @@ export default Vue.extend({
                 آرتمیا تحولی در صنعت شیلات`,
         },
       ],
-      testevents: [
-        {
-          title: 'دورهمی شب چله نیکانیان',
-          body: `
-          در دوشنبه شب مورخ بیست و نهم آذر ماه هزار و چهارصد در محوطه ی سرپوشیده ی دبستان نیکان قریب به سیصد نفر از دانش آموختگان دورهم گرد آمدند تا یادی کنند از خاطراتشان و دیداری با یکدیگر تازه کنند.
-            در ذیل تصاویری از این دورهمی...
-          `,
-        },
-        {
-          title: 'کوهنوردی و بازدید از آبشار یخ زده سنگان',
-          body: `
-            با شروع فصل زیبای بهاری، کارگروه نشاط و سرگرمی کانون دانش آموختگان نیکان برگزار کرد.
 
-                تور یک روزه آبشار یخی سنگان در تاریخ چهارشنبه ۱۱ فروردین ۱۴۰۰
-
-                دیدار از آبشار یخی سنگان(شهران.جاده امامزاده داود)
-
-                حضور به صورت دورهمی با ماشین شخصی و رعایت پروتکل های بهداشتی انجام شد.
-
-                مخاطبان:...
-          `,
-        },
-        {
-          title: 'شب شعر نبوی',
-          body: `
-                در روز چهارشنبه مورخ ۲۰ اسفندماه ۹۹ در محل آمفی تئاتر دبیرستان نیکان مراسم شب شعر نبوی برگزار شد.
-
-            به برکت میلاد پر نور پیامبر متعال حضرت محمد مصطفی صلوات الله علیه و آله و سلم آمفی تئاتر دبیرستان نیکان بعد از حدود بیش از ۱...
-                    `,
-        },
-        {
-          title: 'وبینار تامین مالی شرکتی',
-          body: `
-                وبینار تامین مالی شرکتی
-
-                ? مدرس: دارا بوشهری
-                دانش آموخته دوره ۹
-
-                سوابق کاری و تحصیلی:
-                ? دانش آموخته MBA
-                دانشگاه آمریکایی شارجه
-                ? مدیر بانکداری شرکتی
-                HSBC Bank Middle East
-
-                ? مخاطبین وبینار:
-                ?مدیران میانی شرکتهای بزرگ
-                ?مدیران ارشد شرکتهای متوسط
-                ?مالکین شرکتهای کوچک
-
-                ? عناوین فرعی:
-                ? تامین مالی کوتاه مدت
-                ? تامین مالی ساختاریافته
-                ? تامین...`,
-        },
-      ],
       playerOptions: {
         controls: [
           'play-large',
@@ -849,11 +1033,8 @@ export default Vue.extend({
       ],
     }
   },
-  components: {
-    departments: DepartmentsSection,
-  },
   async fetch() {
-    const variables: EventsQueryVariables = { first: 5 }
+    const variables: EventsQueryVariables = { first: 4 }
     const { data } = await this.$apollo.query<EventsQuery>({
       query: gqlEventsQuery,
       variables,
@@ -891,7 +1072,17 @@ export default Vue.extend({
       }
 
       ev.eventStatus = status
-      console.log(ev)
+
+      ev.content = i?.content ? htmlStrip(i.content) : ''
+      ev.category = i?.categories?.edges
+        ? i.categories.edges
+            .filter(
+              (j) =>
+                j && !!j.node?.name && j.node.name.search('کارگروه ها') === -1
+            )
+            .map((j) => j!.node!.name)
+            .join('-')
+        : ''
       this.events.push(ev)
       if (ev.eventStatus === EventStatus.current) this.upcommingEvents.push(ev)
     })
@@ -900,7 +1091,6 @@ export default Vue.extend({
     // @ts-ignore
     window.home = this
     this.getUpcommingEvents()
-    console.log(process.env.MEDIA_CAT_ID)
   },
   methods: {
     async getUpcommingEvents(tryingThreshold = 3) {
