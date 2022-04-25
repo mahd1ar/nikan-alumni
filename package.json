@@ -23,6 +23,7 @@
     "@nuxtjs/device": "^2.1.0",
     "@nuxtjs/pwa": "^3.3.5",
     "animejs": "^3.2.1",
+    "body-parser": "^1.20.0",
     "clone-deep": "^4.0.1",
     "cookie-universal-nuxt": "^2.1.5",
     "core-js": "^3.19.3",

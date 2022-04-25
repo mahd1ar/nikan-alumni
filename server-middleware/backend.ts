@@ -1,7 +1,9 @@
 import express from 'express'
 import vCardsJS from 'vcards-js'
+import bodyParser from 'body-parser'
 
 const app = express()
+app.use(bodyParser.json());
 
 app.get('/create-contact', (req, res) => {
   const firstname = req.query.firstname
@@ -10,7 +12,7 @@ app.get('/create-contact', (req, res) => {
   const email = req.query.email
   const phone = req.query.mobile
   let error = false
-
+  // console.log(firstname, lastname, job, email, phone)
   const vCard = vCardsJS()
   let filename = String(~~(Date.now() / 60000))
 

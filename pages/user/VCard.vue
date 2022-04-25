@@ -22,7 +22,7 @@
       <div
         class="flex w-full flex-col overflow-hidden rounded-xl bg-white md:w-7/12 lg:w-9/12"
       >
-        <div class="px-7 pt-7">
+        <div class="px-7 pt-7" v-if="user.bio">
           <div class="flex flex-col">
             <h1 class="text-3xl">درباره من</h1>
             <div class="my-5 h-1 w-10 bg-cyan-400"></div>
@@ -231,6 +231,11 @@
           </div>
 
           <div
+            v-if="
+              user.jobLocation &&
+              user.jobLocation.lat !== 0 &&
+              user.jobLocation.lng !== 0
+            "
             class="mt-2 flex cursor-pointer flex-col overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
           >
             <div class="flex items-start">
@@ -254,14 +259,7 @@
                 </svg>
               </div>
 
-              <div
-                v-if="
-                  user.jobLocation &&
-                  user.jobLocation.lat !== 0 &&
-                  user.jobLocation.lng !== 0
-                "
-                class="relative px-2 text-slate-700"
-              >
+              <div class="relative px-2 text-slate-700">
                 <span
                   class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
@@ -298,6 +296,7 @@
             {{ user.firstName + ' ' + user.lastName }}
           </div>
           <div
+            v-if="user.occupation"
             class="my-3 flex items-center justify-center rounded-3xl bg-slate-100 py-2 px-4 text-center text-[#44566c]"
           >
             {{ user.occupation }}
@@ -427,6 +426,7 @@
           </div>
 
           <a
+            v-if="user.mobile"
             download
             target="_blank"
             :href="contact"
@@ -500,7 +500,44 @@ export default Vue.extend({
       } as UserFullProfile,
     }
   },
+  async fetch() {
+    const email = this.$route.query.email as string | 'mahdiyaranari@gmail.com'
 
+    console.log(email)
+    // TODO REFORM THIS URL AND ITS BACKEND
+    const { data } = await this.$axios.get<WPRestuser[]>(
+      'https://nikan-alumni.org/wp-json/wp/v2/users?search=' +
+        encodeURIComponent(email)
+    )
+    this.user.firstName = data[0].name
+      .split(' ')
+      .splice(0, data[0].name.split(' ').length - 1)
+      .join(' ')
+    this.user.lastName = data[0].name.split(' ').at(-1)!
+    this.user.email = email // 'a.mahdiyar7@yahoo.com'
+
+    this.user.avatar = data[0].avatar_urls['96']
+
+    const { biography, socialMedias } = BioHandler.decompose(
+      data[0].description
+    )
+
+    this.user.socialMedias = {
+      instagram: socialMedias.instagram || '',
+      linkedin: socialMedias.linkedin || '',
+      twitter: socialMedias.twitter || '',
+    }
+
+    this.user.bio = biography || ''
+
+    this.user.mobile = data[0].acf.mobile || ''
+    this.user.occupation = data[0].acf.occupation || ''
+    const latlng = LocationHandler.decompose(data[0].acf.job_location)
+    this.user.jobLocation.lat = latlng.lat
+    this.user.jobLocation.lng = latlng.lng
+
+    this.user.website = data[0].url
+  },
   computed: {
     contact() {
       const query = new URLSearchParams()
@@ -519,54 +556,8 @@ export default Vue.extend({
     },
   },
   mounted() {
-    this.fetchData()
-  },
-  methods: {
-    async fetchData() {
-      this.loaded = 0
-      try {
-        const email = this.$route.query.email as
-          | string
-          | 'mahdiyaranari@gmail.com'
-
-        console.log(email)
-        // TODO REFORM THIS URL AND ITS BACKEND
-        const { data } = await this.$axios.get<WPRestuser[]>(
-          'https://nikan-alumni.org/wp-json/wp/v2/users?search=' +
-            encodeURIComponent(email)
-        )
-        this.user.firstName = data[0].name
-        this.user.lastName = ''
-        this.user.email = email // 'a.mahdiyar7@yahoo.com'
-
-        this.user.avatar = data[0].avatar_urls['96']
-
-        const { biography, socialMedias } = BioHandler.decompose(
-          data[0].description
-        )
-
-        this.user.socialMedias = {
-          instagram: socialMedias.instagram || '',
-          linkedin: socialMedias.linkedin || '',
-          twitter: socialMedias.twitter || '',
-        }
-
-        this.user.bio = biography || ''
-
-        this.user.mobile = data[0].acf.mobile || ''
-        this.user.occupation = data[0].acf.occupation || ''
-        const latlng = LocationHandler.decompose(data[0].acf.job_location)
-        this.user.jobLocation.lat = latlng.lat
-        this.user.jobLocation.lng = latlng.lng
-
-        this.user.website = data[0].url
-      } catch (error) {
-        // console.log(error)
-        this.$nuxt.error({ statusCode: 404, message: Dict.P404 })
-      } finally {
-        this.loaded = 1
-      }
-    },
+    // @ts-ignore
+    window.v = this
   },
   // methods: {
   //   addToContacts() {
