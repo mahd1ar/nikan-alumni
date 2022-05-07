@@ -4,11 +4,11 @@
 
     <main class="mx-w-6xl container mx-auto py-4">
       <svg
+        id="icons"
         width="80px"
         height="80px"
         class="mx-auto"
         viewBox="0 0 340 340"
-        id="icons"
         xmlns="http://www.w3.org/2000/svg"
       >
         <title />
@@ -159,7 +159,7 @@
 
       <div
         v-show="events.length === 0 && !$fetchState.pending"
-        class="text-gray-400 text-center mt-10"
+        class="mt-10 text-center text-gray-400"
       >
         هیچ رویدادی وجود ندارد
       </div>

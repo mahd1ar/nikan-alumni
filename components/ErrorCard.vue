@@ -1,13 +1,15 @@
-<template >
-  <div v-show="error" class="text-red-500 bg-red-50 p-5 w-full">
-    <h2 class="text-xl p-2">در این صفحه خطایی رخ داده</h2>
-    <details>
-      <summary>Read more</summary>
-      <pre v-if="error" dir="ltr">
-              <h1> -ERROR- </h1>
+<template>
+  <div v-show="error">
+    <div v-if="error" class="w-full bg-red-50 p-5 text-red-500">
+      <h2 class="p-2 text-xl">در این صفحه خطایی رخ داده</h2>
+      <details>
+        <summary>Read more</summary>
+        <pre v-if="error" dir="ltr">
               {{ error }}
-            </pre>
-    </details>
+            </pre
+        >
+      </details>
+    </div>
   </div>
 </template>
 

@@ -3,27 +3,10 @@
     dir="rtl"
     class="relative flex min-h-screen flex-col justify-start overflow-hidden"
   >
-    <!-- DEBUGG -->
-    <div
-      v-if="$nuxt.context.isDev"
-      class="fixed top-10 left-10 z-50 opacity-50 sm:bg-green-400 md:bg-red-500 lg:bg-blue-500 xl:bg-yellow-500"
-    >
-      <div
-        class="p-1"
-        :class="{ 'bg-red-200': !isLoggedIn, 'bg-green-200': isLoggedIn }"
-      >
-        {{ isLoggedIn ? 'logged in' : 'logged out' }}
-      </div>
-      <span class="hidden sm:block">sm</span>
-      <span class="hidden md:block">md</span>
-      <span class="hidden lg:block">lg</span>
-      <span class="hidden xl:block">xl</span>
-      <span class="hidden 2xl:block">2xl</span>
-    </div>
     <div class="border-b-2">
       <nav class="md:mx-w-6xl p-4 md:container md:mx-auto md:py-4 xl:px-0">
         <div class="hidden lg:flex lg:items-center lg:justify-between">
-          <a href="#" class="group flex items-center gap-2">
+          <div class="group flex items-center gap-2">
             <div
               class="rounded-full bg-sky-50 p-1 text-sky-400 group-hover:bg-sky-800"
             >
@@ -60,7 +43,7 @@
                 {{ user.firstName }} {{ user.lastName }}
               </div>
             </div>
-          </a>
+          </div>
           <ul class="flex items-center gap-2 text-sm font-semibold">
             <li v-for="({ title, link }, index) in nav" :key="index">
               <nuxt-link
@@ -163,7 +146,7 @@
             <li>
               <div title="exit">
                 <div
-                  class="flex cursor-pointer gap-2 overflow-hidden rounded-md bg-sky-50 p-1 px-3 text-sky-400 hover:bg-gray-200"
+                  class="flex cursor-pointer gap-2 overflow-hidden rounded-md bg-sky-50 p-1 px-3 text-sky-400 hover:bg-white"
                   @click="exitModal.open = true"
                 >
                   <svg
@@ -187,35 +170,49 @@
           </ul>
         </div>
         <div class="relative flex w-full justify-between lg:hidden">
-          <a href="#" class="group flex items-start gap-2">
-            <div
-              class="rounded-md bg-blue-600 p-3 text-white group-hover:bg-blue-800"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+          <div class="group flex items-start gap-2">
+            <div class="group flex items-center gap-2">
+              <div
+                class="rounded-full bg-sky-50 p-1 text-sky-400 group-hover:bg-sky-800"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="img"
+                  width="1em"
+                  height="1em"
+                  class="h-10 w-10 p-2"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 48 48"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="4"
+                  >
+                    <path
+                      d="M6.572 37.428A21.904 21.904 0 0 1 2 24C2 11.85 11.85 2 24 2s22 9.85 22 22c0 5.056-1.705 9.713-4.572 13.428"
+                    />
+                    <path
+                      d="M12.303 31.697A13.935 13.935 0 0 1 10 24c0-7.732 6.268-14 14-14s14 6.268 14 14c0 2.843-.847 5.488-2.303 7.697"
+                    />
+                    <path d="m24 30l16 16H8l16-16Z" clip-rule="evenodd" />
+                  </g>
+                </svg>
+              </div>
+              <div class="flex translate-y-1 transform flex-col">
+                <div class="text-base font-bold tracking-widest">پیشخوان</div>
+                <div class="text-xs">
+                  {{ user.firstName }} {{ user.lastName }}
+                </div>
+              </div>
             </div>
-            <p class="text-sm font-light uppercase">
-              Dashboard
-              <span class="block text-base font-bold tracking-widest">
-                Atom
-              </span>
-            </p>
-          </a>
+          </div>
           <button
             type="button"
-            class="rounded-md bg-gray-200 p-3"
+            class="rounded-full bg-white p-3 text-sky-400"
             @click="open_t = !open_t"
           >
             <svg
@@ -249,17 +246,20 @@
               />
             </svg>
           </button>
-          <div
-            v-show="open_t"
-            class="absolute top-14 left-0 right-0 z-20 w-full rounded-md border bg-white"
-          >
-            <ul class="p-4">
-              <li
-                v-for="({ title, link }, index) in nav"
-                :key="index"
-                class="rounded px-4 py-2 hover:bg-gray-200"
-              >
-                <nuxt-link :to="link" href="#" class="flex items-center gap-4">
+
+          <transition name="v-openwindow">
+            <div
+              v-if="open_t"
+              class="absolute top-14 left-0 right-0 z-20 w-full rounded-md border bg-white"
+              @click="open_t = false"
+            >
+              <div class="p-4">
+                <nuxt-link
+                  v-for="({ title, link }, index) in nav"
+                  :key="index"
+                  :to="link"
+                  class="flex items-center gap-4 rounded px-4 py-2 hover:bg-gray-200"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-3 w-3"
@@ -276,9 +276,15 @@
                   </svg>
                   {{ title }}
                 </nuxt-link>
-              </li>
-            </ul>
-          </div>
+                <button
+                  class="mt-2 mr-4 w-full text-right text-red-500"
+                  @click="exitModal.open = true"
+                >
+                  خروج از حساب کاربری
+                </button>
+              </div>
+            </div>
+          </transition>
         </div>
       </nav>
     </div>
@@ -327,6 +333,7 @@ import { Dict } from '~/data/utils/dictionary'
 export default Vue.extend({
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Dashboard',
+
   data() {
     return {
       open_t: false,
@@ -343,6 +350,10 @@ export default Vue.extend({
         {
           title: 'رویداد ها',
           link: '/user/events',
+        },
+        {
+          title: 'بازگشت به خانه',
+          link: '/',
         },
       ],
     }

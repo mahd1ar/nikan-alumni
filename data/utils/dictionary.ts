@@ -3,11 +3,12 @@ export enum Dict {
   btn_ok = 'باشه',
   btn_no = 'خیر',
   general_err = 'خطا',
+  general_confirm = 'تایید',
   btn_cancel = 'کنسل',
   net_err = 'خطای شبکه',
   fetch_err = 'خطا در برقراری ارتباط',
   auth_kickout = 'اعتبار شما منقضی شده لطفا دوباره وارد سیستم شوید',
-  dashboard_saveinfo_title = 'تایید',
+  dashboard_requst_for_password_change = "لینک تغییر رمز عبور برای ایمیل {} ارسال خواهد شد. از تغییر رمز مطمئن هستید",
   dashboard_saveinfo_body = 'شما در آستانه ی بروز رسانی اطلاعات خود هستید، آیا از بروز رسانی اطمینان دارید ؟ ',
   dashboard_signout_title = 'خروج از حساب کاربری',
   dashboard_signout_body = 'آیا از خروج از حساب کاربری خود اطمینان دارید ؟ ',
@@ -28,4 +29,7 @@ export enum Dict {
   rp_dosenot_match = 'عدم هم خوانی با رمز عبور  ',
   rp_min_6char = 'رمز عبور باید حداقل 8 کاراکتر داشته باشد',
   rp_incorrect = ' incorrect',
+  signout_reset_pass_success = 'پسورد با موفقیت تغییر کرد',
+  signout_seeusoon = 'به امید دیدار'
+
 }

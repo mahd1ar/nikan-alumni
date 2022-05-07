@@ -1,20 +1,52 @@
-# , $authorEmail: String!
+# query Event($id: ID = "cG9zdDoxMA==") {
+#   event(id: $id) {
+#     date
+#     title(format: RENDERED)
+#     id
+#     databaseId
+#     content(format: RENDERED)
+#     commentCount
+#     featuredImage {
+#       node {
+#         link
+#         sourceUrl(size: LARGE)
+#       }
+#     }
+#     categories {
+#       edges {
+#         node {
+#           name
+#           link
+#         }
+#       }
+#     }
+#     eventProps {
+#       duration
+#       venue
+#     }
+#   }
+# }
+
 query Event($id: ID = "cG9zdDoxMA==") {
   event(id: $id) {
     date
     title(format: RENDERED)
     id
+    databaseId
     content(format: RENDERED)
     commentCount
     featuredImage {
       node {
+        id
         link
         sourceUrl(size: LARGE)
+        guid
       }
     }
     categories {
       edges {
         node {
+          id
           name
           link
         }
@@ -23,13 +55,7 @@ query Event($id: ID = "cG9zdDoxMA==") {
     eventProps {
       duration
       venue
+      price
     }
-    # comments(where: {authorEmail: $authorEmail }) {
-    #   nodes {
-    #     approved
-    #     type
-    #     content(format: RAW)
-    #   }
-    # }
   }
 }

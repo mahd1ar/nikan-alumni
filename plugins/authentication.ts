@@ -14,6 +14,7 @@ import {
   LocalStoreAuthentication as Authentication,
 } from '~/data/utils/enums'
 import { User } from '~/store/authentication'
+import { Dict } from '~/data/utils/dictionary'
 
 type userCreadit = { username: string; password: string }
 
@@ -35,7 +36,7 @@ class LoginStrategy {
     this.refreshHandler()
   }
 
-  public fetchMe() {}
+  public fetchMe() { }
 
   private loginHandler(response: LoginMutation) {
     localStorage.setItem(
@@ -171,7 +172,16 @@ class LoginStrategy {
     } else throw new Error('empty token')
   }
 
-  public signout() {
+  public signout(title?: string) {
+
+    if (typeof title === 'undefined')
+      title = Dict.signout_seeusoon
+
+    this.ctx.$about.success({ title, time: 6000 })
+    this.logout()
+  }
+
+  public silentSignout() {
     this.logout()
   }
 

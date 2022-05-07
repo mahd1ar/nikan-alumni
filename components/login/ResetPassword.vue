@@ -222,12 +222,13 @@ export default Vue.extend({
           clientMutationId: 'rpp' + ~~(Date.now() / 1000),
         }
 
-        const { data } = await this.$apollo.mutate<ResetPasswordMutation>({
+        await this.$apollo.mutate<ResetPasswordMutation>({
           mutation: ResetPasswordGql,
           variables,
         })
+
         this.$about.success({ title: 'رمزعبور با موفقیت عوض شد' })
-        console.log(data)
+        this.$authentication().silentSignout()
         this.$router.push('/login')
       } catch (error) {
         console.error(error)

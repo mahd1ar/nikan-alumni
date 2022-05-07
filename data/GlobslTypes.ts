@@ -7,7 +7,7 @@ export interface PostScheme {
   date: string
   wpdate: string
   faFormattedDate?: string[]
-  category: string
+  category: string | any[]
   content?: string
 }
 
@@ -21,19 +21,26 @@ export interface CategoryScheme {
   children: { title: string; slug: string }[]
 }
 
+export enum EventStatus {
+  ahead = -1,
+  current,
+  passed,
+}
 export interface Event extends PostScheme {
   location: string
   duration: number
+  eventStatus?: EventStatus
 }
 
-export interface SupportedSocialMedias {
-  instagram?: string
-  linkedin?: string
-  twitter?: string
+export type SupportedSocialMedia = 'instagram' | 'linkedin' | 'twitter'
+
+type SupportedSocialMedias = {
+  [key in SupportedSocialMedia]: string
 }
 export interface UserFullProfile {
   id: string
   databaseId: number
+  username: string
   firstName: string
   lastName: string
   email: string
@@ -45,6 +52,10 @@ export interface UserFullProfile {
   jobLocation: {
     lat: number
     lng: number
+  }
+  location: {
+    city: string
+    providence: string
   }
   bio: string
   premium: boolean

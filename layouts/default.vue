@@ -39,13 +39,17 @@
           class="absolute top-0 left-0 m-0 h-full w-full bg-black bg-opacity-30"
           @click.stop="closeMobileMenu"
         ></dir>
+        <!-- @click.stop="closeMobileMenu" -->
         <div
           id="mmenu__cart"
-          class="relative flex h-full max-w-sm flex-row bg-white"
+          class="relative flex h-full w-full flex-row bg-white"
         >
-          <div class="" style="background-color: #eff5f7; color: #5f6b85">
-            <div>
-              <ul class="flex h-full flex-col gap-2 p-4 overflow-hidden">
+          <div
+            class="flex-shrink-0"
+            style="background-color: #eff5f7; color: #5f6b85"
+          >
+            <div class="h-full">
+              <ul class="flex h-full h-full flex-col gap-2 overflow-hidden p-4">
                 <li
                   v-for="(menuitem, index) in menu"
                   :key="index"
@@ -60,6 +64,24 @@
                   @click="select(index, 0)"
                   v-html="menuitem.svg"
                 ></li>
+                <!-- back -->
+                <li
+                  class="mmenu__icon mt-auto rotate-180 transform cursor-pointer rounded border bg-white p-3 text-red-400 transition-all"
+                  @click="closeMobileMenu"
+                >
+                  <svg
+                    aria-hidden="true"
+                    role="img"
+                    class="mx-auto h-5 w-5"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M17.77 3.77L16 2L6 12l10 10l1.77-1.77L9.54 12z"
+                    />
+                  </svg>
+                </li>
               </ul>
             </div>
           </div>
@@ -172,30 +194,8 @@
           <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
               <div
-                class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+                class="absolute inset-y-0 left-0 flex items-center md:hidden"
               >
-                <nuxt-link
-                  v-if="!isLoggedIn"
-                  to="/login"
-                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-white hover:bg-gray-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    class="h-5 w-5"
-                    role="img"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 16 16"
-                  >
-                    <g fill="currentColor">
-                      <path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z" />
-                      <path
-                        fill-rule="evenodd"
-                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-                      />
-                    </g>
-                  </svg>
-                </nuxt-link>
                 <div
                   class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-white"
                   @click="$emit('openModal')"
@@ -276,31 +276,9 @@
               <div
                 class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
               >
-                <div class="flex-shrink-0 items-center hidden sm:flex">
-                  <nuxt-link
-                    v-if="!isLoggedIn"
-                    to="/login"
-                    class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-white hover:bg-gray-700"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      class="h-5 w-5"
-                      role="img"
-                      preserveAspectRatio="xMidYMid meet"
-                      viewBox="0 0 16 16"
-                    >
-                      <g fill="currentColor">
-                        <path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z" />
-                        <path
-                          fill-rule="evenodd"
-                          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-                        />
-                      </g>
-                    </svg>
-                  </nuxt-link>
+                <div class="hidden flex-shrink-0 items-center sm:flex">
                   <div
-                    class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-white hover:bg-gray-700"
+                    class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-cyan-400 hover:bg-gray-700"
                     @click="$emit('openModal')"
                   >
                     <svg
@@ -321,8 +299,8 @@
                     </svg>
                   </div>
                 </div>
-                <div id="sec-navigation" class="hidden sm:mr-6 sm:block">
-                  <div class="flex space-x-4">
+                <div id="sec-navigation" class="hidden md:block">
+                  <div class="flex gap-2">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <div
                       v-for="(m, index) in menu"
@@ -347,8 +325,20 @@
                   </div>
                 </div>
               </div>
+
               <div
-                class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+                class="absolute w-full inset-y-0 right-0 flex items-center pr-2 md:hidden pointer-events-none"
+              >
+                <div class="w-36 mx-auto">
+                  <div class="flex text-white">
+                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                    <div>کانون دانش آموختگان</div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0"
               >
                 <!-- Profile dropdown -->
                 <div class="relative ml-3">
@@ -357,7 +347,7 @@
                       v-if="isLoggedIn"
                       id="user-menu-button"
                       type="button"
-                      class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-800"
                       aria-expanded="false"
                       aria-haspopup="true"
                       @click="toggleUserController($event)"
@@ -365,10 +355,19 @@
                       <span class="sr-only">Open user menu</span>
                       <img
                         class="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        :src="$store.state.authentication.user.avatar"
                         alt=""
                       />
                     </button>
+
+                    <nuxt-link
+                      to="/login"
+                      v-else
+                      class="text-white py-1 px-4 bg-slate-700 rounded text-slate-300 text-sm"
+                    >
+                      <!-- کانون دانش آموختگان نیکان -->
+                      ورود اعضا
+                    </nuxt-link>
                   </div>
 
                   <!--
@@ -382,42 +381,73 @@
               To: "transform opacity-0 scale-95"
           -->
                   <client-only>
-                    <div
-                      v-if="isOpenUserController"
-                      v-click-outside="closeController"
-                      class="absolute right-0 sm:left-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="user-menu-button"
-                      tabindex="-1"
-                      @click="closeController"
-                    >
-                      <!-- Active: "bg-gray-100", Not Active: "" -->
-                      <a
-                        id="user-menu-item-0"
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
-                        tabindex="-1"
-                        >Your Profile</a
-                      >
-                      <a
-                        id="user-menu-item-1"
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
-                        tabindex="-1"
-                        >Settings</a
-                      >
+                    <transition name="v-openwindow">
                       <div
-                        class="block cursor-pointer px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
+                        v-if="isOpenUserController"
+                        v-click-outside="closeController"
+                        class="absolute right-0 z-10 mt-2 w-48 origin-top-right overflow-hidden rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:right-auto md:left-0"
+                        role="menu"
+                        aria-orientation="vertical"
+                        aria-labelledby="user-menu-button"
                         tabindex="-1"
-                        @click="signOut"
+                        @click="closeController"
                       >
-                        Sign out
+                        <!-- Active: "bg-gray-100", Not Active: "" -->
+                        <transition name="swip-left">
+                          <div v-if="!menuConfirm.show" key="t1">
+                            <a
+                              id="user-menu-item-0"
+                              href="#"
+                              class="block px-4 py-2 text-sm text-gray-700"
+                              role="menuitem"
+                              tabindex="-1"
+                              >Your Profile</a
+                            >
+                            <a
+                              id="user-menu-item-1"
+                              href="#"
+                              class="block px-4 py-2 text-sm text-gray-700"
+                              role="menuitem"
+                              tabindex="-1"
+                              >Settings</a
+                            >
+                            <div
+                              class="block cursor-pointer px-4 py-2 text-sm text-gray-700"
+                              role="menuitem"
+                              tabindex="-1"
+                              @click.stop="confirmSignOut"
+                            >
+                              خارج شدن از حساب کاربری
+                            </div>
+                          </div>
+                          <!-- confirm -->
+                          <div v-else key="t2">
+                            <p
+                              class="p-1 text-center text-tm-black"
+                              @click.stop
+                            >
+                              از خروج از حساب کاربری خود مطمئن هستید
+                            </p>
+                            <button
+                              class="block w-full cursor-pointer bg-red-50 px-4 py-2 text-sm text-red-700 hover:bg-red-100"
+                              role="menuitem"
+                              tabindex="-1"
+                              @click="signOut"
+                            >
+                              بله
+                            </button>
+                            <button
+                              class="block w-full cursor-pointer px-4 py-2 text-sm text-gray-500"
+                              role="menuitem"
+                              tabindex="-2"
+                              @click.stop="menuConfirm.show = false"
+                            >
+                              خیر
+                            </button>
+                          </div>
+                        </transition>
                       </div>
-                    </div>
+                    </transition>
                   </client-only>
                 </div>
               </div>
@@ -445,6 +475,9 @@ export default Vue.extend({
   },
   data() {
     return {
+      menuConfirm: {
+        show: false,
+      },
       isOpenUserController: false,
       mobileMenu: {
         selected: [] as number[],
@@ -510,6 +543,10 @@ export default Vue.extend({
     },
     closeController() {
       this.isOpenUserController = false
+      this.menuConfirm.show = false
+    },
+    confirmSignOut() {
+      this.menuConfirm.show = true
     },
     signOut() {
       // TODO : make a dialog and ask theme
@@ -556,7 +593,7 @@ export default Vue.extend({
   &-leave-to {
     #mmenu__cart {
       transform: translate3d(100%, 0, 0);
-      opacity: 0.5;
+      opacity: 1;
     }
 
     #mmenu__overlay {
@@ -587,6 +624,25 @@ export default Vue.extend({
 }
 .open-menu-move {
   transition: transform 0.2s;
+}
+
+.swip-left-enter-active,
+.swip-left-leave-active {
+  transition: all 400ms;
+}
+.swip-left-enter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.swip-left-leave-to {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: translateX(100%);
+  opacity: 0;
 }
 
 #sec-navigation {

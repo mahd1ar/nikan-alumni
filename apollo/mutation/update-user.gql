@@ -7,6 +7,7 @@ mutation updateUser(
   $mobile: String
   $phone: String
   $jobLocation: String
+  $misc: String
   $clientMutationId: String!
 ) {
   updateUser(
@@ -19,6 +20,7 @@ mutation updateUser(
       mobile: $mobile
       phone: $phone
       jobLocation: $jobLocation
+      misc: $misc
       clientMutationId: $clientMutationId
     }
   ) {

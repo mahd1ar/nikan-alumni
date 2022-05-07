@@ -33,6 +33,21 @@
     </div>
     <div v-else class="content">
       <div v-html="purgedContent || html"></div>
+
+      <div
+        class="w-full grid grid-cols-2 sm:grid-cols-3"
+        v-if="imgs.length > 0"
+      >
+        <img
+          class="hover:scale-125 hover:z-10 transition-all will-change-transform transform cursor-pointer"
+          v-for="(img, index) in imgs"
+          loading="lazy"
+          :key="index"
+          :src="img"
+        />
+      </div>
+
+      <image-viewer :open="false" />
     </div>
   </div>
 </template>
@@ -40,14 +55,11 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue'
 import { mapGetters } from 'vuex'
-
-interface Images {
-  id: number
-  src: string
-}
+import ImageViewer from './ImageViewer.vue'
 
 export default Vue.extend({
   name: 'ContentField',
+  components: { ImageViewer },
   props: {
     html: {
       type: String,
@@ -65,7 +77,7 @@ export default Vue.extend({
   data() {
     return {
       selectedImage: -1,
-      imgs: [] as Images[],
+      imgs: [] as string[],
       isProtected: false,
       purgedContent: '',
     }
@@ -75,50 +87,74 @@ export default Vue.extend({
       isLoggedIn: 'authentication/isLoggedIn',
     }),
   },
+  watch: {
+    html(nval: string) {
+      if (nval) this.purge()
+    },
+  },
   created() {
-    if (this.removeTags.length === 0) return
-
-    let purgedContent = this.html
-    this.removeTags.forEach((tagName) => {
-      const reg = new RegExp(`<${tagName}.*</${tagName}>`, 'g')
-      purgedContent = purgedContent.replace(reg, '')
-    })
-
-    console.log({ purgedContent })
-    if (!purgedContent) purgedContent = ' '
-
-    this.purgedContent = purgedContent
+    // if (this.removeTags.length === 0) return
+    if (this.html !== '') this.purge()
   },
   mounted() {
+    // @ts-ignore
+    window.html = this
     this.isProtected = this.html.search('Login to read more') !== -1
     if (this.isExcerpt) return
 
     const div = document.createElement('div')
     div.innerHTML = this.html
-    console.log(div, this)
   },
-  beforeDestroy() {
-    document.querySelectorAll('.content img').forEach((i) => {
-      i.remove()
-    })
-  },
+
   methods: {
-    // showImage(id: number) {
-    //   console.log({ id })
-    //   this.selectedImage = id
-    // },
+    purge() {
+      let purgedContent = this.html
+
+      this.removeTags.forEach((tagName) => {
+        const reg = new RegExp(`<${tagName}.*</${tagName}>`, 'g')
+        purgedContent = purgedContent.replace(reg, '')
+      })
+
+      if (!purgedContent) purgedContent = ' '
+
+      // strip images
+      this.imgs.splice(0, this.imgs.length)
+      purgedContent.match(/<img.*?src="(.*?)".*?>/gm)?.forEach((imagetag) => {
+        try {
+          // console.log(imagetag)
+          const [, src] = imagetag.match(/src="(.*?)"/)!
+          purgedContent = purgedContent.replace(imagetag, '')
+
+          this.imgs.push(src)
+        } catch (error) {
+          console.error(error)
+        }
+      })
+
+      this.purgedContent = purgedContent
+    },
   },
 })
 </script>
 
-<style>
+<style lang="scss">
 /* WP */
+.content {
+  direction: rtl;
 
+  p {
+    @apply text-lg leading-8;
+  }
+}
 .content .wp-block-columns {
   display: flex;
 }
 
 .content .wp-block-column {
   flex-grow: 1;
+}
+
+.content img {
+  @apply p-2;
 }
 </style>

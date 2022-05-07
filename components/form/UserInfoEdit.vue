@@ -1,5 +1,5 @@
 <template>
-  <main class="mx-w-6xl container mx-auto">
+  <main class="w-full">
     <div class="flex flex-col space-y-8">
       <!-- First Row -->
 
@@ -14,7 +14,7 @@
               اطلاعات کاربر
             </h2>
 
-            <ValidationObserver v-slot="{ invalid }" tag="form">
+            <ValidationObserver ref="form" v-slot="{ invalid }" tag="form">
               <fieldset class="mt-4 flex flex-col gap-6" :disabled="loading">
                 <validation-provider
                   v-slot="{ errors }"
@@ -96,7 +96,11 @@
                   </div>
                 </validation-provider>
 
-                <validation-provider v-slot="{ errors }" name="mobile">
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="phone"
+                  rules="max:22"
+                >
                   <!-- :rules="{ regex: /^(\d|\+)\d+$/, min: 11, max: 15 }" -->
                   <div>
                     <label class="text-gray-700" for="lastname">
@@ -105,7 +109,7 @@
                     <input
                       id="lastname"
                       v-model="editUser.phone"
-                      type="text"
+                      type="number"
                       dir="ltr"
                       :class="{
                         'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
@@ -191,6 +195,72 @@
                   />
                 </div>
 
+                <div>
+                  <label class="text-gray-700"> محل اقامت </label>
+
+                  <div class="flex gap-2 flex-row-reverse">
+                    <div class="w-6/12">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        :rules="{ regex: /^[^\d]*$/, max: 30 }"
+                        name="city"
+                      >
+                        <label class="text-gray-700 text-xs" for="city">
+                          شهر
+                        </label>
+
+                        <input
+                          id="city"
+                          v-model="editUser.location.city"
+                          type="city"
+                          :class="{
+                            ' block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
+                            'border-gray-200': !errors[0],
+                            'border-red-500': errors[0],
+                          }"
+                        />
+                        <!-- :rules="{ regex: /^(\d|\+)\d+$/, min: 11, max: 15 }" -->
+
+                        <span
+                          v-if="errors[0] !== undefined"
+                          class="mx-2 mt-2 text-xs text-red-500"
+                          >{{ errors[0] }}</span
+                        >
+                      </validation-provider>
+                    </div>
+
+                    <div class="w-6/12">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        :rules="{ regex: /^[^\d]*$/, max: 30 }"
+                        name="country"
+                      >
+                        <label class="text-gray-700 text-xs" for="providence">
+                          کشور
+                        </label>
+
+                        <input
+                          id="providence"
+                          v-model="editUser.location.providence"
+                          type="text"
+                          :class="{
+                            ' block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
+                            'border-gray-200': !errors[0],
+                            'border-red-500': errors[0],
+                          }"
+                        />
+                        <!-- :rules="{ regex: /^(\d|\+)\d+$/, min: 11, max: 15 }" -->
+
+                        <span
+                          v-if="errors[0] !== undefined"
+                          class="mx-2 mt-2 text-xs text-red-500"
+                          >{{ errors[0] }}</span
+                        >
+                      </validation-provider>
+                    </div>
+                  </div>
+                </div>
+
                 <div
                   class="flex flex-row-reverse items-center justify-end gap-2"
                 >
@@ -241,7 +311,10 @@
                 <validation-provider
                   v-slot="{ errors }"
                   name="instagram"
-                  rules="max:100"
+                  :rules="{
+                    regex: /instagram\.com\/.+/,
+                    max: 100,
+                  }"
                 >
                   <div>
                     <label class="text-gray-700" for="instagram"
@@ -253,6 +326,7 @@
                       placeholder="https://instagram.com/USERNAME"
                       name="instagram"
                       type="text"
+                      dir="ltr"
                       :class="{
                         'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
                         'border-gray-200': !errors[0],
@@ -270,8 +344,11 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="linkedin"
-                  rules="max:100"
+                  name="linkedin-url"
+                  :rules="{
+                    regex: /linkedin\.com\/.+/,
+                    max: 100,
+                  }"
                 >
                   <div>
                     <label class="text-gray-700" for="linkedin"
@@ -283,6 +360,7 @@
                       placeholder="https://www.linkedin.com/in/USERNAME/"
                       name="linkedin"
                       type="text"
+                      dir="ltr"
                       :class="{
                         'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
                         'border-gray-200': !errors[0],
@@ -301,7 +379,10 @@
                 <validation-provider
                   v-slot="{ errors }"
                   name="twitter"
-                  rules="max:100"
+                  :rules="{
+                    regex: /twitter\.com\/.+/,
+                    max: 100,
+                  }"
                 >
                   <div>
                     <label class="text-gray-700" for="twitter"
@@ -313,6 +394,7 @@
                       placeholder="https://twitter.com/USERNAME"
                       name="twitter"
                       type="text"
+                      dir="ltr"
                       :class="{
                         'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
                         'border-gray-200': !errors[0],
@@ -332,13 +414,19 @@
               <div class="mt-6 flex justify-end">
                 <button
                   :disabled="invalid"
-                  class="rounded bg-blue-50 px-4 py-2 text-sm font-semibold uppercase tracking-wider text-blue-500 hover:bg-blue-100"
+                  :class="{
+                    'rounded px-8 py-2 font-semibold uppercase tracking-wider': true,
+                    'text-red-500 font-thin text-sm ': invalid,
+                    'text-blue-500 hover:bg-blue-100 bg-blue-50': !invalid,
+                  }"
                   @click.prevent="confirm"
                 >
-                  ذخیره
+                  {{ invalid ? 'ورودی ها را دوباره چک کنید' : 'ذخیره' }}
                 </button>
               </div>
             </ValidationObserver>
+            <!-- gap -->
+            <br /><br /><br />
           </div>
         </div>
       </div>
@@ -371,6 +459,7 @@ import isEqual from 'lodash.isequal'
 import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
 import { Dict } from '~/data/utils/dictionary'
+const clonedeep: <T>(a: T) => T = require('lodash.clonedeep')
 
 for (const [rule, validation] of Object.entries(rules)) {
   extend(rule, {
@@ -400,7 +489,7 @@ export default Vue.extend({
     return {
       modal: {
         isOpen: false,
-        title: Dict.dashboard_saveinfo_title,
+        title: Dict.general_confirm,
         body: Dict.dashboard_saveinfo_body,
       },
       location: {
@@ -410,18 +499,10 @@ export default Vue.extend({
     }
   },
   fetch() {
-    let user = {} as UserFullProfile
+    this.editUser = clonedeep(this.user)
 
-    user = { ...this.user }
-    user.jobLocation = { ...this.user.jobLocation }
-    user.socialMedias = { ...this.user.socialMedias }
-    this.editUser = user
-
-    if (this.editUser.jobLocation.lat === 0) {
-      this.location.show = false
-    } else {
-      this.location.show = true
-    }
+    if (this.editUser.jobLocation.lat === 0) this.location.show = false
+    else this.location.show = true
   },
   watch: {
     'location.show'(nval: boolean) {
@@ -457,65 +538,12 @@ export default Vue.extend({
       this.modal.isOpen = true
     },
     save() {
-      // let flag = true
-
       if (isEqual(this.user, this.editUser) === false) {
         this.$emit('update:user', this.editUser)
         this.$emit('saveProfile')
       } else {
         this.$about.info({ title: Dict.form_no_changes, time: 5000 })
       }
-      // console.log(
-      //   'is eq social media',
-      //   isEqual(this.user.socialMedias, this.editUser.socialMedias)
-      // )
-      // console.log(
-      //   'is eq jobloca',
-      //   isEqual(this.user.jobLocation, this.editUser.jobLocation)
-      // )
-      // console.log(this.user.jobLocation, this.editUser.jobLocation)
-
-      // this.editUser.jobLocation =
-      //   this.location.default.x + ',' + this.location.default.y
-
-      // const urls = Object.entries(this.socialMedias).map((i) => i[1])
-      // this.user.description = BioHandler.compose(this.user.description, urls)
-
-      // console.log(this.userTemplate)
-
-      // let k: keyof UserObject
-      // // let k: keyof UpdateUserMutationVariables
-
-      // for (k in this.userTemplate) {
-      //   if (this.user[k] !== this.userTemplate[k]) {
-      //     console.log(k, ' is changed')
-      //     // @ts-ignore
-      //     updatedUser[k] = this.user[k]
-      //     flag = false
-      //   }
-      // }
-      // if (flag) {
-      //   this.$about.info({ title: Dict.form_no_changes })
-      //   return false
-      // } else {
-      //   console.log({ updatedUser })
-      //   return
-      //   try {
-      //     await this.$apollo.mutate({
-      //       mutation: updateUserMutation,
-      //       variables: updatedUser,
-      //     })
-      //     this.$about.success({
-      //       title: 'SUCCESS',
-      //       body: Dict.UPDATE_USER_SUCESS,
-      //     })
-
-      //     await this.$fetch()
-      //   } catch (error) {
-      //     console.error(error)
-      //     this.$about.error({ title: Dict.UPDATE_USER_ERR })
-      //   }
-      // }
     },
   },
 })

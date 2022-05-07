@@ -22,7 +22,7 @@
       <div
         class="flex w-full flex-col overflow-hidden rounded-xl bg-white md:w-7/12 lg:w-9/12"
       >
-        <div class="px-7 pt-7" v-if="user.bio">
+        <div v-if="user.bio" class="px-7 pt-7">
           <div class="flex flex-col">
             <h1 class="text-3xl">درباره من</h1>
             <div class="my-5 h-1 w-10 bg-cyan-400"></div>
@@ -444,8 +444,7 @@
 import Vue from 'vue'
 import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
-import { BioHandler, LocationHandler } from '~/data/utils'
-import { Dict } from '~/data/utils/dictionary'
+import { LocationHandler, MiscHandler } from '~/data/utils'
 
 export interface Avatar_url {
   24: string
@@ -459,6 +458,7 @@ export interface Acf {
   mobile: string
   gen: string
   premium: boolean
+  misc: string
 }
 
 export interface Self {
@@ -518,17 +518,17 @@ export default Vue.extend({
 
     this.user.avatar = data[0].avatar_urls['96']
 
-    const { biography, socialMedias } = BioHandler.decompose(
-      data[0].description
+    const { instagram, linkedin, twitter } = MiscHandler.decompose(
+      data[0].acf.misc
     )
 
     this.user.socialMedias = {
-      instagram: socialMedias.instagram || '',
-      linkedin: socialMedias.linkedin || '',
-      twitter: socialMedias.twitter || '',
+      instagram,
+      linkedin,
+      twitter,
     }
 
-    this.user.bio = biography || ''
+    this.user.bio = data[0].description || ''
 
     this.user.mobile = data[0].acf.mobile || ''
     this.user.occupation = data[0].acf.occupation || ''

@@ -8371,6 +8371,7 @@ export type UpdateUserInput = {
   lastName?: InputMaybe<Scalars['String']>;
   /** User's locale. */
   locale?: InputMaybe<Scalars['String']>;
+  misc?: InputMaybe<Scalars['String']>;
   mobile?: InputMaybe<Scalars['String']>;
   /** A string that contains a URL-friendly name for the user. The default is the user's username. */
   nicename?: InputMaybe<Scalars['String']>;
@@ -9084,6 +9085,8 @@ export type User_UserAcf = AcfFieldGroup & {
    * lat_lng
    */
   jobLocation?: Maybe<Scalars['String']>;
+  /** Dont Even touch This */
+  misc?: Maybe<Scalars['String']>;
   mobile?: Maybe<Scalars['String']>;
   occupation?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
@@ -9620,6 +9623,7 @@ export type UpdateUserMutationVariables = Exact<{
   mobile?: InputMaybe<Scalars['String']>;
   phone?: InputMaybe<Scalars['String']>;
   jobLocation?: InputMaybe<Scalars['String']>;
+  misc?: InputMaybe<Scalars['String']>;
   clientMutationId: Scalars['String'];
 }>;
 
@@ -9662,7 +9666,7 @@ export type EventQueryVariables = Exact<{
 }>;
 
 
-export type EventQuery = { __typename?: 'RootQuery', event?: { __typename?: 'Event', date?: string | null, title?: string | null, id: string, content?: string | null, commentCount?: number | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', link?: string | null, sourceUrl?: string | null } | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', name?: string | null, link?: string | null } | null } | null> | null } | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null } | null };
+export type EventQuery = { __typename?: 'RootQuery', event?: { __typename?: 'Event', date?: string | null, title?: string | null, id: string, databaseId: number, content?: string | null, commentCount?: number | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', id: string, link?: string | null, sourceUrl?: string | null, guid?: string | null } | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null, link?: string | null } | null } | null> | null } | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null, price?: number | null } | null } | null };
 
 export type EventsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -9674,7 +9678,7 @@ export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'R
 export type FetchMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, url?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, user_acf?: { __typename?: 'User_UserAcf', occupation?: string | null, mobile?: string | null, jobLocation?: string | null, phone?: string | null } | null } | null };
+export type FetchMeQuery = { __typename?: 'RootQuery', viewer?: { __typename?: 'User', email?: string | null, description?: string | null, firstName?: string | null, id: string, lastName?: string | null, nicename?: string | null, databaseId: number, username?: string | null, url?: string | null, avatar?: { __typename?: 'Avatar', url?: string | null } | null, user_acf?: { __typename?: 'User_UserAcf', occupation?: string | null, mobile?: string | null, jobLocation?: string | null, phone?: string | null, misc?: string | null } | null } | null };
 
 export type CategoryAttributesFragment = { __typename?: 'Category', id: string, databaseId: number, name?: string | null, slug?: string | null, count?: number | null, description?: string | null };
 

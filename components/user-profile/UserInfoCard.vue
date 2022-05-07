@@ -73,10 +73,10 @@
           <dt class="text-sm font-medium text-gray-500">محل اشتغال</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
             <div
-              class="text-gray-400"
               v-if="
                 userInfo.jobLocation.lat === 0 && userInfo.jobLocation.lng == 0
               "
+              class="text-gray-400"
             >
               شما هیچ آدرسی تعیین نکرده اید
             </div>

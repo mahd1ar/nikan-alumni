@@ -20,18 +20,11 @@
       <template #title> {{ participantsModal.title }} </template>
       <template #body>
         <div class="flex flex-col gap-1">
-          <<<<<<< HEAD
           <div v-if="totalRegistrants === 0" class="font-bold text-red-500">
-            =======
-            <div v-if="totalRegistrants === 0" class="font-bold text-red-500">
-              >>>>>>> 3bd3bbf60f39479137e88e92f51574d21c50f2cc
-              {{ participantsModal.nobodySignUpForThis }}
-            </div>
+            {{ participantsModal.nobodySignUpForThis }}
+          </div>
 
-            <div <<<<<<< HEAD class="font-bold text-cyan-500" ======= >>>>>>>
-            3bd3bbf60f39479137e88e92f51574d21c50f2cc
-            v-if="participantsModal.body.length === 0" class="font-bold
-            text-cyan-500" >
+          <div v-if="participantsModal.body.length === 0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
@@ -399,18 +392,11 @@ import { Dict } from '~/data/utils/dictionary'
 import regEvent from '@/apollo/mutation/event-registration.gql'
 
 import {
-  EventParticipantsQuery,
-  EventParticipantsQueryVariables,
   EventRegistrationMutation,
   EventRegistrationMutationVariables,
 } from '~/types/types'
-import {
-  toIndiaDigits,
-  wordpressDateToFormattedJalali,
-  wordpressDateToJalali,
-} from '~/data/utils'
+import { toIndiaDigits, wordpressDateToJalali } from '~/data/utils'
 import onLoggedOut from '~/mixins/on-logged-out'
-import participants from '@/apollo/queries/event-participants.gql'
 
 interface WPRestEvent {
   comment_ID: string

@@ -4,7 +4,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Dict } from '~/data/utils/dictionary'
 export default Vue.extend({
   // async fetch() {
   //   const slog = this.$route.params.catslog

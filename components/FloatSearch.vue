@@ -260,13 +260,13 @@
 <script lang="ts">
 import Vue from 'vue'
 
-const debounce = (fn: Function, ms = 300) => {
-  let timeoutId: ReturnType<typeof setTimeout>
-  return function (this: any, ...args: any[]) {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn.apply(this, args), ms)
-  }
-}
+// const debounce = (fn: Function, ms = 300) => {
+//   let timeoutId: ReturnType<typeof setTimeout>
+//   return function (this: any, ...args: any[]) {
+//     clearTimeout(timeoutId)
+//     timeoutId = setTimeout(() => fn.apply(this, args), ms)
+//   }
+// }
 
 const VueSearch = Vue.extend({
   name: 'FloatSearch',

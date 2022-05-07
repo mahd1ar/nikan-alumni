@@ -77,7 +77,7 @@
             کارت من
           </div>
           <div
-            class="title-font inline-flex w-1/2 items-center justify-center border-b-2 py-3 font-medium leading-none tracking-wider sm:w-auto sm:justify-start sm:px-6"
+            class="title-font inline-flex w-1/2 items-center justify-center border-b-2 py-3 font-medium leading-none tracking-wider sm:w-auto sm:justify-start sm:px-6 cursor-pointer"
             :class="
               activeTabIndex === 3
                 ? 'rounded-t border-cyan-500 bg-gray-100  text-cyan-500'
@@ -110,12 +110,16 @@
             class="flex flex-col items-start gap-2 md:flex-row"
           >
             <user-info-card
-              v-if="$fetchState.pending === false && !$fetchState.error"
+              v-if="
+                $fetchState.pending === false &&
+                !$fetchState.error &&
+                Object.entries(edituser).length !== 0
+              "
               class="w-full md:w-7/12"
               :user-info="edituser"
             />
 
-            <error-card class="w-full md:sw-7/12" :error="$fetchState.error" />
+            <error-card class="md:sw-7/12 w-full" :error="$fetchState.error" />
 
             <div class="w-full overflow-hidden md:w-5/12">
               <div class="px-4 py-5 sm:px-6">
@@ -210,9 +214,10 @@
                     مشاهده ی کارت کارت ویزیت انلاین
                   </p>
 
-                  <nuxt-link
+                  <a
                     class="mt-4 flex flex-row-reverse items-center justify-center gap-2 text-gray-50"
-                    to="/user/vcard?email=mahdiyaranari%40gmail.com"
+                    target="_blank"
+                    href="/user/vcard?email=mahdiyaranari%40gmail.com"
                   >
                     <p
                       class="max-w-sm text-xs font-light leading-tight md:text-sm"
@@ -235,14 +240,43 @@
                         d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"
                       />
                     </svg>
-                  </nuxt-link>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
+          <div
+            v-else-if="activeTabIndex === 3"
+            id="page-two"
+            :key="activeTabIndex"
+            class="flex flex-col items-start justify-start gap-2 max-w-xs cursor-pointer"
+          >
+            <button
+              class="w-full h-12 bg-gray-50 hover:bg-gray-100 text-gray-800"
+              @click="tryTohangePasswd"
+            >
+              تغییر رمز عبور
+            </button>
+            <button
+              class="w-full h-12 border border-red-100 hover:bg-gray-50 text-red-500"
+              @click="showExitModal"
+            >
+              خروج از حساب کاربری
+            </button>
+          </div>
         </transition>
       </div>
     </section>
+    <modal :open.sync="modal.isOpen" :confirm="true" @yes="confitm">
+      <template #title>
+        <h1>
+          {{ modal.title }}
+        </h1>
+      </template>
+      <template #body>
+        {{ modal.body }}
+      </template>
+    </modal>
   </div>
 </template>
 
@@ -251,23 +285,43 @@ import Vue from 'vue'
 import gql from 'graphql-tag'
 import fetchMe from '@/apollo/queries/fetch-me.gql'
 import onLoggedOut from '~/mixins/on-logged-out'
-import { FetchMeQuery, UpdateUserMutationVariables } from '~/types/types'
+import {
+  FetchMeQuery,
+  UpdateUserMutationVariables,
+  SendResetPasswordMutation,
+  SendResetPasswordMutationVariables,
+} from '~/types/types'
 import { UserFullProfile } from '@/data/GlobslTypes'
-import { BioHandler, toIndiaDigits, wordpressDateToJalali } from '~/data/utils'
+import {
+  toIndiaDigits,
+  wordpressDateToJalali,
+  MiscHandler,
+  Misc,
+  getGenerationFromUsername,
+} from '~/data/utils'
 import UserInfoCard from '~/components/user-profile/UserInfoCard.vue'
 import updateUserMutationgql from '@/apollo/mutation/update-user.gql'
 import UserInfoEdit from '~/components/form/UserInfoEdit.vue'
 import { Dict } from '~/data/utils/dictionary'
+import sendResetPasswordql from '@/apollo/mutation/send-reset-password.gql'
+const clonedeep: <T>(a: T) => T = require('lodash.clonedeep')
+const isEqual: <T>(a: T, b: T) => Boolean = require('lodash.isequal')
 
 export default Vue.extend({
   components: { UserInfoCard, UserInfoEdit },
   mixins: [onLoggedOut],
   layout: 'dashboard',
   middleware: ['authentication'],
-  transition: 'page',
+  // transition: 'page',
   data() {
     return {
       activeTabIndex: 0,
+      modal: {
+        isOpen: false,
+        title: Dict.general_confirm,
+        body: '',
+        mode: '',
+      },
       userRegisterdInThis: [] as { eventName: string; date: string }[],
       showuser: {} as UserFullProfile,
       edituser: {} as UserFullProfile,
@@ -280,10 +334,12 @@ export default Vue.extend({
     })
 
     if (data.viewer) {
+      console.log(data)
       const userTemplate = {} as UserFullProfile
 
       userTemplate.id = data.viewer.id
       userTemplate.databaseId = data.viewer.databaseId
+      userTemplate.username = data.viewer.username!
       userTemplate.firstName = data.viewer.firstName || ''
       userTemplate.lastName = data.viewer.lastName || ''
       userTemplate.email = data.viewer.email || ''
@@ -291,12 +347,16 @@ export default Vue.extend({
       userTemplate.phone = data.viewer.user_acf?.phone || ''
       userTemplate.occupation = data.viewer.user_acf?.occupation || ''
       userTemplate.avatar = data.viewer.avatar?.url || ''
-      userTemplate.gen = '33'
+      userTemplate.gen = toIndiaDigits(
+        getGenerationFromUsername(userTemplate.username)
+      )
       userTemplate.website = data.viewer.url || ''
       userTemplate.jobLocation = {
         lat: 0,
         lng: 0,
       }
+      userTemplate.bio = data.viewer.description || ''
+
       // this.location.show = false
       userTemplate.jobLocation.lat = 0
       userTemplate.jobLocation.lng = 0
@@ -311,27 +371,32 @@ export default Vue.extend({
         }
       }
 
-      const { biography, socialMedias } = BioHandler.decompose(
-        data.viewer.description || ''
-      )
-      userTemplate.bio = biography
-      userTemplate.socialMedias = {}
-      userTemplate.socialMedias.instagram = socialMedias.instagram
-      userTemplate.socialMedias.twitter = socialMedias.twitter
-      userTemplate.socialMedias.linkedin = socialMedias.linkedin
+      const {
+        instagram,
+        linkedin,
+        twitter,
+        city,
+        providence,
+      } = MiscHandler.decompose(data.viewer.user_acf?.misc || '')
+
+      userTemplate.location = { city, providence }
+      userTemplate.socialMedias = { instagram, twitter, linkedin }
 
       //   const x : UserFullProfile = {...userTemplate}
 
-      let k: keyof typeof userTemplate
+      // let k: keyof typeof userTemplate
 
-      for (k in userTemplate) {
-        // @ts-ignore
-        this.showuser[k] = userTemplate[k]
-        // @ts-ignore
-        this.edituser[k] = userTemplate[k]
-        // @ts-ignore
-      }
-    }
+      this.showuser = clonedeep(userTemplate)
+      this.edituser = clonedeep(userTemplate)
+
+      // for (k in userTemplate) {
+      //   // @ts-ignore
+      //   this.showuser[k] = userTemplate[k]
+      //   // @ts-ignore
+      //   this.edituser[k] = userTemplate[k]
+      //   // @ts-ignore
+      // }
+    } else throw new Error('undefined viewer')
   },
   computed: {
     QRCode() {
@@ -398,23 +463,26 @@ export default Vue.extend({
         clientMutationId: 'upusr' + ~~(Math.random() * 1000),
       } as UpdateUserMutationVariables
 
-      const urls1 = [
-        this.showuser.socialMedias.instagram || '',
-        this.showuser.socialMedias.linkedin || '',
-        this.showuser.socialMedias.twitter || '',
-      ]
+      const misc1: Misc = {
+        instagram: this.showuser.socialMedias.instagram,
+        linkedin: this.showuser.socialMedias.linkedin,
+        twitter: this.showuser.socialMedias.twitter,
+        city: this.showuser.location.city || '',
+        providence: this.showuser.location.providence || '',
+      }
 
-      const urls2 = [
-        this.edituser.socialMedias.instagram || '',
-        this.edituser.socialMedias.linkedin || '',
-        this.edituser.socialMedias.twitter || '',
-      ]
+      const misc2: Misc = {
+        instagram: this.edituser.socialMedias.instagram || '',
+        linkedin: this.edituser.socialMedias.linkedin || '',
+        twitter: this.edituser.socialMedias.twitter || '',
+        city: this.edituser.location.city || '',
+        providence: this.edituser.location.providence || '',
+      }
 
-      const description1 = BioHandler.compose(this.showuser.bio, urls1)
-      const description2 = BioHandler.compose(this.edituser.bio, urls2)
-      if (description1 !== description2) {
+      if (isEqual(misc1, misc2) === false) {
+        const stringMisc2 = MiscHandler.compose(misc2)
         contentChangedFlag = true
-        updateUserMutationVariables.description = description2
+        updateUserMutationVariables.misc = stringMisc2
       }
 
       const location1 = [
@@ -432,6 +500,11 @@ export default Vue.extend({
       if (location1 !== location2) {
         contentChangedFlag = true
         updateUserMutationVariables.jobLocation = location2
+      }
+
+      if (this.showuser.bio === this.edituser.bio) {
+        contentChangedFlag = true
+        updateUserMutationVariables.description = this.edituser.bio
       }
 
       if (this.showuser.firstName !== this.edituser.firstName) {
@@ -472,7 +545,8 @@ export default Vue.extend({
     async update() {
       const mutVar = this.generateOutput()
       if (mutVar === false) return
-      // console.log(mutVar)
+      console.log(mutVar)
+
       try {
         await this.$apollo.mutate({
           mutation: updateUserMutationgql,
@@ -483,6 +557,61 @@ export default Vue.extend({
       } catch (error) {
         alert(error)
       }
+    },
+    confitm() {
+      if (this.modal.mode === 'logout') this.$authentication().signout()
+      else if (this.modal.mode === 'chpass') this.sendChangePasswdRequest()
+    },
+    tryTohangePasswd() {
+      if (this.showuser.email) {
+        this.modal.body = Dict.dashboard_requst_for_password_change.replace(
+          '{}',
+          this.showuser.email
+        )
+        this.modal.isOpen = true
+        this.modal.mode = 'chpass'
+      }
+    },
+    async sendChangePasswdRequest() {
+      try {
+        this.$boxLoading.startLoadingEmpty()
+
+        const variables: SendResetPasswordMutationVariables = {
+          clientMutationId: 'uppass' + ~~(Date.now() / 10000),
+          username: this.showuser.email,
+        }
+        const { data } = await this.$apollo.mutate<SendResetPasswordMutation>({
+          mutation: sendResetPasswordql,
+          variables,
+        })
+
+        if (data?.sendPasswordResetEmail?.user?.email) {
+          const msg =
+            'لینک بازیابی به آدرس ' +
+            data.sendPasswordResetEmail.user.email +
+            'ارسال شد'
+          this.$about.success({ title: msg, time: 6000 })
+        } else {
+          const msg = ' لینک بازیابی ارسال شد '
+          this.$about.success({ title: msg, time: 6000 })
+          console.log(data)
+        }
+      } catch (error) {
+        if (String(error).search('There is no user registered') !== -1)
+          this.$about.error({
+            title: Dict.general_err,
+            body: 'ایمیل یا کد وارد شده صحیح نیست',
+          })
+        else console.error(error)
+      } finally {
+        this.$boxLoading.endLoading()
+      }
+    },
+    showExitModal() {
+      this.modal.title = Dict.dashboard_signout_title
+      this.modal.isOpen = true
+      this.modal.body = Dict.dashboard_signout_body
+      this.modal.mode = 'logout'
     },
   },
 })

@@ -3,7 +3,7 @@ import vCardsJS from 'vcards-js'
 import bodyParser from 'body-parser'
 
 const app = express()
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
 app.get('/create-contact', (req, res) => {
   const firstname = req.query.firstname

@@ -7,9 +7,11 @@
         :starting-from="upcommingEvents[0].wpdate"
         :duration="upcommingEvents[0].duration"
       >
-        <div class="container mx-auto flex gap-4">
-          <div class="flex w-8/12 flex-col">
-            <div class="flex flex-row-reverse justify-end gap-4">
+        <div class="container mx-auto flex flex-col-reverse gap-4 md:flex-row">
+          <div class="flex w-full flex-col md:w-8/12">
+            <div
+              class="mx-auto flex w-2/3 flex-row-reverse justify-end gap-4 md:w-full"
+            >
               <div class="flex flex-col gap-2">
                 <div class="text-xl text-tm-black">
                   رویداد پیش رو
@@ -28,29 +30,55 @@
                   {{ upcommingEvents[0].title }}
                 </h1>
                 <div>
-                  <div class="flex items-center gap-2 text-sm text-tm-gray">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      role="img"
-                      class="h-4 w-4"
-                      preserveAspectRatio="xMidYMid meet"
-                      viewBox="0 0 24 24"
-                    >
-                      <g
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                  <div class="mt-3 flex gap-6 md:mt-0">
+                    <div class="flex items-center gap-2 text-sm text-tm-gray">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        class="h-4 w-4"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
                       >
-                        <circle cx="12" cy="10" r="3" />
+                        <g
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        >
+                          <circle cx="12" cy="10" r="3" />
+                          <path
+                            d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z"
+                          />
+                        </g>
+                      </svg>
+                      <span>{{ upcommingEvents[0].location }} </span>
+                    </div>
+                    <div
+                      class="flex items-center gap-2 text-sm text-tm-gray md:hidden"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        role="img"
+                        class="h-4 w-4"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                      >
                         <path
-                          d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z"
+                          fill="currentColor"
+                          d="M8 14q-.425 0-.713-.288Q7 13.425 7 13t.287-.713Q7.575 12 8 12t.713.287Q9 12.575 9 13t-.287.712Q8.425 14 8 14Zm4 0q-.425 0-.712-.288Q11 13.425 11 13t.288-.713Q11.575 12 12 12t.713.287Q13 12.575 13 13t-.287.712Q12.425 14 12 14Zm4 0q-.425 0-.712-.288Q15 13.425 15 13t.288-.713Q15.575 12 16 12t.712.287Q17 12.575 17 13t-.288.712Q16.425 14 16 14ZM3 4h3V2h2v2h8V2h2v2h3v18H3Zm2 16h14V10H5ZM5 8h14V6H5Zm0 0V6v2Z"
                         />
-                      </g>
-                    </svg>
-                    <span>{{ upcommingEvents[0].location }} </span>
+                      </svg>
+                      <span
+                        >{{
+                          upcommingEvents[0].faFormattedDate
+                            .slice()
+                            .reverse()
+                            .join(' ')
+                        }}
+                      </span>
+                    </div>
                   </div>
                   <!-- <div
                   class="text-tm-gray bg-gray-50 inline-flex items-center gap-1 mt-2 rounded-md"
@@ -72,7 +100,7 @@
                 </div> -->
                 </div>
               </div>
-              <div class="w-16 rounded text-center">
+              <div class="hidden w-16 rounded text-center md:block">
                 <div class="bg-gray-200 py-2">
                   <div>{{ upcommingEvents[0].faFormattedDate[2] }}</div>
 
@@ -83,10 +111,10 @@
                 </div>
               </div>
             </div>
-            <div class="mt-20 flex flex-row-reverse gap-8">
+            <div class="mt-10 flex flex-col gap-8 md:mt-20 lg:flex-row-reverse">
               <div
                 v-if="time"
-                class="grid w-9/12 grid-cols-4 text-right text-3xl"
+                class="grid w-full grid-cols-4 text-center text-3xl md:text-right lg:w-9/12"
                 dir="ltr"
               >
                 <div class="flex flex-col">
@@ -108,15 +136,15 @@
                 </div>
               </div>
               <div
-                class="flex-center w-3/12 cursor-pointer rounded bg-tm-yellow text-center text-lg font-semibold text-white shadow-lg shadow-yellow-500/50 hover:bg-yellow-300"
+                class="flex-center h-12 cursor-pointer rounded bg-tm-yellow text-center text-lg font-semibold text-white shadow-lg shadow-yellow-500/50 hover:bg-yellow-300 lg:h-auto lg:w-3/12"
               >
                 مشاهده رویداد
               </div>
             </div>
           </div>
-          <div class="w-4/12">
+          <div class="w-full md:w-4/12">
             <img
-              class="max-h-full w-full rounded-md object-cover"
+              class="mx-auto max-h-full w-2/3 rounded-md object-cover md:w-full"
               src="test/val.jpg"
               alt=""
             />
@@ -126,7 +154,7 @@
     </section>
 
     <section class="body-font overflow-hidden text-gray-600">
-      <div class="hidden md:block container mx-auto px-5 py-12">
+      <div class="container mx-auto hidden px-5 py-12 md:block">
         <!-- -m-12 -->
         <div class="flex">
           <div class="w-1/2">
@@ -142,7 +170,7 @@
             <div
               v-for="(n, index) in news"
               :key="index"
-              class="flex w-full flex-col items-start lg:px-12 py-4"
+              class="flex w-full flex-col items-start py-4 lg:px-12"
             >
               <div class="flex items-start gap-3">
                 <img
@@ -246,12 +274,12 @@
                       >1400</span
                     > -->
                   </div>
-                  <div class="flex-grow pl-6">
-                    <h2
+                  <nuxt-link :to="'/event/' + e.link" class="flex-grow pl-6">
+                    <h3
                       class="title-font mb-1 text-xs font-medium tracking-widest text-black"
                     >
                       {{ e.category }}
-                    </h2>
+                    </h3>
                     <h2
                       class="title-font mb-3 text-xl font-medium text-gray-900"
                     >
@@ -262,19 +290,7 @@
                       class="mb-5 cursor-pointer leading-relaxed hover:underline"
                       v-text="e.content"
                     ></p>
-                    <!-- <a class="inline-flex items-center">
-                      <img
-                        alt="blog"
-                        src="https://dummyimage.com/103x103"
-                        class="w-8 h-8 rounded-full flex-shrink-0 object-cover object-center"
-                      />
-                      <span class="flex-grow flex flex-col pl-3">
-                        <span class="title-font font-medium text-gray-900"
-                          >Alper Kamu</span
-                        >
-                      </span>
-                    </a> -->
-                  </div>
+                  </nuxt-link>
                 </div>
               </div>
             </div>
@@ -305,13 +321,13 @@
       <!-- mobile tabs -->
       <div class="md:hidden">
         <div class="flex-center">
-          <div class="flex border-b border-gray-200 mb-10">
+          <div class="mb-10 flex border-b border-gray-200">
             <button
-              class="h-10 flex gap-2 items-center px-4 py-2 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+              class="-mb-px flex h-10 items-center gap-2 whitespace-nowrap border-b-2 bg-transparent px-4 py-2 text-center text-sm focus:outline-none sm:text-base"
               :class="
                 tabIndex === 0
-                  ? 'text-cyan-600  border-cyan-500'
-                  : 'text-gray-700  border-transparent  cursor-base  hover:border-gray-400'
+                  ? 'border-cyan-500  text-cyan-600'
+                  : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
               "
               @click="tabIndex = 0"
             >
@@ -334,11 +350,11 @@
             </button>
 
             <button
-              class="h-10 flex gap-2 items-center px-4 py-2 -mb-px text-sm text-center bg-transparent border-b-2 sm:text-base whitespace-nowrap focus:outline-none"
+              class="-mb-px flex h-10 items-center gap-2 whitespace-nowrap border-b-2 bg-transparent px-4 py-2 text-center text-sm focus:outline-none sm:text-base"
               :class="
                 tabIndex === 1
-                  ? 'text-cyan-600  border-cyan-500'
-                  : 'text-gray-700  border-transparent  cursor-base  hover:border-gray-400'
+                  ? 'border-cyan-500  text-cyan-600'
+                  : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
               "
               @click="tabIndex = 1"
             >
@@ -381,7 +397,7 @@
                   class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none"
                 >
                   <span
-                    class="mb-2 w-12 border-b-2 pb-2 text font-semibold text-[#ffc400]"
+                    class="text mb-2 w-12 border-b-2 pb-2 font-semibold text-[#ffc400]"
                     >{{ e.faFormattedDate[2] }}</span
                   >
                   <span class="text-sm font-medium leading-none text-tm-black">
@@ -405,7 +421,7 @@
                   </h2>
                   <p
                     v-snip="3"
-                    class="mb-5 text-sm cursor-pointer leading-relaxed hover:underline"
+                    class="mb-5 cursor-pointer text-sm leading-relaxed hover:underline"
                   >
                     {{ e.content }}
                   </p>
@@ -415,7 +431,7 @@
           </div>
           <div class="py-4 px-4">
             <button
-              class="mx-auto text-center flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
+              class="mx-auto flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-center text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -443,14 +459,14 @@
             class="flex w-full flex-col items-start px-12 py-4"
           >
             <div class="flex items-stretch gap-8">
-              <div class="w-4/12 h-fit">
+              <div class="h-fit w-4/12">
                 <img
                   class="aspect-square rounded object-cover"
                   src="test/one.jfif"
                   alt=""
                 />
               </div>
-              <div class="w-8/12 flex flex-col">
+              <div class="flex w-8/12 flex-col">
                 <div>
                   <span
                     class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500"
@@ -838,16 +854,16 @@
         </div>
         <div class="bg-slate-800" dir="ltr">
           <div
-            class="container mx-auto flex justify-between flex-wrap py-4 px-5 sm:flex-row"
+            class="container mx-auto flex flex-wrap justify-between py-4 px-5 sm:flex-row"
           >
             <div
-              class="text-center text-sm text-slate-50 sm:text-left font-mono flex"
+              class="flex text-center font-mono text-sm text-slate-50 sm:text-left"
             >
               © 2020 nikan-alumni —
               <a
                 href="https://netdom.ir"
                 rel="noopener noreferrer"
-                class="ml-1 gap-1 text-gray-400 flex-center tracking-widest"
+                class="flex-center ml-1 gap-1 tracking-widest text-gray-400"
                 target="_blank"
               >
                 Designed and developed by Mahdiyar Anari
@@ -954,17 +970,7 @@ import { Dict } from '~/data/utils/dictionary'
 import gqlEventsQuery from '@/apollo/queries/events.gql'
 import { EventsQuery, EventsQueryVariables } from '~/types/types'
 import DepartmentsSection from '@/components/homepage/DepartmentsSection.vue'
-import { Event } from '@/data/GlobslTypes'
-
-enum EventStatus {
-  ahead = -1,
-  current,
-  passed,
-}
-interface EventWithStatus extends Event {
-  eventStatus: EventStatus
-  content: string
-}
+import { Event, EventStatus } from '@/data/GlobslTypes'
 
 export default Vue.extend({
   components: {
@@ -973,7 +979,7 @@ export default Vue.extend({
   data() {
     return {
       upcommingEvents: [] as Event[],
-      events: [] as EventWithStatus[],
+      events: [] as Event[],
       tabIndex: 0 as 0 | 1,
       news: [
         {
@@ -1041,10 +1047,12 @@ export default Vue.extend({
     })
 
     data.events?.nodes?.forEach((i) => {
-      const ev = {} as EventWithStatus
+      const ev = {} as Event
 
       ev.id = i!.databaseId
       ev.gqlid = i!.id
+      // @ts-ignore
+      ev.link = encodeURIComponent(i!.id)
       ev.title = i?.title || ''
       ev.imageLink = i?.featuredImage?.node?.sourceUrl || ''
       ev.commentCount = i?.commentCount
@@ -1100,6 +1108,7 @@ export default Vue.extend({
         const { data } = await this.$axios.get<WpUpcommingEvents[]>(
           'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent'
         )
+        console.log(data)
         const d: Event[] = data
           .map((e) => ({
             id: e.ID,

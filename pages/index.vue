@@ -30,7 +30,7 @@
               <div
                 class="container relative mx-auto flex h-full flex-row-reverse"
               >
-                <div class="flex w-5/12 flex-col justify-center gap-6">
+                <div class="flex flex-col justify-center gap-6 md:w-6/12">
                   <div class="text-right text-5xl font-bold text-gray-50">
                     کانون
                     <br />
@@ -100,27 +100,29 @@ export default Vue.extend({
     }
   },
   mounted() {
-    const options = {
-      // root: document.querySelector('#scrollArea'),
-      rootMargin: '100px',
-      threshold: 1.0,
-    }
-
-    const observer = new IntersectionObserver((entreis) => {
-      if (entreis[0].isIntersecting) {
-        console.log('isIntersecting')
-        this.$store.dispatch('navigation/toggleDarkMenu', false)
-      } else {
-        console.log('is NOT Intersecting')
-        this.$store.dispatch('navigation/toggleDarkMenu', true)
+    this.$nextTick(() => {
+      const options = {
+        // root: document.querySelector('#scrollArea'),
+        rootMargin: '100px',
+        threshold: 1.0,
       }
-    }, options)
 
-    type NavRef = InstanceType<typeof Vue>
+      const observer = new IntersectionObserver((entreis) => {
+        if (entreis[0].isIntersecting) {
+          console.log('isIntersecting')
+          this.$store.dispatch('navigation/toggleDarkMenu', false)
+        } else {
+          console.log('is NOT Intersecting')
+          this.$store.dispatch('navigation/toggleDarkMenu', true)
+        }
+      }, options)
 
-    this.observer = Object.freeze(observer)
+      type NavRef = InstanceType<typeof Vue>
 
-    this.observer.observe((this.$refs.heroNav as NavRef).$el!)
+      this.observer = Object.freeze(observer)
+
+      this.observer.observe((this.$refs.heroNav as NavRef).$el!)
+    })
   },
 })
 </script>

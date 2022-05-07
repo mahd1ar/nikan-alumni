@@ -36,8 +36,8 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-node-
 
-      - name: stop pm2
-        run: pm2 stop "yarn start"
+      - name: stop pm2 all services
+        run: pm2 delete all
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn
@@ -45,5 +45,8 @@ jobs:
       - name: build 🏦
         run: yarn run build
 
-      - name: start pm2 ✅
+      - name: start server ✅
         run: pm2 start "yarn start"
+
+      - name: start filebrowser 📂
+        run: pm2 start "filebrowser --port 8000 -b /update --root ~/filebrowser"

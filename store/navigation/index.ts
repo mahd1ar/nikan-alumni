@@ -185,6 +185,14 @@ const initialState = {
   },
   menu: [
     {
+      title: 'خانه',
+      hasSubmenu: false,
+      href: '/',
+      svg: SVG.INTRO,
+      submenu: [
+      ],
+    },
+    {
       title: 'معرفی',
       hasSubmenu: true,
       href: '#',

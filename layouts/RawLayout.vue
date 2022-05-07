@@ -18,5 +18,12 @@
 <script>
 export default {
   name: 'RawLayout',
+  mounted() {
+    window.addEventListener('beforeinstallprompt', function (e) {
+      // log the platforms provided as options in an install prompt
+      alert(e.platforms) // e.g., ["web", "android", "windows"]
+      e.preventDefault()
+    })
+  },
 }
 </script>
