@@ -125,6 +125,34 @@
                   </div>
                 </validation-provider>
 
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="website"
+                  :rules="{
+                    regex: /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
+                  }"
+                >
+                  <div>
+                    <label class="text-gray-700" for="lastname"> وبسایت</label>
+                    <input
+                      id="lastname"
+                      v-model="editUser.website"
+                      type="text"
+                      dir="ltr"
+                      :class="{
+                        'mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring  focus:ring-blue-300 focus:ring-opacity-40': true,
+                        'border-gray-200': !errors[0],
+                        'border-red-500': errors[0],
+                      }"
+                    />
+                    <span
+                      v-if="errors[0] !== undefined"
+                      class="mx-2 mt-2 text-xs text-red-500"
+                      >{{ errors[0] }}</span
+                    >
+                  </div>
+                </validation-provider>
+
                 <div class="border-2 border-dashed bg-gray-50 py-5 px-3">
                   <h3 class="text-gray-700">آپلود عکس</h3>
                   <p class="mt-3 leading-7 text-gray-500">

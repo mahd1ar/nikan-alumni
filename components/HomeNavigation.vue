@@ -4,8 +4,31 @@
       class="container mx-auto h-full overflow-x-clip lg:max-w-[1104px] lg:px-10 xl:px-0"
     >
       <div
-        class="flex h-full w-full flex-row items-stretch justify-between gap-1 rounded bg-white px-4"
+        class="flex h-full w-full flex-row-reverse items-stretch justify-between gap-1 rounded bg-white px-4"
       >
+        <div class="flex items-center justify-center lg:hidden">
+          <nuxt-link
+            to="/login"
+            class="py-2 hover:bg-slate-100 tracking-widest px-4 text-gray-600 font-bold rounded"
+          >
+            ورود اعضا
+          </nuxt-link>
+        </div>
+
+        <figure class="relative hidden lg:block">
+          <div class="left-0 z-10 h-full rounded-md bg-white py-2">
+            <img class="h-full" src="img/logo_only.png" alt="" />
+          </div>
+        </figure>
+
+        <figure
+          class="lg:hidden absolute h-full top-0 left-1/2 transform -translate-x-1/2"
+        >
+          <div class="left-0 z-10 h-full rounded-md bg-white py-2">
+            <img class="h-full" src="img/logo_only.png" alt="" />
+          </div>
+        </figure>
+
         <div class="flex flex-row gap-1">
           <div class="flex items-center">
             <div
@@ -16,26 +39,21 @@
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="h-5 w-5"
+                class="w-6 h-6"
                 preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 16 16"
+                viewBox="0 0 20 20"
               >
-                <g
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                >
-                  <circle cx="8" cy="2.5" r=".75" />
-                  <circle cx="8" cy="8" r=".75" />
-                  <circle cx="8" cy="13.5" r=".75" />
-                </g>
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M3 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm0 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm6 5a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2h-6a1 1 0 0 1-1-1Z"
+                  clip-rule="evenodd"
+                />
               </svg>
             </div>
-            <nuxt-link
+            <!-- <nuxt-link
               to="/login"
-              class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
+              class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-red-700 hover:bg-gray-100"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +71,7 @@
                   />
                 </g>
               </svg>
-            </nuxt-link>
+            </nuxt-link> -->
             <div
               class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
               @click="$emit('openModal')"
@@ -62,7 +80,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 role="img"
-                class="h-5 w-5"
+                class="h-6 w-6"
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 24 24"
               >
@@ -90,12 +108,6 @@
             </div>
           </nav>
         </div>
-
-        <figure class="relative">
-          <div class="left-0 z-10 h-full rounded-md bg-white py-3">
-            <img class="h-full" src="img/logo_only.png" alt="" />
-          </div>
-        </figure>
       </div>
     </div>
   </nav>
@@ -112,6 +124,9 @@ export default Vue.extend({
         show: false,
       },
     }
+  },
+  mounted() {
+    this.$emit('componentLoaded')
   },
   computed: {
     ...mapGetters({ menu: 'navigation/menu' }),

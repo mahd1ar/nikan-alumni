@@ -217,13 +217,18 @@
                   <a
                     class="mt-4 flex flex-row-reverse items-center justify-center gap-2 text-gray-50"
                     target="_blank"
-                    href="/user/vcard?email=mahdiyaranari%40gmail.com"
+                    :href="
+                      '/user/vcard?email=' +
+                      encodeURIComponent($store.state.authentication.user.email)
+                    "
                   >
                     <p
                       class="max-w-sm text-xs font-light leading-tight md:text-sm"
                     >
                       <code class="w-full">
-                        https://nikan-alumni.com/user/vcard?email=mahdiyaranari%40gmail.com
+                        https://nikan-alumni.com/user/vcard?email={{
+                          $store.state.authentication.user.email
+                        }}
                       </code>
                     </p>
                     <svg
@@ -347,6 +352,7 @@ export default Vue.extend({
       userTemplate.phone = data.viewer.user_acf?.phone || ''
       userTemplate.occupation = data.viewer.user_acf?.occupation || ''
       userTemplate.avatar = data.viewer.avatar?.url || ''
+      userTemplate.bio = data.viewer.description || ''
       userTemplate.gen = toIndiaDigits(
         getGenerationFromUsername(userTemplate.username)
       )
@@ -356,7 +362,7 @@ export default Vue.extend({
         lng: 0,
       }
       userTemplate.bio = data.viewer.description || ''
-
+      userTemplate.website = data.viewer.url || ''
       // this.location.show = false
       userTemplate.jobLocation.lat = 0
       userTemplate.jobLocation.lng = 0
@@ -502,7 +508,7 @@ export default Vue.extend({
         updateUserMutationVariables.jobLocation = location2
       }
 
-      if (this.showuser.bio === this.edituser.bio) {
+      if (this.showuser.bio !== this.edituser.bio) {
         contentChangedFlag = true
         updateUserMutationVariables.description = this.edituser.bio
       }
@@ -525,6 +531,11 @@ export default Vue.extend({
       if (this.showuser.phone !== this.edituser.phone) {
         contentChangedFlag = true
         updateUserMutationVariables.phone = this.edituser.phone
+      }
+
+      if (this.showuser.website !== this.edituser.website) {
+        contentChangedFlag = true
+        updateUserMutationVariables.websiteUrl = this.edituser.website
       }
 
       if (this.showuser.occupation !== this.edituser.occupation) {

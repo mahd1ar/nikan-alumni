@@ -45,6 +45,7 @@ export const actions: ActionTree<RootState, RootState> = {
     }
 
     if (route.path === '/v3' || route.path === '/') {
+      console.log(route.path)
       dispatch('navigation/toggleDarkMenu', false)
     }
   },

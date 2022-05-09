@@ -107,7 +107,7 @@ export default Vue.extend({
     return {
       loading: false,
       verified: false,
-      email: 'mahdiyaranari@gmail.com',
+      email: 'a.mahdiyar7@yahoo.com',
     }
   },
   methods: {

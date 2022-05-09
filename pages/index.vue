@@ -22,6 +22,7 @@
               <home-navigation
                 ref="heroNav"
                 class="sticky"
+                @componentLoaded="observe"
                 @openModal="search.show = true"
               />
               <div
@@ -99,30 +100,35 @@ export default Vue.extend({
         'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
     }
   },
-  mounted() {
-    this.$nextTick(() => {
-      const options = {
-        // root: document.querySelector('#scrollArea'),
-        rootMargin: '100px',
-        threshold: 1.0,
+
+  beforeMount() {
+    const options = {
+      // root: document.querySelector('#scrollArea'),
+      rootMargin: '100px',
+      threshold: 1.0,
+    }
+
+    const observer = new IntersectionObserver((entreis) => {
+      if (entreis[0].isIntersecting) {
+        console.log('isIntersecting')
+        this.$store.dispatch('navigation/toggleDarkMenu', false)
+      } else {
+        console.log('is NOT Intersecting')
+        this.$store.dispatch('navigation/toggleDarkMenu', true)
       }
+    }, options)
 
-      const observer = new IntersectionObserver((entreis) => {
-        if (entreis[0].isIntersecting) {
-          console.log('isIntersecting')
-          this.$store.dispatch('navigation/toggleDarkMenu', false)
-        } else {
-          console.log('is NOT Intersecting')
-          this.$store.dispatch('navigation/toggleDarkMenu', true)
-        }
-      }, options)
-
+    this.observer = Object.freeze(observer)
+    this.$nextTick(() => {})
+  },
+  methods: {
+    observe() {
       type NavRef = InstanceType<typeof Vue>
 
-      this.observer = Object.freeze(observer)
-
-      this.observer.observe((this.$refs.heroNav as NavRef).$el!)
-    })
+      if (this.observer) {
+        this.observer.observe((this.$refs.heroNav as NavRef).$el!)
+      } else console.log('NOT DEF')
+    },
   },
 })
 </script>

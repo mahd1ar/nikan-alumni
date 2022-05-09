@@ -587,7 +587,6 @@ export default Vue.extend({
 
   watch: {
     loading(nval: boolean) {
-      // debugger
       console.log('WATCH')
       if (nval === false) {
         // TODO : maybe adjust category
@@ -637,7 +636,7 @@ export default Vue.extend({
     async getEventParticipants() {
       if (this.$store.state.authentication.isLoggedIn === false) {
         this.$about.info({
-          title: 'برای مشاهده شرکت کنندگان  در رویداد باید وارد شوید',
+          title: 'برای مشاهده شرکت کنندگان باید وارد شوید',
           time: 5000,
           // body: "<a href='#' > login </a>",
         })

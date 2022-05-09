@@ -28,7 +28,7 @@
             <div class="my-5 h-1 w-10 bg-cyan-400"></div>
           </div>
 
-          <div class="my-3 min-h-[120px]">
+          <div class="my-3 min-h-[120px] text-lg">
             {{ user.bio }}
           </div>
         </div>
@@ -83,11 +83,12 @@
                     />
                   </svg>
                 </span>
-                <span> {{ user.mobile }} </span>
+                <span> {{ toIndiaDigits(user.mobile) }} </span>
               </a>
             </div>
-
+            <!-- // phone -->
             <div
+              v-if="user.mobile"
               class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
               <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
@@ -106,7 +107,10 @@
                 </svg>
               </div>
 
-              <a href="tel:02188344345" class="relative px-2 text-slate-700">
+              <a
+                :href="'tel:' + user.mobile"
+                class="relative px-2 text-slate-700"
+              >
                 <span
                   class="relative flex items-center justify-start gap-2 text-lg font-bold"
                 >
@@ -127,7 +131,7 @@
                     />
                   </svg>
                 </span>
-                <span> 02188344345 </span>
+                <span> {{ toIndiaDigits(user.phone) }} </span>
               </a>
             </div>
 
@@ -183,7 +187,8 @@
             </div>
 
             <a
-              href="https://netdom.ir"
+              v-if="user.website"
+              :href="user.website"
               target="_blank"
               class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
@@ -225,7 +230,13 @@
                     />
                   </svg>
                 </span>
-                <span> netdom.ir </span>
+                <span>
+                  {{
+                    user.website
+                      ? user.website.replace(/(http|https):\/\//, '')
+                      : ''
+                  }}
+                </span>
               </div>
             </a>
           </div>
@@ -269,7 +280,7 @@
               </div>
             </div>
 
-            <div v-if="loaded === false" class="h-72 py-5 px-3">
+            <div v-if="+user.jobLocation.lat !== 0" class="h-72 py-5 px-3">
               <map-picker
                 :lat="user.jobLocation.lat"
                 :lng="user.jobLocation.lng"
@@ -287,6 +298,7 @@
           >
             <!-- src="https://avatars.githubusercontent.com/u/32998122?v=4" -->
             <img
+              loading="lazy"
               :src="user.avatar"
               class="absolute bottom-0 h-40 w-40 rounded-3xl"
               alt=""
@@ -349,8 +361,9 @@
         <div
           class="mt-auto flex shrink-0 flex-col gap-3 rounded-b-xl bg-slate-100 px-7 py-8 text-[#44566c]"
         >
-          <div class="flex items-center gap-1">
+          <div v-if="user.location" class="flex items-center gap-1">
             <svg
+              v-if="user.location.city || user.location.providence"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
@@ -367,7 +380,9 @@
                 d="M512 512a96 96 0 1 0 0-192a96 96 0 0 0 0 192zm0 64a160 160 0 1 1 0-320a160 160 0 0 1 0 320z"
               />
             </svg>
-            <span>ایران، تهران</span>
+            <span>
+              {{ user.location.city + ', ' + user.location.providence }}
+            </span>
           </div>
 
           <div class="flex items-center gap-1">
@@ -406,9 +421,9 @@
                 d="M9 14a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H9ZM7 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7ZM6 4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4Z"
               />
             </svg>
-            <span>{{ user.mobile }}</span>
+            <span>{{ toIndiaDigits(user.mobile) }}</span>
           </div>
-          <div class="flex items-center gap-1">
+          <div v-if="user.phone" class="flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
@@ -422,7 +437,7 @@
                 d="m6.987 2.066l-.717.216a3.5 3.5 0 0 0-2.454 2.854c-.297 2.068.367 4.486 1.968 7.259c1.597 2.766 3.355 4.548 5.29 5.328a3.5 3.5 0 0 0 3.715-.705l.542-.514a2 2 0 0 0 .247-2.623l-1.356-1.88a1.5 1.5 0 0 0-1.655-.556l-2.051.627l-.053.01c-.226.033-.748-.456-1.398-1.582c-.68-1.178-.82-1.867-.633-2.045l1.043-.973a2.497 2.497 0 0 0 .575-2.85l-.662-1.471a2 2 0 0 0-2.4-1.095Zm1.49 1.505l.66 1.471a1.497 1.497 0 0 1-.344 1.71l-1.046.974C7.078 8.36 7.3 9.442 8.2 11c.846 1.466 1.618 2.19 2.448 2.064l.124-.026l2.088-.637a.5.5 0 0 1 .552.185l1.356 1.88a1 1 0 0 1-.123 1.312l-.543.514a2.5 2.5 0 0 1-2.653.503c-1.698-.684-3.303-2.311-4.798-4.9C5.152 9.3 4.545 7.093 4.806 5.278a2.5 2.5 0 0 1 1.753-2.039l.717-.216a1 1 0 0 1 1.2.548Z"
               />
             </svg>
-            <span>02188344345</span>
+            <span>{{ toIndiaDigits(user.phone) }}</span>
           </div>
 
           <a
@@ -444,7 +459,7 @@
 import Vue from 'vue'
 import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
-import { LocationHandler, MiscHandler } from '~/data/utils'
+import { LocationHandler, MiscHandler, toIndiaDigits } from '~/data/utils'
 
 export interface Avatar_url {
   24: string
@@ -459,6 +474,7 @@ export interface Acf {
   gen: string
   premium: boolean
   misc: string
+  phone: string
 }
 
 export interface Self {
@@ -494,14 +510,15 @@ export default Vue.extend({
   layout: 'RawLayout',
   data() {
     return {
-      loaded: 0,
+      loaded: false,
+
       user: {
         jobLocation: { lat: 0, lng: 0 },
       } as UserFullProfile,
     }
   },
   async fetch() {
-    const email = this.$route.query.email as string | 'mahdiyaranari@gmail.com'
+    const email = this.$route.query.email as string | 'a.mahdiyar7@yahoo.com'
 
     console.log(email)
     // TODO REFORM THIS URL AND ITS BACKEND
@@ -518,9 +535,18 @@ export default Vue.extend({
 
     this.user.avatar = data[0].avatar_urls['96']
 
-    const { instagram, linkedin, twitter } = MiscHandler.decompose(
-      data[0].acf.misc
-    )
+    const {
+      instagram,
+      linkedin,
+      twitter,
+      city,
+      providence,
+    } = MiscHandler.decompose(data[0].acf.misc)
+    console.log(instagram, linkedin, twitter, city, providence)
+    this.user.location = {
+      city,
+      providence,
+    }
 
     this.user.socialMedias = {
       instagram,
@@ -531,6 +557,7 @@ export default Vue.extend({
     this.user.bio = data[0].description || ''
 
     this.user.mobile = data[0].acf.mobile || ''
+    this.user.phone = data[0].acf.phone || ''
     this.user.occupation = data[0].acf.occupation || ''
     const latlng = LocationHandler.decompose(data[0].acf.job_location)
     this.user.jobLocation.lat = latlng.lat
@@ -559,24 +586,27 @@ export default Vue.extend({
     // @ts-ignore
     window.v = this
   },
-  // methods: {
-  //   addToContacts() {
-  //     const query = new URLSearchParams()
+  methods: {
+    toIndiaDigits(input: string | number) {
+      return toIndiaDigits(input)
+    },
+    //   addToContacts() {
+    //     const query = new URLSearchParams()
 
-  //     if (this.user.firstName) query.set('firstname', this.user.firstName)
+    //     if (this.user.firstName) query.set('firstname', this.user.firstName)
 
-  //     if (this.user.lastName) query.set('lastname', this.user.lastName)
+    //     if (this.user.lastName) query.set('lastname', this.user.lastName)
 
-  //     if (this.user.email) query.set('email', this.user.email)
+    //     if (this.user.email) query.set('email', this.user.email)
 
-  //     if (this.user.mobile) query.set('mobile', this.user.mobile)
+    //     if (this.user.mobile) query.set('mobile', this.user.mobile)
 
-  //     if (this.user.occupation) query.set('occupation', this.user.occupation)
+    //     if (this.user.occupation) query.set('occupation', this.user.occupation)
 
-  //     console.log(query.toString)
+    //     console.log(query.toString)
 
-  //     window.open('http://194.5.205.148:3000/?' + query.toString())
-  //   },
-  // },
+    //     window.open('http://194.5.205.148:3000/?' + query.toString())
+    //   },
+  },
 })
 </script>

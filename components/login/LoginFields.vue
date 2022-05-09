@@ -109,7 +109,7 @@ export default Vue.extend({
     const isDev = this.$nuxt.context.isDev
     return {
       user: {
-        username: isDev ? 'mahdiyaranari@gmail.com' : '',
+        username: isDev ? 'a.mahdiyar7@yahoo.com' : '',
         password: isDev ? 'master33' : '',
       },
     }

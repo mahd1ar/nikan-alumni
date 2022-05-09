@@ -9625,6 +9625,7 @@ export type UpdateUserMutationVariables = Exact<{
   jobLocation?: InputMaybe<Scalars['String']>;
   misc?: InputMaybe<Scalars['String']>;
   clientMutationId: Scalars['String'];
+  websiteUrl?: InputMaybe<Scalars['String']>;
 }>;
 
 

@@ -49,4 +49,4 @@ jobs:
         run: pm2 start "yarn start"
 
       - name: start filebrowser 📂
-        run: pm2 start "filebrowser --port 8000 -b /update --root ~/filebrowser"
+        run: pm2 start "filebrowser --port 8000 -b /upload --root ~/filebrowser"

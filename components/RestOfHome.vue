@@ -143,9 +143,10 @@
             </div>
           </div>
           <div class="w-full md:w-4/12">
+            <!-- src="test/val.jpg" -->
             <img
               class="mx-auto max-h-full w-2/3 rounded-md object-cover md:w-full"
-              src="test/val.jpg"
+              :src="upcommingEvents[0].imageLink"
               alt=""
             />
           </div>
