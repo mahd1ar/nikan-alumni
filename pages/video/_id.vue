@@ -149,7 +149,8 @@ export default Vue.extend({
 
         if (res === null) return
 
-        this.video.src = res[0]
+        this.video.src = res[0].replace('https', 'http')
+        console.log(this.video.src)
         this.video.content.replace(/<figure .*figure>/g, '')
       }
     } else this.$nuxt.error({ statusCode: 404, message: 'not found' })
