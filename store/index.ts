@@ -12,6 +12,7 @@ export const state = () => ({
 })
 
 export type RootState = ReturnType<typeof state>
+export type GlobalState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
   documentLoaded: (state) => state.documentLoaded,
@@ -25,7 +26,7 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  nuxtServerInit({ dispatch }, { app, route }) {
+  nuxtServerInit({ dispatch, rootState }, { app, route }) {
     const exp = app.$cookies.get(Authentication.expiration)
 
     if (exp && parseInt(exp) - Date.now() > 0) {
@@ -48,14 +49,17 @@ export const actions: ActionTree<RootState, RootState> = {
     if (route.path === '/v3' || route.path === '/') {
       console.log(route.path)
       dispatch('navigation/toggleDarkMenu', false)
-    }
+    } else
+      dispatch('navigation/toggleDarkMenu', true)
 
-    this.$axios.get<WPapi.categories.RootObject[]>('wp-json/wp/v2/categories?per_page=100').then(res => {
+    // @ts-ignore
+    if (rootState.navigation.menu.find(i => i.href === '/video').submenu.length === 0)
+      this.$axios.get<WPapi.categories.RootObject[]>('wp-json/wp/v2/categories?per_page=100').then(res => {
 
-      dispatch('navigation/makeVideoSubmenu',
-        (res.data.filter(i => i.parent === 5))
-      )
-    })
+        dispatch('navigation/makeVideoSubmenu',
+          (res.data.filter(i => i.parent === 5))
+        )
+      })
   },
   loadingStart({ commit }) {
     commit('LOADING', true)

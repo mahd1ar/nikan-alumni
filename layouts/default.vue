@@ -529,6 +529,17 @@ export default Vue.extend({
     this.mobileMenu.selected.push(0)
   },
   mounted() {
+    // remove fucking service worker
+    navigator.serviceWorker
+      .getRegistrations()
+      .then(function (registrations) {
+        for (const registration of registrations) {
+          registration.unregister()
+        }
+      })
+      .catch(function (err) {
+        console.log('Service Worker registration failed: ', err)
+      })
     // @ts-ignore
     window.mm = this
   },
