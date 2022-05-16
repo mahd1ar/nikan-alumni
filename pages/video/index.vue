@@ -11,16 +11,28 @@
       type="text/css"
       href="https://cdn.rawgit.com/shuvroroy/youtube-clone/883c8d9a/public/css/main.css"
     />
-    <div class="bg-white font-sans">
-      <div class="h-112 bg-cover">
+    <div class="font-samim bg-white">
+      <div class="h-80 bg-cover relative">
         <img
-          src="https://yt3.ggpht.com/HR5bTyedjHyoOd9h2zty2OAqZ3MFM6T7_R48jhdd2rQE2aSPHOD2B-ibdv-yLSTy4_AAF6XdoCk=w2560-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no"
+          class="h-full w-full object-bottom object-cover"
+          src="img/cinema.jpg"
           alt="banner"
         />
+        <div class="absolute inset-0">
+          <div
+            class="text-white container m-auto h-full flex-center flex-col items-start"
+          >
+            <div class="flex-col">
+              <h1 class="text-3xl font-bold tracking-wider">
+                آرشیو رسانه کانون دانش آموختگان
+              </h1>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="bg-grey-lighter -mt-1">
+      <div class="bg-grey-lighter pt-6">
         <div class="container mx-auto">
-          <div class="flex items-center justify-between py-4 px-16">
+          <!-- <div class="flex items-center justify-between py-4 px-16">
             <div class="flex items-center">
               <img
                 class="h-24 w-24 rounded-full"
@@ -35,7 +47,7 @@
                     >&#10003;</span
                   >
                 </div>
-                <p class="font-hairline mt-2 text-sm">126,014 subscribers</p>
+                <p class="mt-2 text-sm">126,014 subscribers</p>
               </div>
             </div>
             <div class="text-grey-dark">
@@ -46,557 +58,156 @@
               </button>
               <span><i class="fa fa-bell fa-lg" aria-hidden="true"></i></span>
             </div>
-          </div>
-          <div class="px-16">
+          </div> -->
+          <div>
             <ul class="list-reset flex">
               <li
-                class="border-grey-dark border-b-2 border-solid py-3 px-8 text-center"
+                v-for="cat in categories"
+                :key="cat.href || 'home'"
+                :class="
+                  cat.href.replace(/(\/|#|(video))/g, '') === hash
+                    ? 'py-3 text-center border-grey-dark border-b-2 border-solid px-8'
+                    : 'py-3 text-center px-6'
+                "
               >
-                <a href="#" class="text-black">Home</a>
-              </li>
-              <li class="py-3 px-8 text-center">
-                <a href="#" class="hover:text-black">Videos</a>
-              </li>
-              <li class="py-3 px-8 text-center">
-                <a href="#" class="hover:text-black">Playlists</a>
-              </li>
-              <li class="py-3 px-8 text-center">
-                <a href="#" class="hover:text-black">Community</a>
-              </li>
-              <li class="py-3 px-8 text-center">
-                <a href="#" class="hover:text-black">Channels</a>
-              </li>
-              <li class="py-3 px-8 text-center">
-                <a href="#" class="hover:text-black">About</a>
-              </li>
-              <li class="py-3 px-8 text-center">
-                <i class="fa fa-search fa-lg text-grey-dark"></i>
+                <nuxt-link
+                  :to="cat.href"
+                  class="hover:text-black whitespace-nowrap"
+                  >{{ cat.title }}</nuxt-link
+                >
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div class="container mx-auto flex">
-        <div class="mx-16 w-3/4 py-6">
-          <div class="border-b pb-8">
-            <div class="flex">
-              <div class="flex w-3/4">
-                <div>
-                  <img
-                    class="block w-full"
-                    src="https://i.ytimg.com/vi/Kcie9rbbb4s/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCbowulw74TtG_RM8mhfoyq3tya9A"
-                    alt=""
-                  />
-                </div>
-                <div class="pl-4">
-                  <p class="mb-1 h-6 w-64 truncate text-sm font-medium">
-                    Habitual negative thoughts
-                  </p>
-                  <p class="text-grey-darker text-xs">
-                    <span>Fun Fun Function</span>
-                    <span>&middot;</span>
-                    <span>7.5 views</span>
-                    <span>&middot;</span>
-                    <span>2 days ago</span>
-                  </p>
-                </div>
-              </div>
-              <div class="w-1/4">
-                <div>
-                  <img
-                    class="w-100 block"
-                    src="https://i.ytimg.com/vi/TubVp9nn32Q/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUxQM30HpBNOg3UpiPQUISQgwSlg"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <p class="my-2 text-sm font-medium">
-                    TDD with Wallaby.js Part 2
-                  </p>
-                  <p class="text-grey-darker mb-1 text-xs">Fun Fun Function</p>
-                  <p class="text-grey-darker text-xs">
-                    <span>186 views</span>
-                    <span>&middot;</span>
-                    <span>3 hours ago</span>
-                  </p>
+        <!-- <div v-if="hash === ''" class="py-6"> -->
+        <div v-if="hash === ''" class="py-6">
+          <div v-for="vlist in tatakae" :key="vlist.hash || 'home'">
+            <div v-if="vlist.videos.length > 0" class="border-b">
+              <h3 class="py-6 text-base font-medium">
+                {{ vlist.category }}
+                <span class="text-grey-dark mr-3 uppercase">
+                  مشاهده تمام موارد
+                </span>
+              </h3>
+              <div class="relative mb-4 flex flex-wrap">
+                <div
+                  v-for="(video, index) in vlist.videos"
+                  :key="index"
+                  class="mr-1 flex-1"
+                >
+                  <div>
+                    <img
+                      v-if="video.poster"
+                      class="h-28 object-cover"
+                      :src="video.poster"
+                      alt=""
+                    />
+                    <div v-else>
+                      <div class="h-28 bg-black flex-center text-cyan-700">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          role="img"
+                          class="w-20"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 1024 1024"
+                        >
+                          <path
+                            fill="currentColor"
+                            fill-opacity=".15"
+                            d="M136 792h576V232H136v560zm64-488c0-4.4 3.6-8 8-8h112c4.4 0 8 3.6 8 8v48c0 4.4-3.6 8-8 8H208c-4.4 0-8-3.6-8-8v-48z"
+                          />
+                          <path
+                            fill="currentColor"
+                            d="M912 302.3L784 376V224c0-35.3-28.7-64-64-64H128c-35.3 0-64 28.7-64 64v576c0 35.3 28.7 64 64 64h592c35.3 0 64-28.7 64-64V648l128 73.7c21.3 12.3 48-3.1 48-27.6V330c0-24.6-26.7-40-48-27.7zM712 792H136V232h576v560zm176-167l-104-59.8V458.9L888 399v226z"
+                          />
+                          <path
+                            fill="currentColor"
+                            d="M208 360h112c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H208c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <h4 class="text-sm font-medium mt-2">
+                      {{ video.title }}
+                    </h4>
+                    <p class="font-hairline text-grey-darker mt-2 text-sm">
+                      {{ video.speakers.replace(/[–-]/g, ' . ') }}
+                    </p>
+                    <p class="font-hairline text-grey-darker mt-1 text-xs">
+                      {{ video.date }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div v-else>
           <div class="border-b">
             <h3 class="py-6 text-base font-medium">
-              Best of Fun Fun Function
-              <span class="text-grey-dark ml-3 uppercase">Play all</span>
+              {{ selectedCategory }}
             </h3>
-            <div class="relative mb-4 flex">
-              <div
-                class="text-grey-dark pin-r absolute -mr-3 mt-8 h-10 w-10 rounded-full bg-white text-center shadow-md"
+            <div class="relative mb-4 grid grid-cols-4 gap-1">
+              <nuxt-link
+                v-for="video in hashVideos"
+                :key="video.id"
+                :to="'/video/' + encodeURIComponent(video.gqlid)"
+                class="flex-1 mb-4"
               >
-                <i class="fa fa-chevron-right mt-3" aria-hidden="true"></i>
-              </div>
-              <div class="mr-1 flex-1">
                 <div>
                   <img
-                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
+                    v-if="video.poster"
+                    class="h-28 object-cover"
+                    :src="video.poster"
                     alt=""
                   />
+                  <div v-else>
+                    <div class="h-28 bg-black flex-center text-cyan-700">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        class="w-20"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 1024 1024"
+                      >
+                        <path
+                          fill="currentColor"
+                          fill-opacity=".15"
+                          d="M136 792h576V232H136v560zm64-488c0-4.4 3.6-8 8-8h112c4.4 0 8 3.6 8 8v48c0 4.4-3.6 8-8 8H208c-4.4 0-8-3.6-8-8v-48z"
+                        />
+                        <path
+                          fill="currentColor"
+                          d="M912 302.3L784 376V224c0-35.3-28.7-64-64-64H128c-35.3 0-64 28.7-64 64v576c0 35.3 28.7 64 64 64h592c35.3 0 64-28.7 64-64V648l128 73.7c21.3 12.3 48-3.1 48-27.6V330c0-24.6-26.7-40-48-27.7zM712 792H136V232h576v560zm176-167l-104-59.8V458.9L888 399v226z"
+                        />
+                        <path
+                          fill="currentColor"
+                          d="M208 360h112c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H208c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
                 <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Higher-order functions - Part 1 of Functional Programming
+                  <h4 class="text-sm font-medium mt-2">
+                    {{ video.title }}
                   </h4>
                   <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
+                    {{ video.speakers.replace(/[–-]/g, ' . ') }}
                   </p>
                   <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
+                    {{ video.date }}
                   </p>
                 </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Higher-order functions - Part 1 of Functional Programming
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Higher-order functions - Part 1 of Functional Programming
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Higher-order functions - Part 1 of Functional Programming
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    336K views &middot; 2 years ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
+              </nuxt-link>
             </div>
-          </div>
-          <div class="border-b">
-            <h3 class="py-6 text-base font-medium">
-              Uploads
-              <span class="text-grey-dark ml-3 uppercase">Play all</span>
-            </h3>
-            <div class="relative mb-4 flex">
-              <div
-                class="text-grey-dark pin-r absolute -mr-3 mt-8 h-10 w-10 rounded-full bg-white text-center shadow-md"
-              >
-                <i class="fa fa-chevron-right mt-3" aria-hidden="true"></i>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/C8p7rHwctAg/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDnbDWPH7Ef-OV7CVWii7v-0RuSBw"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4 mt-1">
-                  <h4 class="text-sm font-medium">
-                    Commit editor settings to version control? - Fun Fun
-                    Function
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    5.3K views &middot; 4 days ago
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/C8p7rHwctAg/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDnbDWPH7Ef-OV7CVWii7v-0RuSBw"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4 mt-1">
-                  <h4 class="text-sm font-medium">
-                    Commit editor settings to version control? - Fun Fun
-                    Function
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    5.3K views &middot; 4 days ago
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/C8p7rHwctAg/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDnbDWPH7Ef-OV7CVWii7v-0RuSBw"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4 mt-1">
-                  <h4 class="text-sm font-medium">
-                    Commit editor settings to version control? - Fun Fun
-                    Function
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    5.3K views &middot; 4 days ago
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/C8p7rHwctAg/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDnbDWPH7Ef-OV7CVWii7v-0RuSBw"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4 mt-1">
-                  <h4 class="text-sm font-medium">
-                    Commit editor settings to version control? - Fun Fun
-                    Function
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    5.3K views &middot; 4 days ago
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="border-b">
-            <div class="py-6">
-              <h3 class="text-base font-medium">
-                MPJ's Musings
-                <span class="text-grey-dark ml-3 uppercase">Play all</span>
-              </h3>
-              <p
-                class="text-grey-dark mt-2 max-w-md text-sm font-normal leading-loose"
-              >
-                More "soft" episodes about software, creativity, motivation, and
-                career.
-              </p>
-            </div>
-            <div class="relative mb-4 flex">
-              <div
-                class="text-grey-dark pin-r absolute -mr-3 mt-8 h-10 w-10 rounded-full bg-white text-center shadow-md"
-              >
-                <i class="fa fa-chevron-right mt-3" aria-hidden="true"></i>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/gXfOdwduXqY/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUglms6KZMul1UMpuBfFPM5Ddocw"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Why remote working is so hard
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    20K views &middot; 2 months ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/gXfOdwduXqY/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUglms6KZMul1UMpuBfFPM5Ddocw"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Why remote working is so hard
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    20K views &middot; 2 months ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/gXfOdwduXqY/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUglms6KZMul1UMpuBfFPM5Ddocw"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Why remote working is so hard
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    20K views &middot; 2 months ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/gXfOdwduXqY/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAUglms6KZMul1UMpuBfFPM5Ddocw"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Why remote working is so hard
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    20K views &middot; 2 months ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="border-b">
-            <div class="py-6">
-              <h3 class="text-base font-medium">
-                Functional programming in Javascript
-                <span class="text-grey-dark ml-3 uppercase">Play all</span>
-              </h3>
-              <p
-                class="text-grey-dark mt-2 max-w-md text-sm font-normal leading-loose"
-              >
-                This is a collection of the videos from FunFunFunction that is
-                specifically about functional programming in JavaScript
-              </p>
-            </div>
-            <div class="relative mb-4 flex">
-              <div
-                class="text-grey-dark pin-r absolute -mr-3 mt-8 h-10 w-10 rounded-full bg-white text-center shadow-md"
-              >
-                <i class="fa fa-chevron-right mt-3" aria-hidden="true"></i>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Higher-order functions - Part 1 of Functional Programming in
-                    JavaScript
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    20K views &middot; 2 months ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Higher-order functions - Part 1 of Functional Programming in
-                    JavaScript
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    20K views &middot; 2 months ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Higher-order functions - Part 1 of Functional Programming in
-                    JavaScript
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    20K views &middot; 2 months ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
-              <div class="mr-1 flex-1">
-                <div>
-                  <img
-                    src="https://i.ytimg.com/vi/BMUiFMZr7vk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCBiAHMlgjlC5lAn12CO1GRPKYgPg"
-                    alt=""
-                  />
-                </div>
-                <div class="mb-4">
-                  <h4 class="text-sm font-medium">
-                    Higher-order functions - Part 1 of Functional Programming in
-                    JavaScript
-                  </h4>
-                  <p class="font-hairline text-grey-darker mt-2 text-sm">
-                    Fun Fun Function
-                    <span
-                      class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                      >&#10003;</span
-                    >
-                  </p>
-                  <p class="font-hairline text-grey-darker mt-1 text-xs">
-                    20K views &middot; 2 months ago
-                  </p>
-                  <p
-                    class="text-grey-darker bg-grey-lighter font-hairline text-2xs block inline p-1"
-                  >
-                    CC
-                  </p>
-                </div>
-              </div>
+            <div v-if="hashVideos.length === 0" class="text-gray-400">
+              هیچ مطلبی وجود ندارد
             </div>
           </div>
         </div>
@@ -608,143 +219,230 @@
 <script lang="ts">
 import Vue from 'vue'
 import mediaquery from '@/apollo/queries/videos.gql'
-import { VideosQuery, VideosQueryVariables } from '~/types/types'
+import mediacatquery from '@/apollo/queries/category-videos.gql'
+import {
+  VideosQuery,
+  VideosQueryVariables,
+  CategoryVideosQueryVariables,
+  CategoryVideosQuery,
+} from '~/types/types'
 // eslint-disable-next-line camelcase
-import { gregorian_to_jalali, timeout, toIndiaDigits } from '~/data/utils'
-
-function getSize(url: string): Promise<string | null> {
-  return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest()
-    request.open('HEAD', url, true)
-
-    request.onreadystatechange = () => {
-      if (request.readyState >= 2) {
-        console.log(request.getAllResponseHeaders())
-        resolve(request.getResponseHeader('content-length'))
-        request.abort()
-      } else resolve(null)
-    }
-
-    request.onerror = (e) => {
-      reject(e)
-    }
-
-    request.send()
-  })
-}
+import { gregorian_to_jalali, toIndiaDigits } from '~/data/utils'
+import { RootState as navbarState } from '@/store/navigation/index'
+const clonedeep: <T>(a: T) => T = require('lodash.clonedeep')
 
 interface Video {
+  id: number
+  gqlid: string
   href: any
   title: string
   speakers: string
   duration: string
   date: string
   poster?: string
-  dataId: string
   _content?: string
   src?: string
   loaded: boolean
-}
-
-const secToHour = (secs: number) => {
-  secs = ~~secs
-  const h = ~~(secs / 3600)
-  const m = ~~((secs - h * 3600) / 60)
-  const s = ~~(secs - h * 3600 - m * 60)
-
-  return (
-    (h / 10).toFixed(1).replace('.', '') +
-    ' : ' +
-    (m / 10).toFixed(1).replace('.', '') +
-    ' : ' +
-    (s / 10).toFixed(1).replace('.', '')
-  )
 }
 
 interface VideoList {
   videos: Video[]
   category: string
   categoryId: string
+  hash: string
 }
 
 export default Vue.extend({
   data() {
     return {
       items: [] as VideoList[],
+      hashVideos: [] as Video[],
     }
   },
   async fetch() {
-    const variables: VideosQueryVariables = {
-      first: 8,
-      parent: 5,
-    }
-
-    const { data } = await this.$apollo.query<VideosQuery>({
-      query: mediaquery,
-      variables,
-    })
-
-    if (data.categories?.edges) {
-      data.categories.edges.forEach((i) => {
-        if (i?.node) {
-          const vl: VideoList = {
-            videos: [],
-            category: i.node.name!,
-            categoryId: i.node.id,
-          }
-
-          if (!i.node.videos?.nodes) return
-
-          i.node.videos.nodes.forEach((vid) => {
-            if (!vid) return
-
-            const v = {} as Video
-            const d = vid
-              .date!.split('T')[0]
-              .split('-')
-              .map((i) => Number(i))
-
-            v.date = toIndiaDigits(
-              gregorian_to_jalali(d[0], d[1], d[2]).join('/')
-            )
-
-            v.title = vid.title || ''
-
-            v.href = vid.id ? '/media/' + encodeURIComponent(vid.id) : '#'
-
-            v.speakers = vid.speakers?.speakers || ''
-            v.dataId = ~~(Math.random() * 1000) + ''
-
-            // FIX NEXT LINE LATER
-            // TODO : id should be used in url
-            v.poster = vid.featuredImageId || undefined
-
-            if (vid.content) {
-              // @ts-ignore
-              let src = vid.content.match(/<video.*src="(.+)"/)[1]
-              src = /\.(.+)?#t=/.test(src) ? src : src + '#t=200'
-
-              v.src = src
-            }
-            v.duration = ''
-            v.loaded = false
-            vl.videos.push(v)
-          })
-          this.items.push(vl)
-        }
-      })
-    }
+    if (this.hash === '') await this.getHome()
+    else await this.getContentsByCategory(this.hash)
   },
+  computed: {
+    hash() {
+      return this.$route.hash.replace('#', '')
+    },
+    categories(): navbarState['menu'] {
+      const x = (this.$store.state.navigation as navbarState).menu.find(
+        (i) => i.href === '/video'
+      )
 
+      const res = !x ? [] : clonedeep(x.submenu) || []
+
+      res.unshift({
+        title: 'خانه',
+        hasSubmenu: false,
+        href: '',
+        svg: '',
+        submenu: [],
+      })
+
+      return res
+    },
+
+    tatakae(): VideoList[] {
+      const submenu = clonedeep(
+        (this.$store.state.navigation as navbarState).menu.find(
+          (i) => i.href === '/video'
+        )!.submenu
+      )
+
+      if (!submenu) return []
+      submenu.unshift({
+        title: 'home',
+        hasSubmenu: false,
+        href: '',
+        svg: '',
+        submenu: [],
+      })
+      const x = submenu
+        .map((i) => {
+          return this.items.find(
+            (j) => i.href.replace(/(\/|#|(video))/g, '') === j.hash
+          )
+        })
+        .filter((i) => {
+          return typeof i !== 'undefined'
+        }) as VideoList[]
+
+      return x
+    },
+
+    selectedCategory(): string {
+      return this.categories.find(
+        (cat) => cat.href.replace(/(\/|#|(video))/g, '') === this.hash
+      )!.title
+    },
+  },
   watch: {
-    items() {
-      // this.getVideoMeta()
+    hash() {
+      this.$fetch()
     },
   },
   mounted() {
-    getSize('http://194.5.205.148/vid/TedNikan1.mp4#t=200')
+    // @ts-ignore
+    window.yt = this
+    // getSize('http://194.5.205.148/vid/TedNikan1.mp4#t=200')
   },
   methods: {
+    async getHome() {
+      const variables: VideosQueryVariables = {
+        first: 4,
+        parent: 5,
+      }
+
+      const { data } = await this.$apollo.query<VideosQuery>({
+        query: mediaquery,
+        variables,
+      })
+
+      if (data.categories?.edges) {
+        data.categories.edges.forEach((i) => {
+          if (i?.node) {
+            const vl: VideoList = {
+              videos: [],
+              category: i.node.name!,
+              categoryId: i.node.id,
+              hash: i.node.slug!,
+            }
+
+            if (!i.node.videos?.nodes) return
+
+            i.node.videos.nodes.forEach((vid) => {
+              if (!vid) return
+
+              const v = {} as Video
+              const d = vid
+                .date!.split('T')[0]
+                .split('-')
+                .map((i) => Number(i))
+
+              v.date = toIndiaDigits(
+                gregorian_to_jalali(d[0], d[1], d[2]).join('/')
+              )
+              v.id = +vid.databaseId
+              v.gqlid = vid.id
+              v.title = vid.title || ''
+
+              v.href = vid.id ? '/media/' + encodeURIComponent(vid.id) : '#'
+
+              v.speakers = vid.speakers?.speakers || ''
+
+              // FIX NEXT LINE LATER
+              // TODO : id should be used in url
+              v.poster = vid.featuredImageId || undefined
+
+              if (vid.content) {
+                const matched = vid.content!.match(/<video.*src="(.+)"/)
+
+                if (matched === null) return
+
+                const src = /\.(.+)?#t=/.test(matched[1])
+                  ? matched[1]
+                  : matched[1] + '#t=200'
+
+                v.src = src
+              }
+              v.duration = ''
+              v.loaded = false
+              vl.videos.push(v)
+            })
+            this.items.push(vl)
+          }
+        })
+      }
+
+      const all = this.items
+        .map((i) => i.videos)
+        .flat()
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      this.items.unshift({
+        categoryId: '',
+        category: 'خانه',
+        hash: '',
+        videos: all.splice(0, 4),
+      })
+    },
+    async getContentsByCategory(slug: string) {
+      const variables: CategoryVideosQueryVariables = { id: slug, first: 20 }
+      const { data } = await this.$apollo.query<CategoryVideosQuery>({
+        query: mediacatquery,
+        variables,
+      })
+      this.hashVideos.splice(0, this.hashVideos.length)
+      data.category?.videos?.nodes?.forEach((vid) => {
+        if (!vid) return
+
+        const v = {} as Video
+        const d = vid
+          .date!.split('T')[0]
+          .split('-')
+          .map((i) => Number(i))
+
+        v.date = toIndiaDigits(gregorian_to_jalali(d[0], d[1], d[2]).join('/'))
+        v.id = +vid.databaseId
+        v.gqlid = vid.id
+        v.title = vid.title || ''
+
+        v.href = vid.id ? '/video/' + encodeURIComponent(vid.id) : '#'
+
+        v.speakers = vid.speakers?.speakers || ''
+
+        // FIX NEXT LINE LATER
+        // TODO : id should be used in url
+        v.poster = vid.featuredImageId || undefined
+
+        v.duration = ''
+        v.loaded = false
+
+        this.hashVideos.push(v)
+      })
+    },
     // getpic(video: HTMLVideoElement) {
     //   const canvas = this.$refs.canvas! as HTMLCanvasElement
     //   canvas

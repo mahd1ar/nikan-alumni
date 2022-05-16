@@ -26,7 +26,7 @@
                 @openModal="search.show = true"
               />
               <div
-                class="m-blur-background absolute top-0 left-0 h-full w-full"
+                class="m-blur-background-1 absolute top-0 left-0 h-full w-full"
               ></div>
               <div
                 class="container relative mx-auto flex h-full flex-row-reverse"
@@ -134,7 +134,7 @@ export default Vue.extend({
 </script>
 
 <style>
-.m-blur-background {
+.m-blur-background-1 {
   background: linear-gradient(
     90deg,
     rgba(33, 37, 41, 0.6) 0%,

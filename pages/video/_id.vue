@@ -1,6 +1,6 @@
 <template>
   <section dir="rtl" class="body-font relative bg-slate-800 text-gray-900">
-    <div class="container mx-auto mt-10 flex flex-col gap-4 px-0">
+    <div class="container mx-auto flex flex-col gap-4 relative">
       <div class="flex gap-2">
         <div class="w-8/12 bg-cyan-600 bg-opacity-5">
           <client-only>
@@ -17,7 +17,9 @@
               </vue-plyr>
             </div>
           </client-only>
-          <h1 class="flex h-20 items-center p-4 text-xl text-cyan-300">
+          <h1
+            class="flex h-20 leading-10 mt-5 items-center p-4 text-cyan-300 text-3xl"
+          >
             {{ video.title }}
           </h1>
         </div>
@@ -26,14 +28,17 @@
           <div
             class="flex h-12 items-center justify-start bg-gray-600 px-4 font-bold text-white"
           >
-            از همین دسته
+            مطلب پیشنهادی
           </div>
           <div
             v-for="(i, index) in moreVideso"
             :key="index"
             class="cursor-pointer border-b border-slate-600 bg-[#09345a57] text-sm transition-all hover:bg-[#1d3755]"
           >
-            <div class="flex flex-col gap-1 p-2 px-4">
+            <nuxt-link
+              :to="'/video/' + encodeURIComponent(i.id)"
+              class="flex flex-col gap-1 p-2 px-4"
+            >
               <div class="mt-2 text-base text-white">
                 {{ i.title }}
               </div>
@@ -43,21 +48,10 @@
               <div class="text-xs text-slate-400">
                 {{ i.date }}
               </div>
-            </div>
+            </nuxt-link>
           </div>
         </div>
       </div>
-    </div>
-    <div class="w-full pt-10">
-      <!-- data-poster="https://dummyimage.com/300x300" -->
-    </div>
-
-    <div>
-      <!-- <content-field :remove-tags="['video']" :html="video.content" /> -->
-      <pre>
-
-      {{ video }}
-      </pre>
     </div>
   </section>
 </template>
@@ -66,11 +60,12 @@
 import Vue from 'vue'
 import videogql from '@/apollo/queries/video.gql'
 // TODO : compose a beter query V
-import videocatsgql from '@/apollo/queries/category-videos.gql'
+import allvideos from '@/apollo/queries/videos-all.gql'
 import {
   VideoQuery,
   VideoQueryVariables,
-  CategoryVideosQuery,
+  VideosAllQueryVariables,
+  VideosAllQuery,
 } from '~/types/types'
 import { filterCategory, wordpressDateToFormattedJalali } from '~/data/utils'
 
@@ -78,6 +73,7 @@ interface SuggestedVideos {
   title: string
   speakers: string
   date: string
+  id: string
 }
 
 export default Vue.extend({
@@ -95,6 +91,7 @@ export default Vue.extend({
         categoryName: '',
         categorySlug: '',
       },
+      moreVideosMaxLen: 6,
       moreVideso: [] as SuggestedVideos[],
       playerOptions: {
         controls: [
@@ -146,47 +143,54 @@ export default Vue.extend({
           this.video.categoryName = cats[0]
         }
       }
+      if (data.video.content) {
+        const reg = /https?:\/\/.*\.mp4/
+        const res = reg.exec(data.video.content)
+
+        if (res === null) return
+
+        this.video.src = res[0]
+        this.video.content.replace(/<figure .*figure>/g, '')
+      }
     } else this.$nuxt.error({ statusCode: 404, message: 'not found' })
   },
 
-  mounted() {
+  mounted(): void {
     this.getSimilarVideos()
     // TODO : remove this bolshit
-    const div = document.createElement('div')
-    div.innerHTML = this.video.content
-
-    const htmlVideoElement = div.querySelector('video') as HTMLVideoElement
-
-    if (htmlVideoElement) {
-      this.video.src = htmlVideoElement.src
-    }
-
-    this.video.content = div.innerHTML
-    div.remove()
+    // const div = document.createElement('div')
+    // div.innerHTML = this.video.content
+    // const htmlVideoElement = div.querySelector('video') as HTMLVideoElement
+    // if (htmlVideoElement) {
+    //   this.video.src = htmlVideoElement.src
+    // }
+    // this.video.content = div.innerHTML
+    // div.remove()
   },
   methods: {
     async getSimilarVideos() {
-      if (this.video.categorySlug === '') {
-        return
-      }
+      console.log('getsimilar videos')
 
-      const variables: VideoQueryVariables = {
-        id: this.video.categorySlug,
-        first: 5,
+      const variables: VideosAllQueryVariables = {
+        first: 100,
       }
-      const { data } = await this.$apollo.query<CategoryVideosQuery>({
-        query: videocatsgql,
+      const { data } = await this.$apollo.query<VideosAllQuery>({
+        query: allvideos,
         variables,
       })
-      console.log(data)
-
-      if (data.category?.videos?.nodes)
-        data.category.videos.nodes.forEach((i) => {
-          this.moreVideso.push({
-            title: i?.title || '',
-            speakers: i?.speakers?.speakers || '',
-            date: wordpressDateToFormattedJalali(i!.date!).join(' / '),
-          })
+      this.moreVideso.splice(0, this.moreVideso.length)
+      data.videos?.edges
+        ?.sort(() => Math.random() - Math.random())
+        .forEach((i, index) => {
+          if (index > this.moreVideosMaxLen) return
+          if (this.video.id === i?.node?.id) return
+          if (i?.node)
+            this.moreVideso.push({
+              id: i.node.id,
+              title: i.node?.title || '',
+              speakers: i.node?.speakers?.speakers || '',
+              date: wordpressDateToFormattedJalali(i.node!.date!).join(' / '),
+            })
         })
     },
   },
