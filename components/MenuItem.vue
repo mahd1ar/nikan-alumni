@@ -1,6 +1,6 @@
 <template>
   <li :class="{ 'menu-item': true, 'menu-item-has-children': menu.hasSubmenu }">
-    <a href="#">{{ menu.title }}</a>
+    <nuxt-link :to="menu.href">{{ menu.title }}</nuxt-link>
     <ul v-if="menu.hasSubmenu" class="sub-menu">
       <menu-item
         v-for="(m, index) in menu.submenu"

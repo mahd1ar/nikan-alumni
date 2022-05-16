@@ -395,22 +395,23 @@
                         <!-- Active: "bg-gray-100", Not Active: "" -->
                         <transition name="swip-left">
                           <div v-if="!menuConfirm.show" key="t1">
-                            <a
+                            <nuxt-link
+                              to="/login"
                               id="user-menu-item-0"
                               href="#"
                               class="block px-4 py-2 text-sm text-gray-700"
                               role="menuitem"
                               tabindex="-1"
-                              >Your Profile</a
                             >
-                            <a
+                              پروفایل شما
+                            </nuxt-link>
+                            <!-- <a
                               id="user-menu-item-1"
                               href="#"
                               class="block px-4 py-2 text-sm text-gray-700"
                               role="menuitem"
                               tabindex="-1"
-                              >Settings</a
-                            >
+                              >Settings</a> -->
                             <div
                               class="block cursor-pointer px-4 py-2 text-sm text-gray-700"
                               role="menuitem"

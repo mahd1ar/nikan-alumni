@@ -1,13 +1,41 @@
+# query videos(
+#   $first: Int = 10
+#   $order: OrderEnum = ASC
+#   $field: PostObjectsConnectionOrderbyEnum = DATE
+# ) {
+#   videos(first: $first, where: { orderby: { field: $field, order: $order } }) {
+#     nodes {
+#       id
+#       title(format: RENDERED)
+#       speakers {
+#         speakers
+#       }
+#       categories {
+#         nodes {
+#           name
+#         }
+#       }
+#       featuredImage {
+#         node {
+#           sourceUrl(size: LARGE)
+#         }
+#       }
+#     }
+#   }
+# }
+
 query videos($first: Int = 8, $parent: Int = 5) {
   categories(where: { parent: $parent }) {
     edges {
       node {
         id
         name
+        slug
         videos(first: $first) {
           nodes {
             content(format: RENDERED)
             id
+            databaseId
             date
             title
             speakers {

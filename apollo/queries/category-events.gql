@@ -1,23 +1,27 @@
-query categoryEvents($id: ID = "uncategorized", $first: Int = 10) {
-  category(id: $id, idType: SLUG) {
+query categoryEvents($slug: ID = "uncategorized", $first: Int = 10) {
+  category(id: $slug, idType: SLUG) {
     id
     count
     name
     slug
-    videos(first: $first) {
-      edges {
-        node {
-          id
-          title
-          date
-          content(format: RENDERED)
-          featuredImage {
-            node {
-              sourceUrl
-            }
-          }
-          speakers {
-            speakers
+    description
+    events(first: $first) {
+      nodes {
+        id
+        databaseId
+        title(format: RENDERED)
+        commentCount
+        date
+        content
+        eventProps {
+          duration
+          venue
+        }
+
+        featuredImage {
+          node {
+            altText
+            sourceUrl
           }
         }
       }

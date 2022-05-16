@@ -1,4 +1,5 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { WPapi } from '~/data/GlobslTypes'
 
 export type Menu = {
   title: string
@@ -174,6 +175,7 @@ enum SVG {
 enum Mutations {
   toggleMobileMenu = 'TOGGLE_MOBILE_MENU',
   toggleDarkMenu = 'TOGGLE_DARK_MENU',
+  makeVideoSubmenu = "MAKE_VIDEO_SUBMENU"
 }
 
 const initialState = {
@@ -195,18 +197,18 @@ const initialState = {
     {
       title: 'معرفی',
       hasSubmenu: true,
-      href: '#',
+      href: '/notyetready',
       svg: SVG.INTRO,
       submenu: [
         {
           title: 'معرفی مجموعه',
           hasSubmenu: false,
-          href: '#',
+          href: '/notyetready',
         },
         {
           title: 'هییت اجرای ',
           hasSubmenu: false,
-          href: '#',
+          href: '/notyetready',
         },
       ],
     },
@@ -214,104 +216,104 @@ const initialState = {
       title: 'کتابخانه',
       hasSubmenu: false,
       svg: SVG.LIB,
-      href: '',
+      href: '/notyetready',
     },
     {
       title: 'رویداد ها',
       hasSubmenu: true,
-      href: 'event/category',
+      href: '/event/category',
       svg: SVG.EVENT,
       submenu: [
         {
           title: 'روابط عمومی',
           hasSubmenu: false,
-          href: '',
+          href: '/event/category/pr',
         },
         {
           title: 'کارگروه نشاط و سرگرمی',
           hasSubmenu: false,
-          href: 'event/category/entertainment-and-entertainment',
+          href: '/event/category/entertainment-and-entertainment',
         },
         {
           title: 'کارگروه امور خیریه و عام المنفعه',
           hasSubmenu: false,
-          href: '',
+          href: '/event/category/charity',
         },
         {
           title: 'کارگروه خانواده و امور اجتماعی',
           hasSubmenu: false,
-          href: '',
+          href: '/event/category/family-and-health',
         },
         {
           title: 'کارگروه علم و فرهنگ',
           hasSubmenu: false,
-          href: '',
+          href: '/event/category/science-and-culture',
         },
         {
           title: 'کارگروه کسب و کار',
           hasSubmenu: false,
-          href: '',
+          href: '/event/category/business',
         },
       ],
     },
     {
       title: 'آرشیو رسانه',
       hasSubmenu: true,
-      href: '',
+      href: '/video',
       svg: SVG.MEDIA,
       submenu: [
-        {
-          title: 'ویدئو',
-          hasSubmenu: false,
-          href: '',
-        },
-        {
-          title: 'کلاب هواس',
-          hasSubmenu: false,
-          href: '',
-        },
+        // {
+        //   title: 'تد',
+        //   hasSubmenu: false,
+        //   href: '/video#ted',
+        // },
+        // {
+        //   title: 'clubinar',
+        //   hasSubmenu: false,
+        //   href: '/video#business-challenges',
+        // },
       ],
     },
     {
       title: 'انواع بیمه',
       hasSubmenu: true,
-      href: '',
+      href: '/notyetready',
       svg: SVG.INSUR,
       submenu: [
         {
           title: 'بیمه خودرو',
           hasSubmenu: false,
-          href: '',
+          href: '/notyetready',
         },
         {
           title: 'بیمه مسئولیت',
           hasSubmenu: false,
-          href: '',
+          href: '/notyetready',
         },
         {
           title: 'بیمه آتش سوزی',
           hasSubmenu: false,
-          href: '',
+          href: '/notyetready',
         },
         {
           title: 'بیمه درمان تکمیلی اعضا و وابستگان درجه یک',
           hasSubmenu: false,
-          href: '',
+          href: '/notyetready',
         },
         {
           title: 'فرم درخواست بیمه درمان تکمیلی',
           hasSubmenu: false,
-          href: '',
+          href: '/notyetready',
         },
         {
           title: 'بیمه درمان تکمیلی وابستگان درجه دو',
           hasSubmenu: false,
-          href: '',
+          href: '/notyetready',
         },
         {
           title: 'بیمه درمان تکمیلی گروهی و شرکتی',
           hasSubmenu: false,
-          href: '',
+          href: '/notyetready',
         },
       ],
     },
@@ -336,7 +338,7 @@ const initialState = {
     {
       title: 'پروفایل اعضا',
       hasSubmenu: false,
-      href: '',
+      href: 'google.com',
       svg: SVG.USER,
     },
   ] as Menu[],
@@ -361,6 +363,12 @@ export const mutations: MutationTree<RootState> = {
   [Mutations.toggleDarkMenu]: (state, nval: boolean) => {
     state.darkMenu.show = nval
   },
+  [Mutations.makeVideoSubmenu]: (state, nval: Menu[]) => {
+    const vm = state.menu.find(i => i.href === '/video')!
+    nval.forEach(i => {
+      vm.submenu!.push(i)
+    })
+  },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -376,4 +384,21 @@ export const actions: ActionTree<RootState, RootState> = {
       commit(Mutations.toggleDarkMenu, !state.darkMenu.show)
     } else commit(Mutations.toggleDarkMenu, val)
   },
+  makeVideoSubmenu: ({ commit }, items: WPapi.categories.RootObject[]) => {
+
+    const submenus = items.map(item => {
+      const m: Menu = {
+        hasSubmenu: false,
+        href: "/video#" + item.slug,
+        title: item.name,
+        svg: ''
+
+      }
+      return m
+    })
+
+    commit(Mutations.makeVideoSubmenu, submenus)
+
+  },
+
 }

@@ -1,6 +1,6 @@
 <template>
   <dir v-show="open">
-    <transition name="scale-up">
+    <transition name="scale-up" @after-leave="closeViewer" @after-enter="enter">
       <div
         v-show="show"
         class="z-20 fixed w-full h-full flex-center top-0 left-0"
@@ -14,6 +14,7 @@
         <div v-if="$device.isMobile" class="relative w-full">
           <div class="snap-mandatory snap-x w-full flex overflow-auto">
             <div
+              ref="image-item"
               v-for="(img, index) in imgs"
               :key="index"
               :style="{ '--count': index }"
@@ -37,7 +38,10 @@
         </div>
 
         <!-- buttons -->
-        <div class="absolute cursor-pointer top-4 right-4 p-5 text-gray-500">
+        <div
+          @click="hide"
+          class="absolute cursor-pointer top-4 right-4 p-5 text-gray-500"
+        >
           <svg
             aria-hidden="true"
             role="img"
@@ -53,7 +57,10 @@
           </svg>
         </div>
 
-        <div class="absolute cursor-pointer right-4 p-5 text-gray-500">
+        <div
+          v-if="$device.isDesktop"
+          class="absolute cursor-pointer right-4 p-5 text-gray-500"
+        >
           <svg
             aria-hidden="true"
             role="img"
@@ -119,22 +126,20 @@ export default Vue.extend({
       type: Boolean,
       required: true,
     },
-    srcs: {
+    imgs: {
       type: Array as PropType<string[]>,
+    },
+    imgIndex: {
+      type: Number,
+      required: false,
+      default: 0,
     },
   },
   data() {
     return {
-      show: true,
+      show: false,
       selectedIndex: 1,
       scale: 1,
-      imgs: [
-        'https://nikan-alumni.ir/wp-content/uploads/2022/01/IMG_1481-300x225.jpg',
-        'https://nikan-alumni.ir/wp-content/uploads/2022/01/IMG_1480-300x225.jpg',
-        'https://nikan-alumni.ir/wp-content/uploads/2022/01/IMG_1471-300x225.jpg',
-        'https://nikan-alumni.ir/wp-content/uploads/2022/01/IMG_1467-300x225.jpg',
-        'https://nikan-alumni.ir/wp-content/uploads/2022/01/IMG_1480-300x225.jpg',
-      ],
     }
   },
   //   watch {
@@ -145,11 +150,32 @@ export default Vue.extend({
   //     this.scale = 1
   // }
   //   },
-  mounted() {
-    // @ts-ignore
-    window.img = this
+
+  watch: {
+    open(nval: boolean) {
+      if (nval) {
+        // this.imgIndex
+        this.show = true
+      }
+    },
   },
   methods: {
+    enter() {
+      if (this.imgIndex > -1 && this.$device.isMobile) {
+        const divs = this.$refs['image-item'] as HTMLDivElement[]
+
+        divs[this.imgIndex].scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+        })
+      }
+    },
+    hide() {
+      this.show = false
+    },
+    closeViewer() {
+      this.$emit('update:open', false)
+    },
     zoomIn() {
       if (this.scale < 3) this.scale += 1
     },

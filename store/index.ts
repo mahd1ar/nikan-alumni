@@ -4,6 +4,7 @@ import {
   CookieUser,
   LocalStoreAuthentication as Authentication,
 } from '~/data/utils/enums'
+import { WPapi } from '~/data/GlobslTypes'
 
 export const state = () => ({
   documentLoaded: false,
@@ -48,6 +49,13 @@ export const actions: ActionTree<RootState, RootState> = {
       console.log(route.path)
       dispatch('navigation/toggleDarkMenu', false)
     }
+
+    this.$axios.get<WPapi.categories.RootObject[]>('wp-json/wp/v2/categories?per_page=100').then(res => {
+
+      dispatch('navigation/makeVideoSubmenu',
+        (res.data.filter(i => i.parent === 5))
+      )
+    })
   },
   loadingStart({ commit }) {
     commit('LOADING', true)

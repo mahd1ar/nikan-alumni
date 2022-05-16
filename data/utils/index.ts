@@ -197,4 +197,44 @@ export class MiscHandler {
   }
 }
 
-export const getGenerationFromUsername = (username: string) => username.split('').filter((_, n, arr) => arr.length - 3 > n).join("") 
+export const getGenerationFromUsername = (username: string) => username.split('').filter((_, n, arr) => arr.length - 3 > n).join("")
+
+
+export class VideoUtils {
+  public static secToHour(secs: number) {
+    secs = ~~secs
+    const h = ~~(secs / 3600)
+    const m = ~~((secs - h * 3600) / 60)
+    const s = ~~(secs - h * 3600 - m * 60)
+
+    return (
+      (h / 10).toFixed(1).replace('.', '') +
+      ' : ' +
+      (m / 10).toFixed(1).replace('.', '') +
+      ' : ' +
+      (s / 10).toFixed(1).replace('.', '')
+    )
+  }
+
+  public static getSize(url: string): Promise<string | null> {
+    return new Promise((resolve, reject) => {
+      const request = new XMLHttpRequest()
+      request.open('HEAD', url, true)
+
+      request.onreadystatechange = () => {
+        if (request.readyState >= 2) {
+          console.log(request.getAllResponseHeaders())
+          resolve(request.getResponseHeader('content-length'))
+          request.abort()
+        } else resolve(null)
+      }
+
+      request.onerror = (e) => {
+        reject(e)
+      }
+
+      request.send()
+    })
+  }
+
+}

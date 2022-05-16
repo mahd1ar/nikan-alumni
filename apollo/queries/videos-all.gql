@@ -1,0 +1,17 @@
+query videosAll($first: Int = 8) {
+  videos(first: $first) {
+    edges {
+      node {
+        content(format: RENDERED)
+        id
+        databaseId
+        date
+        title
+        speakers {
+          speakers
+        }
+        featuredImageId
+      }
+    }
+  }
+}

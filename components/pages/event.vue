@@ -88,7 +88,7 @@
         </div>
       </template>
     </modal>
-
+    <loading-indicator :showif="loading" dark fullscreen />
     <transition name="slide-down">
       <div v-show="!loading" id="event-page">
         <header
@@ -387,7 +387,6 @@
         </main>
       </div>
     </transition>
-    <loading-indicator v-if="loading"></loading-indicator>
   </div>
 </template>
 

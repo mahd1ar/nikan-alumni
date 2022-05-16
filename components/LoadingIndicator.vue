@@ -1,13 +1,26 @@
 <template>
-  <div
-    class="inline-flex items-center justify-center gap-3 rounded bg-[#242F3F] p-2"
-  >
-    <div>
-      <span class="loader"><span class="loader-inner"></span></span>
+  <div v-show="showif" :class="fullscreen ? 'flex-center h-screen' : ''">
+    <div
+      :style="{ background: dark ? '#dcdcdc' : '#242F3F' }"
+      class="inline-flex items-center justify-center gap-3 rounded p-2"
+    >
+      <div>
+        <span class="loader"><span class="loader-inner"></span></span>
+      </div>
     </div>
   </div>
 </template>
-
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  name: 'LoadingIndicator',
+  props: {
+    fullscreen: { type: Boolean, default: false },
+    dark: { type: Boolean, default: false },
+    showif: { type: Boolean, default: false },
+  },
+})
+</script>
 <style scoped>
 .loader {
   display: inline-block;

@@ -143,6 +143,15 @@ declare module '*/simplePost.gql' {
 }
     
 
+declare module '*/home.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const home: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/posts.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -156,6 +165,15 @@ declare module '*/video.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const video: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/videos-all.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const videosAll: DocumentNode;
 
   export default defaultDocument;
 }

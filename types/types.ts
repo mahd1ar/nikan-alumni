@@ -9632,12 +9632,12 @@ export type UpdateUserMutationVariables = Exact<{
 export type UpdateUserMutation = { __typename?: 'RootMutation', updateUser?: { __typename?: 'UpdateUserPayload', clientMutationId?: string | null, user?: { __typename?: 'User', id: string, firstName?: string | null } | null } | null };
 
 export type CategoryEventsQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type CategoryEventsQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, count?: number | null, name?: string | null, slug?: string | null, videos?: { __typename?: 'CategoryToVideoConnection', edges?: Array<{ __typename?: 'CategoryToVideoConnectionEdge', node?: { __typename?: 'Video', id: string, title?: string | null, date?: string | null, content?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', sourceUrl?: string | null } | null } | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null } | null> | null } | null } | null };
+export type CategoryEventsQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, events?: { __typename?: 'CategoryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null } | null };
 
 export type CategoryPostsQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
@@ -9653,7 +9653,7 @@ export type CategoryVideosQueryVariables = Exact<{
 }>;
 
 
-export type CategoryVideosQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, databaseId: number, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, children?: { __typename?: 'CategoryToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null } | null> | null } | null, categoryAttrs?: { __typename?: 'Category_Categoryattrs', categoryAttrs?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', id: string, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null> | null } | null } | null };
+export type CategoryVideosQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, databaseId: number, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, children?: { __typename?: 'CategoryToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null } | null> | null } | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', id: string, databaseId: number, title?: string | null, date?: string | null, featuredImageId?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null> | null } | null } | null };
 
 export type EventParticipantsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -9687,6 +9687,16 @@ export type FullPostFragment = { __typename?: 'Post', id: string, databaseId: nu
 
 export type SimplePostFragment = { __typename?: 'Post', id: string, databaseId: number, title?: string | null, date?: string | null, content?: string | null, contentTypeName: string };
 
+export type HomeQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+  order?: InputMaybe<OrderEnum>;
+  field?: InputMaybe<PostObjectsConnectionOrderbyEnum>;
+  first1?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type HomeQuery = { __typename?: 'RootQuery', videos?: { __typename?: 'RootQueryToVideoConnection', nodes?: Array<{ __typename?: 'Video', id: string, title?: string | null, content?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, categories?: { __typename?: 'VideoToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', sourceUrl?: string | null } | null } | null } | null> | null } | null, events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null };
+
 export type PostsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   categoryName?: InputMaybe<Scalars['String']>;
@@ -9703,10 +9713,17 @@ export type VideoQueryVariables = Exact<{
 
 export type VideoQuery = { __typename?: 'RootQuery', video?: { __typename?: 'Video', id: string, content?: string | null, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, categories?: { __typename?: 'VideoToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null, databaseId: number, id: string } | null> | null } | null } | null };
 
+export type VideosAllQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type VideosAllQuery = { __typename?: 'RootQuery', videos?: { __typename?: 'RootQueryToVideoConnection', edges?: Array<{ __typename?: 'RootQueryToVideoConnectionEdge', node?: { __typename?: 'Video', content?: string | null, id: string, databaseId: number, date?: string | null, title?: string | null, featuredImageId?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null } | null> | null } | null };
+
 export type VideosQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   parent?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type VideosQuery = { __typename?: 'RootQuery', categories?: { __typename?: 'RootQueryToCategoryConnection', edges?: Array<{ __typename?: 'RootQueryToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', content?: string | null, id: string, date?: string | null, title?: string | null, featuredImageId?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null> | null } | null } | null } | null> | null } | null };
+export type VideosQuery = { __typename?: 'RootQuery', categories?: { __typename?: 'RootQueryToCategoryConnection', edges?: Array<{ __typename?: 'RootQueryToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null, slug?: string | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', content?: string | null, id: string, databaseId: number, date?: string | null, title?: string | null, featuredImageId?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null> | null } | null } | null } | null> | null } | null };

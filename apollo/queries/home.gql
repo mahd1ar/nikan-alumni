@@ -1,0 +1,55 @@
+query home(
+  $first: Int = 10
+  $order: OrderEnum = ASC
+  $field: PostObjectsConnectionOrderbyEnum = DATE
+  $first1: Int = 10
+) {
+  videos(first: $first, where: { orderby: { field: $field, order: $order } }) {
+    nodes {
+      id
+      title(format: RENDERED)
+      content
+      speakers {
+        speakers
+      }
+      categories {
+        nodes {
+          name
+        }
+      }
+      featuredImage {
+        node {
+          sourceUrl(size: LARGE)
+        }
+      }
+    }
+  }
+  events(first: $first1) {
+    nodes {
+      id
+      databaseId
+      title(format: RENDERED)
+      commentCount
+      date
+      content(format: RENDERED)
+      eventProps {
+        duration
+        venue
+      }
+      categories {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+        }
+      }
+    }
+  }
+}

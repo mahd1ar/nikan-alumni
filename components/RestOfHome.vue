@@ -8,7 +8,7 @@
         :duration="upcommingEvents[0].duration"
       >
         <div class="container mx-auto flex flex-col-reverse gap-4 md:flex-row">
-          <div class="flex w-full flex-col md:w-8/12">
+          <div class="flex w-full flex-col md:w-8/12 my-auto">
             <div
               class="mx-auto flex w-2/3 flex-row-reverse justify-end gap-4 md:w-full"
             >
@@ -111,7 +111,7 @@
                 </div>
               </div>
             </div>
-            <div class="mt-10 flex flex-col gap-8 md:mt-20 lg:flex-row-reverse">
+            <div class="pt-10 flex flex-col gap-8 md:mt-20 lg:flex-row-reverse">
               <div
                 v-if="time"
                 class="grid w-full grid-cols-4 text-center text-3xl md:text-right lg:w-9/12"
@@ -296,7 +296,8 @@
               </div>
             </div>
             <div class="flex-center">
-              <button
+              <nuxt-link
+                to="/event/category"
                 class="mx-auto flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
               >
                 <svg
@@ -314,7 +315,7 @@
                 </svg>
 
                 مشاهده تمام رویداد ها
-              </button>
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -597,7 +598,10 @@
         </div>
         <div class="-m-2 flex w-2/5 flex-wrap">
           <div v-for="(i, index) in media" :key="index" class="w-full p-2">
+            <!-- v-show="index !== mediaIndex" -->
             <div
+              @click="mediaIndex = index"
+              :title="i.subject"
               class="flex h-full translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 px-4 py-2 transition-all hover:-translate-y-2 hover:bg-slate-800 hover:shadow-sm hover:shadow-yellow-200/50"
             >
               <svg
@@ -617,62 +621,51 @@
               </svg>
 
               <div class="flex flex-grow">
-                <div class="flex w-3/5 flex-col gap-2">
-                  <h2
-                    class="title-font text-sm font-medium text-yellow-100 shadow-yellow-500/50 drop-shadow-2xl"
-                    style="text-shadow: 1px 1px 9px #dee3f0"
-                  >
-                    {{ i.subject }}
-                  </h2>
-                  <div class="flex gap-4 text-xs text-slate-400">
-                    <span>
-                      {{ i.cat }}
-                    </span>
-                  </div>
-                </div>
                 <div
-                  class="text-sx flex w-2/5 flex-col items-start gap-2 text-slate-400"
+                  class="text-sx flex w-full flex-col items-start gap-1 text-slate-400"
                 >
-                  <div class="flex-center gap-1 text-sm">
+                  <div class="flex-col gap-2">
+                    <h2
+                      class="title-font text-sm font-medium text-yellow-100 shadow-yellow-500/50 drop-shadow-2xl"
+                      style="text-shadow: 1px 1px 9px #dee3f0"
+                    >
+                      {{ i.subject }}
+                    </h2>
+                    <div class="flex gap-4 mt-1 text-xs text-slate-400">
+                      <span>
+                        {{ i.cat }}
+                      </span>
+                    </div>
+                  </div>
+                  <div v-if="i.speaker" class="flex-center gap-1 text-xs">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       aria-hidden="true"
                       role="img"
-                      class="h-4 w-4"
+                      class="w-4 h-4"
                       preserveAspectRatio="xMidYMid meet"
-                      viewBox="0 0 24 24"
+                      viewBox="0 0 32 32"
                     >
                       <path
                         fill="currentColor"
-                        d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2S7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"
+                        d="M29.415 19L27.7 17.285A2.97 2.97 0 0 0 28 16a3 3 0 1 0-3 3a2.97 2.97 0 0 0 1.286-.3L28 20.414V28h-6v-3a7.008 7.008 0 0 0-7-7H9a7.008 7.008 0 0 0-7 7v5h28v-9.586A1.988 1.988 0 0 0 29.415 19ZM4 25a5.006 5.006 0 0 1 5-5h6a5.006 5.006 0 0 1 5 5v3H4Z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7Z"
                       />
                     </svg>
 
                     {{ i.speaker }}
-                  </div>
-                  <div class="flex-center gap-1 text-xs">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      role="img"
-                      class="h-4 w-4"
-                      preserveAspectRatio="xMidYMid meet"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8zm.5-13H11v6l5.25 3.15l.75-1.23l-4.5-2.67z"
-                      />
-                    </svg>
-                    <span> 9 دقیقه </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="w-full px-2 text-center">
-            <button
-              class="flex-center mx-auto mt-8 flex w-full gap-4 rounded border border-slate-500 bg-slate-800 py-4 px-8 text-lg text-slate-200 shadow-md shadow-white/5 transition hover:border-white hover:bg-white hover:text-cyan-600 hover:shadow-lg hover:shadow-cyan-300/50 focus:outline-none"
+            <nuxt-link
+              to="/video"
+              class="flex-center cursor-pointer mx-auto mt-8 flex w-full gap-4 rounded border border-slate-500 bg-slate-800 py-4 px-8 text-lg text-slate-200 shadow-md shadow-white/5 transition hover:border-white hover:bg-white hover:text-cyan-600 hover:shadow-lg hover:shadow-cyan-300/50 focus:outline-none"
             >
               ورود به بخش آرشیو رسانه
 
@@ -688,20 +681,24 @@
                   clip-rule="evenodd"
                 />
               </svg>
-            </button>
+            </nuxt-link>
           </div>
         </div>
 
         <div class="flex w-3/5 flex-col">
           <client-only>
             <div class="aspect-video">
-              <vue-plyr ref="plyr" :options="playerOptions">
+              <vue-plyr
+                v-if="media[mediaIndex]"
+                ref="plyr"
+                :options="playerOptions"
+              >
+                <!-- data-poster="https://dummyimage.com/300x300" -->
                 <video
                   controls
                   crossorigin
                   playsinline
-                  data-poster="https://dummyimage.com/300x300"
-                  :src="videourl"
+                  :src="media[mediaIndex].url"
                   size="720"
                   format="video/mp4"
                   preload="none"
@@ -712,15 +709,16 @@
             </div>
           </client-only>
           <div
+            v-if="media[mediaIndex]"
             class="bg-opacity-5 bg-gradient-to-tr from-slate-500/5 to-slate-100/5 p-4"
           >
             <h2 class="mt-4 mb-2 text-2xl text-yellow-100">
-              {{ media[0].subject }}
+              {{ media[mediaIndex].subject }}
             </h2>
-            <div class="mb-4">
+            <div v-show="media[mediaIndex].speaker" class="mb-4 text-lg">
               سخنران:
-              <span class="font-bold">
-                {{ media[0].speaker }}
+              <span class="font-bold mt-2">
+                {{ media[mediaIndex].speaker }}
               </span>
             </div>
           </div>
@@ -738,116 +736,80 @@
         <div
           class="container mx-auto flex flex-col flex-wrap px-5 py-24 text-slate-300 md:flex-row md:flex-nowrap md:items-center lg:items-start"
         >
-          <div
-            class="mx-auto w-64 flex-shrink-0 text-center md:mx-0 md:text-left"
-          >
-            <a
-              class="title-font flex items-center justify-center font-medium text-gray-900 md:justify-start"
+          <div class="mx-auto w-64 flex-shrink-0 md:mx-0 md:text-left">
+            <h2
+              class="title-font mb-3 text-sm text-right font-medium tracking-widest text-cyan-600"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="h-10 w-10 rounded-full bg-blue-500 p-2 text-white"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                ></path>
-              </svg>
-              <span class="ml-3 text-xl">Tailblocks</span>
-            </a>
-            <p class="mt-2 text-sm text-gray-500">
-              Air plant banjo lyft occupy retro adaptogen indego
+              کانون دانش آموختگان نیکان
+            </h2>
+            <p class="mt-2 text-sm text-gray-400 text-right">
+              محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و ایجاد
+              بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها و توانمندی های ایشان
             </p>
           </div>
+
           <div
-            class="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pl-20 md:text-left"
+            class="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pr-20 md:text-left"
           >
-            <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+            <div class="w-full text-right px-4 md:w-1/2 lg:w-1/3">
               <h2
-                class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900"
+                class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600"
               >
-                CATEGORIES
+                کانون دانش آموختگان
               </h2>
-              <nav class="mb-10 list-none">
+              <nav
+                class="mb-10 list-none flex flex-col gap-2 items-start text-sm"
+              >
                 <li>
-                  <a class="">First Link</a>
+                  <a class="">۲۲۶۳۱۲۵۰ </a>
                 </li>
                 <li>
-                  <a class="">Second Link</a>
+                  <a class="">۰۹۲۰۳۱۷۹۸۲۳</a>
                 </li>
                 <li>
-                  <a class="">Third Link</a>
-                </li>
-                <li>
-                  <a class="">Fourth Link</a>
+                  <a class="">
+                    الهیه، خیابان فیاضی (فرشته)، خیابان چناران، پلاک ۳/۲، طبقه
+                    اول.
+                  </a>
                 </li>
               </nav>
             </div>
-            <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+
+            <div class="w-full text-right px-4 md:w-1/2 lg:w-1/3">
               <h2
-                class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900"
+                class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600"
               >
-                CATEGORIES
+                شبکه های اجتماعی
               </h2>
-              <nav class="mb-10 list-none">
+              <nav
+                class="mb-10 list-none flex flex-col gap-2 items-start text-sm"
+              >
                 <li>
-                  <a class="">First Link</a>
+                  <a class="">اینستاگرام</a>
                 </li>
                 <li>
-                  <a class="">Second Link</a>
+                  <a class="">کانال تلگرام</a>
                 </li>
                 <li>
-                  <a class="">Third Link</a>
-                </li>
-                <li>
-                  <a class="">Fourth Link</a>
+                  <a class="">لینکدین</a>
                 </li>
               </nav>
             </div>
-            <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+
+            <div class="w-full text-right px-4 md:w-1/2 lg:w-1/3">
               <h2
-                class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900"
+                class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600"
               >
-                CATEGORIES
+                شبکه های اجتماعی
               </h2>
-              <nav class="mb-10 list-none">
-                <li>
-                  <a class="">First Link</a>
-                </li>
-                <li>
-                  <a class="">Second Link</a>
-                </li>
-                <li>
-                  <a class="">Third Link</a>
-                </li>
-                <li>
-                  <a class="">Fourth Link</a>
-                </li>
-              </nav>
-            </div>
-            <div class="w-full px-4 md:w-1/2 lg:w-1/4">
-              <h2
-                class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900"
+              <nav
+                class="mb-10 list-none flex flex-col gap-2 items-start text-sm"
               >
-                CATEGORIES
-              </h2>
-              <nav class="mb-10 list-none">
                 <li>
-                  <a class="">First Link</a>
+                  <a class=""> امور خیریه </a>
                 </li>
                 <li>
-                  <a class="">Second Link</a>
-                </li>
-                <li>
-                  <a class="">Third Link</a>
-                </li>
-                <li>
-                  <a class="">Fourth Link</a>
+                  <a class=""> نیک پیوند </a>
                 </li>
               </nav>
             </div>
@@ -968,8 +930,8 @@ import {
   wordpressDateToJalali,
 } from '~/data/utils'
 import { Dict } from '~/data/utils/dictionary'
-import gqlEventsQuery from '@/apollo/queries/events.gql'
-import { EventsQuery, EventsQueryVariables } from '~/types/types'
+import homegql from '@/apollo/queries/home.gql'
+import { HomeQuery, HomeQueryVariables } from '~/types/types'
 import DepartmentsSection from '@/components/homepage/DepartmentsSection.vue'
 import { Event, EventStatus } from '@/data/GlobslTypes'
 
@@ -1014,37 +976,36 @@ export default Vue.extend({
           'fullscreen',
         ],
       },
-      videourl: 'http://194.5.205.148/vid/TedNikan1.mp4',
-
-      media: [
-        {
-          subject: ' دادرسی اهل بیت علیهم السلام از مردم ',
-          cat: 'لایو ها',
-          speaker: 'دکتر دولتی',
-        },
-        {
-          subject: ' کارآفرینی ',
-          cat: 'چالش های کسب و کار',
-          speaker: ' دکتر ضیا ',
-        },
-        {
-          subject: ' معرفی کاربرگ    ',
-          cat: 'کاربرگ',
-          speaker: ' حمیدرضا مرادی مطلق۱۴',
-        },
-        {
-          subject: 'در جسستجوی آرامش',
-          cat: 'کلابینار',
-          speaker: ' حمیدرضا مرادی مطلق۱۴',
-        },
-      ],
+      mediaIndex: 0,
+      media: [] as {
+        subject: string
+        cat: string
+        speaker: string
+        url: string
+      }[],
     }
   },
   async fetch() {
-    const variables: EventsQueryVariables = { first: 4 }
-    const { data } = await this.$apollo.query<EventsQuery>({
-      query: gqlEventsQuery,
+    const variables: HomeQueryVariables = { first: 4, first1: 4 }
+    const { data } = await this.$apollo.query<HomeQuery>({
+      query: homegql,
       variables,
+    })
+
+    data.videos?.nodes?.forEach((i) => {
+      if (i?.content) {
+        const reg = /https?:\/\/.*\.mp4/
+        const res = reg.exec(i.content)
+        if (res === null) return
+
+        const v = {
+          subject: i?.title || '',
+          cat: i?.categories?.nodes?.map((j) => j?.name).join(' . ') || '',
+          speaker: i?.speakers?.speakers || '',
+          url: res[0],
+        }
+        this.media.push(v)
+      }
     })
 
     data.events?.nodes?.forEach((i) => {
@@ -1107,9 +1068,9 @@ export default Vue.extend({
         if (this.upcommingEvents.length > 0) return
 
         const { data } = await this.$axios.get<WpUpcommingEvents[]>(
-          'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent'
+          '/wp-json/myplugin/v1/upcommingevent'
         )
-        console.log(data)
+
         const d: Event[] = data
           .map((e) => ({
             id: e.ID,
@@ -1122,7 +1083,7 @@ export default Vue.extend({
               .join(' / '),
             faFormattedDate: wordpressDateToFormattedJalali(e.post_date),
             wpdate: e.post_date,
-            location: 'LOCATION',
+            location: e.venue,
             category: e.category.length ? e.category[0].name : '',
             duration: e.duration ? parseFloat(e.duration) : 0.0,
           }))

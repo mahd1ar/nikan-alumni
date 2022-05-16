@@ -40,4 +40,5 @@ export interface WpUpcommingEvents {
   featured_image: string
   category: Category[]
   duration: string
+  venue: string
 }

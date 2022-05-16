@@ -35,19 +35,28 @@
       <div v-html="purgedContent || html"></div>
 
       <div
-        class="w-full grid grid-cols-2 sm:grid-cols-3"
         v-if="imgs.length > 0"
+        class="w-full grid grid-cols-2 sm:grid-cols-3"
       >
-        <img
-          class="hover:scale-125 hover:z-10 transition-all will-change-transform transform cursor-pointer"
+        <div
           v-for="(img, index) in imgs"
-          loading="lazy"
           :key="index"
-          :src="img"
-        />
+          class="w-full h-full"
+          @click="openImage(index)"
+        >
+          <img
+            class="hover:scale-110 w-full h-full object-cover transition-all will-change-transform transform cursor-pointer"
+            loading="lazy"
+            :src="img"
+          />
+        </div>
       </div>
 
-      <image-viewer :open="false" />
+      <image-viewer
+        :img-index="selectedImage"
+        :imgs="imgs"
+        :open.sync="isPlayerOpen"
+      />
     </div>
   </div>
 </template>
@@ -76,6 +85,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      isPlayerOpen: false,
       selectedImage: -1,
       imgs: [] as string[],
       isProtected: false,
@@ -107,6 +117,15 @@ export default Vue.extend({
   },
 
   methods: {
+    openImage(index: number) {
+      this.selectedImage = index
+      this.isPlayerOpen = true
+    },
+    // closePlayer(){
+
+    //   this.selectedImage = -1
+    //   this.isPlayerOpen = false
+    // },
     purge() {
       let purgedContent = this.html
 
