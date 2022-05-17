@@ -1,16 +1,12 @@
 <template>
   <div dir="rtl">
     <!-- component -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
+
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="https://cdn.rawgit.com/shuvroroy/youtube-clone/883c8d9a/public/css/main.css"
-    />
+    /> -->
     <div class="font-samim bg-white">
       <div class="h-80 bg-cover relative">
         <img
@@ -20,47 +16,23 @@
         />
         <div class="absolute inset-0">
           <div
-            class="text-white container m-auto h-full flex-center flex-col items-start"
+            class="text-white container m-auto h-full flex-center flex-col items-center md:items-start"
           >
             <div class="flex-col">
-              <h1 class="text-3xl font-bold tracking-wider">
+              <h1
+                style="background: black"
+                class="text-3xl font-bold tracking-wider py-2 px-4"
+              >
                 آرشیو رسانه کانون دانش آموختگان
               </h1>
             </div>
           </div>
         </div>
       </div>
-      <div class="bg-grey-lighter pt-6">
+      <div class="bg-gray-200 pt-6">
         <div class="container mx-auto">
-          <!-- <div class="flex items-center justify-between py-4 px-16">
-            <div class="flex items-center">
-              <img
-                class="h-24 w-24 rounded-full"
-                src="https://yt3.ggpht.com/-5ny40r8qe90/AAAAAAAAAAI/AAAAAAAAAAA/IrloZ_OeiYc/s288-c-k-no-mo-rj-c0xffffff/photo.jpg"
-                alt="channel_logo"
-              />
-              <div class="mr-6">
-                <div class="flex items-center text-2xl font-normal">
-                  <span>Fun Fun Function</span>
-                  <span
-                    class="bg-grey-dark text-2xs inline-block h-3 w-3 rounded-full text-center text-white"
-                    >&#10003;</span
-                  >
-                </div>
-                <p class="mt-2 text-sm">126,014 subscribers</p>
-              </div>
-            </div>
-            <div class="text-grey-dark">
-              <button
-                class="bg-grey-light text-grey-darker mr-4 appearance-none px-3 py-2 text-sm uppercase"
-              >
-                Subscribed 126K
-              </button>
-              <span><i class="fa fa-bell fa-lg" aria-hidden="true"></i></span>
-            </div>
-          </div> -->
-          <div>
-            <ul class="list-reset flex">
+          <div class="horizental-scrollbar">
+            <ul class="list-reset flex overflow-auto">
               <li
                 v-for="cat in categories"
                 :key="cat.href || 'home'"
@@ -82,7 +54,40 @@
       </div>
       <div class="container mx-auto flex">
         <!-- <div v-if="hash === ''" class="py-6"> -->
-        <div v-if="hash === ''" class="py-6">
+        <div
+          class="flex-center text-gray-500 w-full h-16"
+          v-if="$fetchState.pending"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            role="img"
+            width="2em"
+            height="2em"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z"
+              opacity=".5"
+            />
+            <path
+              fill="currentColor"
+              d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"
+            >
+              <animateTransform
+                attributeName="transform"
+                dur="1s"
+                from="0 12 12"
+                repeatCount="indefinite"
+                to="360 12 12"
+                type="rotate"
+              />
+            </path>
+          </svg>
+        </div>
+        <div v-else-if="hash === ''" class="py-6">
           <div v-for="vlist in tatakae" :key="vlist.hash || 'home'">
             <div v-if="vlist.videos.length > 0" class="border-b">
               <h3 class="py-6 text-base font-medium">
@@ -91,7 +96,7 @@
                   مشاهده تمام موارد
                 </span>
               </h3>
-              <div class="relative mb-4 flex flex-wrap">
+              <div class="relative mb-4 grid md:grid-cols-4 grid-cols-2">
                 <div
                   v-for="(video, index) in vlist.videos"
                   :key="index"

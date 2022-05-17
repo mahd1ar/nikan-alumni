@@ -298,6 +298,7 @@
           >
             <!-- src="https://avatars.githubusercontent.com/u/32998122?v=4" -->
             <img
+              v-if="loaded && !$fetchState.pending"
               loading="lazy"
               :src="user.avatar"
               class="absolute bottom-0 h-40 w-40 rounded-3xl"
@@ -585,6 +586,10 @@ export default Vue.extend({
   mounted() {
     // @ts-ignore
     window.v = this
+
+    this.$nextTick(() => {
+      this.loaded = true
+    })
   },
   methods: {
     toIndiaDigits(input: string | number) {

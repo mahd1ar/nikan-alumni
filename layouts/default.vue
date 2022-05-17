@@ -42,16 +42,17 @@
         <!-- @click.stop="closeMobileMenu" -->
         <div
           id="mmenu__cart"
-          class="relative flex h-full w-full flex-row bg-white"
+          class="relative flex h-full w-full sm:max-w-md flex-row bg-white"
         >
           <div
             class="flex-shrink-0"
             style="background-color: #eff5f7; color: #5f6b85"
           >
             <div class="h-full">
-              <ul class="flex h-full h-full flex-col gap-2 overflow-hidden p-4">
+              <ul class="flex h-full flex-col gap-2 overflow-hidden p-4">
                 <li
                   v-for="(menuitem, index) in menu"
+                  v-show="index !== 0"
                   :key="index"
                   :class="{
                     'mmenu__icon cursor-pointer rounded border bg-white p-3 transition-all hover:bg-slate-50': true,
@@ -120,6 +121,7 @@
                 name="open-menu"
               >
                 <li
+                  @click="closeMobileMenu"
                   v-for="(sm, index2) in menu[mobileMenu.selected[0]].submenu"
                   :key="index2 * 100 + 5"
                   class="overflow-hidden rounded-md bg-slate-50 p-2"
@@ -128,7 +130,10 @@
                     '--max': menu[mobileMenu.selected[0]].submenu.length,
                   }"
                 >
-                  <div class="flex items-center justify-between gap-2">
+                  <nuxt-link
+                    :to="sm.href"
+                    class="flex items-center justify-between gap-2"
+                  >
                     {{ sm.title }}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +155,7 @@
                         d="M9.293 7.707L13.586 12l-4.293 4.293l1.414 1.414L16.414 12l-5.707-5.707z"
                       />
                     </svg>
-                  </div>
+                  </nuxt-link>
                 </li>
               </transition-group>
 
@@ -217,7 +222,24 @@
                     />
                   </svg>
                 </div>
-
+                <nuxt-link
+                  to="/"
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-cyan-400 hover:bg-gray-700 hover:text-cyan-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
+                    class="h-5 w-5"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M18.178 11.373a.7.7 0 0 1 .7.7v5.874c.027.812-.071 1.345-.434 1.68c-.338.311-.828.4-1.463.366H3.144C2.5 19.961 2 19.7 1.768 19.173c-.154-.347-.226-.757-.226-1.228v-5.873a.7.7 0 0 1 1.4 0v5.873c0 .232.026.42.07.562l.036.098l-.003-.01c.001-.013.03-.008.132-.002h13.84c.245.014.401 0 .456-.001l.004-.001c-.013-.053.012-.27 0-.622v-5.897a.7.7 0 0 1 .701-.7ZM10.434 0c.264 0 .5.104.722.297l8.625 8.139a.7.7 0 1 1-.962 1.017l-8.417-7.944l-9.244 7.965a.7.7 0 0 1-.915-1.06L9.689.277l.086-.064c.214-.134.428-.212.66-.212Z"
+                    />
+                  </svg>
+                </nuxt-link>
                 <!-- Mobile menu button-->
                 <button
                   type="button"
@@ -300,19 +322,20 @@
                   </div>
                 </div>
                 <div id="sec-navigation" class="hidden md:block">
-                  <div class="flex gap-2">
+                  <div class="flex lg:gap-2">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <div
+                    <nuxt-link
                       v-for="(m, index) in menu"
                       :key="index"
                       :class="`menu-item ${
                         m.hasSubmenu ? 'menu-item-has-children' : ''
                       }`"
+                      :to="m.href"
                       aria-current="page"
                     >
-                      <nuxt-link :to="m.href">
+                      <span class="">
                         {{ m.title }}
-                      </nuxt-link>
+                      </span>
 
                       <ul class="sub-menu">
                         <menu-item
@@ -321,7 +344,7 @@
                           :menu="menuitem"
                         ></menu-item>
                       </ul>
-                    </div>
+                    </nuxt-link>
                   </div>
                 </div>
               </div>
@@ -332,7 +355,9 @@
                 <div class="w-36 mx-auto">
                   <div class="flex text-white">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <div>کانون دانش آموختگان</div>
+                    <nuxt-link to="/" class="cursor-pointer"
+                      >کانون دانش آموختگان</nuxt-link
+                    >
                   </div>
                 </div>
               </div>
@@ -361,8 +386,8 @@
                     </button>
 
                     <nuxt-link
-                      to="/login"
                       v-else
+                      to="/login"
                       class="text-white py-1 px-4 bg-slate-700 rounded text-slate-300 text-sm"
                     >
                       <!-- کانون دانش آموختگان نیکان -->
@@ -396,8 +421,8 @@
                         <transition name="swip-left">
                           <div v-if="!menuConfirm.show" key="t1">
                             <nuxt-link
-                              to="/login"
                               id="user-menu-item-0"
+                              to="/login"
                               href="#"
                               class="block px-4 py-2 text-sm text-gray-700"
                               role="menuitem"
@@ -526,7 +551,7 @@ export default Vue.extend({
     }),
   },
   created() {
-    this.mobileMenu.selected.push(0)
+    this.mobileMenu.selected.push(1)
   },
   mounted() {
     // remove fucking service worker
@@ -571,7 +596,6 @@ export default Vue.extend({
     },
 
     toggleUserController(val?: boolean) {
-      console.log(val)
       if (val === undefined)
         this.isOpenUserController = !this.isOpenUserController
       else this.isOpenUserController = val
@@ -746,10 +770,11 @@ export default Vue.extend({
 .animation-rollup-leave-active {
   transition: all 500ms ease;
   transition-delay: calc(var(--count) * 75ms);
-  top: 0%;
+  transform: translateY(0%);
+  z-index: 0;
 }
 .animation-rollup-enter,
 .animation-rollup-leave-to {
-  top: -100%;
+  transform: translateY(-100%);
 }
 </style>

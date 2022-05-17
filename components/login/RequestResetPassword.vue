@@ -104,10 +104,11 @@ import { timeout } from '~/data/utils'
 export default Vue.extend({
   components: { VueHcaptcha },
   data() {
+    const { isDev } = this.$nuxt.context
     return {
       loading: false,
       verified: false,
-      email: 'a.mahdiyar7@yahoo.com',
+      email: isDev ? 'a.mahdiyar7@yahoo.com' : '',
     }
   },
   methods: {

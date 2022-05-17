@@ -4,18 +4,19 @@
       class="absolute h-full w-full bg-gradient-to-br from-slate-900 to-slate-700 opacity-75"
     ></div>
     <div
-      class="relative flex max-h-screen w-10/12 flex-col overflow-auto rounded-md bg-gray-50 p-12"
+      style="max-height: 90%"
+      class="relative flex max-h-screen w-10/12 flex-col overflow-auto rounded-md bg-gray-50 p-4 md:p-12"
     >
       <div class="flex gap-2">
         <div
-          class="sticky top-0 z-10 flex w-full gap-4 rounded-md border-2 border-cyan-500 bg-white p-4 text-tm-black"
+          class="sticky top-0 z-10 flex w-full gap-4 rounded-md border-2 border-cyan-500 bg-white p-1 px-4 md:p-4 text-tm-black"
         >
-          <label for="search">
+          <label class="flex-center" for="search">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               role="img"
-              class="h-10 w-10 text-cyan-500"
+              class="md:h-10 md:w-10 w-4 h-4 text-cyan-500"
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 24 24"
             >
@@ -33,7 +34,7 @@
             v-model="searchValue"
             name="search"
             placeholder="جست و جو کنید..."
-            class="w-full bg-opacity-0 px-2 focus-within:outline-none"
+            class="w-full bg-opacity-0 md:px-2 focus-within:outline-none"
             type="text"
             @blur="inputFocused"
             @focus="inputFocused"
@@ -41,12 +42,12 @@
           />
         </div>
         <i
-          class="flex-center w-20 flex-shrink-0 cursor-pointer border-2 text-gray-400"
+          class="flex-center w-10 md:w-20 flex-shrink-0 cursor-pointer border-2 text-gray-400"
           @click="close"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10"
+            class="md:h-10 md:w-10 w-4 h-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -61,7 +62,7 @@
         </i>
       </div>
       <section v-if="searchValue" class="body-font text-gray-600">
-        <div class="container mx-auto px-5 pt-12 transition-all">
+        <div class="container mx-auto lg:px-5 pt-12 transition-all">
           <div class="-m-4 flex flex-wrap">
             <div class="w-full p-4 sm:w-1/2 lg:w-1/4">
               <h2
@@ -102,11 +103,11 @@
             >
               دسترسی سریع به محتوا وب سایت
             </h2>
-            <p class="mx-auto text-base leading-relaxed lg:w-3/4 xl:w-2/4">
+            <!-- <p class="mx-auto text-base leading-relaxed lg:w-3/4 xl:w-2/4">
               Blue bottle crucifix vinyl post-ironic four dollar toast vegan
               taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh
               mi pug.
-            </p>
+            </p> -->
           </div>
           <div class="-m-4 flex flex-wrap">
             <div class="w-full p-4 sm:w-1/2 lg:w-1/4">

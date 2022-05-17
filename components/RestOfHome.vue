@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="bg-[#faf9f9] py-8">
+    <section class="py-8 home__upcomming">
       <count-down
         v-if="upcommingEvents.length"
         v-slot="{ status, time }"
@@ -391,7 +391,7 @@
           <div
             v-for="(e, index) in events"
             :key="index"
-            class="flex w-full flex-col items-start px-12"
+            class="flex w-full flex-col items-start sm:px-12"
           >
             <div class="py-4 px-4">
               <div class="flex h-full items-start gap-4">
@@ -410,7 +410,7 @@
                       >1400</span
                     > -->
                 </div>
-                <div class="flex-grow pl-6">
+                <nuxt-link :to="'/event/' + e.link" class="flex-grow pl-6">
                   <h2
                     class="title-font mb-1 text-xs tracking-widest text-gray-700"
                   >
@@ -427,7 +427,7 @@
                   >
                     {{ e.content }}
                   </p>
-                </div>
+                </nuxt-link>
               </div>
             </div>
           </div>
@@ -542,7 +542,7 @@
       />
       <div class="container relative mx-auto flex flex-wrap px-5 py-12">
         <div
-          class="-mx-4 mt-auto mb-auto flex flex-wrap content-start sm:w-2/3 sm:pr-10 lg:w-1/2"
+          class="mt-auto mb-auto flex flex-wrap content-start sm:w-2/3 sm:pr-10 lg:w-1/2"
         >
           <div class="mb-6 w-full px-4 sm:p-4">
             <h1 class="title-font mb-2 text-2xl font-medium text-gray-900">
@@ -557,20 +557,28 @@
             </div>
           </div>
           <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-            <h2 class="title-font text-3xl font-medium text-gray-900">2.7K</h2>
+            <h2 class="title-font text-3xl font-medium text-gray-900">
+              {{ stats.alumni }}
+            </h2>
             <p class="leading-relaxed">فارغ التحصیل</p>
           </div>
           <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-            <h2 class="title-font text-3xl font-medium text-gray-900">1.8K</h2>
+            <h2 class="title-font text-3xl font-medium text-gray-900">
+              {{ stats.events }}
+            </h2>
             <p class="leading-relaxed">رویداد</p>
           </div>
           <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-            <h2 class="title-font text-3xl font-medium text-gray-900">35</h2>
-            <p class="leading-relaxed">Downloads</p>
+            <h2 class="title-font text-3xl font-medium text-gray-900">
+              {{ stats.project }}
+            </h2>
+            <p class="leading-relaxed">پروژه خیریه</p>
           </div>
           <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-            <h2 class="title-font text-3xl font-medium text-gray-900">4</h2>
-            <p class="leading-relaxed">پروژه خیریه</p>
+            <h2 class="title-font text-3xl font-medium text-gray-900">
+              {{ stats.groups }}
+            </h2>
+            <p class="leading-relaxed">کارگروه</p>
           </div>
         </div>
         <div
@@ -596,130 +604,143 @@
             آرشیو رسانه
           </h1>
         </div>
-        <div class="-m-2 flex w-2/5 flex-wrap">
-          <div v-for="(i, index) in media" :key="index" class="w-full p-2">
-            <!-- v-show="index !== mediaIndex" -->
-            <div
-              @click="mediaIndex = index"
-              :title="i.subject"
-              class="flex h-full translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 px-4 py-2 transition-all hover:-translate-y-2 hover:bg-slate-800 hover:shadow-sm hover:shadow-yellow-200/50"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                role="img"
-                class="ml-4 h-10 w-10 flex-shrink-0 rounded-full bg-white object-cover object-center p-2 text-cyan-700 shadow-lg shadow-cyan-500/50"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 36 36"
+
+        <div class="flex flex-col-reverse lg:flex-row-reverse gap-4">
+          <div class="-m-2 flex lg:w-2/5 flex-wrap">
+            <div v-for="(i, index) in media" :key="index" class="w-full p-2">
+              <!-- v-show="index !== mediaIndex" -->
+              <div
+                :title="i.subject"
+                class="flex h-full py-4 lg:py-1 translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 px-4 transition-all"
+                :class="
+                  mediaIndex === index
+                    ? 'border border-cyan-700 shadow-md shadow-cyan-700/50'
+                    : ' hover:-translate-y-2 hover:bg-slate-800 hover:shadow-sm hover:shadow-yellow-200/50'
+                "
+                @click="mediaIndex = index"
               >
-                <path
-                  fill="currentColor"
-                  d="M32.16 16.08L8.94 4.47A2.07 2.07 0 0 0 6 6.32v23.21a2.06 2.06 0 0 0 3 1.85l23.16-11.61a2.07 2.07 0 0 0 0-3.7Z"
-                  class="clr-i-solid clr-i-solid-path-1"
-                />
-                <path fill="none" d="M0 0h36v36H0z" />
-              </svg>
-
-              <div class="flex flex-grow">
-                <div
-                  class="text-sx flex w-full flex-col items-start gap-1 text-slate-400"
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="img"
+                  class="ml-4 h-10 w-10 flex-shrink-0 rounded-full bg-white object-cover object-center p-2 text-cyan-700 shadow-lg shadow-cyan-500/50"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 36 36"
                 >
-                  <div class="flex-col gap-2">
-                    <h2
-                      class="title-font text-sm font-medium text-yellow-100 shadow-yellow-500/50 drop-shadow-2xl"
-                      style="text-shadow: 1px 1px 9px #dee3f0"
-                    >
-                      {{ i.subject }}
-                    </h2>
-                    <div class="flex gap-4 mt-1 text-xs text-slate-400">
-                      <span>
-                        {{ i.cat }}
-                      </span>
-                    </div>
-                  </div>
-                  <div v-if="i.speaker" class="flex-center gap-1 text-xs">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                      role="img"
-                      class="w-4 h-4"
-                      preserveAspectRatio="xMidYMid meet"
-                      viewBox="0 0 32 32"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M29.415 19L27.7 17.285A2.97 2.97 0 0 0 28 16a3 3 0 1 0-3 3a2.97 2.97 0 0 0 1.286-.3L28 20.414V28h-6v-3a7.008 7.008 0 0 0-7-7H9a7.008 7.008 0 0 0-7 7v5h28v-9.586A1.988 1.988 0 0 0 29.415 19ZM4 25a5.006 5.006 0 0 1 5-5h6a5.006 5.006 0 0 1 5 5v3H4Z"
-                      />
-                      <path
-                        fill="currentColor"
-                        d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7Z"
-                      />
-                    </svg>
+                  <path
+                    fill="currentColor"
+                    d="M32.16 16.08L8.94 4.47A2.07 2.07 0 0 0 6 6.32v23.21a2.06 2.06 0 0 0 3 1.85l23.16-11.61a2.07 2.07 0 0 0 0-3.7Z"
+                    class="clr-i-solid clr-i-solid-path-1"
+                  />
+                  <path fill="none" d="M0 0h36v36H0z" />
+                </svg>
 
-                    {{ i.speaker }}
+                <div class="flex flex-grow">
+                  <div
+                    class="text-sx flex w-full flex-col items-start gap-1 text-slate-400"
+                  >
+                    <div class="flex-col gap-2">
+                      <h2
+                        class="title-font text-sm font-medium drop-shadow-2xl"
+                        :class="
+                          mediaIndex === index
+                            ? 'text-cyan-50'
+                            : 'text-yellow-100 shadow-yellow-500/50'
+                        "
+                        style="text-shadow: 1px 1px 9px #dee3f0"
+                      >
+                        {{ i.subject }}
+                      </h2>
+                      <div class="flex gap-4 mt-2 text-xs text-slate-400">
+                        <span>
+                          {{ i.cat }}
+                        </span>
+                      </div>
+                    </div>
+                    <div v-if="i.speaker" class="flex-center gap-1 text-xs">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        class="w-4 h-4"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 32 32"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M29.415 19L27.7 17.285A2.97 2.97 0 0 0 28 16a3 3 0 1 0-3 3a2.97 2.97 0 0 0 1.286-.3L28 20.414V28h-6v-3a7.008 7.008 0 0 0-7-7H9a7.008 7.008 0 0 0-7 7v5h28v-9.586A1.988 1.988 0 0 0 29.415 19ZM4 25a5.006 5.006 0 0 1 5-5h6a5.006 5.006 0 0 1 5 5v3H4Z"
+                        />
+                        <path
+                          fill="currentColor"
+                          d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7Z"
+                        />
+                      </svg>
+
+                      {{ i.speaker }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="w-full px-2 text-center">
-            <nuxt-link
-              to="/video"
-              class="flex-center cursor-pointer mx-auto mt-8 flex w-full gap-4 rounded border border-slate-500 bg-slate-800 py-4 px-8 text-lg text-slate-200 shadow-md shadow-white/5 transition hover:border-white hover:bg-white hover:text-cyan-600 hover:shadow-lg hover:shadow-cyan-300/50 focus:outline-none"
-            >
-              ورود به بخش آرشیو رسانه
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+            <div class="w-full px-2 text-center">
+              <nuxt-link
+                to="/video"
+                class="flex-center cursor-pointer mx-auto mt-8 flex w-full gap-4 rounded border border-slate-500 bg-slate-800 py-4 px-8 text-lg text-slate-200 shadow-md shadow-white/5 transition hover:border-white hover:bg-white hover:text-cyan-600 hover:shadow-lg hover:shadow-cyan-300/50 focus:outline-none"
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </nuxt-link>
-          </div>
-        </div>
+                ورود به بخش آرشیو رسانه
 
-        <div class="flex w-3/5 flex-col">
-          <client-only>
-            <div class="aspect-video">
-              <vue-plyr
-                v-if="media[mediaIndex]"
-                ref="plyr"
-                :options="playerOptions"
-              >
-                <!-- data-poster="https://dummyimage.com/300x300" -->
-                <video
-                  controls
-                  crossorigin
-                  playsinline
-                  :src="media[mediaIndex].url"
-                  size="720"
-                  format="video/mp4"
-                  preload="none"
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
                 >
-                  <!-- <source   /> -->
-                </video>
-              </vue-plyr>
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </nuxt-link>
             </div>
-          </client-only>
-          <div
-            v-if="media[mediaIndex]"
-            class="bg-opacity-5 bg-gradient-to-tr from-slate-500/5 to-slate-100/5 p-4"
-          >
-            <h2 class="mt-4 mb-2 text-2xl text-yellow-100">
-              {{ media[mediaIndex].subject }}
-            </h2>
-            <div v-show="media[mediaIndex].speaker" class="mb-4 text-lg">
-              سخنران:
-              <span class="font-bold mt-2">
-                {{ media[mediaIndex].speaker }}
-              </span>
+          </div>
+
+          <div class="flex full lg:w-3/5 flex-col">
+            <client-only>
+              <div class="aspect-video">
+                <vue-plyr
+                  v-if="media[mediaIndex]"
+                  ref="plyr"
+                  :options="playerOptions"
+                >
+                  <!-- data-poster="https://dummyimage.com/300x300" -->
+                  <video
+                    controls
+                    crossorigin
+                    playsinline
+                    :src="media[mediaIndex].url"
+                    size="720"
+                    format="video/mp4"
+                    preload="none"
+                  >
+                    <!-- <source   /> -->
+                  </video>
+                </vue-plyr>
+              </div>
+            </client-only>
+            <div
+              v-if="media[mediaIndex]"
+              class="bg-opacity-5 bg-gradient-to-tr from-slate-500/5 to-slate-100/5 p-4"
+            >
+              <h2 class="mt-4 mb-2 text-2xl text-yellow-100">
+                {{ media[mediaIndex].subject }}
+              </h2>
+              <div v-show="media[mediaIndex].speaker" class="mb-4 text-lg">
+                سخنران:
+                <span class="font-bold mt-2">
+                  {{ media[mediaIndex].speaker }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -822,7 +843,7 @@
             <div
               class="flex text-center font-mono text-sm text-slate-50 sm:text-left"
             >
-              © 2020 nikan-alumni —
+              © {{ new Date().getFullYear() }} nikan-alumni —
               <a
                 href="https://netdom.ir"
                 rel="noopener noreferrer"
@@ -847,71 +868,6 @@
                 </svg>
               </a>
             </div>
-            <span
-              class="mt-2 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start"
-            >
-              <a class="text-slate-50">
-                <svg
-                  fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-                  ></path>
-                </svg>
-              </a>
-              <a class="ml-3 text-gray-500">
-                <svg
-                  fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
-                  ></path>
-                </svg>
-              </a>
-              <a class="ml-3 text-gray-500">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                >
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                  <path
-                    d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
-                  ></path>
-                </svg>
-              </a>
-              <a class="ml-3 text-gray-500">
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="0"
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="none"
-                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
-                  ></path>
-                  <circle cx="4" cy="4" r="2" stroke="none"></circle>
-                </svg>
-              </a>
-            </span>
           </div>
         </div>
       </footer>
@@ -962,7 +918,12 @@ export default Vue.extend({
                 آرتمیا تحولی در صنعت شیلات`,
         },
       ],
-
+      stats: {
+        alumni: toIndiaDigits(2.7) + 'K',
+        events: toIndiaDigits(1.8) + 'K',
+        project: toIndiaDigits(35),
+        groups: toIndiaDigits(6),
+      },
       playerOptions: {
         controls: [
           'play-large',
@@ -1108,4 +1069,9 @@ export default Vue.extend({
 })
 </script>
 
-<style></style>
+<style>
+.home__upcomming {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1009%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(250%2c 249%2c 249%2c 1)'%3e%3c/rect%3e%3cpath d='M1440 0L834.64 0L1440 190.59z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M834.64 0L1440 190.59L1440 380.21000000000004L798.27 0z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M798.27 0L1440 380.21000000000004L1440 387.34000000000003L542.68 0z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M542.68 0L1440 387.34000000000003L1440 471.58000000000004L259.19999999999993 0z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M0 560L190.05 560L0 476.86z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M0 476.86L190.05 560L678.86 560L0 347.27z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M0 347.27L678.86 560L694.95 560L0 138.14z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M0 138.14L694.95 560L1019.07 560L0 60.67999999999999z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1009'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  background-color: #faf9f9;
+}
+</style>

@@ -22,7 +22,7 @@
       </svg>
       <div class="flex flex-col">
         <h1 class="text-5xl text-cyan-500 font-bold">{{ category.name }}</h1>
-        <p class="mt-6 w-2/3 text-gray-400 leading-7 mr-4">
+        <p class="mt-6 w-full md:w-2/3 text-gray-400 leading-7 mr-4">
           {{ category.desc }}
         </p>
       </div>
@@ -31,7 +31,7 @@
       <transition-group
         name="v-fade"
         tag="div"
-        class="grid grid-cols-3 gap-3"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
         dir="rtl"
       >
         <div

@@ -51,15 +51,16 @@ export const actions: ActionTree<RootState, RootState> = {
       dispatch('navigation/toggleDarkMenu', false)
     } else
       dispatch('navigation/toggleDarkMenu', true)
-
     // @ts-ignore
-    if (rootState.navigation.menu.find(i => i.href === '/video').submenu.length === 0)
+    if (rootState.navigation.menu.find(i => i.href === '/video').submenu.length === 0) {
+
       this.$axios.get<WPapi.categories.RootObject[]>('wp-json/wp/v2/categories?per_page=100').then(res => {
 
         dispatch('navigation/makeVideoSubmenu',
           (res.data.filter(i => i.parent === 5))
         )
       })
+    }
   },
   loadingStart({ commit }) {
     commit('LOADING', true)

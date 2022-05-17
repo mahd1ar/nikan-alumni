@@ -45,14 +45,14 @@
                   </p>
                   <div class="text-sm">
                     <button
-                      class="inline-flex rounded border-0 bg-cyan-500 py-2 px-6 text-white hover:bg-cyan-600 focus:outline-none"
+                      class="inline-flex border-0 rounded bg-cyan-500 py-2 px-6 text-white hover:bg-cyan-600 focus:outline-none"
                     >
-                      درباره کانون دانش آموختگان
+                      ورود دانش آموخته
                     </button>
                     <button
-                      class="ml-4 inline-flex rounded border-0 bg-gray-100 bg-opacity-20 py-2 px-6 text-white hover:bg-gray-200 focus:outline-none"
+                      class="ml-4 inline-flex rounded border-0 bg-opacity-20 py-2 px-6 text-white hover:bg-gray-50 focus:outline-none"
                     >
-                      تماس با ما
+                      درباره کانون دانش آموختگان
                     </button>
                   </div>
                 </div>
@@ -72,6 +72,10 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'IndexPage',
+  middleware(ctx) {
+    // alert('dispatchEvent')
+    ctx.store.dispatch('navigation/toggleDarkMenu', false)
+  },
   data() {
     return {
       observer: null as null | IntersectionObserver,
@@ -96,11 +100,10 @@ export default Vue.extend({
           'fullscreen',
         ],
       },
-      videourl:
-        'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
+      // videourl:
+      //   'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
     }
   },
-
   beforeMount() {
     const options = {
       // root: document.querySelector('#scrollArea'),
