@@ -80,6 +80,26 @@
   clip-path: circle(0% at 50% 50%);
 }
 
+.page {
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.5s ease;
+    clip-path: circle(140.2% at 1% 99%);
+    opacity: 1;
+  }
+  &-enter {
+    overflow: hidden;
+    clip-path: circle(2.8% at 1% 99%);
+    opacity: 0;
+  }
+
+  &-leave-to {
+    overflow: hidden;
+    clip-path: circle(2.8% at 99% 1%);
+    opacity: 0.5;
+  }
+}
+
 /* h1 {
   font-family: 'Noto Naskh Arabic', serif;
 

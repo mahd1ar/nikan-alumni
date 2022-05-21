@@ -68,6 +68,7 @@ import {
   VideosAllQuery,
 } from '~/types/types'
 import { filterCategory, wordpressDateToFormattedJalali } from '~/data/utils'
+import { WPapi } from '~/data/GlobslTypes'
 
 interface SuggestedVideos {
   title: string
@@ -172,26 +173,30 @@ export default Vue.extend({
     async getSimilarVideos() {
       console.log('getsimilar videos')
 
-      const variables: VideosAllQueryVariables = {
-        first: 100,
-      }
-      const { data } = await this.$apollo.query<VideosAllQuery>({
-        query: allvideos,
-        variables,
-      })
+      const { data } = await this.$axios.get<WPapi.allvideos.RootObject[]>(
+        'https://nikan-alumni.org/wp-json/wp/v2/video?per_page=100'
+      )
+
+      // const variables: VideosAllQueryVariables = {
+      //   first: 100,
+      // }
+      // const { data } = await this.$apollo.query<VideosAllQuery>({
+      //   query: allvideos,
+      //   variables,
+      // })
       this.moreVideso.splice(0, this.moreVideso.length)
-      data.videos?.edges
-        ?.sort(() => Math.random() - Math.random())
+
+      data
+        .sort(() => Math.random() - Math.random())
         .forEach((i, index) => {
           if (index > this.moreVideosMaxLen) return
-          if (this.video.id === i?.node?.id) return
-          if (i?.node)
-            this.moreVideso.push({
-              id: i.node.id,
-              title: i.node?.title || '',
-              speakers: i.node?.speakers?.speakers || '',
-              date: wordpressDateToFormattedJalali(i.node!.date!).join(' / '),
-            })
+
+          this.moreVideso.push({
+            id: i.id.toString(),
+            title: i.title.rendered || '',
+            speakers: i.acf.speakers || '',
+            date: wordpressDateToFormattedJalali(i.date).join(' / '),
+          })
         })
     },
   },

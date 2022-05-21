@@ -111,5 +111,141 @@ export namespace WPapi {
     }
   }
 
+  export namespace upcommingEvent {
+
+
+    interface Category {
+      term_id: number
+      name: string
+      slug: string
+      term_group: number
+      term_taxonomy_id: number
+      taxonomy: string
+      description: string
+      parent: number
+      count: number
+      filter: string
+    }
+
+    export interface RootObject {
+      ID: number
+      post_author: string
+      post_date: string
+      post_date_gmt: string
+      post_content: string
+      post_title: string
+      post_excerpt: string
+      post_status: string
+      comment_status: string
+      ping_status: string
+      post_password: string
+      post_name: string
+      to_ping: string
+      pinged: string
+      post_modified: string
+      post_modified_gmt: string
+      post_content_filtered: string
+      post_parent: number
+      guid: string
+      menu_order: number
+      post_type: string
+      post_mime_type: string
+      comment_count: string
+      filter: string
+      gqlid: string
+      featured_image: string
+      category: Category[]
+      duration: string
+      venue: string
+    }
+  }
+
+  export namespace allvideos {
+
+
+    interface Guid {
+      rendered: string;
+    }
+
+    interface Title {
+      rendered: string;
+    }
+
+    interface Content {
+      rendered: string;
+      protected: boolean;
+    }
+
+    interface Excerpt {
+      rendered: string;
+      protected: boolean;
+    }
+
+    interface Self {
+      href: string;
+    }
+
+    interface Collection {
+      href: string;
+    }
+
+    interface About {
+      href: string;
+    }
+
+    interface Wp_attachment {
+      href: string;
+    }
+
+    interface Wp_term {
+      taxonomy: string;
+      embeddable: boolean;
+      href: string;
+    }
+
+    interface Cury {
+      name: string;
+      href: string;
+      templated: boolean;
+    }
+
+    interface _link {
+      self: Self[];
+      collection: Collection[];
+      about: About[];
+      'wp:attachment': Wp_attachment[];
+      'wp:term': Wp_term[];
+      curies: Cury[];
+    }
+
+    interface Acf {
+      speakers: string;
+    }
+
+    export interface RootObject {
+      id: number;
+      date: string;
+      date_gmt: string;
+      guid: Guid;
+      modified: string;
+      modified_gmt: string;
+      slug: string;
+      status: string;
+      type: string;
+      link: string;
+      title: Title;
+      content: Content;
+      excerpt: Excerpt;
+      featured_media: number;
+      template: string;
+      meta: any[];
+      categories: number[];
+      tags: any[];
+      acf: Acf;
+      _links: _link;
+    }
+
+  }
+
 }
 

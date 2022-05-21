@@ -135,11 +135,14 @@
                   <span class="text-base text-gray-500">ثانیه</span>
                 </div>
               </div>
-              <div
+              <nuxt-link
                 class="flex-center h-12 cursor-pointer rounded bg-tm-yellow text-center text-lg font-semibold text-white shadow-lg shadow-yellow-500/50 hover:bg-yellow-300 lg:h-auto lg:w-3/12"
+                :to="{
+                  path: '/upcommingevent?eventId=' + upcommingEvents[0].id,
+                }"
               >
                 مشاهده رویداد
-              </div>
+              </nuxt-link>
             </div>
           </div>
           <div class="w-full md:w-4/12">
@@ -605,16 +608,18 @@
           </h1>
         </div>
 
-        <div class="flex flex-col-reverse lg:flex-row-reverse gap-4">
+        <div
+          class="flex items-stretch lg:items-start flex-col-reverse lg:flex-row-reverse gap-4"
+        >
           <div class="-m-2 flex lg:w-2/5 flex-wrap">
             <div v-for="(i, index) in media" :key="index" class="w-full p-2">
               <!-- v-show="index !== mediaIndex" -->
               <div
                 :title="i.subject"
-                class="flex h-full py-4 lg:py-1 translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 px-4 transition-all"
+                class="flex h-full py-4 translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 px-4 transition-all"
                 :class="
                   mediaIndex === index
-                    ? 'border border-cyan-700 shadow-md shadow-cyan-700/50'
+                    ? 'border border-cyan-700 shadow-md shadow-cyan-900/50'
                     : ' hover:-translate-y-2 hover:bg-slate-800 hover:shadow-sm hover:shadow-yellow-200/50'
                 "
                 @click="mediaIndex = index"
@@ -657,7 +662,10 @@
                         </span>
                       </div>
                     </div>
-                    <div v-if="i.speaker" class="flex-center gap-1 text-xs">
+                    <div
+                      v-if="i.speaker"
+                      class="flex-center gap-1 text-xs mt-1"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
@@ -877,7 +885,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { WpUpcommingEvents } from '~/data/AxiosTypes'
 import {
   htmlStrip,
   timeout,
@@ -889,7 +896,7 @@ import { Dict } from '~/data/utils/dictionary'
 import homegql from '@/apollo/queries/home.gql'
 import { HomeQuery, HomeQueryVariables } from '~/types/types'
 import DepartmentsSection from '@/components/homepage/DepartmentsSection.vue'
-import { Event, EventStatus } from '@/data/GlobslTypes'
+import { Event, EventStatus, WPapi } from '@/data/GlobslTypes'
 
 export default Vue.extend({
   components: {
@@ -1028,9 +1035,9 @@ export default Vue.extend({
       try {
         if (this.upcommingEvents.length > 0) return
 
-        const { data } = await this.$axios.get<WpUpcommingEvents[]>(
-          '/wp-json/myplugin/v1/upcommingevent'
-        )
+        const { data } = await this.$axios.get<
+          WPapi.upcommingEvent.RootObject[]
+        >('/wp-json/myplugin/v1/upcommingevent')
 
         const d: Event[] = data
           .map((e) => ({
@@ -1073,5 +1080,8 @@ export default Vue.extend({
 .home__upcomming {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1009%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(250%2c 249%2c 249%2c 1)'%3e%3c/rect%3e%3cpath d='M1440 0L834.64 0L1440 190.59z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M834.64 0L1440 190.59L1440 380.21000000000004L798.27 0z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M798.27 0L1440 380.21000000000004L1440 387.34000000000003L542.68 0z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M542.68 0L1440 387.34000000000003L1440 471.58000000000004L259.19999999999993 0z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M0 560L190.05 560L0 476.86z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M0 476.86L190.05 560L678.86 560L0 347.27z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M0 347.27L678.86 560L694.95 560L0 138.14z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M0 138.14L694.95 560L1019.07 560L0 60.67999999999999z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1009'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
   background-color: #faf9f9;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  box-shadow: 1px 1px rgb(37, 37, 37);
 }
 </style>

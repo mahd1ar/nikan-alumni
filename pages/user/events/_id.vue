@@ -397,6 +397,7 @@ import {
 } from '~/types/types'
 import { toIndiaDigits, wordpressDateToJalali } from '~/data/utils'
 import onLoggedOut from '~/mixins/on-logged-out'
+import { WPapi } from '~/data/GlobslTypes'
 
 interface WPRestEvent {
   comment_ID: string
@@ -414,50 +415,6 @@ interface WPRestEvent {
   comment_post_ID: string
   comment_type: string
   user_id: string
-}
-
-export interface Category {
-  term_id: number
-  name: string
-  slug: string
-  term_group: number
-  term_taxonomy_id: number
-  taxonomy: string
-  description: string
-  parent: number
-  count: number
-  filter: string
-}
-
-export interface WpUpcommingEvent {
-  iD: number
-  post_author: string
-  post_date: string
-  post_date_gmt: string
-  post_content: string
-  post_title: string
-  post_excerpt: string
-  post_status: string
-  comment_status: string
-  ping_status: string
-  post_password: string
-  post_name: string
-  to_ping: string
-  pinged: string
-  post_modified: string
-  post_modified_gmt: string
-  post_content_filtered: string
-  post_parent: number
-  guid: string
-  menu_order: number
-  post_type: string
-  post_mime_type: string
-  comment_count: string
-  filter: string
-  gqlid: string
-  featured_image: string
-  category: Category[]
-  duration: string
 }
 
 export interface WPRegedUsers {
@@ -535,7 +492,7 @@ export default Vue.extend({
       //   query,
       //   variables,
       // })
-      const { data } = await this.$axios.get<WpUpcommingEvent>(
+      const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject>(
         'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent/' +
           this.$route.params.id
       )

@@ -261,18 +261,16 @@ const initialState = {
       hasSubmenu: true,
       href: '/video',
       svg: SVG.MEDIA,
-      submenu: [
-        // {
-        //   title: 'تد',
-        //   hasSubmenu: false,
-        //   href: '/video#ted',
-        // },
-        // {
-        //   title: 'clubinar',
-        //   hasSubmenu: false,
-        //   href: '/video#business-challenges',
-        // },
-      ],
+      submenu:
+        [
+          { "hasSubmenu": false, "href": "/video#ted", "title": "تد نیکان", "svg": "" },
+          { "hasSubmenu": false, "href": "/video#business-challenges", "title": "چالش های کسب و کار", "svg": "" },
+          { "hasSubmenu": false, "href": "/video#medical-discussion", "title": "بحث های پزشکی", "svg": "" },
+          { "hasSubmenu": false, "href": "/video#karbarg", "title": "کاربرگ", "svg": "" },
+          { "hasSubmenu": false, "href": "/video#clubinar", "title": "کلابینار", "svg": "" },
+          { "hasSubmenu": false, "href": "/video#live", "title": "لایوها", "svg": "" },
+          { "hasSubmenu": false, "href": "/video#nikasar", "title": "نیک اثار", "svg": "" }]
+
     },
     {
       title: 'انواع بیمه',

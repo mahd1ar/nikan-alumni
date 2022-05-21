@@ -103,6 +103,7 @@
                   :key="index"
                   :menu="menuitem"
                   class="flex-center h-full"
+                  v-show="index !== 0"
                 ></menu-item>
               </ul>
             </div>

@@ -333,7 +333,6 @@ import { Dict } from '~/data/utils/dictionary'
 export default Vue.extend({
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Dashboard',
-
   data() {
     return {
       open_t: false,
@@ -357,6 +356,9 @@ export default Vue.extend({
         },
       ],
     }
+  },
+  head: {
+    title: 'dashboard',
   },
   computed: {
     ...mapGetters({

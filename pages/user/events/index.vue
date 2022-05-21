@@ -173,7 +173,7 @@ import Vue from 'vue'
 import onLoggedOut from '@/mixins/on-logged-out'
 import { Dict } from '~/data/utils/dictionary'
 import { wordpressDateToJalali } from '~/data/utils'
-import { WpUpcommingEvents } from '@/data/AxiosTypes'
+import { WPapi } from '~/data/GlobslTypes'
 
 interface Event {
   id: number | string
@@ -199,7 +199,7 @@ export default Vue.extend({
   },
   async fetch() {
     try {
-      const { data } = await this.$axios.get<WpUpcommingEvents[]>(
+      const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject[]>(
         'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent'
       )
 
