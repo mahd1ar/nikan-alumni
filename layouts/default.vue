@@ -26,6 +26,13 @@
       </div>
     </client-only>
 
+    <!-- search -->
+    <client-only>
+      <transition name="v-fade">
+        <float-search v-if="$store.getters['search/showSearchBox']" />
+      </transition>
+    </client-only>
+
     <!-- MOBILE MENU -->
     <transition name="anime-mobile-menu">
       <div
@@ -189,111 +196,19 @@
     </transition>
 
     <div class="flex min-h-screen flex-col">
-      <!-- <transition name="animation-rollup"> -->
-      <nav v-if="showDarkMenu" dir="rtl" class="sticky top-0 z-10 bg-gray-800">
-        <div class="mx-auto max-w-7xl px-0 sm:px-6 lg:px-8">
-          <div class="relative flex h-16 items-center justify-between">
-            <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
+      <transition name="animation-rollup">
+        <nav
+          v-if="showDarkMenu"
+          dir="rtl"
+          class="sticky top-0 z-10 bg-gray-800"
+        >
+          <div class="mx-auto max-w-7xl px-0 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
               <div
-                class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-white"
-                @click="$emit('openModal')"
+                class="absolute inset-y-0 left-0 flex items-center md:hidden"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="img"
-                  class="h-5 w-5"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-width="2"
-                    d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"
-                  />
-                </svg>
-              </div>
-              <nuxt-link
-                to="/"
-                class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-cyan-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="img"
-                  class="h-5 w-5"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M18.178 11.373a.7.7 0 0 1 .7.7v5.874c.027.812-.071 1.345-.434 1.68c-.338.311-.828.4-1.463.366H3.144C2.5 19.961 2 19.7 1.768 19.173c-.154-.347-.226-.757-.226-1.228v-5.873a.7.7 0 0 1 1.4 0v5.873c0 .232.026.42.07.562l.036.098l-.003-.01c.001-.013.03-.008.132-.002h13.84c.245.014.401 0 .456-.001l.004-.001c-.013-.053.012-.27 0-.622v-5.897a.7.7 0 0 1 .701-.7ZM10.434 0c.264 0 .5.104.722.297l8.625 8.139a.7.7 0 1 1-.962 1.017l-8.417-7.944l-9.244 7.965a.7.7 0 0 1-.915-1.06L9.689.277l.086-.064c.214-.134.428-.212.66-.212Z"
-                  />
-                </svg>
-              </nuxt-link>
-              <!-- Mobile menu button-->
-              <button
-                type="button"
-                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-                @click="openMobileMenu"
-              >
-                <span class="sr-only">Open main menu</span>
-                <!--
-            Icon when menu is closed.
-
-            Heroicon name: outline/menu
-
-            Menu open: "hidden", Menu closed: "block"
-          -->
-                <svg
-                  class="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-                <!--
-            Icon when menu is open.
-
-            Heroicon name: outline/x
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
-                <svg
-                  class="hidden h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div
-              class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
-            >
-              <div class="hidden flex-shrink-0 items-center sm:flex">
                 <div
-                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-cyan-400 hover:bg-gray-700"
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-white"
                   @click="$emit('openModal')"
                 >
                   <svg
@@ -313,83 +228,190 @@
                     />
                   </svg>
                 </div>
-              </div>
-              <div id="sec-navigation" class="hidden md:block">
-                <div class="flex lg:gap-2">
-                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                  <nuxt-link
-                    v-for="(m, index) in menu"
-                    :key="index"
-                    :class="`menu-item ${
-                      m.hasSubmenu ? 'menu-item-has-children' : ''
-                    }`"
-                    :to="m.href"
-                    aria-current="page"
+                <nuxt-link
+                  to="/"
+                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-cyan-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
+                    class="h-5 w-5"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 20 20"
                   >
-                    <div class="">
-                      {{ m.title }}
-                    </div>
-                    <ul class="sub-menu">
-                      <menu-item
-                        v-for="(menuitem, index2) in m.submenu"
-                        :key="index2"
-                        :menu="menuitem"
-                      ></menu-item>
-                    </ul>
-                  </nuxt-link>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="absolute w-full inset-y-0 right-0 flex items-center pr-2 md:hidden pointer-events-none"
-            >
-              <div class="w-36 mx-auto">
-                <div class="flex text-white">
-                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                  <nuxt-link
-                    to="/"
-                    class="pointer-events-none transition-all transform translate-x-4 sm:translate-x-0"
-                    >کانون دانش آموختگان</nuxt-link
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0"
-            >
-              <!-- Profile dropdown -->
-              <div class="relative ml-3">
-                <div>
-                  <button
-                    v-if="isLoggedIn"
-                    id="user-menu-button"
-                    type="button"
-                    class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-800"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    @click="toggleUserController($event)"
-                  >
-                    <span class="sr-only">Open user menu</span>
-                    <img
-                      class="h-8 w-8 rounded-full"
-                      :src="$store.state.authentication.user.avatar"
-                      alt=""
+                    <path
+                      fill="currentColor"
+                      d="M18.178 11.373a.7.7 0 0 1 .7.7v5.874c.027.812-.071 1.345-.434 1.68c-.338.311-.828.4-1.463.366H3.144C2.5 19.961 2 19.7 1.768 19.173c-.154-.347-.226-.757-.226-1.228v-5.873a.7.7 0 0 1 1.4 0v5.873c0 .232.026.42.07.562l.036.098l-.003-.01c.001-.013.03-.008.132-.002h13.84c.245.014.401 0 .456-.001l.004-.001c-.013-.053.012-.27 0-.622v-5.897a.7.7 0 0 1 .701-.7ZM10.434 0c.264 0 .5.104.722.297l8.625 8.139a.7.7 0 1 1-.962 1.017l-8.417-7.944l-9.244 7.965a.7.7 0 0 1-.915-1.06L9.689.277l.086-.064c.214-.134.428-.212.66-.212Z"
                     />
-                  </button>
+                  </svg>
+                </nuxt-link>
+                <!-- Mobile menu button-->
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
+                  aria-controls="mobile-menu"
+                  aria-expanded="false"
+                  @click="openMobileMenu"
+                >
+                  <span class="sr-only">Open main menu</span>
+                  <!--
+            Icon when menu is closed.
 
-                  <nuxt-link
-                    v-else
-                    to="/login"
-                    class="text-white py-1 px-4 bg-slate-700 rounded text-slate-300 text-sm"
+            Heroicon name: outline/menu
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+                  <svg
+                    class="block h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
                   >
-                    <!-- کانون دانش آموختگان نیکان -->
-                    ورود اعضا
-                  </nuxt-link>
-                </div>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                  <!--
+            Icon when menu is open.
 
-                <!--
+            Heroicon name: outline/x
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+                  <svg
+                    class="hidden h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+              >
+                <div class="hidden flex-shrink-0 items-center sm:flex">
+                  <div
+                    class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-cyan-400 hover:bg-gray-700"
+                    @click="$store.dispatch('search/toggleSearchBox', false)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="img"
+                      class="h-5 w-5"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <client-only>
+                  <div id="sec-navigation" class="hidden md:block">
+                    <div class="flex lg:gap-2">
+                      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                      <!-- @click="
+                      $router.push({
+                        path: m.href,
+                        hash:
+                          m.href.find('#') !== -1 ? m.href.split('#')[1] : null,
+                      })
+                    " -->
+                      <nuxt-link
+                        v-for="(m, index) in menu"
+                        :key="index"
+                        :class="`menu-item cursor-pointer ${
+                          m.hasSubmenu ? 'menu-item-has-children' : ''
+                        }`"
+                        :to="m.href"
+                        aria-current="page"
+                      >
+                        <div class="">
+                          {{ m.title }}
+                        </div>
+                        <ul class="sub-menu">
+                          <menu-item
+                            v-for="(menuitem, index2) in m.submenu"
+                            :key="index2"
+                            :menu="menuitem"
+                          ></menu-item>
+                        </ul>
+                      </nuxt-link>
+                    </div>
+                  </div>
+                </client-only>
+              </div>
+
+              <div
+                class="absolute w-full inset-y-0 right-0 flex items-center pr-2 md:hidden pointer-events-none"
+              >
+                <div class="w-36 mx-auto">
+                  <div class="flex text-white">
+                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                    <nuxt-link
+                      to="/"
+                      class="pointer-events-none transition-all transform translate-x-4 sm:translate-x-0"
+                      >کانون دانش آموختگان</nuxt-link
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0"
+              >
+                <!-- Profile dropdown -->
+                <div class="relative ml-3">
+                  <div>
+                    <button
+                      v-if="isLoggedIn"
+                      id="user-menu-button"
+                      type="button"
+                      class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-800"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      @click="toggleUserController($event)"
+                    >
+                      <span class="sr-only">Open user menu</span>
+                      <img
+                        class="h-8 w-8 rounded-full"
+                        :src="$store.state.authentication.user.avatar"
+                        alt=""
+                      />
+                    </button>
+
+                    <nuxt-link
+                      v-else
+                      to="/login"
+                      class="text-white py-1 px-4 bg-slate-700 rounded text-slate-300 text-sm"
+                    >
+                      <!-- کانون دانش آموختگان نیکان -->
+                      ورود اعضا
+                    </nuxt-link>
+                  </div>
+
+                  <!--
             Dropdown menu, show/hide based on menu state.
 
             Entering: "transition ease-out duration-100"
@@ -399,79 +421,82 @@
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
           -->
-                <client-only>
-                  <transition name="v-openwindow">
-                    <div
-                      v-if="isOpenUserController"
-                      v-click-outside="closeController"
-                      class="absolute right-0 z-10 mt-2 w-48 origin-top-right overflow-hidden rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:right-auto md:left-0"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="user-menu-button"
-                      tabindex="-1"
-                      @click="closeController"
-                    >
-                      <!-- Active: "bg-gray-100", Not Active: "" -->
-                      <transition name="swip-left">
-                        <div v-if="!menuConfirm.show" key="t1">
-                          <nuxt-link
-                            id="user-menu-item-0"
-                            to="/login"
-                            href="#"
-                            class="block px-4 py-2 text-sm text-gray-700"
-                            role="menuitem"
-                            tabindex="-1"
-                          >
-                            پروفایل شما
-                          </nuxt-link>
-                          <!-- <a
+                  <client-only>
+                    <transition name="v-openwindow">
+                      <div
+                        v-if="isOpenUserController"
+                        v-click-outside="closeController"
+                        class="absolute right-0 z-10 mt-2 w-48 origin-top-right overflow-hidden rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:right-auto md:left-0"
+                        role="menu"
+                        aria-orientation="vertical"
+                        aria-labelledby="user-menu-button"
+                        tabindex="-1"
+                        @click="closeController"
+                      >
+                        <!-- Active: "bg-gray-100", Not Active: "" -->
+                        <transition name="swip-left">
+                          <div v-if="!menuConfirm.show" key="t1">
+                            <nuxt-link
+                              id="user-menu-item-0"
+                              to="/login"
+                              href="#"
+                              class="block px-4 py-2 text-sm text-gray-700"
+                              role="menuitem"
+                              tabindex="-1"
+                            >
+                              پروفایل شما
+                            </nuxt-link>
+                            <!-- <a
                               id="user-menu-item-1"
                               href="#"
                               class="block px-4 py-2 text-sm text-gray-700"
                               role="menuitem"
                               tabindex="-1"
                               >Settings</a> -->
-                          <div
-                            class="block cursor-pointer px-4 py-2 text-sm text-gray-700"
-                            role="menuitem"
-                            tabindex="-1"
-                            @click.stop="confirmSignOut"
-                          >
-                            خارج شدن از حساب کاربری
+                            <div
+                              class="block cursor-pointer px-4 py-2 text-sm text-gray-700"
+                              role="menuitem"
+                              tabindex="-1"
+                              @click.stop="confirmSignOut"
+                            >
+                              خارج شدن از حساب کاربری
+                            </div>
                           </div>
-                        </div>
-                        <!-- confirm -->
-                        <div v-else key="t2">
-                          <p class="p-1 text-center text-tm-black" @click.stop>
-                            از خروج از حساب کاربری خود مطمئن هستید
-                          </p>
-                          <button
-                            class="block w-full cursor-pointer bg-red-50 px-4 py-2 text-sm text-red-700 hover:bg-red-100"
-                            role="menuitem"
-                            tabindex="-1"
-                            @click="signOut"
-                          >
-                            بله
-                          </button>
-                          <button
-                            class="block w-full cursor-pointer px-4 py-2 text-sm text-gray-500"
-                            role="menuitem"
-                            tabindex="-2"
-                            @click.stop="menuConfirm.show = false"
-                          >
-                            خیر
-                          </button>
-                        </div>
-                      </transition>
-                    </div>
-                  </transition>
-                </client-only>
+                          <!-- confirm -->
+                          <div v-else key="t2">
+                            <p
+                              class="p-1 text-center text-tm-black"
+                              @click.stop
+                            >
+                              از خروج از حساب کاربری خود مطمئن هستید
+                            </p>
+                            <button
+                              class="block w-full cursor-pointer bg-red-50 px-4 py-2 text-sm text-red-700 hover:bg-red-100"
+                              role="menuitem"
+                              tabindex="-1"
+                              @click="signOut"
+                            >
+                              بله
+                            </button>
+                            <button
+                              class="block w-full cursor-pointer px-4 py-2 text-sm text-gray-500"
+                              role="menuitem"
+                              tabindex="-2"
+                              @click.stop="menuConfirm.show = false"
+                            >
+                              خیر
+                            </button>
+                          </div>
+                        </transition>
+                      </div>
+                    </transition>
+                  </client-only>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
-      <!-- </transition> -->
+        </nav>
+      </transition>
 
       <Nuxt class="flex-1" @error="nuxtonError" />
     </div>
@@ -761,11 +786,14 @@ export default Vue.extend({
 .animation-rollup-leave-active {
   transition: all 500ms ease;
   transition-delay: calc(var(--count) * 75ms);
-  transform: translateY(0%);
+  // transform: translateY(0%);
+  max-height: 65px;
   z-index: 0;
 }
 .animation-rollup-enter,
 .animation-rollup-leave-to {
-  transform: translateY(-100%);
+  // transform: translateY(-100%);
+  max-height: 0px;
+  overflow: hidden;
 }
 </style>

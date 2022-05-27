@@ -784,7 +784,7 @@
               <h2
                 class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600"
               >
-                کانون دانش آموختگان
+                راه های ارتباطی
               </h2>
               <nav
                 class="mb-10 list-none flex flex-col gap-2 items-start text-sm"
@@ -835,10 +835,23 @@
                 class="mb-10 list-none flex flex-col gap-2 items-start text-sm"
               >
                 <li>
-                  <a class=""> امور خیریه </a>
+                  <a class="https://www.instagram.com/nikasaar/">
+                    امور خیریه
+                  </a>
                 </li>
                 <li>
                   <a class=""> نیک پیوند </a>
+                </li>
+                <li>
+                  <a class="https://www.instagram.com/nikasaar/"> نیک آثار </a>
+                </li>
+                <li>
+                  <a class="https://nikan.sch.ir/"> دبیرستان نیکان </a>
+                </li>
+                <li>
+                  <a class="http://nikanschool.net/">
+                    دبستان و متوسطه اول نیکان
+                  </a>
                 </li>
               </nav>
             </div>

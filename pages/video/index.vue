@@ -39,14 +39,14 @@
                 :class="
                   cat.href.replace(/(\/|#|(video))/g, '') === hash
                     ? 'py-3 text-center border-grey-dark border-b-2 border-solid px-8'
-                    : 'py-3 text-center px-6'
+                    : 'py-3 text-center px-4'
                 "
               >
                 <nuxt-link
                   :to="cat.href"
                   class="hover:text-black whitespace-nowrap"
-                  >{{ cat.title }}</nuxt-link
-                >
+                  >{{ cat.title }}
+                </nuxt-link>
               </li>
             </ul>
           </div>

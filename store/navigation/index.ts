@@ -197,18 +197,43 @@ const initialState = {
     {
       title: 'معرفی',
       hasSubmenu: true,
-      href: '/notyetready',
+      href: '/p/intro',
       svg: SVG.INTRO,
       submenu: [
         {
           title: 'معرفی مجموعه',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/p/intro#scholl',
         },
         {
-          title: 'هییت اجرای ',
+          title: 'کانون  ',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/p/intro#alumni',
+        },
+        {
+          title: 'شورای عالی هماهنگی  ',
+          hasSubmenu: false,
+          href: '/p/intro#highCoordinationCouncil',
+        },
+        {
+          title: 'شورای مرکزی',
+          hasSubmenu: false,
+          href: '/p/intro#centralCouncil',
+        },
+        {
+          title: 'بازرسی',
+          hasSubmenu: false,
+          href: '/p/intro#inspection',
+        },
+        {
+          title: 'هیأت اجرایی',
+          hasSubmenu: false,
+          href: '/p/intro#executiveCommittee',
+        },
+        {
+          title: 'دبیرخانه',
+          hasSubmenu: false,
+          href: '/p/intro#mailroom',
         },
       ],
     },

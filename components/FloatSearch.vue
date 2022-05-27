@@ -1,5 +1,8 @@
 <template>
-  <div class="flex-center fixed top-0 left-0 z-20 h-screen w-screen text-white">
+  <div
+    dir="rtl"
+    class="flex-center fixed top-0 left-0 z-20 h-screen w-screen text-white"
+  >
     <div
       class="absolute h-full w-full bg-gradient-to-br from-slate-900 to-slate-700 opacity-75"
     ></div>
@@ -38,7 +41,6 @@
             type="text"
             @blur="inputFocused"
             @focus="inputFocused"
-            @input="input"
           />
         </div>
         <i
@@ -64,26 +66,30 @@
       <section v-if="searchValue" class="body-font text-gray-600">
         <div class="container mx-auto lg:px-5 pt-12 transition-all">
           <div class="-m-4 flex flex-wrap">
-            <div class="w-full p-4 sm:w-1/2 lg:w-1/4">
+            <div
+              v-for="(value, key) in results"
+              :key="key"
+              class="w-full p-4 sm:w-1/2 lg:w-1/4"
+            >
               <h2
-                class="title-font mb-4 text-center text-sm font-medium tracking-widest text-cyan-700 sm:text-right"
+                class="title-font mb-4 text-center text-sm font-medium tracking-widest text-gray-900 sm:text-right"
               >
-                نتایج
+                {{ key }}
               </h2>
               <nav
                 class="-mb-1 flex flex-col items-center space-y-2.5 text-right sm:items-start sm:text-left"
               >
                 <a
-                  v-for="(g, id) in [1, 2, 3]"
-                  :key="id"
+                  v-for="(item, index) in value.items"
+                  :key="index"
                   class="flex items-start text-sm"
                 >
                   <span
                     class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
                   >
                   </span>
-                  <span dir="ltr" class="text-right">
-                    {{ id + 1 + ' ' + searchValue }}
+                  <span class="text-right">
+                    {{ item.title }}
                   </span>
                 </a>
               </nav>
@@ -260,14 +266,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { WPapi } from '~/data/GlobslTypes'
 
-// const debounce = (fn: Function, ms = 300) => {
-//   let timeoutId: ReturnType<typeof setTimeout>
-//   return function (this: any, ...args: any[]) {
-//     clearTimeout(timeoutId)
-//     timeoutId = setTimeout(() => fn.apply(this, args), ms)
-//   }
-// }
+type Result = {
+  loading: boolean
+
+  items: {
+    excerpt: string
+    title: string
+    href: string
+  }[]
+}
 
 const VueSearch = Vue.extend({
   name: 'FloatSearch',
@@ -310,18 +319,58 @@ const VueSearch = Vue.extend({
         'مالی',
         'معاملاتی',
       ],
+      results: {
+        events: { loading: false, items: [] } as Result,
+        videos: { loading: false, items: [] } as Result,
+      },
+      time: 0,
     }
   },
-  mounted() {
-    // console.log(this)
+  watch: {
+    searchValue() {
+      clearTimeout(this.time)
+      const time = window.setTimeout(() => {
+        this.input()
+      }, 600)
+      this.time = Object.freeze(time)
+    },
   },
   methods: {
-    input() {},
+    async input() {
+      this.results.events.items.splice(0, this.results.events.items.length)
+      this.results.videos.items.splice(0, this.results.videos.items.length)
+
+      if (this.searchValue.trim() === '') return
+
+      this.results.events.loading = true
+      this.results.videos.loading = true
+
+      try {
+        const { data: data1 } = await this.$axios.get<WPapi.event.RootObject[]>(
+          'wp-json/wp/v2/event?search=' + encodeURIComponent(this.searchValue)
+        )
+        console.log(data1)
+        data1.forEach((i) => {
+          this.results.events.loading = false
+          this.results.events.items.push({
+            title: i.title.rendered,
+            href: '#',
+            excerpt: i.excerpt.rendered,
+          })
+        })
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.results.videos.loading = false
+        this.results.events.loading = false
+      }
+    },
     inputFocused() {
       this.inputIsFocused = !this.inputIsFocused
     },
     close() {
-      this.$emit('closeModal')
+      this.$store.dispatch('search/toggleSearchBox', false)
+
       this.searchValue = ''
     },
   },

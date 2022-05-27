@@ -1,12 +1,5 @@
 <template>
   <div dir="rtl" class="">
-    <!-- search -->
-    <client-only>
-      <transition name="v-fade">
-        <float-search v-if="search.show" @closeModal="search.show = false" />
-      </transition>
-    </client-only>
-
     <!-- hero section -->
     <div class="flex h-screen w-full flex-col">
       <!-- <nuxt-link to="login">++++</nuxt-link> -->
@@ -79,10 +72,6 @@ export default Vue.extend({
   data() {
     return {
       observer: null as null | IntersectionObserver,
-
-      search: {
-        show: false,
-      },
 
       events: [],
       news: [],

@@ -53,7 +53,9 @@
         >
           <dt class="text-sm font-medium text-gray-500">وبسایت</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-            {{ userInfo.url }}
+            <a class="underline" :href="userInfo.website" target="_blank">
+              {{ userInfo.website.replace(/https?:\/\//g, '') }}
+            </a>
           </dd>
         </div>
 

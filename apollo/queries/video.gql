@@ -1,5 +1,5 @@
-query video($id: ID!, $first: Int = 3) {
-  video(id: $id) {
+query video($id: ID!, $first: Int = 3, $idType: VideoIdType = ID) {
+  video(id: $id, idType: $idType) {
     id
     content
     title(format: RENDERED)

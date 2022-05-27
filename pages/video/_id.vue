@@ -1,7 +1,7 @@
 <template>
   <section dir="rtl" class="body-font relative bg-slate-800 text-gray-900">
     <div class="container mx-auto flex flex-col gap-4 relative">
-      <div class="flex gap-2">
+      <div class="flex gap-2 items-start">
         <div class="w-8/12 bg-cyan-600 bg-opacity-5">
           <client-only>
             <div class="aspect-video">
@@ -17,11 +17,16 @@
               </vue-plyr>
             </div>
           </client-only>
-          <h1
-            class="flex h-20 leading-10 mt-5 items-center p-4 text-cyan-300 text-3xl"
-          >
-            {{ video.title }}
-          </h1>
+          <div class="p-4">
+            <h1
+              class="flex h-20 leading-10 mt-5 items-center text-cyan-300 text-3xl"
+            >
+              {{ video.title }}
+            </h1>
+            <p class="text-white text-lg">
+              {{ video.speakers }}
+            </p>
+          </div>
         </div>
 
         <div class="flex w-4/12 flex-col text-cyan-50">
@@ -60,12 +65,13 @@
 import Vue from 'vue'
 import videogql from '@/apollo/queries/video.gql'
 // TODO : compose a beter query V
-import allvideos from '@/apollo/queries/videos-all.gql'
+// import allvideos from '@/apollo/queries/videos-all.gql'
 import {
   VideoQuery,
   VideoQueryVariables,
-  VideosAllQueryVariables,
-  VideosAllQuery,
+  // VideosAllQueryVariables,
+  // VideosAllQuery,
+  VideoIdType,
 } from '~/types/types'
 import { filterCategory, wordpressDateToFormattedJalali } from '~/data/utils'
 import { WPapi } from '~/data/GlobslTypes'
@@ -114,9 +120,9 @@ export default Vue.extend({
     if (!videoId) {
       this.$nuxt.error({ statusCode: 404, message: 'err.message' })
     }
-
     const variables: VideoQueryVariables = {
       id: decodeURIComponent(videoId),
+      idType: Number(videoId) ? VideoIdType.DatabaseId : VideoIdType.Id,
     }
 
     const { data } = await this.$apollo.query<VideoQuery>({

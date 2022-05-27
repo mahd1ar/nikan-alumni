@@ -6,7 +6,6 @@ import { SupportedSocialMedia } from "../GlobslTypes"
 //    compose : (input: T) => string
 // }
 
-/* eslint-disable camelcase */
 export const timeout = (time: number): Promise<void> => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -14,6 +13,14 @@ export const timeout = (time: number): Promise<void> => {
     }, time)
   })
 }
+
+export const debounce = (fn: Function, ms = 300) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return function (this: any, ...args: any[]) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), ms);
+  };
+};
 
 export const toIndiaDigits = (num: string | number): string => {
   if (typeof num === 'number') {

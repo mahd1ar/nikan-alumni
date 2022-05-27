@@ -101,13 +101,21 @@
                 :is-excerpt="true"
                 :html="ev.content"
               />
-
+              <div class="mt-4 text-xs text-gray-600 flex flex-nowrap gap-2">
+                <div
+                  class="whitespace-nowrap"
+                  v-for="c in ev.category"
+                  :key="c.id"
+                >
+                  {{ c.name }} .
+                </div>
+              </div>
               <nuxt-link
                 :to="'/event/' + ev.gqlid"
                 class="inline-block pb-1 mt-4 font-medium text-blue-600 border-b border-blue-500"
               >
                 ادامه مطلب
-                <span aria-hidden="true">&rarr;</span>
+                <span aria-hidden="true">&larr;</span>
               </nuxt-link>
             </div>
           </div>
@@ -153,8 +161,11 @@ export default Vue.extend({
           commentCount: '0', // TODO: <- change this later
           wpdate: e?.date || '',
           category: e?.categories?.edges
-            ? e.categories.edges.map((i) => i?.node?.name || '').join(' . ')
-            : '',
+            ? e.categories.edges.map((i) => ({
+                name: i?.node?.name || '',
+                id: i?.node?.id || '',
+              }))
+            : [],
           eventStatus: 1,
           duration: e?.eventProps?.duration || 0,
           location: e?.eventProps?.venue || '',

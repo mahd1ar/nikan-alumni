@@ -213,8 +213,8 @@ export namespace WPapi {
       self: Self[];
       collection: Collection[];
       about: About[];
-      'wp:attachment': Wp_attachment[];
-      'wp:term': Wp_term[];
+      'wp_attachment': Wp_attachment[];
+      'wp_term': Wp_term[];
       curies: Cury[];
     }
 
@@ -247,5 +247,102 @@ export namespace WPapi {
 
   }
 
-}
 
+  export namespace event {
+
+    interface Guid {
+      rendered: string;
+    }
+
+    interface Title {
+      rendered: string;
+    }
+
+    interface Content {
+      rendered: string;
+      protected: boolean;
+    }
+
+    interface Excerpt {
+      rendered: string;
+      protected: boolean;
+    }
+
+    interface Acf {
+      duration: number;
+      venue: string;
+      price: string;
+    }
+
+    interface Self {
+      href: string;
+    }
+
+    interface Collection {
+      href: string;
+    }
+
+    interface About {
+      href: string;
+    }
+
+    interface Reply {
+      embeddable: boolean;
+      href: string;
+    }
+
+    interface Wp_attachment {
+      href: string;
+    }
+
+    interface Wp_term {
+      taxonomy: string;
+      embeddable: boolean;
+      href: string;
+    }
+
+    interface Cury {
+      name: string;
+      href: string;
+      templated: boolean;
+    }
+
+    interface _link {
+      self: Self[];
+      collection: Collection[];
+      about: About[];
+      replies: Reply[];
+      wp_attachment: Wp_attachment[];
+      wp_term: Wp_term[];
+      curies: Cury[];
+    }
+
+    export interface RootObject {
+      id: number;
+      date: string;
+      date_gmt: string;
+      guid: Guid;
+      modified: string;
+      modified_gmt: string;
+      slug: string;
+      status: string;
+      type: string;
+      link: string;
+      title: Title;
+      content: Content;
+      excerpt: Excerpt;
+      featured_media: number;
+      comment_status: string;
+      ping_status: string;
+      template: string;
+      meta: any[];
+      categories: number[];
+      tags: any[];
+      acf: Acf;
+      _links: _link;
+    }
+
+
+  }
+
+}

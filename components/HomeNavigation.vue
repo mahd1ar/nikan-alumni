@@ -74,7 +74,7 @@
             </nuxt-link> -->
             <div
               class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
-              @click="$emit('openModal')"
+              @click="$store.dispatch('search/toggleSearchBox', false)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

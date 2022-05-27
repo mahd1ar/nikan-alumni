@@ -9708,6 +9708,7 @@ export type PostsQuery = { __typename?: 'RootQuery', posts?: { __typename?: 'Roo
 export type VideoQueryVariables = Exact<{
   id: Scalars['ID'];
   first?: InputMaybe<Scalars['Int']>;
+  idType?: InputMaybe<VideoIdType>;
 }>;
 
 
