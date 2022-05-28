@@ -124,6 +124,7 @@ export const htmlEscape = (str: string) =>
 
 export class LocationHandler {
   static decompose(langlat: string) {
+
     const res = langlat
       .split(',')
       .map((i) => i.trim())

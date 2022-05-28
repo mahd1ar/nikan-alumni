@@ -88,7 +88,8 @@
             </div>
             <!-- // phone -->
             <div
-              v-if="user.mobile"
+              v-if="user.phone"
+              :title="user.phone"
               class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
               <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
@@ -108,7 +109,7 @@
               </div>
 
               <a
-                :href="'tel:' + user.mobile"
+                :href="'tel:' + user.phone"
                 class="relative px-2 text-slate-700"
               >
                 <span
@@ -136,6 +137,7 @@
             </div>
 
             <div
+              :title="user.email"
               class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
               <div class="rounded-lg bg-cyan-50 p-3 text-cyan-400">
@@ -189,6 +191,7 @@
             <a
               v-if="user.website"
               :href="user.website"
+              :title="user.website"
               target="_blank"
               class="flex cursor-pointer overflow-hidden rounded bg-white p-3 shadow-sm hover:bg-gray-50"
             >
@@ -317,46 +320,65 @@
           <div
             class="mb-3 flex items-center justify-center gap-3 py-3 text-gray-700"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              role="img"
-              class="h-5 w-5"
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 24 24"
+            <a
+              v-if="user.socialMedias.twitter"
+              :href="user.socialMedias.twitter"
+              target="_blank"
             >
-              <path
-                fill="currentColor"
-                d="M23.643 4.937c-.835.37-1.732.62-2.675.733a4.67 4.67 0 0 0 2.048-2.578a9.3 9.3 0 0 1-2.958 1.13a4.66 4.66 0 0 0-7.938 4.25a13.229 13.229 0 0 1-9.602-4.868c-.4.69-.63 1.49-.63 2.342A4.66 4.66 0 0 0 3.96 9.824a4.647 4.647 0 0 1-2.11-.583v.06a4.66 4.66 0 0 0 3.737 4.568a4.692 4.692 0 0 1-2.104.08a4.661 4.661 0 0 0 4.352 3.234a9.348 9.348 0 0 1-5.786 1.995a9.5 9.5 0 0 1-1.112-.065a13.175 13.175 0 0 0 7.14 2.093c8.57 0 13.255-7.098 13.255-13.254c0-.2-.005-.402-.014-.602a9.47 9.47 0 0 0 2.323-2.41l.002-.003Z"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="img"
+                class="h-5 w-5"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M23.643 4.937c-.835.37-1.732.62-2.675.733a4.67 4.67 0 0 0 2.048-2.578a9.3 9.3 0 0 1-2.958 1.13a4.66 4.66 0 0 0-7.938 4.25a13.229 13.229 0 0 1-9.602-4.868c-.4.69-.63 1.49-.63 2.342A4.66 4.66 0 0 0 3.96 9.824a4.647 4.647 0 0 1-2.11-.583v.06a4.66 4.66 0 0 0 3.737 4.568a4.692 4.692 0 0 1-2.104.08a4.661 4.661 0 0 0 4.352 3.234a9.348 9.348 0 0 1-5.786 1.995a9.5 9.5 0 0 1-1.112-.065a13.175 13.175 0 0 0 7.14 2.093c8.57 0 13.255-7.098 13.255-13.254c0-.2-.005-.402-.014-.602a9.47 9.47 0 0 0 2.323-2.41l.002-.003Z"
+                />
+              </svg>
+            </a>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              role="img"
-              class="h-5 w-5"
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 512 512"
+            <a
+              v-if="user.socialMedias.linkedin"
+              :href="user.socialMedias.linkedin"
+              target="_blank"
             >
-              <path
-                fill="currentColor"
-                d="M470.435 45.423L16.827 221.249c-18.254 8.188-24.428 24.585-4.412 33.484l116.37 37.173l281.368-174.79c15.363-10.973 31.091-8.047 17.557 4.024L186.053 341.075l-7.591 93.076c7.031 14.371 19.905 14.438 28.117 7.295l66.858-63.589l114.505 86.187c26.595 15.826 41.066 5.613 46.788-23.394l75.105-357.47c7.798-35.705-5.5-51.437-39.4-37.757z"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              role="img"
-              class="h-5 w-5"
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 1024 1024"
+              <svg
+                aria-hidden="true"
+                role="img"
+                class="w-5 h-5"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 1024 1024"
+              >
+                <path
+                  fill="currentColor"
+                  d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zM349.3 793.7H230.6V411.9h118.7v381.8zm-59.3-434a68.8 68.8 0 1 1 68.8-68.8c-.1 38-30.9 68.8-68.8 68.8zm503.7 434H675.1V608c0-44.3-.8-101.2-61.7-101.2c-61.7 0-71.2 48.2-71.2 98v188.9H423.7V411.9h113.8v52.2h1.6c15.8-30 54.5-61.7 112.3-61.7c120.2 0 142.3 79.1 142.3 181.9v209.4z"
+                />
+              </svg>
+            </a>
+
+            <!-- instagram -->
+            <a
+              v-if="user.socialMedias.instagram"
+              :href="user.socialMedias.instagram"
+              target="_blank"
             >
-              <path
-                fill="currentColor"
-                d="M512 378.7c-73.4 0-133.3 59.9-133.3 133.3S438.6 645.3 512 645.3S645.3 585.4 645.3 512S585.4 378.7 512 378.7zM911.8 512c0-55.2.5-109.9-2.6-165c-3.1-64-17.7-120.8-64.5-167.6c-46.9-46.9-103.6-61.4-167.6-64.5c-55.2-3.1-109.9-2.6-165-2.6c-55.2 0-109.9-.5-165 2.6c-64 3.1-120.8 17.7-167.6 64.5C132.6 226.3 118.1 283 115 347c-3.1 55.2-2.6 109.9-2.6 165s-.5 109.9 2.6 165c3.1 64 17.7 120.8 64.5 167.6c46.9 46.9 103.6 61.4 167.6 64.5c55.2 3.1 109.9 2.6 165 2.6c55.2 0 109.9.5 165-2.6c64-3.1 120.8-17.7 167.6-64.5c46.9-46.9 61.4-103.6 64.5-167.6c3.2-55.1 2.6-109.8 2.6-165zM512 717.1c-113.5 0-205.1-91.6-205.1-205.1S398.5 306.9 512 306.9S717.1 398.5 717.1 512S625.5 717.1 512 717.1zm213.5-370.7c-26.5 0-47.9-21.4-47.9-47.9s21.4-47.9 47.9-47.9s47.9 21.4 47.9 47.9a47.84 47.84 0 0 1-47.9 47.9z"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="img"
+                class="h-5 w-5"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 1024 1024"
+              >
+                <path
+                  fill="currentColor"
+                  d="M512 378.7c-73.4 0-133.3 59.9-133.3 133.3S438.6 645.3 512 645.3S645.3 585.4 645.3 512S585.4 378.7 512 378.7zM911.8 512c0-55.2.5-109.9-2.6-165c-3.1-64-17.7-120.8-64.5-167.6c-46.9-46.9-103.6-61.4-167.6-64.5c-55.2-3.1-109.9-2.6-165-2.6c-55.2 0-109.9-.5-165 2.6c-64 3.1-120.8 17.7-167.6 64.5C132.6 226.3 118.1 283 115 347c-3.1 55.2-2.6 109.9-2.6 165s-.5 109.9 2.6 165c3.1 64 17.7 120.8 64.5 167.6c46.9 46.9 103.6 61.4 167.6 64.5c55.2 3.1 109.9 2.6 165 2.6c55.2 0 109.9.5 165-2.6c64-3.1 120.8-17.7 167.6-64.5c46.9-46.9 61.4-103.6 64.5-167.6c3.2-55.1 2.6-109.8 2.6-165zM512 717.1c-113.5 0-205.1-91.6-205.1-205.1S398.5 306.9 512 306.9S717.1 398.5 717.1 512S625.5 717.1 512 717.1zm213.5-370.7c-26.5 0-47.9-21.4-47.9-47.9s21.4-47.9 47.9-47.9s47.9 21.4 47.9 47.9a47.84 47.84 0 0 1-47.9 47.9z"
+                />
+              </svg>
+            </a>
           </div>
         </div>
         <div
@@ -381,7 +403,7 @@
                 d="M512 512a96 96 0 1 0 0-192a96 96 0 0 0 0 192zm0 64a160 160 0 1 1 0-320a160 160 0 0 1 0 320z"
               />
             </svg>
-            <span>
+            <span v-if="user.location.city || user.location.providence">
               {{ user.location.city + ', ' + user.location.providence }}
             </span>
           </div>
@@ -459,50 +481,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import MapPicker from '~/components/form/MapPicker.vue'
-import { UserFullProfile } from '~/data/GlobslTypes'
+import { UserFullProfile, WPapi } from '~/data/GlobslTypes'
 import { LocationHandler, MiscHandler, toIndiaDigits } from '~/data/utils'
-
-export interface Avatar_url {
-  24: string
-  48: string
-  96: string
-}
-
-export interface Acf {
-  occupation: string
-  job_location: string
-  mobile: string
-  gen: string
-  premium: boolean
-  misc: string
-  phone: string
-}
-
-export interface Self {
-  href: string
-}
-
-export interface Collection {
-  href: string
-}
-
-export interface _link {
-  self: Self[]
-  collection: Collection[]
-}
-
-export interface WPRestuser {
-  id: number
-  name: string
-  url: string
-  description: string
-  link: string
-  slug: string
-  avatar_urls: Avatar_url
-  meta: any[]
-  acf: Acf
-  _links: _link
-}
 
 export default Vue.extend({
   components: {
@@ -519,22 +499,22 @@ export default Vue.extend({
     }
   },
   async fetch() {
-    const email = this.$route.query.email as string | 'a.mahdiyar7@yahoo.com'
-
-    console.log(email)
+    const id = this.$route.params.id as string
+    console.log({ id })
     // TODO REFORM THIS URL AND ITS BACKEND
-    const { data } = await this.$axios.get<WPRestuser[]>(
-      'https://nikan-alumni.org/wp-json/wp/v2/users?search=' +
-        encodeURIComponent(email)
+    const { data } = await this.$axios.get<WPapi.pulicUser.RootObject | false>(
+      '/wp-json/myplugin/v1/user/' + id
     )
-    this.user.firstName = data[0].name
-      .split(' ')
-      .splice(0, data[0].name.split(' ').length - 1)
-      .join(' ')
-    this.user.lastName = data[0].name.split(' ').at(-1)!
-    this.user.email = email // 'a.mahdiyar7@yahoo.com'
 
-    this.user.avatar = data[0].avatar_urls['96']
+    if (data === false)
+      return this.$nuxt.error({ statusCode: 404, message: 'user not found' })
+    console.log({ data })
+    this.user.firstName = data.firstname
+    this.user.lastName = data.lastname
+
+    this.user.email = data.user_email
+
+    this.user.avatar = data.avatar
 
     const {
       instagram,
@@ -542,8 +522,8 @@ export default Vue.extend({
       twitter,
       city,
       providence,
-    } = MiscHandler.decompose(data[0].acf.misc)
-    console.log(instagram, linkedin, twitter, city, providence)
+    } = MiscHandler.decompose(data.misc)
+
     this.user.location = {
       city,
       providence,
@@ -555,16 +535,16 @@ export default Vue.extend({
       twitter,
     }
 
-    this.user.bio = data[0].description || ''
+    this.user.bio = data.description
 
-    this.user.mobile = data[0].acf.mobile || ''
-    this.user.phone = data[0].acf.phone || ''
-    this.user.occupation = data[0].acf.occupation || ''
-    const latlng = LocationHandler.decompose(data[0].acf.job_location)
+    this.user.mobile = data.mobile || ''
+    this.user.phone = data.phone || ''
+    this.user.occupation = data.occupation || ''
+    const latlng = LocationHandler.decompose(data.location)
     this.user.jobLocation.lat = latlng.lat
     this.user.jobLocation.lng = latlng.lng
 
-    this.user.website = data[0].url
+    this.user.website = data.user_url
   },
   computed: {
     contact() {
@@ -592,8 +572,8 @@ export default Vue.extend({
     })
   },
   methods: {
-    toIndiaDigits(input: string | number) {
-      return toIndiaDigits(input)
+    toIndiaDigits(input?: string | number) {
+      return toIndiaDigits(input || '')
     },
     //   addToContacts() {
     //     const query = new URLSearchParams()
