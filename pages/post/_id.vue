@@ -74,7 +74,7 @@ export default Vue.extend({
     } else this.$nuxt.error({ statusCode: 404 })
   },
   head(): any {
-    return {
+    const data = {
       title: this.title + ' | ' + 'کانون دانش آموختگان نیکان',
       meta: [
         {
@@ -84,6 +84,7 @@ export default Vue.extend({
         },
       ],
     }
+    return data
   },
 })
 </script>

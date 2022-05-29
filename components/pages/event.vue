@@ -93,7 +93,7 @@
       <div v-show="!loading" id="event-page">
         <header
           style="z-index: 5"
-          class="entry-header entry-header--style-3 relative bg-neutral-900 pt-16 dark:bg-black md:py-20 lg:py-28"
+          class="relative flex flex-col-reverse items-center md:items-start bg-neutral-900 pb-16 md:pt-16 dark:bg-black md:py-20 lg:py-28"
         >
           <div class="container relative z-10">
             <div class="max-w-screen-md">
@@ -122,7 +122,7 @@
 
                 <!-- META -->
                 <div
-                  class="flex flex-col justify-around space-y-5 lg:flex-row lg:items-end lg:space-y-0 lg:space-x-5"
+                  class="flex flex-col justify-start md:gap-5 lg:flex-row lg:items-end lg:gap-10 lg:space-x-5"
                 >
                   <div
                     class="flex flex-shrink-0 items-center gap-2 text-left text-sm leading-none text-neutral-700 dark:text-neutral-200"
@@ -243,13 +243,18 @@
                     </button>
 
                     <!-- DIVIDER -->
-                    <div v-if="canRegister" class="px-1">
+                    <div
+                      v-show="!temporarilyDisabled"
+                      v-if="canRegister"
+                      class="px-1"
+                    >
                       <div
                         class="h-6 border-l border-neutral-200 dark:border-neutral-700"
                       ></div>
                     </div>
 
                     <div
+                      v-show="!temporarilyDisabled"
                       v-if="canRegister"
                       class="relative inline-block text-left"
                     >
@@ -354,7 +359,7 @@
           </div>
 
           <div
-            class="mt-8 md:absolute md:top-0 md:left-0 md:bottom-0 md:mt-0 md:w-1/2 lg:w-2/5 2xl:w-1/3"
+            class="mt-8 md:absolute md:top-0 md:left-0 md:bottom-0 md:mt-0 w-1/2 text-center md:w-1/2 lg:w-2/5 2xl:w-1/3"
           >
             <div
               class="rigth-0 absolute top-0 bottom-0 hidden w-1/5 bg-gradient-to-l from-neutral-900 dark:from-black md:block"
@@ -471,6 +476,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      temporarilyDisabled: true,
       participantsModal: {
         isOpen: false,
         title: '',

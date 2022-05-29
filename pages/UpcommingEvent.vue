@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-full">
     <event :loading="$fetchState.pending" :event="upcommingevent" />
   </div>
 </template>

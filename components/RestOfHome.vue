@@ -1029,6 +1029,7 @@ export default Vue.extend({
   mounted() {
     // @ts-ignore
     window.home = this
+
     this.getUpcommingEvents()
   },
   methods: {
@@ -1038,8 +1039,8 @@ export default Vue.extend({
 
         const { data } = await this.$axios.get<
           WPapi.upcommingEvent.RootObject[]
-        >('/wp-json/myplugin/v1/upcommingevent')
-
+        >('//nikan-alumni.org/wp-json/myplugin/v1/upcommingevent')
+        console.log({ data })
         const d: Event[] = data
           .map((e) => ({
             id: e.ID,
