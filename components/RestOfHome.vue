@@ -950,9 +950,13 @@ export default Vue.extend({
     if (data.category?.contentNodes)
       data.category.contentNodes.edges?.forEach((i) => {
         this.news.push({
+          // @ts-ignore
           title: i?.node?.title || '',
+          // @ts-ignore
           date: wordpressDateToFormattedJalali(i!.node!.date),
+          // @ts-ignore
           image: i?.node?.featuredImage.node.mediaItemUrl || '',
+          // @ts-ignore
           id: i?.node!.id!,
         })
       })

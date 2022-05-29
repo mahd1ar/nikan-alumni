@@ -53,6 +53,7 @@ export default Vue.extend({
       idType: Number(id) ? PostIdType.DatabaseId : PostIdType.Id,
     }
 
+    // @ts-ignore
     const { data } = await this.$apollo.query<PostQuery>({
       query: postgql,
       variables,
@@ -64,8 +65,8 @@ export default Vue.extend({
       this.date = data.post.date
         ? wordpressDateToFormattedJalali(data.post.date)
         : []
-
       this.categories =
+        // @ts-ignore
         data.post.categories?.nodes?.map((i) => ({
           name: i?.name || '',
           link: i?.slug ? '/post/category/' + i.slug : '',
