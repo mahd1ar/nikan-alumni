@@ -2,20 +2,22 @@
   <div dir="rtl">
     <div class="container mx-auto">
       <h1 class="text-right text-4xl mt-10">{{ title }}</h1>
-      <div class="text-right text-gray-500 mt-5">
-        {{ date[2] }} . {{ date[1] }} .
-        {{ date[0] }}
-      </div>
-      <div class="mt-5">
-        <nuxt-link
-          v-for="(cat, index) in categories"
-          :key="index"
-          class="text-blue-600 bg-blue-100 text-sm mx-1 rounded-full px-2 py-1"
-          :to="cat.link"
-          :prefetch="false"
-        >
-          {{ cat.name }}
-        </nuxt-link>
+      <div class="mt-5 pb-3 border-b-2 flex items-center justify-between px-4">
+        <div>
+          <nuxt-link
+            v-for="(cat, index) in categories"
+            :key="index"
+            class="text-blue-600 bg-blue-50 text-sm mx-1 rounded-full px-2 py-1"
+            :to="cat.link"
+            :prefetch="false"
+          >
+            {{ cat.name }}
+          </nuxt-link>
+        </div>
+        <div class="text-right text-gray-500">
+          {{ date[2] }} . {{ date[1] }} .
+          {{ date[0] }}
+        </div>
       </div>
 
       <div class="mt-5">
@@ -55,6 +57,7 @@ export default Vue.extend({
       query: postgql,
       variables,
     })
+
     if (data.post) {
       this.title = data.post.title || ''
       this.content = data.post.content || ''
@@ -68,6 +71,18 @@ export default Vue.extend({
           link: i?.slug ? '/post/category/' + i.slug : '',
         })) || []
     } else this.$nuxt.error({ statusCode: 404 })
+  },
+  head(): any {
+    return {
+      title: this.title + ' | ' + 'کانون دانش آموختگان نیکان',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.content,
+        },
+      ],
+    }
   },
 })
 </script>

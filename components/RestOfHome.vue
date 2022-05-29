@@ -179,7 +179,7 @@
               <div class="flex items-start gap-3">
                 <img
                   class="aspect-square w-4/12 rounded object-cover"
-                  src="test/one.jfif"
+                  :src="n.image"
                   alt=""
                 />
                 <div class="w-8/12">
@@ -196,7 +196,9 @@
                   <div
                     class="mb-4 mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4"
                   >
-                    <a class="inline-flex items-center text-cyan-500"
+                    <nuxt-link
+                      :to="'/post/' + n.id"
+                      class="inline-flex items-center text-cyan-500"
                       >ادامه مطلب
 
                       <svg
@@ -211,7 +213,7 @@
                         <path d="M5 12h14"></path>
                         <path d="M12 5l7 7-7 7"></path>
                       </svg>
-                    </a>
+                    </nuxt-link>
                     <span
                       class="ml-3 mr-auto inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400"
                     >
@@ -234,7 +236,7 @@
                         />
                       </svg> -->
 
-                      04 بهمن 1400
+                      04 بهمن sa
                     </span>
                   </div>
                 </div>
@@ -467,7 +469,7 @@
               <div class="h-fit w-4/12">
                 <img
                   class="aspect-square rounded object-cover"
-                  src="test/one.jfif"
+                  :src="n.image"
                   alt=""
                 />
               </div>
@@ -479,15 +481,23 @@
                   >
                 </div>
                 <h2
-                  class="title-font mt-4 mb-4 text-xl font-medium text-gray-900"
+                  class="title-font mt-4 mb-2 text-xl font-medium text-gray-900"
                 >
                   {{ n.title }}
                 </h2>
-                <!-- <p class="leading-relaxed mb-8" v-html="n.body"></p> -->
+                <span
+                  class="ml-auto inline-flex items-center border-gray-200 pb-2 text-sm leading-none text-gray-400"
+                >
+                  {{ n.date[2] }}
+                  {{ n.date[1] }}
+                  {{ n.date[0] }}
+                </span>
                 <div
                   class="mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4"
                 >
-                  <a class="inline-flex items-center text-cyan-500"
+                  <nuxt-link
+                    :to="'/post/' + n.id"
+                    class="inline-flex items-center text-cyan-500"
                     >ادامه مطلب
 
                     <svg
@@ -502,31 +512,7 @@
                       <path d="M5 12h14"></path>
                       <path d="M12 5l7 7-7 7"></path>
                     </svg>
-                  </a>
-                  <span
-                    class="ml-3 mr-auto inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400"
-                  >
-                    <!-- <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        role="img"
-                        class="w-6 h-6 ml-1"
-                        preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M5 8h14V6H5z"
-                          opacity=".3"
-                        />
-                        <path
-                          fill="currentColor"
-                          d="M7 11h2v2H7zm12-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-4 3h2v2h-2zm-4 0h2v2h-2z"
-                        />
-                      </svg> -->
-
-                    04 بهمن 1400
-                  </span>
+                  </nuxt-link>
                 </div>
               </div>
             </div>
@@ -919,27 +905,15 @@ export default Vue.extend({
     return {
       upcommingEvents: [] as Event[],
       events: [] as Event[],
-      tabIndex: 0 as 0 | 1,
-      news: [
-        {
-          title: 'کاربرگ شماره 5 منتشر شد',
-          body: `                فهرست موضوهات این هفته :
-                <br />
-                نوآوری در صنعت ساختمان
-                <br />
-                آرتمیا تحولی در صنعت شیلات`,
-        },
-        {
-          title: ' بیمه درمان تکمیلی برای بستگان درجه دو',
-          body: `                فهرست موضوهات این هفته :
-                <br />
-                نوآوری در صنعت ساختمان
-                <br />
-                آرتمیا تحولی در صنعت شیلات`,
-        },
-      ],
+      tabIndex: 1 as 0 | 1,
+      news: [] as {
+        title: string
+        date: string[]
+        image: string
+        id: string
+      }[],
       stats: {
-        alumni: toIndiaDigits(2.7) + 'K',
+        alumni: toIndiaDigits(4) + 'K',
         events: toIndiaDigits(1.8) + 'K',
         project: toIndiaDigits(35),
         groups: toIndiaDigits(6),
@@ -972,6 +946,16 @@ export default Vue.extend({
       query: homegql,
       variables,
     })
+
+    if (data.category?.contentNodes)
+      data.category.contentNodes.edges?.forEach((i) => {
+        this.news.push({
+          title: i?.node?.title || '',
+          date: wordpressDateToFormattedJalali(i!.node!.date),
+          image: i?.node?.featuredImage.node.mediaItemUrl || '',
+          id: i?.node!.id!,
+        })
+      })
 
     data.videos?.nodes?.forEach((i) => {
       if (i?.content) {

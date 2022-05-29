@@ -52,4 +52,23 @@ query home(
       }
     }
   }
+  category(id: "announcement", idType: SLUG) {
+    contentNodes(first: 4) {
+      edges {
+        node {
+          date
+          contentTypeName
+          ... on Post {
+            id
+            title(format: RENDERED)
+            featuredImage {
+              node {
+                mediaItemUrl
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

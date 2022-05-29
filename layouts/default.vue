@@ -208,7 +208,7 @@
                 class="absolute inset-y-0 left-0 flex items-center md:hidden"
               >
                 <div
-                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-white"
+                  class="flex-center cursor-pointer rounded-full p-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-white"
                   @click="$emit('openModal')"
                 >
                   <svg
@@ -230,7 +230,7 @@
                 </div>
                 <nuxt-link
                   to="/"
-                  class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-cyan-300"
+                  class="flex-center cursor-pointer rounded-full p-1 font-bold text-gray-400 hover:bg-gray-700 hover:text-cyan-300"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -249,7 +249,7 @@
                 <!-- Mobile menu button-->
                 <button
                   type="button"
-                  class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white"
+                  class="inline-flex items-center justify-center rounded-md p-1 text-gray-400 hover:bg-gray-700 hover:text-white"
                   aria-controls="mobile-menu"
                   aria-expanded="false"
                   @click="openMobileMenu"
@@ -369,9 +369,8 @@
                 <div class="w-36 mx-auto">
                   <div class="flex text-white">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <nuxt-link
-                      to="/"
-                      class="pointer-events-none transition-all transform translate-x-4 sm:translate-x-0"
+                    <!-- transform translate-x-4 sm:translate-x-0 -->
+                    <nuxt-link to="/" class="pointer-events-none transition-all"
                       >کانون دانش آموختگان</nuxt-link
                     >
                   </div>
