@@ -1,0 +1,17 @@
+query Post($idType: PostIdType = DATABASE_ID, $id: ID = "1", $first: Int = 10) {
+  post(id: $id, idType: $idType) {
+    id
+    slug
+    title
+    featuredImageId
+    date
+    content(format: RENDERED)
+    categories(first: $first) {
+      nodes {
+        name
+        link
+        slug
+      }
+    }
+  }
+}

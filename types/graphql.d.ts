@@ -152,6 +152,24 @@ declare module '*/home.gql' {
 }
     
 
+declare module '*/page.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const page: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/post.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Post: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/posts.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

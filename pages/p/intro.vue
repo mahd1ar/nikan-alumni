@@ -1,5 +1,5 @@
 <template>
-  <div ref="parent" dir="rtl" class="container mx-auto py-10">
+  <div dir="rtl" class="container mx-auto py-10">
     <div class="pb-6 mb-4 border-b">
       <ul class="css-header flex gap-4 flex-wrap items-end">
         <li

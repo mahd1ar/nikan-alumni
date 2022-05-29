@@ -8652,7 +8652,9 @@ export enum UserRoleEnum {
   /** User role with specific capabilities */
   Editor = 'EDITOR',
   /** User role with specific capabilities */
-  Subscriber = 'SUBSCRIBER'
+  Subscriber = 'SUBSCRIBER',
+  /** User role with specific capabilities */
+  UramGuest = 'URAM_GUEST'
 }
 
 /** Connection between the User type and the Comment type */
@@ -9696,6 +9698,23 @@ export type HomeQueryVariables = Exact<{
 
 
 export type HomeQuery = { __typename?: 'RootQuery', videos?: { __typename?: 'RootQueryToVideoConnection', nodes?: Array<{ __typename?: 'Video', id: string, title?: string | null, content?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, categories?: { __typename?: 'VideoToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', sourceUrl?: string | null } | null } | null } | null> | null } | null, events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null };
+
+export type PageQueryVariables = Exact<{
+  idType?: InputMaybe<PageIdType>;
+  id?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type PageQuery = { __typename?: 'RootQuery', page?: { __typename?: 'Page', date?: string | null, title?: string | null, content?: string | null } | null };
+
+export type PostQueryVariables = Exact<{
+  idType?: InputMaybe<PostIdType>;
+  id?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type PostQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, slug?: string | null, title?: string | null, featuredImageId?: string | null, date?: string | null, content?: string | null, categories?: { __typename?: 'PostToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, link?: string | null, slug?: string | null } | null> | null } | null } | null };
 
 export type PostsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;

@@ -1,0 +1,7 @@
+query page($idType: PageIdType = DATABASE_ID, $id: ID = "2") {
+  page(id: $id, idType: $idType) {
+    date
+    title
+    content(format: RENDERED)
+  }
+}
