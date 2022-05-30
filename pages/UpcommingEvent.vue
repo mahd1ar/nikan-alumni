@@ -38,8 +38,7 @@ export default Vue.extend({
 
     try {
       const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject>(
-        'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent/' +
-          this.$route.query.eventId
+        `/wp-json/myplugin/v1/upcommingevent/${this.$route.query.eventId}`
       )
       console.log(data)
       this.upcommingevent.id = data.ID

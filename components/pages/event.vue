@@ -626,7 +626,7 @@ export default Vue.extend({
         const { data } = await this.$axios.post<WPRegedUsers[]>(
           'wp-json/myplugin/v1/getregisteredusers',
           {
-            'event-id': this.$route.params.id,
+            'event-id': this.event.id,
           }
         )
 
@@ -652,7 +652,7 @@ export default Vue.extend({
     async getRegistrationStatus() {
       try {
         const { data } = await this.$axios.post<WPRestEvent[]>(
-          `https://nikan-alumni.org/wp-json/myplugin/v1/event`,
+          `/wp-json/myplugin/v1/event`,
           {
             event_id: decodeURIComponent(this.$route.params.id),
             user_id: this.$store.state.authentication.user.id,

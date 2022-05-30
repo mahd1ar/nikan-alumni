@@ -1,10 +1,16 @@
+import { createHmac } from 'node:crypto';
 import express from 'express'
 import vCardsJS from 'vcards-js'
 import bodyParser from 'body-parser'
+import axios from "axios"
+
+type ReqMemo = {
+  time: number, value: any
+}
 
 const app = express()
 app.use(bodyParser.json())
-
+app.set("memo_req", new Map<string, ReqMemo>())
 app.get('/create-contact', (req, res) => {
   const firstname = req.query.firstname
   const lastname = req.query.lastname
@@ -43,6 +49,46 @@ app.get('/create-contact', (req, res) => {
   } else {
     res.send('error ! some information is missing').status(500)
   }
+})
+
+
+app.all<{ 0: string }>("/request/*", async (req, res) => {
+  const fullPath = req.params[0] as string;
+  // const hash = createHmac('md5', fullPath)
+  //   .update('I love cupcakes')
+  //   .digest('hex');
+
+  // const map: Map<string, ReqMemo> = app.get("memo_req");
+
+  // const storedValue = map.get(hash);
+
+  // if (storedValue && (~~(Date.now() / (1000 * 60))) - storedValue.time > 5) {
+  //   res.send("DATATA")
+  // } else {
+
+  //   const { data } = await axios.get(fullPath)
+
+  //   res.send(data)
+  // }
+
+  try {
+    if (req.method === 'GET') {
+
+      const { data } = await axios.get(fullPath);
+      // res.setHeader("Content-Type", 'application/json')
+      res.json(data)
+    } else {
+
+      const { data } = await axios.post(fullPath, req.body);
+      res.json(data)
+
+    }
+    res.writeHead(500, 'something went wrong')
+  } catch (error) {
+    res.send(error).status(500)
+
+  }
+
 })
 
 app.all('/getJSON', (_, res) => {

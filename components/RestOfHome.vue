@@ -1039,7 +1039,7 @@ export default Vue.extend({
 
         const { data } = await this.$axios.get<
           WPapi.upcommingEvent.RootObject[]
-        >('//nikan-alumni.org/wp-json/myplugin/v1/upcommingevent')
+        >('/wp-json/myplugin/v1/upcommingevent')
         console.log({ data })
         const d: Event[] = data
           .map((e) => ({
