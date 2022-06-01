@@ -309,6 +309,7 @@
     </div>
     <client-only>
       <div class="fixed bottom-10 right-20 z-30 m-auto">
+        <div class="js-fireworks absolute right-0 bottom-0"></div>
         <about />
         <square-loader />
       </div>
@@ -351,8 +352,8 @@ export default Vue.extend({
           link: '/user/events',
         },
         {
-          title: 'بازگشت به خانه',
-          link: '/',
+          title: ' تخفیفات',
+          link: '/user/coupons',
         },
       ],
     }

@@ -200,7 +200,7 @@ export default Vue.extend({
   async fetch() {
     try {
       const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject[]>(
-        'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent'
+        '/wp-json/myplugin/v1/upcommingevent'
       )
 
       console.log(data)

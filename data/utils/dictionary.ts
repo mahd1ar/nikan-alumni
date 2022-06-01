@@ -4,6 +4,7 @@ export enum Dict {
   btn_no = 'خیر',
   general_err = 'خطا',
   general_confirm = 'تایید',
+  general_welcome = 'خوش آمدید',
   btn_cancel = 'کنسل',
   net_err = 'خطای شبکه',
   fetch_err = 'خطا در برقراری ارتباط',

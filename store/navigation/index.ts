@@ -241,7 +241,7 @@ const initialState = {
       title: 'کتابخانه',
       hasSubmenu: false,
       svg: SVG.LIB,
-      href: '/notyetready',
+      href: '/p/library',
     },
     {
       title: 'رویداد ها',

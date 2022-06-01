@@ -102,6 +102,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import VueHcaptcha from '@hcaptcha/vue-hcaptcha'
+import lottie from 'lottie-web'
+import { timeout } from '~/data/utils'
+import { Dict } from '~/data/utils/dictionary'
 
 export default Vue.extend({
   components: { VueHcaptcha },
@@ -121,7 +124,20 @@ export default Vue.extend({
         return
       }
 
-      await this.$authentication().login(this.user)
+      const [error] = await this.$authentication().login(this.user)
+
+      if (error === null) {
+        this.$about.success({ title: Dict.general_welcome })
+        await timeout(1000)
+        lottie.loadAnimation({
+          container: document.querySelector('.js-fireworks')!, // the dom element that will contain the animation
+          renderer: 'svg',
+          loop: false,
+          autoplay: true,
+          path:
+            'https://assets3.lottiefiles.com/private_files/lf30_jm7peqxp.json', // the path to the animation json
+        })
+      }
     },
   },
 })

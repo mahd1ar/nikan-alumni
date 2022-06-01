@@ -77,15 +77,16 @@ app.all<{ 0: string }>("/request/*", async (req, res) => {
       const { data } = await axios.get(fullPath);
       // res.setHeader("Content-Type", 'application/json')
       res.json(data)
-    } else {
+    } else if (req.method === "POST") {
 
       const { data } = await axios.post(fullPath, req.body);
       res.json(data)
 
-    }
-    res.writeHead(500, 'something went wrong')
+    } else
+      res.writeHead(500, 'method is not suported')
   } catch (error) {
-    res.send(error).status(500)
+    console.error(error)
+    res.status(500).send(error)
 
   }
 

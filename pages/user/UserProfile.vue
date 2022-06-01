@@ -118,6 +118,7 @@
               class="w-full md:w-7/12"
               :user-info="edituser"
             />
+            <loading-indicator :showif="$fetchState.pending" dark fullscreen />
 
             <error-card class="md:sw-7/12 w-full" :error="$fetchState.error" />
 
@@ -418,10 +419,6 @@ export default Vue.extend({
     // @ts-ignore
     window.ml = this
     this.getEvents()
-    //  type SonRef = InstanceType<typeof NuxtLogo>
-    // const c = (this.$refs.element as SonRef)
-
-    // (this.$children[0] as typeof NuxtLogo).sayHi()
   },
   methods: {
     async getEvents() {

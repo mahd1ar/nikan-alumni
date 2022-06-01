@@ -21,6 +21,7 @@
     <!-- spinnet toast -->
     <client-only>
       <div class="fixed bottom-10 right-20 z-30 m-auto">
+        <div class="js-fireworks absolute right-0 bottom-0"></div>
         <about />
         <square-loader />
       </div>
@@ -166,7 +167,10 @@
                 </li>
               </transition-group>
 
-              <div
+              <nuxt-link
+                @
+                @click.native="closeMobileMenu"
+                :to="menu[mobileMenu.selected[0]].href"
                 v-show="menu[mobileMenu.selected[0]].hasSubmenu === false"
                 class="flex items-center justify-between gap-2 rounded-md bg-cyan-50 p-2 text-cyan-800"
               >
@@ -188,7 +192,7 @@
                     d="M3 5v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2zm6.293 2.707l1.414-1.414L16.414 12l-5.707 5.707l-1.414-1.414L13.586 12L9.293 7.707z"
                   />
                 </svg>
-              </div>
+              </nuxt-link>
             </client-only>
           </div>
         </div>
@@ -230,7 +234,7 @@
                 </div>
                 <nuxt-link
                   to="/"
-                  class="flex-center cursor-pointer rounded-full p-1 font-bold text-gray-400 hover:bg-gray-700 hover:text-cyan-300"
+                  class="flex-center cursor-pointer rounded-full p-2 font-bold text-gray-400 hover:bg-gray-700 hover:text-cyan-300"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -432,61 +436,80 @@
                         tabindex="-1"
                         @click="closeController"
                       >
+                        <div
+                          class="text-center flex flex-col text-sm text-tm-black border-b-2 py-4 bg-white"
+                        >
+                          <img
+                            class="w-16 h-16 rounded-full mx-auto mb-2"
+                            :src="$store.state.authentication.user.avatar"
+                          />
+                          <div class="text-tm-gray">
+                            <span>
+                              {{ $store.state.authentication.user.firstName }}
+                              {{ $store.state.authentication.user.lastName }}
+                            </span>
+                            <span>
+                              {{ $store.state.authentication.user.email }}
+                            </span>
+                          </div>
+                        </div>
                         <!-- Active: "bg-gray-100", Not Active: "" -->
-                        <transition name="swip-left">
-                          <div v-if="!menuConfirm.show" key="t1">
-                            <nuxt-link
-                              id="user-menu-item-0"
-                              to="/login"
-                              href="#"
-                              class="block px-4 py-2 text-sm text-gray-700"
-                              role="menuitem"
-                              tabindex="-1"
-                            >
-                              پروفایل شما
-                            </nuxt-link>
-                            <!-- <a
+                        <div class="relative">
+                          <transition name="swip-left">
+                            <div v-if="!menuConfirm.show" key="t1">
+                              <nuxt-link
+                                id="user-menu-item-0"
+                                to="/login"
+                                href="#"
+                                class="block px-4 py-2 text-sm text-gray-700"
+                                role="menuitem"
+                                tabindex="-1"
+                              >
+                                پروفایل شما
+                              </nuxt-link>
+                              <!-- <a
                               id="user-menu-item-1"
                               href="#"
                               class="block px-4 py-2 text-sm text-gray-700"
                               role="menuitem"
                               tabindex="-1"
                               >Settings</a> -->
-                            <div
-                              class="block cursor-pointer px-4 py-2 text-sm text-gray-700"
-                              role="menuitem"
-                              tabindex="-1"
-                              @click.stop="confirmSignOut"
-                            >
-                              خارج شدن از حساب کاربری
+                              <div
+                                class="block cursor-pointer px-4 py-2 text-sm text-gray-700"
+                                role="menuitem"
+                                tabindex="-1"
+                                @click.stop="confirmSignOut"
+                              >
+                                خارج شدن از حساب کاربری
+                              </div>
                             </div>
-                          </div>
-                          <!-- confirm -->
-                          <div v-else key="t2">
-                            <p
-                              class="p-1 text-center text-tm-black"
-                              @click.stop
-                            >
-                              از خروج از حساب کاربری خود مطمئن هستید
-                            </p>
-                            <button
-                              class="block w-full cursor-pointer bg-red-50 px-4 py-2 text-sm text-red-700 hover:bg-red-100"
-                              role="menuitem"
-                              tabindex="-1"
-                              @click="signOut"
-                            >
-                              بله
-                            </button>
-                            <button
-                              class="block w-full cursor-pointer px-4 py-2 text-sm text-gray-500"
-                              role="menuitem"
-                              tabindex="-2"
-                              @click.stop="menuConfirm.show = false"
-                            >
-                              خیر
-                            </button>
-                          </div>
-                        </transition>
+                            <!-- confirm -->
+                            <div v-else key="t2">
+                              <p
+                                class="p-1 text-center text-tm-black"
+                                @click.stop
+                              >
+                                از خروج از حساب کاربری خود مطمئن هستید
+                              </p>
+                              <button
+                                class="block w-full cursor-pointer bg-red-50 px-4 py-2 text-sm text-red-700 hover:bg-red-100"
+                                role="menuitem"
+                                tabindex="-1"
+                                @click="signOut"
+                              >
+                                بله
+                              </button>
+                              <button
+                                class="block w-full cursor-pointer px-4 py-2 text-sm text-gray-500"
+                                role="menuitem"
+                                tabindex="-2"
+                                @click.stop="menuConfirm.show = false"
+                              >
+                                خیر
+                              </button>
+                            </div>
+                          </transition>
+                        </div>
                       </div>
                     </transition>
                   </client-only>

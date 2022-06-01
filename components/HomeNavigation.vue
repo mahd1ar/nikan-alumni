@@ -9,7 +9,7 @@
         <div class="flex items-center justify-center lg:hidden">
           <nuxt-link
             to="/login"
-            class="py-2 hover:bg-slate-100 tracking-widest px-4 text-gray-600 font-bold rounded"
+            class="py-2 hover:bg-slate-100 tracking-widest px-4 text-gray-600 font-bold rounded text-sm"
           >
             ورود اعضا
           </nuxt-link>
