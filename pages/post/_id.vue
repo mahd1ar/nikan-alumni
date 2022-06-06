@@ -21,7 +21,7 @@
       </div>
 
       <div class="mt-5">
-        <content-field :html="content" />
+        <content-field :include-gallery="false" :html="content" />
       </div>
     </div>
   </div>

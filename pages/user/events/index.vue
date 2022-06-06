@@ -134,8 +134,8 @@
                     {{ e.excerpt }}
                   </p>
                 </div>
-
-                <div class="mt-4">
+                <!-- FEATURS : regester events -->
+                <!-- <div class="mt-4 ">
                   <div class="flex items-center">
                     <div class="flex items-center">
                       <a
@@ -150,7 +150,7 @@
                       .
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </nuxt-link>
           </div>

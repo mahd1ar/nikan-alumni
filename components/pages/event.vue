@@ -93,7 +93,7 @@
       <div v-show="!loading" id="event-page">
         <header
           style="z-index: 5"
-          class="relative flex flex-col-reverse items-center md:items-start bg-neutral-900 pb-16 md:pt-16 dark:bg-black md:py-20 lg:py-28"
+          class="relative flex flex-col-reverse items-center md:items-start pb-16 md:pt-16 bg-black md:py-20 lg:py-28"
         >
           <div class="container relative z-10">
             <div class="max-w-screen-md">
@@ -109,16 +109,14 @@
 
                 <!-- TITLE -->
                 <h1
-                  class="sd-item entry-title max-w-4xl text-3xl font-semibold text-neutral-900 dark:text-neutral-100 md:text-4xl md:!leading-[120%] lg:text-5xl"
+                  class="sd-item entry-title max-w-4xl text-3xl font-semibold text-neutral-100 md:text-4xl md:!leading-[120%] lg:text-5xl"
                 >
                   {{ event.title }}
                 </h1>
                 <!-- // ========== SHOW EXCERPT ========== -->
 
                 <!-- DIVIDER BORDER -->
-                <div
-                  class="w-full border-b border-neutral-100 dark:border-neutral-800"
-                ></div>
+                <div class="w-full border-b border-neutral-800"></div>
 
                 <!-- META -->
                 <div
@@ -235,7 +233,7 @@
                       </svg>
 
                       <span
-                        class="mx-1 whitespace-nowrap text-neutral-900 group-hover:text-teal-600 dark:text-neutral-200"
+                        class="mx-1 whitespace-nowrap group-hover:text-teal-600 text-neutral-200"
                       >
                         {{ duration }}
                         {{ delimiter }}
@@ -248,9 +246,7 @@
                       v-if="canRegister"
                       class="px-1"
                     >
-                      <div
-                        class="h-6 border-l border-neutral-200 dark:border-neutral-700"
-                      ></div>
+                      <div class="h-6 border-l border-neutral-700"></div>
                     </div>
 
                     <div
@@ -362,7 +358,7 @@
             class="mt-8 md:absolute md:top-0 md:left-0 md:bottom-0 md:mt-0 w-1/2 text-center md:w-1/2 lg:w-2/5 2xl:w-1/3"
           >
             <div
-              class="rigth-0 absolute top-0 bottom-0 hidden w-1/5 bg-gradient-to-l from-neutral-900 dark:from-black md:block"
+              class="rigth-0 absolute top-0 bottom-0 hidden w-1/5 bg-gradient-to-l from-black md:block"
             ></div>
 
             <!-- <img

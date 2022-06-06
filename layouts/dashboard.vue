@@ -258,7 +258,7 @@
                   v-for="({ title, link }, index) in nav"
                   :key="index"
                   :to="link"
-                  class="flex items-center gap-4 rounded px-4 py-2 hover:bg-gray-200"
+                  class="flex items-center gap-4 rounded px-4 py-2 hover:bg-gray-200 text-gray-700"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -335,7 +335,7 @@ export default Vue.extend({
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Dashboard',
   data() {
-    return {
+    const data = {
       open_t: false,
       exitModal: {
         title: Dict.dashboard_signout_title,
@@ -357,6 +357,12 @@ export default Vue.extend({
         },
       ],
     }
+    if (this.$device.isMobile)
+      data.nav.push({
+        title: 'بازگشت به خانه',
+        link: '/',
+      })
+    return data
   },
   head: {
     title: 'dashboard',
@@ -378,6 +384,6 @@ export default Vue.extend({
 
 <style scoped>
 .nuxt-link-exact-active {
-  @apply bg-gray-100 text-gray-600;
+  @apply bg-gray-100 text-tm-black;
 }
 </style>

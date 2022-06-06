@@ -2,35 +2,31 @@
   <div
     class="w-full transform-gpu px-6 py-8 transition-all duration-700 ease-out md:px-8 lg:w-1/2"
   >
-    <h2
-      class="text-center font-naskh text-2xl font-semibold text-gray-700 dark:text-white"
-    >
+    <h2 class="text-center font-naskh text-2xl font-semibold text-white">
       بازیابی پسورد
     </h2>
 
-    <p
-      class="mb-16 mt-2 text-center text-base text-gray-600 dark:text-gray-200"
-    >
+    <p class="mb-16 mt-2 text-center text-base text-gray-200">
       پسورد جدید خود را وارد کنید
     </p>
 
     <div class="mt-4 flex items-center justify-between">
-      <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
+      <span class="w-1/5 border-b border-gray-600 lg:w-1/4"></span>
 
       <a
         href="#"
-        class="text-center text-xs uppercase text-gray-500 hover:underline dark:text-gray-400"
+        class="text-center text-xs uppercase hover:underline text-gray-400"
       >
         reset password</a
       >
 
-      <span class="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
+      <span class="w-1/5 border-b border-gray-400 lg:w-1/4"></span>
     </div>
 
     <div class="mt-4">
       <div class="flex justify-between">
         <label
-          class="mb-2 block text-sm font-medium text-gray-600 dark:text-gray-200"
+          class="mb-2 block text-sm font-medium text-gray-200"
           for="password"
           >Password</label
         >
@@ -39,15 +35,13 @@
       <input
         id="password"
         v-model="user.password"
-        class="block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
+        class="block w-full rounded-md border px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 border-gray-600 bg-gray-800 text-gray-300 focus:border-blue-300"
         type="password"
       />
     </div>
     <div class="mt-4">
       <div class="flex justify-between">
-        <label
-          class="mb-2 block text-sm font-medium text-gray-600 dark:text-gray-200"
-          for="confirmpassword"
+        <label class="mb-2 block text-sm font-medium" for="confirmpassword"
           >Confirm Password</label
         >
       </div>
@@ -55,7 +49,7 @@
       <input
         id="confirmpassword"
         v-model="user.confirmpassword"
-        class="block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
+        class="block w-full rounded-md border px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 border-gray-600 bg-gray-800 text-gray-300 focus:border-blue-300"
         type="password"
       />
 
@@ -127,15 +121,13 @@
     </div>
 
     <div class="mt-4 flex items-center justify-between">
-      <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+      <span class="w-1/5 border-b border-gray-600 md:w-1/4"></span>
 
-      <a
-        href="#"
-        class="text-xs uppercase text-gray-500 hover:underline dark:text-gray-400"
+      <a href="#" class="text-xs uppercase hover:underline text-gray-400"
         >or sign up</a
       >
 
-      <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+      <span class="w-1/5 border-b border-gray-600 md:w-1/4"></span>
     </div>
   </div>
 </template>

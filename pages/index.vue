@@ -102,6 +102,7 @@ export default Vue.extend({
 
     const observer = new IntersectionObserver((entreis) => {
       if (entreis[0].isIntersecting) {
+        console.log(entreis[0])
         console.log('isIntersecting')
         this.$store.dispatch('navigation/toggleDarkMenu', false)
       } else {
@@ -111,7 +112,6 @@ export default Vue.extend({
     }, options)
 
     this.observer = Object.freeze(observer)
-    this.$nextTick(() => {})
   },
   methods: {
     observe() {

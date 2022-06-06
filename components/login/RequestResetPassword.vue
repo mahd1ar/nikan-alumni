@@ -2,29 +2,25 @@
   <div
     class="relative w-full transform-gpu px-6 py-8 transition-all duration-700 ease-out md:px-8 lg:w-1/2"
   >
-    <h2
-      class="text-center font-naskh text-2xl font-semibold text-gray-700 dark:text-white"
-    >
+    <h2 class="text-center font-naskh text-2xl font-semibold text-white">
       فراموشی رمز عبور
     </h2>
 
-    <p
-      class="mt-2 mb-12 text-center text-base text-gray-600 dark:text-gray-200"
-    >
+    <p class="mt-2 mb-12 text-center text-base text-gray-200">
       برای تنظیم مجدد پسورد ایمیل یا کد دانش آموختگی خود را وارد کنید
     </p>
 
     <div class="mt-4 flex items-center justify-between">
-      <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
+      <span class="w-1/5 border-b border-gray-600 lg:w-1/4"></span>
 
       <a
         href="#"
-        class="text-center text-xs uppercase text-gray-500 hover:underline dark:text-gray-400"
+        class="text-center text-xs uppercase hover:underline text-gray-400"
       >
         login with email</a
       >
 
-      <span class="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
+      <span class="w-1/5 border-b border-gray-400 lg:w-1/4"></span>
     </div>
 
     <div class="mt-4">
@@ -37,7 +33,7 @@
       <input
         v-model="email"
         placeholder="email"
-        class="block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300"
+        class="block w-full rounded-md border px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 border-gray-600 bg-gray-800 text-gray-300 focus:border-blue-300"
         type="email"
       />
 
@@ -66,16 +62,16 @@
     </div>
 
     <div class="mt-4 flex items-center justify-between">
-      <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+      <span class="w-1/5 border-b border-gray-600 md:w-1/4"></span>
 
       <nuxt-link
         :to="{ path: '/login', query: {} }"
-        class="text-xs uppercase text-gray-500 hover:underline dark:text-gray-400"
+        class="text-xs uppercase hover:underline text-gray-400"
       >
         بازگشت به صفحه ورود
       </nuxt-link>
 
-      <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+      <span class="w-1/5 border-b border-gray-600 md:w-1/4"></span>
     </div>
 
     <!-- overlay -->

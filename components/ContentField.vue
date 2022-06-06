@@ -69,7 +69,7 @@
       </div>
 
       <div
-        v-if="imgs.length > 0"
+        v-if="imgs.length > 0 && includeGallery"
         class="w-full grid grid-cols-2 sm:grid-cols-3"
       >
         <div
@@ -87,6 +87,7 @@
       </div>
 
       <image-viewer
+        v-if="includeGallery"
         :img-index="selectedImage"
         :imgs="imgs"
         :open.sync="isPlayerOpen"
@@ -115,6 +116,10 @@ export default Vue.extend({
     removeTags: {
       type: Array as PropType<string[]>,
       default: () => [],
+    },
+    includeGallery: {
+      type: Boolean,
+      default: () => true,
     },
   },
   data() {
@@ -172,17 +177,18 @@ export default Vue.extend({
 
       // strip images
       this.imgs.splice(0, this.imgs.length)
-      purgedContent.match(/<img.*?src="(.*?)".*?>/gm)?.forEach((imagetag) => {
-        try {
-          // console.log(imagetag)
-          const [, src] = imagetag.match(/src="(.*?)"/)!
-          purgedContent = purgedContent.replace(imagetag, '')
+      if (this.includeGallery)
+        purgedContent.match(/<img.*?src="(.*?)".*?>/gm)?.forEach((imagetag) => {
+          try {
+            // console.log(imagetag)
+            const [, src] = imagetag.match(/src="(.*?)"/)!
+            purgedContent = purgedContent.replace(imagetag, '')
 
-          this.imgs.push(src)
-        } catch (error) {
-          console.error(error)
-        }
-      })
+            this.imgs.push(src)
+          } catch (error) {
+            console.error(error)
+          }
+        })
 
       this.purgedContent = purgedContent
     },
@@ -199,8 +205,78 @@ export default Vue.extend({
     @apply text-lg leading-8;
   }
 }
-.content .wp-block-columns {
+// .content .wp-block-columns {
+//   @apply flex flex-col sm:flex-row;
+// }
+.wp-block-columns {
   display: flex;
+  margin-bottom: 1.75em;
+  box-sizing: border-box;
+  flex-wrap: wrap !important;
+  align-items: normal !important;
+}
+@media (min-width: 782px) {
+  .wp-block-columns {
+    flex-wrap: nowrap !important;
+  }
+}
+.wp-block-columns.are-vertically-aligned-top {
+  align-items: flex-start;
+}
+.wp-block-columns.are-vertically-aligned-center {
+  align-items: center;
+}
+.wp-block-columns.are-vertically-aligned-bottom {
+  align-items: flex-end;
+}
+@media (max-width: 781px) {
+  .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column {
+    flex-basis: 100% !important;
+  }
+}
+@media (min-width: 782px) {
+  .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column {
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+  .wp-block-columns:not(.is-not-stacked-on-mobile)
+    > .wp-block-column[style*='flex-basis'] {
+    flex-grow: 0;
+  }
+}
+.wp-block-columns.is-not-stacked-on-mobile {
+  flex-wrap: nowrap !important;
+}
+.wp-block-columns.is-not-stacked-on-mobile > .wp-block-column {
+  flex-basis: 0;
+  flex-grow: 1;
+}
+.wp-block-columns.is-not-stacked-on-mobile
+  > .wp-block-column[style*='flex-basis'] {
+  flex-grow: 0;
+}
+:where(.wp-block-columns.has-background) {
+  padding: 1.25em 2.375em;
+}
+.wp-block-column {
+  flex-grow: 1;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.wp-block-column.is-vertically-aligned-top {
+  align-self: flex-start;
+}
+.wp-block-column.is-vertically-aligned-center {
+  align-self: center;
+}
+.wp-block-column.is-vertically-aligned-bottom {
+  align-self: flex-end;
+}
+.wp-block-column.is-vertically-aligned-bottom,
+.wp-block-column.is-vertically-aligned-center,
+.wp-block-column.is-vertically-aligned-top {
+  width: 100%;
 }
 
 .content .wp-block-column {

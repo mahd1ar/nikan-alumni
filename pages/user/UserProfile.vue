@@ -218,18 +218,13 @@
                   <a
                     class="mt-4 flex flex-row-reverse items-center justify-center gap-2 text-gray-50"
                     target="_blank"
-                    :href="
-                      '/user/vcard?email=' +
-                      encodeURIComponent($store.state.authentication.user.email)
-                    "
+                    :href="'/vcard/' + encodeURIComponent(showuser.username)"
                   >
                     <p
                       class="max-w-sm text-xs font-light leading-tight md:text-sm"
                     >
                       <code class="w-full">
-                        https://nikan-alumni.com/user/vcard?email={{
-                          $store.state.authentication.user.email
-                        }}
+                        https://nikan-alumni.com/vcard/{{ showuser.username }}
                       </code>
                     </p>
                     <svg

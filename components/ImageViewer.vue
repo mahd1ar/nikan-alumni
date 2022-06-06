@@ -1,21 +1,21 @@
 <template>
   <dir v-show="open">
-    <transition name="scale-up" @after-leave="closeViewer" @after-enter="enter">
+    <transition name="scale-up" @after-leave="closeViewer" @enter="enter">
       <div
         v-show="show"
         class="z-20 fixed w-full h-full flex-center top-0 left-0"
       >
         <!-- overlay -->
         <div
-          class="bg-gray-700 bg-opacity-90 absolute flex-center top-0 left-0 w-full h-full"
+          class="bg-gray-700 bg-opacity-90 absolute flex-center top-0 left-0 w-full h-full select-none"
         ></div>
 
         <!-- For mobile -->
         <div v-if="$device.isMobile" class="relative w-full">
           <div class="snap-mandatory snap-x w-full flex overflow-auto">
             <div
-              ref="image-item"
               v-for="(img, index) in imgs"
+              ref="image-item"
               :key="index"
               :style="{ '--count': index }"
               class="snap-center w-11/12 flex-shrink-0"
@@ -26,12 +26,12 @@
         </div>
 
         <!-- for desktop -->
-        <div v-else class="relative w-full">
+        <div v-else class="relative w-full select-none">
           <div class="movable w-10/12 h-5/6 mx-auto" :style="{ '--count': 3 }">
             <img
               :style="{ transform: `scale(${scale})` }"
               class="mx-auto max-w-full max-h-full object-cover will-change-transform transition-all duration-500"
-              :src="imgs[selectedIndex]"
+              :src="imgs[imgIndex + diff]"
               alt=""
             />
           </div>
@@ -39,8 +39,8 @@
 
         <!-- buttons -->
         <div
-          @click="hide"
           class="absolute cursor-pointer top-4 right-4 p-5 text-gray-500"
+          @click="hide"
         >
           <svg
             aria-hidden="true"
@@ -59,6 +59,7 @@
 
         <div
           v-if="$device.isDesktop"
+          @click="next"
           class="absolute cursor-pointer right-4 p-5 text-gray-500"
         >
           <svg
@@ -76,9 +77,28 @@
         </div>
 
         <div
+          @click="prv"
           v-if="$device.isDesktop"
-          @click="zoomIn"
+          class="absolute cursor-pointer left-4 p-5 text-gray-500"
+        >
+          <svg
+            aria-hidden="true"
+            role="img"
+            class="w-10 h-10 transform rotate-180"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M10.02 6L8.61 7.41L13.19 12l-4.58 4.59L10.02 18l6-6l-6-6z"
+            />
+          </svg>
+        </div>
+
+        <div
+          v-if="$device.isDesktop"
           class="absolute cursor-pointer border-l-0 transform translate-x-1/2 bottom-4 p-5 text-white bg-white bg-opacity-20 border"
+          @click="zoomIn"
         >
           <svg
             aria-hidden="true"
@@ -96,8 +116,8 @@
 
         <div
           v-if="$device.isDesktop"
-          @click="zoomOut"
           class="absolute border-r-0 cursor-pointer transform -translate-x-1/2 bottom-4 p-5 text-white bg-white bg-opacity-20 border"
+          @click="zoomOut"
         >
           <svg
             aria-hidden="true"
@@ -138,8 +158,8 @@ export default Vue.extend({
   data() {
     return {
       show: false,
-      selectedIndex: 1,
       scale: 1,
+      diff: 0,
     }
   },
   //   watch {
@@ -159,22 +179,33 @@ export default Vue.extend({
       }
     },
   },
+  mounted() {
+    // @ts-ignore
+    window.mv = this
+  },
   methods: {
     enter() {
       if (this.imgIndex > -1 && this.$device.isMobile) {
         const divs = this.$refs['image-item'] as HTMLDivElement[]
 
         divs[this.imgIndex].scrollIntoView({
-          behavior: 'smooth',
+          // behavior: 'smooth',
           inline: 'center',
         })
       }
+    },
+    next() {
+      this.diff++
+    },
+    prv() {
+      this.diff--
     },
     hide() {
       this.show = false
     },
     closeViewer() {
       this.$emit('update:open', false)
+      this.diff = 0
     },
     zoomIn() {
       if (this.scale < 3) this.scale += 1
@@ -193,6 +224,7 @@ export default Vue.extend({
 .scale-up-enter-active,
 .scale-up-leave-active {
   transition: all 1s;
+  transition-delay: 200ms;
   transform: scale(1);
   .snap-center,
   .movable {
