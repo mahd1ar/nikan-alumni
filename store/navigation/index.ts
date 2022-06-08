@@ -177,6 +177,14 @@ enum Mutations {
   toggleDarkMenu = 'TOGGLE_DARK_MENU',
   makeVideoSubmenu = "MAKE_VIDEO_SUBMENU"
 }
+interface FOOTERCOL {
+  title: string,
+  items: {
+    type: 'email' | 'tel' | 'href' | 'text',
+    title: string,
+    link?: string
+  }[]
+}
 
 const initialState = {
   darkMenu: {
@@ -365,6 +373,84 @@ const initialState = {
       svg: SVG.USER,
     },
   ] as Menu[],
+  footer: {
+    col1: {
+      title: 'راه های ارتباطی',
+      items: [
+        {
+          type: 'tel',
+          title: '22631250',
+        },
+        {
+          type: 'tel',
+          title: '09203179823',
+        },
+        {
+          type: 'text',
+          title: `
+          الهیه، خیابان فیاضی (فرشته)، خیابان چناران، پلاک ۳/۲، طبقه
+          اول.
+          `,
+        },
+      ]
+    },
+    col2: {
+      title: "شبکه های اجتماعی",
+      items: [
+        {
+          title: 'اینستاگرام',
+          type: 'href',
+          link: '#'
+        },
+        {
+          title: 'کانال تلگرام',
+          type: 'href',
+          link: '#'
+        },
+        {
+          title: 'لینکدین',
+          type: 'href',
+          link: '#'
+        },
+
+      ]
+    },
+    col3: {
+      title: "پیوند ها",
+      items: [
+        {
+          title: 'نیک پیوند ',
+          type: 'href',
+          link: 'http://nikan.nikpeyvand.com/'
+        },
+        {
+          title: 'امور خیریه',
+          type: 'href',
+          link: '#'
+        },
+        {
+          title: 'نیک آثار',
+          type: 'href',
+          link: 'https://www.instagram.com/nikasaar/'
+        },
+        {
+          title: 'دبیرستان نیکان',
+          type: 'href',
+          link: 'https://nikan.sch.ir/'
+        },
+        {
+          title: 'دبستان و متوسطه اول نیکان',
+          type: 'href',
+          link: 'http://nikanschool.net/'
+        },
+
+      ]
+    }
+  } as {
+    col1: FOOTERCOL
+    col2: FOOTERCOL
+    col3: FOOTERCOL
+  }
 }
 
 export const state = () => ({

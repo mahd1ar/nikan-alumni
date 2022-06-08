@@ -123,7 +123,7 @@ export default Vue.extend({
       const [error] = await this.$authentication().login(this.user)
 
       if (error === null) {
-        this.$about.success({ title: Dict.general_welcome })
+        this.$about.success({ title: Dict.general_welcome, time: 4000 })
         await timeout(1000)
         lottie.loadAnimation({
           container: document.querySelector('.js-fireworks')!, // the dom element that will contain the animation

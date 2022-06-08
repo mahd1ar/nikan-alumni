@@ -29,7 +29,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import postgql from '~/apollo/queries/post.gql'
-import { wordpressDateToFormattedJalali } from '~/data/utils'
+import { htmlStrip, wordpressDateToFormattedJalali } from '~/data/utils'
 import { PostQuery, PostQueryVariables, PostIdType } from '~/types/types'
 
 export default Vue.extend({
@@ -80,7 +80,7 @@ export default Vue.extend({
         {
           hid: 'description',
           name: 'description',
-          content: this.content,
+          content: htmlStrip(this.content).trim(),
         },
       ],
     }

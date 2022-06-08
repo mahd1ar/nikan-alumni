@@ -35,7 +35,7 @@ export const actions: ActionTree<RootState, RootState> = {
       try {
         const user = {} as User
         user.id = app.$cookies.get(CookieUser.id)
-        user.avatar = app.$cookies.get(CookieUser.avatar)
+        user.avatar = decodeURIComponent(app.$cookies.get(CookieUser.avatar))
         user.firstName = app.$cookies.get(CookieUser.firstName)
         user.lastName = app.$cookies.get(CookieUser.lastName)
         user.email = app.$cookies.get(CookieUser.email)

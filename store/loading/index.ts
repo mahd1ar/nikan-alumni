@@ -4,13 +4,14 @@ const initialState = {
   isLoading: false,
   lockScreen: false,
   loadingMessage: '',
+  pageInTransition: false
 }
 
 export type LoadingOptions =
   | {
-      lockScreen: boolean | undefined
-      message: string | undefined
-    }
+    lockScreen: boolean | undefined
+    message: string | undefined
+  }
   | string
 
 export const state = () => ({
@@ -20,6 +21,7 @@ export const state = () => ({
 enum Mutations {
   loading = 'LOADING',
   reset = 'RESET',
+  transitioning = 'TRANS'
 }
 
 export type RootState = ReturnType<typeof state>
@@ -47,6 +49,9 @@ export const mutations: MutationTree<RootState> = {
   [Mutations.reset]: (state) => {
     Object.assign(state, initialState)
   },
+  [Mutations.transitioning]: (state, val: boolean) => {
+    state.pageInTransition = val
+  },
 }
 
 export const actions: ActionTree<RootState, RootState> = {
@@ -59,4 +64,7 @@ export const actions: ActionTree<RootState, RootState> = {
   endLoading({ commit: c }) {
     c(Mutations.reset)
   },
+  transitioning({ commit }, value: boolean) {
+    commit(Mutations.transitioning, value)
+  }
 }

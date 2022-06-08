@@ -43,7 +43,7 @@
                       ورود دانش آموخته
                     </button>
                     <button
-                      class="ml-4 inline-flex rounded border-0 bg-opacity-20 py-2 px-6 text-white hover:bg-gray-50 focus:outline-none"
+                      class="ml-4 inline-flex rounded border-0 hover:bg-opacity-20 py-2 px-6 text-white hover:bg-gray-50 focus:outline-none"
                     >
                       درباره کانون دانش آموختگان
                     </button>
@@ -62,13 +62,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import logTransition from '@/mixins/log-page-transition'
 
 export default Vue.extend({
   name: 'IndexPage',
+  mixins: [logTransition],
   middleware(ctx) {
     // alert('dispatchEvent')
     ctx.store.dispatch('navigation/toggleDarkMenu', false)
   },
+
   data() {
     return {
       observer: null as null | IntersectionObserver,
@@ -101,14 +104,12 @@ export default Vue.extend({
     }
 
     const observer = new IntersectionObserver((entreis) => {
-      if (entreis[0].isIntersecting) {
-        console.log(entreis[0])
-        console.log('isIntersecting')
-        this.$store.dispatch('navigation/toggleDarkMenu', false)
-      } else {
-        console.log('is NOT Intersecting')
-        this.$store.dispatch('navigation/toggleDarkMenu', true)
-      }
+      if (this.$store.state.loading.pageInTransition === false)
+        if (entreis[0].isIntersecting) {
+          this.$store.dispatch('navigation/toggleDarkMenu', false)
+        } else {
+          this.$store.dispatch('navigation/toggleDarkMenu', true)
+        }
     }, options)
 
     this.observer = Object.freeze(observer)

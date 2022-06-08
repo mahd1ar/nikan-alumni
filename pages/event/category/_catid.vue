@@ -37,10 +37,9 @@
         <div
           v-for="(ev, index) in eventList"
           :key="ev.id"
-          :style="{ '--count': index * 1 }"
+          :style="{ '--count': index * 10 }"
         >
           <div
-            :style="{ '--count': index * 1 }"
             class="block overflow-hidden border border-gray-100 rounded-lg shadow-sm"
           >
             <img
@@ -114,8 +113,8 @@ export default Vue.extend({
 
     if (data.category?.events?.nodes) {
       this.eventList.splice(0, this.eventList.length)
-      this.eventList = data.category.events.nodes.map((e) => {
-        return {
+      data.category.events.nodes.forEach((e) => {
+        const x: Event = {
           id: +e!.databaseId,
           gqlid: e!.id,
           title: e?.title || '',
@@ -130,6 +129,8 @@ export default Vue.extend({
           duration: e?.eventProps?.duration || 0,
           location: e?.eventProps?.venue || '',
         }
+
+        this.eventList.push(x)
       })
     }
   },

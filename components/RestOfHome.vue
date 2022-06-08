@@ -1,8 +1,7 @@
 <template>
   <div>
-    <section class="py-8 home__upcomming">
+    <section v-if="upcommingEvents.length > 0" class="py-8 home__upcomming">
       <count-down
-        v-if="upcommingEvents.length"
         v-slot="{ status, time }"
         :starting-from="upcommingEvents[0].wpdate"
         :duration="upcommingEvents[0].duration"
@@ -157,6 +156,55 @@
       </count-down>
     </section>
 
+    <section v-else class="py-8 home__upcomming">
+      <div class="container mx-auto flex flex-col-reverse gap-4 md:flex-row">
+        <div class="flex w-full flex-col md:w-8/12 my-auto">
+          <div
+            class="mx-auto flex w-2/3 flex-row-reverse justify-end gap-4 md:w-full"
+          >
+            <div class="flex flex-col gap-2">
+              <div class="text-xl text-tm-black">رویداد پیش رو</div>
+              <h1 class="text-3xl font-bold text-tm-black before:hidden">
+                هیچ رویدادی وجود ندارد
+              </h1>
+            </div>
+          </div>
+          <div class="pt-10 flex flex-col gap-8 md:mt-20 lg:flex-row-reverse">
+            <div
+              class="grid w-full grid-cols-4 text-center text-3xl md:text-right lg:w-9/12"
+              dir="ltr"
+            >
+              <div class="flex flex-col">
+                <span> {{ 0 }} :</span>
+                <span class="text-base text-gray-500">روز</span>
+              </div>
+
+              <div class="flex flex-col">
+                <span>{{ 0 }} :</span>
+                <span class="text-base text-gray-500">ساعت</span>
+              </div>
+              <div class="flex flex-col">
+                <span>{{ 0 }} :</span>
+                <span class="text-base text-gray-500">دقیقه</span>
+              </div>
+              <div class="flex flex-col">
+                <span> {{ 0 }} </span>
+                <span class="text-base text-gray-500">ثانیه</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-4/12">
+          <!-- src="test/val.jpg" -->
+          <img
+            class="mx-auto max-h-full w-52 rounded-md object-cover"
+            src="/icons/calendar-svgrepo-com.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </section>
+
     <section class="body-font overflow-hidden text-gray-600">
       <div class="container mx-auto hidden px-5 py-12 md:block">
         <!-- -m-12 -->
@@ -236,7 +284,7 @@
                         />
                       </svg> -->
 
-                      04 بهمن sa
+                      {{ n.date[1] + ' ' + n.date[0] }}
                     </span>
                   </div>
                 </div>
@@ -766,77 +814,42 @@
           <div
             class="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pr-20 md:text-left"
           >
-            <div class="w-full text-right px-4 md:w-1/2 lg:w-1/3">
+            <div
+              v-for="(col, colindex) in $store.state.navigation.footer"
+              :key="colindex"
+              class="w-full text-right px-4 md:w-1/2 lg:w-1/3"
+            >
               <h2
                 class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600"
               >
-                راه های ارتباطی
+                {{ col.title }}
               </h2>
               <nav
                 class="mb-10 list-none flex flex-col gap-2 items-start text-sm"
               >
-                <li>
-                  <a class="">۲۲۶۳۱۲۵۰ </a>
-                </li>
-                <li>
-                  <a class="">۰۹۲۰۳۱۷۹۸۲۳</a>
-                </li>
-                <li>
-                  <a class="">
-                    الهیه، خیابان فیاضی (فرشته)، خیابان چناران، پلاک ۳/۲، طبقه
-                    اول.
-                  </a>
-                </li>
-              </nav>
-            </div>
-
-            <div class="w-full text-right px-4 md:w-1/2 lg:w-1/3">
-              <h2
-                class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600"
-              >
-                شبکه های اجتماعی
-              </h2>
-              <nav
-                class="mb-10 list-none flex flex-col gap-2 items-start text-sm"
-              >
-                <li>
-                  <a class="">اینستاگرام</a>
-                </li>
-                <li>
-                  <a class="">کانال تلگرام</a>
-                </li>
-                <li>
-                  <a class="">لینکدین</a>
-                </li>
-              </nav>
-            </div>
-
-            <div class="w-full text-right px-4 md:w-1/2 lg:w-1/3">
-              <h2
-                class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600"
-              >
-                شبکه های اجتماعی
-              </h2>
-              <nav
-                class="mb-10 list-none flex flex-col gap-2 items-start text-sm"
-              >
-                <li>
-                  <a class="https://www.instagram.com/nikasaar/">
-                    امور خیریه
-                  </a>
-                </li>
-                <li>
-                  <a class=""> نیک پیوند </a>
-                </li>
-                <li>
-                  <a class="https://www.instagram.com/nikasaar/"> نیک آثار </a>
-                </li>
-                <li>
-                  <a class="https://nikan.sch.ir/"> دبیرستان نیکان </a>
-                </li>
-                <li>
-                  <a class="http://nikanschool.net/">
-                    دبستان و متوسطه اول نیکان
+                <li
+                  v-for="({ type, title, link }, index) in col.items"
+                  :key="index"
+                >
+                  <span v-if="type === 'text'">
+                    {{ title }}
+                  </span>
+                  <a
+                    v-else
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    :href="
+                      link
+                        ? link
+                        : type === 'email'
+                        ? 'mailto:' + title
+                        : type === 'tel'
+                        ? 'tel:' + title
+                        : '#'
+                    "
+                    class="hover:underline"
+                  >
+                    {{ formatstr(title) }}
                   </a>
                 </li>
               </nav>
@@ -1040,7 +1053,7 @@ export default Vue.extend({
         const { data } = await this.$axios.get<
           WPapi.upcommingEvent.RootObject[]
         >('/wp-json/myplugin/v1/upcommingevent')
-        console.log({ data })
+
         const d: Event[] = data
           .map((e) => ({
             id: e.ID,
@@ -1073,6 +1086,9 @@ export default Vue.extend({
           this.$about.error({ title: Dict.general_err, body: String(error) })
         }
       }
+    },
+    formatstr(x: string) {
+      return toIndiaDigits(x)
     },
   },
 })

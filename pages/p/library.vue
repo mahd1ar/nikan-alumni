@@ -21,7 +21,7 @@
             class="flex flex-col items-center pt-8 overflow-hidden border rounded-md"
           >
             <div class="w-32 h-32 rounded-full">
-              <img :src="icon" alt="" />
+              <img :src="require('@/assets' + icon)" alt="" />
             </div>
 
             <h1
@@ -158,6 +158,7 @@ export default Vue.extend({
             },
             {
               title: 'شورای مرکزی دور دوم',
+              link: '/page/22801',
             },
             {
               title: 'شورای مرکزی دور سوم',
@@ -168,9 +169,11 @@ export default Vue.extend({
             },
             {
               title: 'هیٔت اجرایی دور دوم',
+              link: '/page/22755',
             },
             {
               title: 'هیٔت اجرایی دور سوم',
+              link: '/page/22781',
             },
           ],
         },

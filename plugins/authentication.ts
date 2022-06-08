@@ -2,7 +2,9 @@ import { Plugin, Context } from '@nuxt/types'
 // import { BoxLoading } from './loading'
 import LOGIN_MUT from '@/apollo/mutation/login.gql'
 import REFRESH_TOKEN_MUT from '@/apollo/mutation/refresh.gql'
+import FETCHME from '@/apollo/queries/fetch-me.gql'
 import {
+  FetchMeQuery,
   LoginMutation,
   LoginMutationVariables,
   RefreshAuthTokenMutation,
@@ -36,7 +38,22 @@ class LoginStrategy {
     this.refreshHandler()
   }
 
-  public fetchMe() { }
+  public async fetchMe() {
+
+    const { data } = await this.ctx.app.apolloProvider.defaultClient.query<FetchMeQuery>({ query: FETCHME })
+
+    if (data.viewer) {
+
+      const user: User = {
+        avatar: data.viewer.avatar?.url || "",
+        email: data.viewer.email || "",
+        firstName: data.viewer.firstName || "",
+        lastName: data.viewer.lastName || "",
+        id: data.viewer.id
+      }
+      this.setUser(user)
+    } else console.error("[!!] no data.viewer")
+  }
 
   private loginHandler(response: LoginMutation) {
     localStorage.setItem(
@@ -56,7 +73,17 @@ class LoginStrategy {
     if (response.login?.authToken) {
       this.setToken(response.login.authToken)
 
-      this.setUser(response.login)
+      if (response.login.user) {
+
+        const user: User = {
+          avatar: response.login.user.avatar?.url || "",
+          email: response.login.user.email || "",
+          firstName: response.login.user.firstName || "",
+          lastName: response.login.user.lastName || "",
+          id: response.login.user.id
+        }
+        this.setUser(user)
+      } else console.error("[!!]there is no user prop in authToken")
 
       this.ctx.store.dispatch('authentication/login')
       window.setTimeout(() => {
@@ -168,6 +195,7 @@ class LoginStrategy {
     if (data?.refreshJwtAuthToken?.authToken) {
       this.setToken(data?.refreshJwtAuthToken?.authToken)
       this.ctx.store.dispatch('authentication/login')
+      this.fetchMe()
       return data
     } else throw new Error('empty token')
   }
@@ -208,37 +236,29 @@ class LoginStrategy {
     localStorage.setItem('tt', token)
   }
 
-  private setUser(logininfo: LoginMutation['login']) {
-    if (logininfo?.user) {
-      const user: User = {
-        avatar: logininfo.user.avatar?.url || '',
-        email: logininfo.user.email!,
-        firstName: logininfo.user.firstName || '',
-        lastName: logininfo.user.lastName || '',
-        id: logininfo.user.id,
-      }
+  private setUser(user: User) {
 
-      this.ctx.store.dispatch('authentication/setUser', user)
+    this.ctx.store.dispatch('authentication/setUser', user)
 
-      const infinity = 10 * 365 * 24 * 60 * 60
-      this.setCookie(CookieUser.id, logininfo.user.id, infinity)
-      this.setCookie(
-        CookieUser.avatar,
-        logininfo.user.avatar?.url || '',
-        infinity
-      )
-      this.setCookie(CookieUser.email, logininfo.user.email || '', infinity)
-      this.setCookie(
-        CookieUser.firstName,
-        logininfo.user.firstName || '',
-        infinity
-      )
-      this.setCookie(
-        CookieUser.lastName,
-        logininfo.user.lastName || '',
-        infinity
-      )
-    }
+    const infinity = 10 * 365 * 24 * 60 * 60
+    this.setCookie(CookieUser.id, user.id, infinity)
+    this.setCookie(
+      CookieUser.avatar,
+      user.avatar,
+      infinity
+    )
+    this.setCookie(CookieUser.email, user.email, infinity)
+    this.setCookie(
+      CookieUser.firstName,
+      user.firstName,
+      infinity
+    )
+    this.setCookie(
+      CookieUser.lastName,
+      user.lastName,
+      infinity
+    )
+
   }
 
   private setCookie(key: string, value: string, maxAge: number) {
