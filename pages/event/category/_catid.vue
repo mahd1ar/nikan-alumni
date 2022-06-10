@@ -28,16 +28,14 @@
       </div>
     </div>
     <div class="container mx-auto">
-      <transition-group
-        name="v-fade"
-        tag="div"
+      <div
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
         dir="rtl"
       >
         <div
           v-for="(ev, index) in eventList"
           :key="ev.id"
-          :style="{ '--count': index * 10 }"
+          :style="{ '--count': index }"
         >
           <div
             class="block overflow-hidden border border-gray-100 rounded-lg shadow-sm"
@@ -71,7 +69,7 @@
             </div>
           </div>
         </div>
-      </transition-group>
+      </div>
     </div>
   </div>
 </template>

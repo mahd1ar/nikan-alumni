@@ -314,37 +314,37 @@ const initialState = {
         {
           title: 'بیمه خودرو',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/page/22017',
         },
         {
           title: 'بیمه مسئولیت',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/page/22015',
         },
         {
           title: 'بیمه آتش سوزی',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/page/22013',
         },
         {
           title: 'بیمه درمان تکمیلی اعضا و وابستگان درجه یک',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/page/22005',
         },
         {
           title: 'فرم درخواست بیمه درمان تکمیلی',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/page/22403',
         },
         {
           title: 'بیمه درمان تکمیلی وابستگان درجه دو',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/page/22007',
         },
         {
           title: 'بیمه درمان تکمیلی گروهی و شرکتی',
           hasSubmenu: false,
-          href: '/notyetready',
+          href: '/page/22009',
         },
       ],
     },
@@ -366,12 +366,12 @@ const initialState = {
         },
       ],
     },
-    {
-      title: 'پروفایل اعضا',
-      hasSubmenu: false,
-      href: 'google.com',
-      svg: SVG.USER,
-    },
+    // {
+    //   title: 'پروفایل اعضا',
+    //   hasSubmenu: false,
+    //   href: 'google.com',
+    //   svg: SVG.USER,
+    // },
   ] as Menu[],
   footer: {
     col1: {

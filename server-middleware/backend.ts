@@ -2,7 +2,7 @@ import { createHmac } from 'node:crypto';
 import express from 'express'
 import vCardsJS from 'vcards-js'
 import bodyParser from 'body-parser'
-import axios from "axios"
+import axios, { AxiosRequestConfig } from "axios"
 
 type ReqMemo = {
   time: number, value: any
@@ -74,7 +74,12 @@ app.all<{ 0: string }>("/request/*", async (req, res) => {
   try {
     if (req.method === 'GET') {
 
-      const { data } = await axios.get(fullPath);
+      const config: AxiosRequestConfig = {};
+
+      if (Object.keys(req.query).length > 0) {
+        config.params = req.query
+      }
+      const { data } = await axios.get(fullPath, config);
       // res.setHeader("Content-Type", 'application/json')
       res.json(data)
     } else if (req.method === "POST") {

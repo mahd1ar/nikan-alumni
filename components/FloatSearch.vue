@@ -77,12 +77,14 @@
                 {{ key }}
               </h2>
               <nav
-                class="-mb-1 flex flex-col items-center space-y-2.5 text-right sm:items-start sm:text-left"
+                class="-mb-1 flex flex-col space-y-2.5 text-right items-start sm:text-left"
               >
-                <a
+                <nuxt-link
+                  @click.native="close"
                   v-for="(item, index) in value.items"
                   :key="index"
                   class="flex items-start text-sm"
+                  :to="item.href"
                 >
                   <span
                     class="ml-2 mt-2 inline-flex h-2 w-2 items-center justify-center rounded-full bg-blue-100"
@@ -91,7 +93,7 @@
                   <span class="text-right">
                     {{ item.title }}
                   </span>
-                </a>
+                </nuxt-link>
               </nav>
             </div>
           </div>
@@ -347,14 +349,14 @@ const VueSearch = Vue.extend({
 
       try {
         const { data: data1 } = await this.$axios.get<WPapi.event.RootObject[]>(
-          'wp-json/wp/v2/event?search=' + encodeURIComponent(this.searchValue)
+          'wp-json/wp/v2/event?search=' + this.searchValue
         )
         console.log(data1)
         data1.forEach((i) => {
           this.results.events.loading = false
           this.results.events.items.push({
             title: i.title.rendered,
-            href: '#',
+            href: '/event/' + btoa(`post:${i.id}`),
             excerpt: i.excerpt.rendered,
           })
         })

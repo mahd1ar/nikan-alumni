@@ -68,59 +68,59 @@
         </svg>
         <h2 class="text-3xl font-bold tracking-wider">رویداد ها</h2>
       </div>
-
-      <transition-group
-        name="v-fade"
-        tag="div"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
-        dir="rtl"
-      >
+      <transition name="s-fade">
         <div
-          v-for="(ev, index) in eventList"
-          :key="ev.id"
-          :style="{ '--count': index * 1 }"
+          v-if="$fetchState.pending === false"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+          dir="rtl"
         >
           <div
-            class="block overflow-hidden border border-gray-100 rounded-lg shadow-sm"
+            v-for="(ev, index) in eventList"
+            :key="ev.id"
+            :style="{ '--count': index * 1 }"
           >
-            <img
-              v-if="ev.imagelink"
-              class="object-cover w-full h-56"
-              :src="ev.imagelink"
-              alt=""
-            />
-
-            <div class="p-6">
-              <h5 class="text-xl font-bold">
-                {{ ev.title }}
-              </h5>
-
-              <content-field
-                class="mt-2 text-gray-500"
-                style="max-height: 80px; overflow: hidden"
-                :is-excerpt="true"
-                :html="ev.content"
+            <div
+              class="block overflow-hidden border border-gray-100 rounded-lg shadow-sm"
+            >
+              <img
+                v-if="ev.imagelink"
+                class="object-cover w-full h-56"
+                :src="ev.imagelink"
+                alt=""
               />
-              <div class="mt-4 text-xs text-gray-600 flex flex-nowrap gap-2">
-                <div
-                  class="whitespace-nowrap"
-                  v-for="c in ev.category"
-                  :key="c.id"
-                >
-                  {{ c.name }} .
+
+              <div class="p-6">
+                <h5 class="text-xl font-bold">
+                  {{ ev.title }}
+                </h5>
+
+                <content-field
+                  class="mt-2 text-gray-500"
+                  style="max-height: 80px; overflow: hidden"
+                  :is-excerpt="true"
+                  :html="ev.content"
+                />
+                <div class="mt-4 text-xs text-gray-600 flex flex-nowrap gap-2">
+                  <div
+                    class="whitespace-nowrap"
+                    v-for="c in ev.category"
+                    :key="c.id"
+                  >
+                    {{ c.name }} .
+                  </div>
                 </div>
+                <nuxt-link
+                  :to="'/event/' + ev.gqlid"
+                  class="inline-block pb-1 mt-4 font-medium text-blue-600 border-b border-blue-500"
+                >
+                  ادامه مطلب
+                  <span aria-hidden="true">&larr;</span>
+                </nuxt-link>
               </div>
-              <nuxt-link
-                :to="'/event/' + ev.gqlid"
-                class="inline-block pb-1 mt-4 font-medium text-blue-600 border-b border-blue-500"
-              >
-                ادامه مطلب
-                <span aria-hidden="true">&larr;</span>
-              </nuxt-link>
             </div>
           </div>
         </div>
-      </transition-group>
+      </transition>
     </div>
   </div>
 </template>
@@ -180,9 +180,34 @@ export default Vue.extend({
       this.isLoaded = true
     },
   },
-  mounted() {
-    // @ts-ignore
-    window.events = this
-  },
 })
 </script>
+
+<style lang="scss" scoped>
+.s-fade-enter-active,
+.s-fade-leave-active {
+  transition: all 1.8s ease;
+  transition-delay: 0.2s;
+  div {
+    transition: all 0.9s ease;
+    overflow: hidden;
+    max-height: 100%;
+    background: #fff;
+    opacity: 1;
+    transform: translateY(0%);
+    transition-delay: calc(var(--count) * 100ms);
+  }
+}
+.s-fade-enter, .s-fade-leave-to /* .s-fade-leave-active below version 2.1.8 */ {
+  div {
+    overflow: hidden;
+    transform: translateY(50px);
+    opacity: 0;
+    max-height: 0%;
+  }
+}
+.s-fade-move {
+  transition: transform 0.2s;
+}
+</style>
+

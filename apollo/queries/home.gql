@@ -15,6 +15,7 @@ query home(
       categories {
         nodes {
           name
+          id
         }
       }
       featuredImage {
@@ -64,9 +65,11 @@ query home(
             featuredImage {
               node {
                 mediaItemUrl
+                id
               }
             }
           }
+          id
         }
       }
     }
