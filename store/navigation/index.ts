@@ -170,18 +170,109 @@ enum SVG {
             />
             </svg>
             `,
+
+  EVENT_NESHAT = `
+  <svg
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  role="img"
+  preserveAspectRatio="xMidYMid meet"
+  viewBox="0 0 24 24"
+>
+  <path
+    fill="currentColor"
+    d="m21.88 2.15l-1.2.4a13.84 13.84 0 0 1-6.41.64a11.87 11.87 0 0 0-6.68.9A7.23 7.23 0 0 0 3.3 9.5a8.65 8.65 0 0 0 1.47 6.6c-.06.21-.12.42-.17.63A22.6 22.6 0 0 0 4 22h2a30.69 30.69 0 0 1 .59-4.32a9.25 9.25 0 0 0 4.52 1.11a11 11 0 0 0 4.28-.87C23 14.67 22 3.86 22 3.41zm-7.27 13.93c-2.61 1.11-5.73.92-7.48-.45a13.79 13.79 0 0 1 1.21-2.84A10.17 10.17 0 0 1 9.73 11a9 9 0 0 1 1.81-1.42A12 12 0 0 1 16 8V7a11.43 11.43 0 0 0-5.26 1.08a10.28 10.28 0 0 0-4.12 3.65a15.07 15.07 0 0 0-1 1.87a7 7 0 0 1-.38-3.73a5.24 5.24 0 0 1 3.14-4a8.93 8.93 0 0 1 3.82-.84c.62 0 1.23.06 1.87.11a16.2 16.2 0 0 0 6-.35C20 7.55 19.5 14 14.61 16.08z"
+  />
+</svg>`,
+
+  EVENT_CASB = `
+<svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                role="img"
+              
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  fill="currentColor"
+                  d="M216 64h-40v-8a24.1 24.1 0 0 0-24-24h-48a24.1 24.1 0 0 0-24 24v8H40a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16ZM96 56a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm120 24v72H40V80Zm0 128H40v-40h176v40Z"
+                />
+              </svg>`,
+  EVENT_ELM = `
+<svg
+xmlns="http://www.w3.org/2000/svg"
+aria-hidden="true"
+role="img"
+preserveAspectRatio="xMidYMid meet"
+viewBox="0 0 36 36"
+>
+<path
+  fill="currentColor"
+  d="M10 5.2h18v1.55H10z"
+  class="clr-i-outline clr-i-outline-path-1"
+/>
+<path
+  fill="currentColor"
+  d="M29 8H9.86A1.89 1.89 0 0 1 8 6a2 2 0 0 1 1.86-2H29a1 1 0 0 0 0-2H9.86A4 4 0 0 0 6 6a4.14 4.14 0 0 0 0 .49a1 1 0 0 0 0 .24V30a4 4 0 0 0 3.86 4H29a1 1 0 0 0 1-1V9.07A1.07 1.07 0 0 0 29 8Zm-1 24H9.86A2 2 0 0 1 8 30V9.55a3.63 3.63 0 0 0 1.86.45H28Z"
+  class="clr-i-outline clr-i-outline-path-2"
+/>
+<path fill="none" d="M0 0h36v36H0z" />
+</svg>
+`,
+
+  EVENT_SALAMAT = `     <svg
+xmlns="http://www.w3.org/2000/svg"
+aria-hidden="true"
+role="img"
+preserveAspectRatio="xMidYMid meet"
+viewBox="0 0 24 24"
+>
+<path
+  stroke="currentColor"
+  stroke-width="1.5px"
+  fill="none"
+  d="M19.649 5.286L14 8.548V2.025h-4v6.523L4.351 5.286l-2 3.465l5.648 3.261l-5.648 3.261l2 3.465L10 15.477V22h4v-6.523l5.649 3.261l2-3.465l-5.648-3.261l5.648-3.261z"
+/>
+</svg>`,
+
+  EVENT_KHEYRIYE = `<svg
+xmlns="http://www.w3.org/2000/svg"
+aria-hidden="true"
+role="img"
+preserveAspectRatio="xMidYMid meet"
+viewBox="0 0 24 24"
+>
+<path
+  fill="currentColor"
+  d="M4 21h9.62a3.995 3.995 0 0 0 3.037-1.397l5.102-5.952a1 1 0 0 0-.442-1.6l-1.968-.656a3.043 3.043 0 0 0-2.823.503l-3.185 2.547l-.617-1.235A3.98 3.98 0 0 0 9.146 11H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2zm0-8h5.146c.763 0 1.448.423 1.789 1.105l.447.895H7v2h6.014a.996.996 0 0 0 .442-.11l.003-.001l.004-.002h.003l.002-.001h.004l.001-.001c.009.003.003-.001.003-.001c.01 0 .002-.001.002-.001h.001l.002-.001l.003-.001l.002-.001l.002-.001l.003-.001l.002-.001c.003 0 .001-.001.002-.001l.003-.002l.002-.001l.002-.001l.003-.001l.002-.001h.001l.002-.001h.001l.002-.001l.002-.001c.009-.001.003-.001.003-.001l.002-.001a.915.915 0 0 0 .11-.078l4.146-3.317c.262-.208.623-.273.94-.167l.557.186l-4.133 4.823a2.029 2.029 0 0 1-1.52.688H4v-6zM16 2h-.017c-.163.002-1.006.039-1.983.705c-.951-.648-1.774-.7-1.968-.704L12.002 2h-.004c-.801 0-1.555.313-2.119.878C9.313 3.445 9 4.198 9 5s.313 1.555.861 2.104l3.414 3.586a1.006 1.006 0 0 0 1.45-.001l3.396-3.568C18.688 6.555 19 5.802 19 5s-.313-1.555-.878-2.121A2.978 2.978 0 0 0 16.002 2H16zm1 3c0 .267-.104.518-.311.725L14 8.55l-2.707-2.843C11.104 5.518 11 5.267 11 5s.104-.518.294-.708A.977.977 0 0 1 11.979 4c.025.001.502.032 1.067.485c.081.065.163.139.247.222l.707.707l.707-.707c.084-.083.166-.157.247-.222c.529-.425.976-.478 1.052-.484a.987.987 0 0 1 .701.292c.189.189.293.44.293.707z"
+/>
+</svg>`,
+
+  EVENT_PR = ` <svg
+xmlns="http://www.w3.org/2000/svg"
+aria-hidden="true"
+role="img"
+preserveAspectRatio="xMidYMid meet"
+viewBox="0 0 20 20"
+>
+<path
+  fill="currentColor"
+  d="M10 4.5a6.5 6.5 0 0 0-4.601 11.091a.75.75 0 1 1-1.062 1.06a8 8 0 1 1 13.632-6.355a3.004 3.004 0 0 0-1.756-1.21A6.503 6.503 0 0 0 10 4.5Zm4.637 4.626A5.002 5.002 0 0 0 5 11c0 1.377.558 2.626 1.458 3.53a.75.75 0 0 0 1.063-1.06a3.5 3.5 0 1 1 5.811-3.544a3 3 0 0 1 1.305-.8ZM8 11a2 2 0 1 1 4 0a2 2 0 0 1-4 0Zm9.5 1a2 2 0 1 1-4 0a2 2 0 0 1 4 0Zm1.5 4.5c0 1.245-1 2.5-3.5 2.5S12 17.75 12 16.5a1.5 1.5 0 0 1 1.5-1.5h4a1.5 1.5 0 0 1 1.5 1.5Z"
+/>
+</svg>`
 }
 
 enum Mutations {
   toggleMobileMenu = 'TOGGLE_MOBILE_MENU',
   toggleDarkMenu = 'TOGGLE_DARK_MENU',
-  makeVideoSubmenu = "MAKE_VIDEO_SUBMENU"
+  makeVideoSubmenu = 'MAKE_VIDEO_SUBMENU',
 }
 interface FOOTERCOL {
-  title: string,
+  title: string
   items: {
-    type: 'email' | 'tel' | 'href' | 'text',
-    title: string,
+    type: 'email' | 'tel' | 'href' | 'text'
+    title: string
     link?: string
   }[]
 }
@@ -199,8 +290,7 @@ const initialState = {
       hasSubmenu: false,
       href: '/',
       svg: SVG.INTRO,
-      submenu: [
-      ],
+      submenu: [],
     },
     {
       title: 'معرفی',
@@ -258,31 +348,37 @@ const initialState = {
       svg: SVG.EVENT,
       submenu: [
         {
+          svg: SVG.EVENT_PR,
           title: 'روابط عمومی',
           hasSubmenu: false,
           href: '/event/category/pr',
         },
         {
+          svg: SVG.EVENT_NESHAT,
           title: 'کارگروه نشاط و سرگرمی',
           hasSubmenu: false,
           href: '/event/category/entertainment-and-entertainment',
         },
         {
+          svg: SVG.EVENT_KHEYRIYE,
           title: 'کارگروه امور خیریه و عام المنفعه',
           hasSubmenu: false,
           href: '/event/category/charity',
         },
         {
+          svg: SVG.EVENT_SALAMAT,
           title: 'کارگروه خانواده و امور اجتماعی',
           hasSubmenu: false,
           href: '/event/category/family-and-health',
         },
         {
+          svg: SVG.EVENT_ELM,
           title: 'کارگروه علم و فرهنگ',
           hasSubmenu: false,
           href: '/event/category/science-and-culture',
         },
         {
+          svg: SVG.EVENT_CASB,
           title: 'کارگروه کسب و کار',
           hasSubmenu: false,
           href: '/event/category/business',
@@ -294,21 +390,40 @@ const initialState = {
       hasSubmenu: true,
       href: '/video',
       svg: SVG.MEDIA,
-      submenu:
-        [
-          { "hasSubmenu": false, "href": "/video#ted", "title": "تد نیکان", "svg": "" },
-          { "hasSubmenu": false, "href": "/video#business-challenges", "title": "چالش های کسب و کار", "svg": "" },
-          { "hasSubmenu": false, "href": "/video#medical-discussion", "title": "بحث های پزشکی", "svg": "" },
-          { "hasSubmenu": false, "href": "/video#karbarg", "title": "کاربرگ", "svg": "" },
-          { "hasSubmenu": false, "href": "/video#clubinar", "title": "کلابینار", "svg": "" },
-          { "hasSubmenu": false, "href": "/video#live", "title": "لایوها", "svg": "" },
-          { "hasSubmenu": false, "href": "/video#nikasar", "title": "نیک اثار", "svg": "" }]
-
+      submenu: [
+        { hasSubmenu: false, href: '/video#ted', title: 'تد نیکان', svg: '' },
+        {
+          hasSubmenu: false,
+          href: '/video#business-challenges',
+          title: 'چالش های کسب و کار',
+          svg: '',
+        },
+        {
+          hasSubmenu: false,
+          href: '/video#medical-discussion',
+          title: 'بحث های پزشکی',
+          svg: '',
+        },
+        { hasSubmenu: false, href: '/video#karbarg', title: 'کاربرگ', svg: '' },
+        {
+          hasSubmenu: false,
+          href: '/video#clubinar',
+          title: 'کلابینار',
+          svg: '',
+        },
+        { hasSubmenu: false, href: '/video#live', title: 'لایوها', svg: '' },
+        {
+          hasSubmenu: false,
+          href: '/video#nikasar',
+          title: 'نیک اثار',
+          svg: '',
+        },
+      ],
     },
     {
       title: 'انواع بیمه',
       hasSubmenu: true,
-      href: '/notyetready',
+      href: '#',
       svg: SVG.INSUR,
       submenu: [
         {
@@ -351,19 +466,15 @@ const initialState = {
     {
       title: 'نشریات',
       hasSubmenu: true,
-      href: '',
+      href: '#',
       svg: SVG.JURNAL,
       submenu: [
         {
-          title: 'بیمه خودرو',
+          title: 'کاربرگ',
           hasSubmenu: false,
-          href: '',
+          href: '/post/category/karbarg-cat',
         },
-        {
-          title: 'بیمه مسئولیت',
-          hasSubmenu: false,
-          href: '',
-        },
+
       ],
     },
     // {
@@ -392,65 +503,63 @@ const initialState = {
           اول.
           `,
         },
-      ]
+      ],
     },
     col2: {
-      title: "شبکه های اجتماعی",
+      title: 'شبکه های اجتماعی',
       items: [
         {
           title: 'اینستاگرام',
           type: 'href',
-          link: '#'
+          link: '#',
         },
         {
           title: 'کانال تلگرام',
           type: 'href',
-          link: '#'
+          link: '#',
         },
         {
           title: 'لینکدین',
           type: 'href',
-          link: '#'
+          link: '#',
         },
-
-      ]
+      ],
     },
     col3: {
-      title: "پیوند ها",
+      title: 'پیوند ها',
       items: [
         {
           title: 'نیک پیوند ',
           type: 'href',
-          link: 'http://nikan.nikpeyvand.com/'
+          link: 'http://nikan.nikpeyvand.com/',
         },
         {
           title: 'امور خیریه',
           type: 'href',
-          link: '#'
+          link: '#',
         },
         {
           title: 'نیک آثار',
           type: 'href',
-          link: 'https://www.instagram.com/nikasaar/'
+          link: 'https://www.instagram.com/nikasaar/',
         },
         {
           title: 'دبیرستان نیکان',
           type: 'href',
-          link: 'https://nikan.sch.ir/'
+          link: 'https://nikan.sch.ir/',
         },
         {
           title: 'دبستان و متوسطه اول نیکان',
           type: 'href',
-          link: 'http://nikanschool.net/'
+          link: 'http://nikanschool.net/',
         },
-
-      ]
-    }
+      ],
+    },
   } as {
     col1: FOOTERCOL
     col2: FOOTERCOL
     col3: FOOTERCOL
-  }
+  },
 }
 
 export const state = () => ({
@@ -473,8 +582,8 @@ export const mutations: MutationTree<RootState> = {
     state.darkMenu.show = nval
   },
   [Mutations.makeVideoSubmenu]: (state, nval: Menu[]) => {
-    const vm = state.menu.find(i => i.href === '/video')!
-    nval.forEach(i => {
+    const vm = state.menu.find((i) => i.href === '/video')!
+    nval.forEach((i) => {
       vm.submenu!.push(i)
     })
   },
@@ -495,20 +604,16 @@ export const actions: ActionTree<RootState, RootState> = {
     } else commit(Mutations.toggleDarkMenu, val)
   },
   makeVideoSubmenu: ({ commit }, items: WPapi.categories.RootObject[]) => {
-
-    const submenus = items.map(item => {
+    const submenus = items.map((item) => {
       const m: Menu = {
         hasSubmenu: false,
-        href: "/video#" + item.slug,
+        href: '/video#' + item.slug,
         title: item.name,
-        svg: ''
-
+        svg: '',
       }
       return m
     })
 
     commit(Mutations.makeVideoSubmenu, submenus)
-
   },
-
 }

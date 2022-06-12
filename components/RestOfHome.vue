@@ -485,8 +485,9 @@
             </div>
           </div>
           <div class="py-4 px-4">
-            <button
-              class="mx-auto flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-center text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
+            <nuxt-link
+              to="/event/category"
+              class="mx-auto inline-flex text-center flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6  text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -503,7 +504,7 @@
               </svg>
 
               مشاهده تمام رویداد ها
-            </button>
+            </nuxt-link>
           </div>
         </div>
 

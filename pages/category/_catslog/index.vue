@@ -21,7 +21,7 @@
         </h2>
       </div>
     </div>
-
+    <loading-indicator :showif="$fetchState.pending" dark fullscreen />
     <div class="container mx-auto px-5 py-24">
       <div class="-m-4 flex flex-row-reverse flex-wrap">
         <div v-for="post in posts" :key="post.id" class="p-4 lg:w-1/3">
@@ -45,11 +45,13 @@ import { CategoryPostsQuery, CategoryPostsQueryVariables } from '~/types/types'
 
 import { PostScheme, CategoryScheme } from '@/data/GlobslTypes'
 import { wordpressDateToFormattedJalali } from '~/data/utils'
+import LoadingIndicator from '~/components/LoadingIndicator.vue'
 
 export default Vue.extend({
   components: {
     CardTemplate,
-  },
+    LoadingIndicator
+},
   data() {
     const category: CategoryScheme = {
       id: '0',

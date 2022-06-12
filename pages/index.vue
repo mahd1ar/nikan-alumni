@@ -16,7 +16,7 @@
                 ref="heroNav"
                 class="sticky"
                 @componentLoaded="observe"
-                @openModal="search.show = true"
+  
               />
               <div
                 class="m-blur-background-1 absolute top-0 left-0 h-full w-full"
@@ -37,11 +37,17 @@
                     ایجاد بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها
                   </p>
                   <div class="text-sm">
-                    <button
+                    <nuxt-link
+                    :to="isLoggedIn ? '/user/userprofile' : '/login'" 
                       class="inline-flex border-0 rounded bg-cyan-500 py-2 px-6 text-white hover:bg-cyan-600 focus:outline-none"
                     >
-                      ورود دانش آموخته
-                    </button>
+                    {{
+                      isLoggedIn 
+                      ? 'ورود به حساب کاربری'
+                       : 'ورود دانش آموخته'
+                    }}
+                      
+                    </nuxt-link>
                     <button
                       class="ml-4 inline-flex rounded border-0 hover:bg-opacity-20 py-2 px-6 text-white hover:bg-gray-50 focus:outline-none"
                     >
@@ -62,6 +68,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 import logTransition from '@/mixins/log-page-transition'
 
 export default Vue.extend({
@@ -96,6 +103,9 @@ export default Vue.extend({
       //   'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
     }
   },
+  computed:{ ...mapGetters({
+    isLoggedIn: 'authentication/isLoggedIn',
+  }) },
   beforeMount() {
     const options = {
       // root: document.querySelector('#scrollArea'),

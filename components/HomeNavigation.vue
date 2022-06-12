@@ -1,29 +1,35 @@
 <template>
   <nav class="relative top-8 z-10 h-24">
-    <div
-      class="container mx-auto h-full overflow-x-clip lg:max-w-[1104px] lg:px-10 xl:px-0"
-    >
-      <div
-        class="flex h-full w-full flex-row-reverse items-stretch justify-between gap-1 rounded bg-white px-4"
-      >
+    <div class="container mx-auto h-full overflow-x-clip lg:max-w-[1104px] lg:px-10 xl:px-0">
+      <div class="flex h-full w-full flex-row-reverse items-stretch justify-between gap-1 rounded bg-white px-4">
         <div class="flex items-center justify-center lg:hidden">
-          <nuxt-link
-            to="/login"
-            class="py-2 hover:bg-slate-100 tracking-widest px-4 text-gray-600 font-bold rounded text-sm"
-          >
+          <nuxt-link v-if="!isLoggedIn" to="/login"
+            class="py-2 hover:bg-slate-100 tracking-widest px-4 text-gray-600 font-bold rounded text-sm">
             ورود اعضا
+          </nuxt-link>
+
+          <nuxt-link class="text-gray-600 flex items-center gap-2 font-bold" to="/user/userprofile" v-else>
+            <img class="w-10 h-10 rounded-full" :src="$store.state.authentication.user.avatar" :alt="$store.state.authentication.user.lastName">
+            
+            <span class="block text-sm">
+              <span class=" flex flex-col">
+                {{ $store.state.authentication.user.firstName }}
+              </span>
+              <span>
+                {{ $store.state.authentication.user.lastName }}
+              </span>
+            </span>
+
           </nuxt-link>
         </div>
 
         <figure class="relative hidden lg:block">
           <div class="left-0 z-10 h-full rounded-md bg-white py-2">
-            <img class="h-full" src="img/logo_only.png" alt="" />
+            <img class="h-full" src="img/logo_only.png" alt="nikan-alumni-logo" />
           </div>
         </figure>
 
-        <figure
-          class="lg:hidden absolute h-full top-0 left-1/2 transform -translate-x-1/2"
-        >
+        <figure class="lg:hidden absolute h-full top-0 left-1/2 transform -translate-x-1/2">
           <div class="left-0 z-10 h-full rounded-md bg-white py-2">
             <img class="h-full" src="img/logo_only.png" alt="" />
           </div>
@@ -33,22 +39,12 @@
           <div class="flex items-center">
             <div
               class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100 lg:hidden"
-              @click="openMobileMenu"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                role="img"
-                class="w-6 h-6"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill="currentColor"
-                  fill-rule="evenodd"
+              @click="openMobileMenu">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="w-6 h-6"
+                preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20">
+                <path fill="currentColor" fill-rule="evenodd"
                   d="M3 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm0 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm6 5a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2h-6a1 1 0 0 1-1-1Z"
-                  clip-rule="evenodd"
-                />
+                  clip-rule="evenodd" />
               </svg>
             </div>
             <!-- <nuxt-link
@@ -72,25 +68,12 @@
                 </g>
               </svg>
             </nuxt-link> -->
-            <div
-              class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
-              @click="$store.dispatch('search/toggleSearchBox', false)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                role="img"
-                class="h-6 w-6"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-width="2"
-                  d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"
-                />
+            <div class="flex-center cursor-pointer rounded-full py-2 px-2 font-bold text-neutral-700 hover:bg-gray-100"
+              @click="$store.dispatch('search/toggleSearchBox', false)">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="h-6 w-6"
+                preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                  d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z" />
               </svg>
             </div>
           </div>
@@ -98,13 +81,8 @@
           <nav id="navigation" class="flex justify-center font-bold">
             <div class="menu-top_menu-container hidden lg:flex">
               <ul id="menu-top_menu" class="menu">
-                <menu-item
-                  v-for="(menuitem, index) in menu"
-                  :key="index"
-                  :menu="menuitem"
-                  class="flex-center h-full"
-                  v-show="index !== 0"
-                ></menu-item>
+                <menu-item v-for="(menuitem, index) in menu" :key="index" :menu="menuitem" class="flex-center h-full"
+                  v-show="index !== 0"></menu-item>
               </ul>
             </div>
           </nav>
@@ -130,7 +108,7 @@ export default Vue.extend({
     this.$emit('componentLoaded')
   },
   computed: {
-    ...mapGetters({ menu: 'navigation/menu' }),
+    ...mapGetters({ menu: 'navigation/menu', isLoggedIn: 'authentication/isLoggedIn' }),
   },
   methods: {
     ...mapActions({ openMobileMenu: 'navigation/openMobileMenu' }),

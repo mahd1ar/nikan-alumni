@@ -123,13 +123,39 @@
 
             <hr class="my-5 divide-y-4 divide-slate-800" />
             <client-only>
+              
+              <nuxt-link
+                v-show="menu[mobileMenu.selected[0]].href !== '#'"
+                :to="menu[mobileMenu.selected[0]].href"
+                class="flex items-center justify-between gap-2 rounded-md bg-cyan-50 p-2 text-cyan-800"
+                @click.native="closeMobileMenu"
+              >
+                ورود به بخش
+                {{ menu[mobileMenu.selected[0]].title }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="img"
+                  style="transform: rotate(180deg)"
+                  class="flex-shrink-0"
+                  width="1em"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M3 5v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2zm6.293 2.707l1.414-1.414L16.414 12l-5.707 5.707l-1.414-1.414L13.586 12L9.293 7.707z"
+                  />
+                </svg>
+              </nuxt-link>
+              
               <transition-group
                 tag="ul"
                 class="flex flex-col gap-1"
                 name="open-menu"
               >
                 <li
-                  @click="closeMobileMenu"
                   v-for="(sm, index2) in menu[mobileMenu.selected[0]].submenu"
                   :key="index2 * 100 + 5"
                   class="overflow-hidden rounded-md bg-slate-50 p-2"
@@ -137,6 +163,7 @@
                     '--count': index2,
                     '--max': menu[mobileMenu.selected[0]].submenu.length,
                   }"
+                  @click="closeMobileMenu"
                 >
                   <nuxt-link
                     :to="sm.href"
@@ -167,32 +194,6 @@
                 </li>
               </transition-group>
 
-              <nuxt-link
-                @
-                @click.native="closeMobileMenu"
-                :to="menu[mobileMenu.selected[0]].href"
-                v-show="menu[mobileMenu.selected[0]].hasSubmenu === false"
-                class="flex items-center justify-between gap-2 rounded-md bg-cyan-50 p-2 text-cyan-800"
-              >
-                ورود به بخش
-                {{ menu[mobileMenu.selected[0]].title }}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="img"
-                  style="transform: rotate(180deg)"
-                  class="flex-shrink-0"
-                  width="1em"
-                  height="1em"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M3 5v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2zm6.293 2.707l1.414-1.414L16.414 12l-5.707 5.707l-1.414-1.414L13.586 12L9.293 7.707z"
-                  />
-                </svg>
-              </nuxt-link>
             </client-only>
           </div>
         </div>
@@ -443,7 +444,7 @@
                             class="w-16 h-16 rounded-full mx-auto mb-2"
                             :src="$store.state.authentication.user.avatar"
                           />
-                          <div class="text-tm-gray">
+                          <div class="text-tm-gray gap-1 flex flex-col">
                             <span>
                               {{ $store.state.authentication.user.firstName }}
                               {{ $store.state.authentication.user.lastName }}

@@ -62,10 +62,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-export default Vue.extend({
-  data() {
-    return {
-      items: [
+
+export const library = [
         {
           title: 'اسناد بالادستی',
           icon: '/icons/bookmark-svgrepo-com.svg',
@@ -177,7 +175,12 @@ export default Vue.extend({
             },
           ],
         },
-      ],
+      ]
+      
+export default Vue.extend({
+  data() {
+    return {
+      items: library
     }
   },
 })

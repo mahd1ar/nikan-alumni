@@ -95,8 +95,12 @@
           </div>
         </div>
       </div>
-      <div class="mt-10">
-        <div class="text-sm text-gray-600 mb-5">مطالب مربوط</div>
+          <loading-indicator :showif="$fetchState.pending" dark fullscreen />
+
+      <div v-if="$fetchState.pending === false" class="mt-10">
+        <div class="border-b pb-3 text-gray-600 mb-5" >  مطالب مربوط
+          :
+        </div>
         <div
           v-for="item in items"
           :key="item.id"
@@ -120,7 +124,7 @@
 import Vue from 'vue'
 import { CategoryPostsQuery, CategoryPostsQueryVariables } from '~/types/types'
 import postgql from '@/apollo/queries/category-posts.gql'
-import { wordpressDateToJalali } from '~/data/utils'
+import {  htmlStrip, wordpressDateToJalali } from '~/data/utils'
 
 export default Vue.extend({
   data() {
@@ -145,7 +149,7 @@ export default Vue.extend({
     const { data } = await this.$apollo.query<CategoryPostsQuery>({
       query: postgql,
       variables,
-      fetchPolicy: 'network-only',
+      // fetchPolicy: 'network-only',
     })
     console.log(data)
     if (data.category) {
@@ -156,14 +160,14 @@ export default Vue.extend({
         data.category.posts.edges.forEach((i) => {
           this.items.push({
             title: i?.node?.title || '',
-            content: i?.node?.content || '',
+            content: i?.node?.content ?  htmlStrip(i?.node?.content) : '',
             id: i?.node?.id || '',
             date: i?.node?.date
               ? wordpressDateToJalali(i.node.date).join(' . ')
               : '',
           })
         })
-      console.log(999)
+      
     } else this.$nuxt.error({ statusCode: 404 })
   },
 })
