@@ -344,7 +344,7 @@
       </div>
     </div>
 
-    <rest-of-home />
+ 
   </div>
 </template>
 

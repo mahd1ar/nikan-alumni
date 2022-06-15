@@ -180,7 +180,7 @@ export default Vue.extend({
       console.log('getsimilar videos')
 
       const { data } = await this.$axios.get<WPapi.allvideos.RootObject[]>(
-        'https://nikan-alumni.org/wp-json/wp/v2/video?per_page=100'
+        '/wp-json/wp/v2/video?per_page=100'
       )
 
       // const variables: VideosAllQueryVariables = {

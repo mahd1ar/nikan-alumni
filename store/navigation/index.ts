@@ -598,7 +598,6 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   toggleDarkMenu: ({ commit, state }, val: boolean | undefined) => {
-    console.log('show dark menu', !state.darkMenu.show)
     if (typeof val === 'undefined') {
       commit(Mutations.toggleDarkMenu, !state.darkMenu.show)
     } else commit(Mutations.toggleDarkMenu, val)

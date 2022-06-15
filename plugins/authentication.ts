@@ -1,5 +1,4 @@
 import { Plugin, Context } from '@nuxt/types'
-// import { BoxLoading } from './loading'
 import LOGIN_MUT from '@/apollo/mutation/login.gql'
 import REFRESH_TOKEN_MUT from '@/apollo/mutation/refresh.gql'
 import FETCHME from '@/apollo/queries/fetch-me.gql'
@@ -39,7 +38,9 @@ class LoginStrategy {
   }
 
   public async fetchMe() {
+    console.log("fetch me")
 
+    await this.ctx.app.apolloProvider.defaultClient.resetStore()
     const { data } = await this.ctx.app.apolloProvider.defaultClient.query<FetchMeQuery>({ query: FETCHME })
 
     if (data.viewer) {
@@ -193,6 +194,7 @@ class LoginStrategy {
     >({ mutation: REFRESH_TOKEN_MUT, variables })
 
     if (data?.refreshJwtAuthToken?.authToken) {
+
       this.setToken(data?.refreshJwtAuthToken?.authToken)
       this.ctx.store.dispatch('authentication/login')
       this.fetchMe()
@@ -237,7 +239,7 @@ class LoginStrategy {
   }
 
   private setUser(user: User) {
-
+    console.log("setuser", user)
     this.ctx.store.dispatch('authentication/setUser', user)
 
     const infinity = 10 * 365 * 24 * 60 * 60

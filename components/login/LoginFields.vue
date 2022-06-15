@@ -131,7 +131,7 @@ export default Vue.extend({
           loop: false,
           autoplay: true,
           path:
-            'https://assets3.lottiefiles.com/private_files/lf30_jm7peqxp.json', // the path to the animation json
+            '/lf30_jm7peqxp.json',
         })
       }
     },

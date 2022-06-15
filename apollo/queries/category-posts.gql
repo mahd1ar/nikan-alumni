@@ -7,6 +7,7 @@ query categoryPosts($id: ID = "uncategorized", $first: Int = 10) {
       nodes {
         name
         slug
+        id
       }
     }
     posts(first: $first) {
@@ -20,6 +21,7 @@ query categoryPosts($id: ID = "uncategorized", $first: Int = 10) {
           featuredImage {
             node {
               sourceUrl
+              id
             }
           }
         }
@@ -27,6 +29,7 @@ query categoryPosts($id: ID = "uncategorized", $first: Int = 10) {
     }
     categoryAttrs {
       categoryAttrs {
+        id
         altText
         sourceUrl
       }

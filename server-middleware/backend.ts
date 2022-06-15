@@ -74,7 +74,11 @@ app.all<{ 0: string }>("/request/*", async (req, res) => {
   try {
     if (req.method === 'GET') {
 
-      const config: AxiosRequestConfig = {};
+      const config: AxiosRequestConfig = {
+        headers: {
+          'Cookies': 'wordpress_test_cookie=WP%20Cookie%20check; wp-settings-1=posts_lis53cdb154bc8ae4e45affae4cde496982222bc; _lscache_vary=c55f48d289b9b7155be53153df717d5b'
+        }
+      };
 
       if (Object.keys(req.query).length > 0) {
         config.params = req.query

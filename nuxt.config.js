@@ -78,15 +78,9 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    // baseURL: 'https://nikan-alumni.org',
-    baseURL: `${process.env.NODE_ENV === 'production' ? 'https://nikan-alumni.com' : 'http://localhost:3000'}/api/request/https://nikan-alumni.org`,
+    baseURL: 'https://cors.nikan-alumni.com/https://nikan-alumni.org',
+    // baseURL: `${process.env.NODE_ENV === 'production' ? 'https://cors.nikan-alumni.com' : 'http://localhost:3000'}/https://nikan-alumni.org`,
   },
-  // PWA module configuration: https://go.nuxtjs.dev/pwa
-  // pwa: {
-  //   manifest: {
-  //     lang: 'en',
-  //   },
-  // },
 
   // auth: {
   //   strategies: {

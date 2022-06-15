@@ -149,7 +149,7 @@ export default Vue.extend({
     const { data } = await this.$apollo.query<CategoryPostsQuery>({
       query: postgql,
       variables,
-      // fetchPolicy: 'network-only',
+      fetchPolicy: 'network-only',
     })
     console.log(data)
     if (data.category) {
