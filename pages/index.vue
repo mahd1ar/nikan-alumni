@@ -727,9 +727,7 @@ export default Vue.extend({
           'airplay',
           'fullscreen',
         ],
-      },
-      // videourl:
-      //   'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
+      }
     }
   },
   async fetch() {
@@ -763,7 +761,7 @@ export default Vue.extend({
           subject: i?.title || '',
           cat: i?.categories?.nodes?.map((j) => j?.name).join(' . ') || '',
           speaker: i?.speakers?.speakers || '',
-          url: res[0],
+          url: res[0].replace('nikan-alumni.com','visionquest.ir'),
         }
         this.media.push(v)
       }
@@ -823,7 +821,11 @@ export default Vue.extend({
       isLoggedIn: 'authentication/isLoggedIn',
     })
   },
-
+  mounted() {
+    // @ts-ignore
+    window.home = this
+    this.getUpcommingEvents()
+  },
   beforeMount() {
 
     const options = {
@@ -913,5 +915,4 @@ export default Vue.extend({
   background-position: bottom left;
   box-shadow: 1px 1px rgb(37, 37, 37);
 }
-
 </style>
