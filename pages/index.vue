@@ -27,7 +27,7 @@
                 class="vid-blur-background absolute top-0 left-0 h-full w-full"
               ></div>
               <div
-                class="container relative mx-auto flex h-full flex-col-reverse md:flex-row-reverse justify-center"
+                class="container relative mx-auto flex h-full flex-col-reverse justify-center md:flex-row-reverse"
               >
                 <div class="flex-center w-full md:w-6/12">
                   <div class="flex flex-col justify-center gap-6">
@@ -54,7 +54,7 @@
                         }}
                       </nuxt-link>
                       <nuxt-link
-to="/p/intro"
+                        to="/p/intro"
                         class="ml-4 inline-flex rounded border-0 py-2 px-6 text-white hover:bg-gray-50 hover:bg-opacity-20 focus:outline-none"
                       >
                         درباره کانون دانش آموختگان
@@ -62,7 +62,9 @@ to="/p/intro"
                     </div>
                   </div>
                 </div>
-                <div class="flex-center hidden md:block md:w-6/12">
+                <div
+                  class="hidden items-center justify-center md:flex md:w-6/12"
+                >
                   <svg
                     id="nikanlogosvg"
                     version="1.1"
@@ -1435,8 +1437,7 @@ export default Vue.extend({
   },
   methods: {
     async videoloaded() {
-      if(this.$device.isMobile)
-      return
+      if (this.$device.isMobile) return
 
       console.log('video loaded')
       await timeout(5000)
