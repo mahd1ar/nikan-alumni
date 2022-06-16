@@ -1,8 +1,8 @@
 <template>
   <section dir="rtl" class="body-font relative bg-slate-800 text-gray-900">
-    <div class="container mx-auto flex flex-col gap-4 relative">
-      <div class="flex gap-2 items-start">
-        <div class="w-8/12 bg-cyan-600 bg-opacity-5">
+    <div class="container relative mx-auto flex flex-col gap-4">
+      <div class="flex flex-col items-start gap-2 lg:flex-row">
+        <div class="w-full bg-cyan-600 bg-opacity-5 lg:w-8/12">
           <client-only>
             <div class="aspect-video">
               <vue-plyr ref="plyr" :options="playerOptions">
@@ -19,17 +19,17 @@
           </client-only>
           <div class="p-4">
             <h1
-              class="flex h-20 leading-10 mt-5 items-center text-cyan-300 text-3xl"
+              class="mt-5 flex h-20 items-center text-3xl leading-10 text-cyan-300"
             >
               {{ video.title }}
             </h1>
-            <p class="text-white text-lg">
+            <p class="text-lg text-white">
               {{ video.speakers }}
             </p>
           </div>
         </div>
 
-        <div class="flex w-4/12 flex-col text-cyan-50">
+        <div class="flex w-full mt-4 flex-col text-cyan-50 lg:w-4/12">
           <div
             class="flex h-12 items-center justify-start bg-gray-600 px-4 font-bold text-white"
           >
@@ -156,7 +156,7 @@ export default Vue.extend({
 
         if (res === null) return
 
-        this.video.src = res[0]
+        this.video.src = res[0].replace('nikan-alumni.com','visionquest.ir')
         console.log(this.video.src)
         this.video.content.replace(/<figure .*figure>/g, '')
       }

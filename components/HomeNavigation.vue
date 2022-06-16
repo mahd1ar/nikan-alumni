@@ -8,16 +8,16 @@
             ورود اعضا
           </nuxt-link>
 
-          <nuxt-link class="text-gray-600 flex items-center gap-2 font-bold" to="/user/userprofile" v-else>
+          <nuxt-link class="text-gray-600 flex flex-col items-center gap-1 font-bold" to="/user/userprofile" v-else>
             <img class="w-10 h-10 rounded-full" :src="$store.state.authentication.user.avatar" :alt="$store.state.authentication.user.lastName">
             
             <span class="block text-sm">
               <span class=" flex flex-col">
                 {{ $store.state.authentication.user.firstName }}
               </span>
-              <span>
+              <!-- <span>
                 {{ $store.state.authentication.user.lastName }}
-              </span>
+              </span> -->
             </span>
 
           </nuxt-link>

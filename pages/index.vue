@@ -5,40 +5,335 @@
       <!-- <nuxt-link to="login">++++</nuxt-link> -->
       <div class="relative flex h-full w-full flex-col">
         <div class="relative h-full">
-          <img class="absolute top-0 left-0 h-full w-full object-cover object-bottom"
-            src="img/IMG_4141(ACR v8.1)F-2MP.jpg" alt="" />
+          <!-- <img class="absolute top-0 left-0 h-full w-full object-cover object-bottom"
+            :src=" require('@/assets/img/IMG_4141(ACR v8.1)F-2MP.jpg')" alt="nika-higth-school" /> -->
+          <video
+            class="absolute top-0 left-0 h-full w-full bg-black object-cover object-bottom"
+            src="test/hero.webm"
+            muted
+            loop
+            autoplay
+            @loadeddata="videoloaded"
+          ></video>
           <div class="relative top-0 left-0 h-full w-full">
             <div class="relative h-full w-full">
-              <home-navigation ref="heroNav" class="sticky" @componentLoaded="observe" />
-              <div class="m-blur-background-1 absolute top-0 left-0 h-full w-full"></div>
-              <div class="container relative mx-auto flex h-full flex-row-reverse">
-                <div class="flex flex-col justify-center gap-6 md:w-6/12">
-                  <div class="text-right text-5xl font-bold text-gray-50">
-                    کانون
-                    <br />
-                    دانش آموختگان
-                    <br />
-                    <span class="text-cyan-300"> نیکان </span>
-                  </div>
-                  <p class="text-lg leading-7 text-white">
-                    محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و
-                    ایجاد بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها
-                  </p>
-                  <div class="text-sm">
-                    <nuxt-link :to="isLoggedIn ? '/user/userprofile' : '/login'"
-                      class="inline-flex border-0 rounded bg-cyan-500 py-2 px-6 text-white hover:bg-cyan-600 focus:outline-none">
-                      {{
+              <home-navigation
+                ref="heroNav"
+                class="sticky"
+                @componentLoaded="observe"
+              />
+              <!-- <div class="pic-blur-background absolute top-0 left-0 h-full w-full"></div> -->
+              <div
+                class="vid-blur-background absolute top-0 left-0 h-full w-full"
+              ></div>
+              <div
+                class="container relative mx-auto flex h-full flex-col-reverse md:flex-row-reverse justify-center"
+              >
+                <div class="flex-center w-full md:w-6/12">
+                  <div class="flex flex-col justify-center gap-6">
+                    <div class="text-right text-5xl font-bold text-gray-50">
+                      کانون
+                      <br />
+                      دانش آموختگان
+                      <br />
+                      <span class="text-cyan-300"> نیکان </span>
+                    </div>
+                    <p class="text-lg leading-7 text-white">
+                      محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و
+                      ایجاد بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها
+                    </p>
+                    <div class="text-sm">
+                      <nuxt-link
+                        :to="isLoggedIn ? '/user/userprofile' : '/login'"
+                        class="inline-flex rounded border-0 bg-cyan-500 py-2 px-6 text-white hover:bg-cyan-600 focus:outline-none"
+                      >
+                        {{
                           isLoggedIn
                             ? 'ورود به حساب کاربری'
                             : 'ورود دانش آموخته'
-                      }}
-
-                    </nuxt-link>
-                    <button
-                      class="ml-4 inline-flex rounded border-0 hover:bg-opacity-20 py-2 px-6 text-white hover:bg-gray-50 focus:outline-none">
-                      درباره کانون دانش آموختگان
-                    </button>
+                        }}
+                      </nuxt-link>
+                      <nuxt-link
+to="/p/intro"
+                        class="ml-4 inline-flex rounded border-0 py-2 px-6 text-white hover:bg-gray-50 hover:bg-opacity-20 focus:outline-none"
+                      >
+                        درباره کانون دانش آموختگان
+                      </nuxt-link>
+                    </div>
                   </div>
+                </div>
+                <div class="flex-center hidden md:block md:w-6/12">
+                  <svg
+                    id="nikanlogosvg"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    class="hidden h-80 w-80 transition-all"
+                    viewBox="0 0 612 792"
+                    style="enable-background: new 0 0 612 792"
+                    xml:space="preserve"
+                  >
+                    <style type="text/css">
+                      .st0 {
+                        fill: none;
+                        stroke: #26b7c4;
+                        stroke-width: 9;
+                        stroke-miterlimit: 10;
+                      }
+                      .st1 {
+                        fill: none;
+                        stroke: #f9f9f9;
+                        stroke-width: 5;
+                        stroke-miterlimit: 10;
+                      }
+                      .st2 {
+                        fill: #84ccd5;
+                      }
+                    </style>
+                    <g>
+                      <path
+                        class="st0"
+                        d="M563.6,34.8c-2,0.3-3.5-0.2-5-0.4c-19.4-2.5-37.5,1.7-54.2,11.1c-29.2,16.4-51.5,39.6-66.8,69.3
+		c-8.3,16-13,33.4-16.1,51.1c-2.9,16.8-4.1,33.8-4.2,50.9c-0.1,24.9,4,49.2,11.1,73.1c10.8,36.1,27.5,69.5,47.6,101.2
+		c17.5,27.6,37.3,53.5,58.8,78.1c12.2,13.9,24.8,27.4,38.4,40.1c1.3,1.2,0.8,1.8-0.2,2.7c-18.8,18.7-37.6,37.5-56.3,56.3
+		c-14.2,14.3-21.5,31.5-21.5,51.7c0,26.5,0,52.9,0,79.4c0,2-0.5,2.5-2.5,2.5c-26.4-0.1-52.8,0-79.1-0.1c-20.4,0-37.7,7.2-52.1,21.6
+		c-18.7,18.6-37.3,37.3-55.9,56c-1.3,1.3-1.9,1.3-3.2,0c-19.4-19.4-38.6-39-58.3-58.1c-13.3-12.9-29.6-19.3-48.1-19.5
+		c-26.9-0.2-53.9-0.1-80.8,0c-2.1,0-2.5-0.6-2.5-2.6c0.1-26.2,0-52.3,0-78.5c0-20.7-7.3-38.4-22-53c-18.6-18.5-37.1-37.1-55.7-55.6
+		c-1.3-1.3-1.2-2,0-3.2c12.6-12.6,25.4-25,37.8-37.8c21.7-22.3,36.9-48.5,45.9-78.2c12.8-42.1,28-83.3,46.6-123.1
+		c16.9-36.1,36.4-70.8,59.5-103.3c19.4-27.3,41.1-52.6,66-75.2C315.5,69,342.3,50,372.5,36c18.5-8.6,37.8-15.1,58-18.5
+		c10.4-1.8,20.9-2.7,31.5-3.2c11.1-0.6,22.1-0.6,33.2,0.3c20.3,1.6,40,5.5,58.6,14.4C557.1,30.6,560.4,32.4,563.6,34.8z
+		 M435.8,540.1c0.7-0.5,1.9-25.5,1.5-32.7c-0.5-9.4-2-18.7-3.9-27.9c-0.9-4.2-5.1-19.7-5.2-20.1c-2.4-8.4-5.3-16.7-8.5-24.8
+		c-6.8-17.5-15.1-34.3-23.5-51.1c-5.4-10.8-40.1-94.6-42.3-101.9c-0.6-2.8-2.4-11.4-1.9-8.4c-1-5.9-2-11.8-3.1-17.7
+		c-0.5-2.7-2-20-2.4-27.1c0-0.6,0.1-8.7,0.4-12.7c0.2-4.5,0.5-9,0.9-13.5c0.6-6,1.4-11.9,2.4-17.9c0.3-2.1,6.2-23.6,8-32.8
+		c-0.7,0.3-0.9,0.3-1,0.4c-1.7,1.3-3.4,2.6-5.1,4c-27.7,22.5-52.7,47.7-75.3,75.3c-37.7,46-67.2,96.7-85.5,153.5
+		c-7.9,24.5-13,49.5-14.5,75.1c-0.6,10.7-0.5,21.4,0.2,32.1c1.3,17.5,4.5,34.6,10.2,51.2c6.7,19.4,16.5,37,30.3,52.4
+		c15.3,17,33.8,29.2,55.1,37.4c11.6,4.5,23.6,7.6,35.9,8.8c10.3,1,20.6,0.5,30.7-1.4c4.6-0.9,9.3-1.6,13.7-3.5c0.2,0,0.4,0,0.6-0.1
+		c11.6-3.6,22.3-8.9,32.2-16c0.4-0.3,0.6-0.5,0.6-1c0.1,0,0.2-0.1,0.3-0.1c0.2-0.1,0.3-0.2,0.5-0.3c3.2-1.6,5.6-4.2,7.9-6.8
+		c1.3-0.2,2.1-1.1,2.9-1.9c1.6-1.6,3-3.2,4.6-4.8c11.7-12.5,21-26.7,27.3-42.7C432.7,555.7,435,548,435.8,540.1z M372.2,126.6
+		c0-0.9,0-1.3-0.6-2c-3.2-3.9-7.1-6.6-12.2-7.4c-0.9-0.1-1.4,0.3-1.8,1c-4,6.6-7.9,13.2-12,19.8c-0.9,1.4-0.3,1.7,0.9,1.9
+		c3.1,0.6,6,1.8,8.8,3.2c2.9,1.4,3.6,1.5,5.9-0.8c4.4-4.2,7.9-9.2,10.5-14.7C372,127.3,372.1,126.9,372.2,126.6z"
+                      />
+                      <path
+                        class="st1"
+                        d="M348.4,181.4c-4.1,5.2-9.1,9.6-13.9,14c-10.1,9.3-19.9,19.1-29.6,28.9c-11.3,11.5-21.7,23.9-31.6,36.6
+		c-11.6,14.9-22.6,30.3-32.7,46.3c-16.5,26.1-30.6,53.5-40.6,82.8c-5.1,14.9-8.8,30.1-11.4,45.6c-1.9,11.4-3.3,22.8-3.9,34.3
+		c-0.4,7.6-0.2,15.1-0.1,22.7c0.5-5.4,1.1-10.7,1.9-16.1c1.8-12.1,4.9-23.8,9-35.3c5.9-16.5,13.8-32,23.7-46.5
+		c9.2-13.4,19.6-25.8,31.5-36.9c8.4-7.7,17-15.2,26.3-21.9c0.5-0.4,1-1.1,1.8-0.7c0.8,0.4,0.4,1.2,0.5,1.9c0.2,4.1-0.3,8.1-1.3,12
+		c-1.2,4.7-5,7.3-8.4,10c-20.8,16.7-38.5,36.1-51.9,59.3c-10.7,18.5-17.9,38.4-21.5,59.5c-1.4,8.4-2.3,16.8-2.6,25.2
+		c-0.7,19.6,1.6,38.8,7.7,57.5c3.9,11.8,10.2,22.2,18.3,31.6c14.2,16.7,31.5,29.3,51.2,38.7c9,4.3,18.4,7.3,28.2,9.4
+		c0.7,0.1,1.4,0.1,2.1,0.1c0.1,0.1,0.1,0.1,0.2,0.2c0,0,0-0.1,0-0.1c0,0-0.1,0-0.2-0.1c-2.7-1.8-5.6-3.3-8.1-5.4
+		c-7-6-11.3-13.5-13.1-22.4c-2.8-13.8-1.1-27.2,4.3-40.2c6.7-16,17.8-28.6,31.1-39.4c16-13,33.8-22.9,52.9-30.6
+		c0.6-0.2,1.2-1,1.9-0.3c0.6,0.6,0.3,1.4,0.1,2.2c-0.9,4.1-2.6,7.9-4.4,11.7c-0.7,1.4-1.7,2.3-3.3,2.9
+		c-16.3,6.2-31.4,14.7-44.7,25.9c-11.2,9.4-21.2,19.9-28,33.1c-3.3,6.5-4.9,13.4-5.5,20.6c-0.6,7.5,0.3,14.8,3.2,21.8
+		c4.1,9.9,11.8,16,21.6,19.6c6.2,2.3,12.6,3.1,19.2,2.7c7-0.4,13.9-1.3,20.7-3.1c0.6-0.1,1.3-0.6,1.4,0.5c-4.4,1.8-9.1,2.6-13.7,3.5
+		c-10.2,1.9-20.5,2.4-30.7,1.4c-12.4-1.2-24.3-4.3-35.9-8.8c-21.3-8.2-39.8-20.4-55.1-37.4c-13.8-15.3-23.6-32.9-30.3-52.4
+		c-5.7-16.6-8.9-33.7-10.2-51.2c-0.8-10.7-0.9-21.4-0.2-32.1c1.6-25.7,6.6-50.7,14.5-75.1c18.3-56.8,47.8-107.5,85.5-153.5
+		c22.6-27.6,47.6-52.8,75.3-75.3c1.7-1.4,3.4-2.7,5.1-4c0.2-0.1,0.4-0.2,1-0.4C353.8,164.1,352.7,173.2,348.4,181.4z"
+                      />
+                      <path
+                        class="st1"
+                        d="M383.8,623.2c-1.5-0.2-2.9,0.4-4.3,0.2c-6-1-10-5.1-11.1-12.1c-1.1-6.3-0.6-12.6,0.5-18.9
+		c2.4-13.1,6.1-25.9,9.8-38.7c0.4-1.3,0.9-2.5,1.6-3.6c0.2-0.4,0.5-0.9,1.1-0.8c0.7,0.1,0.7,0.8,0.7,1.3c0.3,3.2-0.4,6.4-1.1,9.5
+		c-2,8.7-4.1,17.4-5,26.3c-0.4,3.7-0.5,7.5,0.6,11.2c1.9,6.8,9.7,10.1,15.7,6.2c5.9-3.8,6.2-5.8,0.9-11.2c-3.4-3.4-9-3.5-13.8-0.9
+		c-0.7,0.4-1.3,0.7-2.3,1.3c2.1-6.4,3.9-12.5,7.4-17.9c5.5-8.6,12.8-15.5,20.4-22.2c9.6-8.4,20.1-15.6,30.5-22.9
+		c10-6.9,20-13.9,30.1-20.7c11.4-7.6,21.8-16.4,31.5-26c0.5-0.5,1.1-1.1,1.7-1.6c0.8-0.5,1.4-1.9,2.3-1.4c1,0.6,0.6,2.1,0.4,3.1
+		c-0.6,3.1-2.4,5.7-4.2,8.3c-7.8,11.6-17.8,20.9-29.3,28.7c-10.6,7.3-21.5,14.2-32.1,21.5c-0.7,0.5-1.4,1.1-2.2,1.6
+		c-0.5,0.3-1,0.5-1.5,0.8c-9.6,6.5-19,13.1-28.1,20.1c-3.5,2.7-6.8,5.6-10.5,8.6c1.2,0.2,2,0.3,2.8,0.6c5.2,1.5,7.9,6.3,7.3,12.7
+		c-0.6,6.8-2.6,13.2-5.4,19.3c-1.6,3.5-3.7,6.8-5.4,10.3c-2.3,2.6-4.7,5.2-7.9,6.8c-0.2,0-0.4,0-0.5,0.3
+		C384,623.1,383.9,623.1,383.8,623.2z"
+                      />
+                      <path
+                        class="st1"
+                        d="M312.4,305.3c4.5-1.6,8.2-4.3,11.7-7.5c6.1-5.5,11.5-11.5,14.5-19.4c1.3-3.4,5.9-6,9.7-2.3
+		c0.3,0.3,0.7,0.8,1.2,0.5c2.4-0.9,3.8-2.9,5.3-4.8c0.9-1.1,1.7-2.3,2.5-3.5c0.9,0.6,0.5,1.2,0.4,1.8c-0.6,5.6-2.9,10.5-6.3,14.9
+		c-1.3,0.9-2,2.3-3.3,3.2c-1.4,1-2.5,0.9-3.8-0.1c-2.8-2.3-3.8-2.2-5.7,0.9c-2.3,3.6-4.8,7.1-7.7,10.4c-4.6,5.2-10.4,8.6-16.7,11.1
+		c-5.4,2.1-9.9,5.1-14.1,8.8c-4.9,4.3-10.2,8.2-16.8,9.8c-9.8,2.4-16.7-2.5-18.2-12.4c-1-6.8-0.1-13.5,0.9-20.1
+		c1.2-7.8,2.8-15.6,5.8-23c0.5-1.3,1.3-2.6,2-3.9c0.3-0.6,0.9-1.3,1.7-1c0.9,0.3,0.9,1.2,0.8,2c-0.4,2.2-0.8,4.4-1.3,6.5
+		c-1.4,5.6-2.3,11.3-2.5,17.1c-0.1,3.4,0.4,6.8,1.8,10c2.4,5.5,10.2,6.1,14.4,4.3c0.8-0.3,0.9-0.8,0.1-1.3c-3.2-2.3-3.3-5.4-1.9-8.7
+		c3.5-8.1,8.3-15.2,15.3-20.8c2.7-2.1,5.8-3.3,9.3-3.3c5.6,0,8.7,3,8.8,8.6c0.1,6.5-2.1,12.4-5.4,17.9c-0.8,1.4-1.7,2.9-2.5,4.3
+		c-0.1,0.1-0.1,0.2-0.2,0.3C312.2,305.4,312.3,305.3,312.4,305.3z M312.7,293.4c0-6-2.1-8-6.5-7.8c-5.1,0.2-8.8,3-12,6.7
+		c-4.9,5.4-4.2,8.7,3,11.1c2.1,0.7,4.4,1.7,6.6,0.5c2.1-1.1,4-2.6,5.6-4.3C311.4,297.4,312.7,295,312.7,293.4z"
+                      />
+                      <path
+                        class="st1"
+                        d="M364.7,325.7c-3.6,2.2-6.5,5.4-9.7,8.1c-11,9.3-21.3,19.3-33,27.8c-17.9,12.9-36.4,25.1-54,38.5
+		c-6.6,5-12.6,10.7-19,15.9c-0.9,0.8-2.2,2.4-2.9,1.8c-1-0.9,0.5-2.4,1-3.4c3.6-6.9,8.8-12.7,14.5-17.9
+		c15.3-13.8,32.2-25.6,48.4-38.3c17.4-13.6,34.9-27.1,52.4-40.6c0.1,0,0.1-0.1,0.1-0.2c9-7.5,17.4-15.7,25.6-24.8
+		c0.2,3.2-0.6,5.6-1.6,8c-2.6,6-6.7,11-11.4,15.5c-2.8,2.7-5.8,5.2-8.7,7.8C365.7,324.4,365,324.8,364.7,325.7z"
+                      />
+                      <path
+                        class="st1"
+                        d="M344,230c-3.7,2.5-6.9,5.5-10.3,8.4c-9.6,8-19.1,15.9-27.9,24.8c-3.4,3.5-6.8,7-10.2,10.5
+		c-0.5,0.5-1,1.4-1.7,1c-0.9-0.5-0.1-1.4,0.1-2c2.6-6.1,6.2-11.5,10.4-16.5c8.9-10.8,19.4-19.8,30.2-28.7c3.3-2.7,6.4-5.5,9.6-8.3
+		c10-8.3,19.7-17,29.2-25.9c5.2-4.9,10.1-10,14.6-15.5c0.6-0.7,1-1.5,2-1.9c0.7,1.2,0.4,2.4,0.1,3.5c-1.1,4-3.2,7.4-5.3,10.8
+		c-5.3,8.8-12.6,15.9-20.4,22.4c-6.4,5.4-12.9,10.8-19.3,16.3C344.7,229.2,344.4,229.6,344,230z"
+                      />
+                      <path
+                        class="st1"
+                        d="M374.9,349.1c-1.5,3.9-2.8,8-4.9,11.7c-6.4,10.9-15.2,18.9-27.7,22.2c-5.3,1.4-10.5,1-15.6-0.7
+		c-4.2-1.4-8-1-11.6,1.7c-0.8,0.6-1.9,1.6-2.8,0.8c-0.9-0.9,0.1-2,0.7-2.7c5.1-6.4,10.3-12.7,18.6-15.1c1.8-0.5,3.4-0.4,5.1,0.4
+		c3.3,1.6,6.8,1.8,10.2,1.2c9.7-1.5,17.6-6.2,23-14.6c1.4-2.2,2.8-4.4,4.3-6.7C374.8,347.7,374.9,348.4,374.9,349.1z"
+                      />
+                      <path
+                        class="st1"
+                        d="M427.6,470.6c-0.8,5.3-3.2,10-6.7,14.1c-6.4,7.7-13.8,14.1-23.5,17.4c-4.8,1.6-9.8,2.1-14.7,0.3
+		c-0.8-0.3-1.6-0.6-2.3-1c-0.7-0.3-1.4-0.7-1.3-1.7c0.1-1,1-1.1,1.7-1.3c6.5-1.8,13-3.4,19.4-5.8c4.9-1.8,9.5-4.2,13.6-7.5
+		c0.3-0.3,0.7-0.5,1-0.8c5.5-5.1,3.6-9.4-2.3-12.3c-2.6-1.3-5.6-1.4-8.6-0.8c-0.8,0.2-1.8,0.6-2.5-0.3c-0.8-1,0-1.9,0.5-2.7
+		c3.4-5.5,12.9-11.8,20.8-6.7c1.1,0.7,2.1,1.6,3.1,2.4C427.1,466,427,468.4,427.6,470.6z"
+                      />
+                      <path
+                        class="st1"
+                        d="M372.2,127.6c-0.1,0.2-0.2,0.7-0.4,1.1c-2.7,5.5-6.1,10.4-10.5,14.7c-2.3,2.2-3,2.2-5.9,0.8
+		c-2.8-1.4-5.7-2.5-8.8-3.2c-1.2-0.3-1.8-0.5-0.9-1.9c4.1-6.6,8-13.2,12-19.8c0.4-0.7,0.9-1.1,1.8-1c5.1,0.7,9,3.5,12.2,7.4
+		C372.1,126.3,372.2,126.7,372.2,127.6z"
+                      />
+                      <path
+                        class="st1"
+                        d="M360.3,312.7c-10.8,10-22.7,18.3-35.5,25.4c0.3-2.1,1.7-3.3,3-4.6c4.4-4,9.2-7.4,13.7-11.2
+		c5.4-4.4,10.5-9.1,15.4-14c0.4-0.4,0.9-0.7,0.9-1.3c3.7-2.9,6.5-6.6,9.6-10.1c1.3-1.4,2.5-2.8,4.3-3.6c0.9-0.4,1.9-0.7,2.7,0.1
+		c0.9,0.8,0.7,1.9,0.3,2.9c-0.4,0.8-0.9,1.5-1.5,2.2C369.3,303.6,364.8,308.2,360.3,312.7z"
+                      />
+                      <path
+                        class="st1"
+                        d="M345,250.3c-1.6,2.2-2.9,4.5-4.8,6.5c-1.2,1.2-2.3,1.6-3.9,0.7c-1.1-0.7-2.4-1-3.7-1.3
+		c-0.8-0.2-1.2-0.5-0.6-1.4c1.9-3,3.7-6,5.5-9.1c0.6-1,1.4-1.1,2.5-0.8c1.9,0.6,3.4,1.9,4.9,3.1C345.1,248.8,345.4,249.5,345,250.3z
+		"
+                      />
+                      <path
+                        class="st2"
+                        d="M386.4,619.4c0.1-0.2,0.2-0.3,0.5-0.3C386.7,619.2,386.5,619.3,386.4,619.4z"
+                      />
+                      <path
+                        class="st1"
+                        d="M271,449.4c3.6-0.7,6.6-2.6,9.6-4.5c7-4.2,13-9.5,17.8-16.1c1.1-1.6,1.9-3.4,2.9-5.1c2.1-3.8,7.1-6.1,11.3-2.7
+		c1.4,1.1,2.4,0.5,3.5-0.3c5.1-3.8,9.4-8.5,13.3-13.5c0.1-0.2,0.2-0.3,0.4-0.5c2.7-3.5,2.8-3.6-1.4-5.6c-4.2-2-8.4-3.7-13.2-2.3
+		c-3.8,1.1-6.5,3.7-9.1,6.4c-0.7,0.7-1.1,1.6-2.4,1.8c0.3-1.8,1.3-3.1,2.2-4.5c2.4-3.7,4.9-7.2,8.2-10.1c4.9-4.3,10.2-4.6,16-2.5
+		c2,0.7,4,1.6,5.9,2.5c3.5,1.6,6.9,2.7,10.8,1.1c1-0.4,2.4-1.3,3.3-0.1c0.8,1.2,0.2,2.5-0.4,3.7c-0.9,1.8-1.8,3.7-3.5,4.8
+		c-9.8,6.3-17.8,14.6-25.7,23.1c-2.3,2.5-4.4,5.2-7.2,7.3c-2.1,1.5-3.1,1.6-5.2,0.1c-2.7-1.9-4.5-1.5-6.8,1.6
+		c-2.9,3.9-6.1,7.6-9.8,10.8c-5.4,4.6-11.8,7.6-18.5,9.8c-5.5,1.8-10.4,4.3-15,7.8c-6,4.6-12.6,8.4-20.2,10.1
+		c-3.9,0.9-7.9,0.9-11.7-0.4c-5.8-1.9-9.4-7.2-9.8-14.2c-0.5-9.3,1.4-18.3,3.7-27.3c1.2-4.6,2.8-9,5-13.2c0.5-1.1,1.2-2,2.1-2.9
+		c0.5-0.4,1-0.9,1.7-0.6c0.8,0.3,0.6,1,0.6,1.6c0,3.1-1.3,5.8-1.9,8.7c-1.2,5.3-2.5,10.5-2.3,16c0.1,1.8,0.4,3.6,0.9,5.3
+		c1.5,4.8,4.8,7.3,9.8,7.6c4.9,0.2,6.4,0,8.7-1.1c0-0.8-0.8-0.9-1.2-1.3c-2.6-2-3.4-4.1-2-7.1c4.7-9.6,11.2-17.6,20.9-22.5
+		c3.7-1.9,7.7-2.2,11.8-1.4c3.8,0.7,6.1,3.6,6.2,7.5c0.2,7.8-3.2,14.1-7.8,20C271.9,447.9,271.4,448.6,271,449.4
+		c-0.2,0-0.2,0.1-0.3,0.2C270.8,449.5,270.9,449.4,271,449.4z M259.6,448.5c0.2,0,0.7,0,1.1-0.2c3.8-1.8,7.4-3.9,9.7-7.6
+		c0.9-1.4,1.4-3,1.2-4.8c-0.6-4.4-3.5-6.3-8.2-5.7c-6.7,0.7-11.6,4.3-15.7,9.3c-1.9,2.3-1.6,4.2,0.9,5.9
+		C251.8,447.6,255.5,448.1,259.6,448.5z"
+                      />
+                      <path
+                        class="st1"
+                        d="M379.1,422.2c-0.3,11.5-1.5,21.9-6.7,31.4c-4.7,8.8-11.3,14.9-21.5,16.4c-6.4,1-12.7,0.5-19-1.1
+		c-2.6-0.6-2.6-0.6-3.3,2c-2,8.2-4,16.5-6.7,24.5c-6.7,19.6-15.9,37.8-29,53.9c-7.8,9.5-16.5,18-27.7,23.4
+		c-19.1,9.4-37.3,7.9-54.6-4.6c-2.1-1.5-4.2-3.2-6-5.1c-0.5-0.6-1.5-1.1-1-2c0.5-0.9,1.6-0.9,2.4-0.8c2.2,0.3,4.4,0.7,6.6,1.1
+		c9,1.6,18,2.7,27.1,2.4c15.1-0.5,28.4-5.7,40.3-15c13-10.2,22-23.4,29.3-38c5.5-11.2,10-22.8,12.5-35.1c1.1-5.5,1.4-11.1,1.8-16.7
+		c0.2-2.6,1.1-3.4,3.7-3.4c3,0,5.7,1.3,8.5,1.9c7.7,1.8,15.4,2.3,22.9-0.7c8.7-3.4,15.2-13.6,13.6-23c-0.8-5.1-2-10.4,0.1-15.6
+		c1.2-3,2.5-5.9,3.9-8.8c0.2-0.4,0.4-1,1-0.9c0.5,0.1,0.6,0.7,0.6,1.2C378.5,414.2,378.9,418.7,379.1,422.2z"
+                      />
+                      <path
+                        class="st1"
+                        d="M255.7,499.7c2.8-0.8,5-2.6,7.1-4.5c4.7-4.5,7.9-10.2,11.5-15.5c3.5-5.1,6.9-10.3,12.4-13.6
+		c1.8-1.1,2.5-3.3,3.6-5.1c0.9-1.4,1.7-2.9,2.6-4.3c0.7-1.1,1.3-1,2.1,0c5.1,6.6,5.3,18,0.4,24.5c-3.1,4.1-7.1,5.2-11.8,3.9
+		c-3.4-0.9-5.6,0.7-7.6,3c-3.9,4.4-7.1,9.3-11.2,13.5c-3.1,3.3-6.5,6.1-10.6,8c-1,0.5-1.3,1.3-1.6,2.2c-3.2,9.4-6.5,18.6-12.2,26.9
+		c-2,3-4.4,5.7-7.2,8.1c-5.9,5-12.7,5.9-20,4.7c-3.4-0.6-6.8-1.3-10-2.7c-1.2-0.5-2.3-1.2-3.3-2.1c-0.6-0.5-0.9-1.2-0.7-2.1
+		c0.3-0.9,1.1-0.9,1.9-0.9c2.6,0,5.1,0.2,7.7,0.4c6.2,0.3,12-1.3,17.3-4.6c7.6-4.7,14.2-10.4,18.3-18.6c1-2,1.7-4.1,1.5-6.4
+		c-0.2-2.3-1.3-3.3-3.6-3.4c-1.8,0-3.6,0.1-5.4-0.2c-4.8-0.8-6.4-3.2-5.4-7.9c1.3-6.5,5-11.7,8.8-16.8c0.6-0.8,1.3-1.6,2-2.4
+		c2.2-2.5,4.9-3.8,8.3-2.7c3.6,1.2,4.8,4.1,5.3,7.5c0.5,3.3,0.1,6.5-0.3,9.7C255.5,498.7,255.4,499.2,255.7,499.7z"
+                      />
+                      <path
+                        class="st1"
+                        d="M314.8,628.5c-5.4-0.2-10.6-0.9-15.6-3.2c-0.3-0.1-0.5-0.2-0.7-0.4c-1.1-0.6-2.4-1.3-2-2.8
+		c0.5-1.6,2.1-1.1,3.2-1c4.9,0.4,9.8,0.9,14.5-0.6c10.6-3.4,19.1-9.8,24.7-19.6c1-1.8,1.6-3.8,1.1-6c-0.4-1.6-1.2-2.4-2.9-2.4
+		c-2.1,0-4.2,0.1-6.2-0.3c-3.3-0.6-4.4-2-4.4-5.2c0-2.5,0.9-4.8,2-7c2-4,4.7-7.5,7.6-10.9c2.4-2.8,5.3-4.2,8.9-3
+		c3.8,1.3,4.5,4.6,4.9,8c0.3,2.2-0.2,4.3-0.4,6.4c-0.1,1.3,0.1,1.9,1.6,1.2c6.2-2.7,12.7-9.1,11.8-17.2c-0.5-4.6,1.2-8.6,3.4-12.4
+		c1.5-2.6,2.8-5.3,4.3-7.9c0.3-0.5,0.5-1.3,1.2-1.2c0.8,0.1,0.6,1,0.7,1.5c1.1,6.6-0.4,12.9-2.6,19c-2.6,7-5.9,13.6-10.8,19.4
+		c-2.8,3.3-6.1,6.1-10.1,7.9c-1.6,0.7-2.3,1.7-2.8,3.2c-2.7,7.5-5.6,15-10.2,21.6c-2.2,3.1-4.6,6.1-7.7,8.4
+		C324.2,627.1,319.8,628.8,314.8,628.5z"
+                      />
+                      <path
+                        class="st1"
+                        d="M367.1,493.3c-1.1-0.2-2.5,0.4-2.8-0.4c-0.4-1,1-1.5,1.7-2.1c4.2-3.6,8.8-6.8,12.6-11c4.6-5.1,8-10.8,8.6-17.8
+		c0.4-4.7,0.6-9.5,0.2-14.2c-0.8-11.2,2-21.6,6.3-31.7c0.4-1,0.8-2.7,1.9-2.4c1.2,0.3,0.2,1.8,0.2,2.8c-0.4,7.2-0.8,14.4-0.9,21.6
+		c-0.2,13-1.7,25.8-7,37.8c-1.8,4-3.9,7.8-6.7,11.2C377.5,491.6,372.2,492.6,367.1,493.3z"
+                      />
+                      <path
+                        class="st1"
+                        d="M279.4,519.5c3.8-3.9,7.8-6.5,11.2-9.6c6.1-5.5,11-11.7,12.3-20c0.5-3.1,0.6-6.2,0.6-9.3c0.1-4.6,0-9.2,0-13.8
+		c-0.1-9.3,3.3-17.6,7-25.9c0.2-0.4,0.4-1,1-0.9c0.6,0.1,0.4,0.8,0.4,1.2c-0.3,5.9-0.7,11.8-1,17.7c-0.1,2.1-0.2,4.3-0.2,6.5
+		c-0.2,11.2-1.3,22.3-5.4,32.9c-2,5.4-4.5,10.4-8.1,15c-3.5,4.4-8.3,5.6-13.4,6.3C282.6,519.6,281.3,519.5,279.4,519.5z"
+                      />
+                      <path
+                        class="st1"
+                        d="M341.2,430.2c2,0.3,4.2,1.1,5.9,2.8c1,1,1.5,0.8,2.2-0.3c1.3-1.9,2.9-3.7,4.3-5.6c0.9-1.2,1.9-1.4,3.2-0.8
+		c1.9,0.8,3.2,2.2,4.3,3.8c0.7,1.1,0.7,2.2,0.1,3.4c-1.6,3.4-4,6.1-6.8,8.6c-0.9,0.8-1.9,0.7-2.9,0.2c-1.3-0.8-2.7-1.5-4-2.2
+		c-1-0.6-1.8-0.3-2.4,0.7c-1.1,1.8-2.3,3.4-3.9,4.9c-1.3,1.2-2.6,1.6-4.1,0.5c-1.7-1.2-3.5-2-5.5-2.2c-1-0.1-1-0.5-0.5-1.2
+		c2.7-4,5.5-8,8.2-12C339.7,430.1,340.2,430.1,341.2,430.2z"
+                      />
+                      <path
+                        class="st1"
+                        d="M240.9,335.4c3.8,0.6,6.9,2.8,9.4,5.9c0.6,0.8,0.6,1.6,0.2,2.5c-2.1,4.3-4.8,8.1-8.1,11.5
+		c-1.6,1.6-3.2,2.2-5.4,0.8c-2-1.3-4.3-2-6.6-2.4c-1.4-0.3-1.4-0.8-0.8-1.8c3.1-5.2,6.2-10.3,9.4-15.5
+		C239.3,335.7,239.9,335.2,240.9,335.4z"
+                      />
+                      <path
+                        class="st1"
+                        d="M378.2,394.6c-0.4,0.9-0.8,1.8-1.2,2.7c-1.6,3-3.6,5.6-5.8,8.2c-2.2,2.5-3.2,2.7-6.4,1.4
+		c-1.9-0.8-3.7-1.6-5.7-1.9c-1-0.2-1.3-0.6-0.7-1.7c2.9-4.7,5.7-9.4,8.5-14.1c0.6-1.1,1.4-1.3,2.6-1.1c3.2,0.8,5.8,2.6,7.9,5.1
+		C377.8,393.6,378,394.1,378.2,394.6z"
+                      />
+                      <path
+                        class="st1"
+                        d="M342.8,502c-0.3-0.1-0.7-0.2-1.2-0.4c-2.3-1.1-4.6-2.1-7-2.6c-1.1-0.2-1.4-0.6-0.7-1.6
+		c2.9-4.7,5.7-9.4,8.5-14.1c0.7-1.1,1.4-1.4,2.7-1.1c3.1,0.8,5.5,2.5,7.6,4.9c0.7,0.8,1.1,1.7,0.5,2.8c-2,4-4.5,7.7-7.7,10.8
+		C344.8,501.4,344,501.9,342.8,502z"
+                      />
+                      <path
+                        class="st1"
+                        d="M342.8,555.9c-0.3-0.1-0.7-0.2-1.2-0.4c-2.2-1.2-4.6-2.1-7-2.6c-1.1-0.2-1.4-0.6-0.7-1.7
+		c2.9-4.7,5.7-9.5,8.6-14.3c0.5-0.9,1.2-1.2,2.3-1c3.3,0.7,6,2.6,8.1,5.1c0.7,0.8,0.9,1.6,0.4,2.7c-2,4.1-4.6,7.8-7.9,10.9
+		C344.7,555.3,344,555.8,342.8,555.9z"
+                      />
+                      <path
+                        class="st1"
+                        d="M281,403.2c1.3,0.2,3.1,0.8,4.4,2.1c1.1,1,1.7,0.7,2.5-0.4c1-1.4,2-2.6,3-4c1-1.5,2.3-1.6,3.8-0.8
+		c3.2,1.7,3.9,4.4,2,7.4c-0.6,0.9-1.3,1.8-2,2.6c-3.2,3.9-3.2,3.9-7.6,1.7c-1.6-0.8-2.7-0.7-3.6,1c-0.3,0.6-0.8,1.1-1.2,1.7
+		c-2.4,2.9-2.7,2.9-6.1,1.4c-1-0.5-2.1-0.9-3.1-1.1c-1.4-0.2-1.2-0.7-0.6-1.6c2.2-3.1,4.3-6.1,6.4-9.2
+		C279.3,403.2,279.8,402.9,281,403.2z"
+                      />
+                      <path
+                        class="st1"
+                        d="M322.1,326.2c-0.1,0.3-0.3,0.9-0.5,1.3c-1.3,2.5-3.2,4.5-5.1,6.5c-1.1,1.1-2.2,1-3.6,0.3c-3.9-2-3.9-2-6.5,1.4
+		c-0.5,0.7-1.1,1.2-1.7,1.8c-1,1-2,1.2-3.3,0.4c-1.3-0.9-2.8-1.6-4.4-1.8c-1.3-0.2-1-0.7-0.5-1.5c2.1-3,4.2-6,6.3-9.1
+		c0.6-1,1.4-1.2,2.5-0.9c1.7,0.5,3.3,1.2,4.6,2.3c0.9,0.8,1.3,0.5,1.9-0.3c1.1-1.6,2.3-3.1,3.5-4.6c0.4-0.6,0.9-1,1.7-1
+		C318.8,321.1,322.1,324.2,322.1,326.2z"
+                      />
+                      <path
+                        class="st1"
+                        d="M343.8,426.4c-0.2-0.1-0.7-0.2-1.1-0.4c-1.6-1-3.4-1.7-5.2-2c-1.4-0.2-1.2-0.7-0.7-1.6c2.3-3.9,4.7-7.9,7-11.8
+		c0.5-0.9,1.2-1.1,2.1-0.8c2.6,0.7,4.6,2.1,6.3,4.1c0.6,0.7,0.7,1.5,0.3,2.3c-1.6,3.4-3.5,6.5-6.2,9.1
+		C345.8,426,345,426.4,343.8,426.4z"
+                      />
+                      <path
+                        class="st1"
+                        d="M307.3,386.3c0.1,0.9-0.3,1.4-0.6,1.9c-0.5,0.8-1,1.7-1.5,2.5c-3.7,5.3-4.6,5.6-10.3,2.6
+		c-0.8-0.4-0.6-0.8-0.3-1.3c1.8-3.1,3.7-6.2,5.5-9.3c0.3-0.5,0.7-0.6,1.2-0.5c2.2,0.5,4.1,1.6,5.6,3.4
+		C307.2,385.8,307.2,386.1,307.3,386.3z"
+                      />
+                      <path
+                        class="st2"
+                        d="M303.3,636.9c0.1,0,0.1,0,0.2,0.1c0,0,0,0.1,0,0.1C303.4,637.1,303.3,637,303.3,636.9
+		C303.3,636.9,303.3,636.9,303.3,636.9z"
+                      />
+                      <path
+                        class="st2"
+                        d="M314.6,301.6c-0.1,0.1-0.2,0.1-0.3,0.2c0.1-0.1,0.1-0.2,0.2-0.3C314.5,301.5,314.6,301.6,314.6,301.6z"
+                      />
+                      <path
+                        class="st1"
+                        d="M271,449.4c-0.1,0.1-0.2,0.1-0.3,0.2C270.8,449.5,270.9,449.4,271,449.4C270.9,449.3,271,449.4,271,449.4z"
+                      />
+                    </g>
+                  </svg>
                 </div>
               </div>
             </div>
@@ -47,21 +342,31 @@
       </div>
     </div>
 
-
     <!-- rest of home -->
     <div>
-      <section v-if="upcommingEvents.length > 0" class="py-8 home__upcomming">
-        <count-down v-slot="{ status, time }" :starting-from="upcommingEvents[0].wpdate"
-          :duration="upcommingEvents[0].duration">
-          <div class="container mx-auto flex flex-col-reverse gap-4 md:flex-row">
-            <div class="flex w-full flex-col md:w-8/12 my-auto">
-              <div class="mx-auto flex w-2/3 flex-row-reverse justify-end gap-4 md:w-full">
+      <section v-if="upcommingEvents.length > 0" class="home__upcomming py-8">
+        <count-down
+          v-slot="{ status, time }"
+          :starting-from="upcommingEvents[0].wpdate"
+          :duration="upcommingEvents[0].duration"
+        >
+          <div
+            class="container mx-auto flex flex-col-reverse gap-4 md:flex-row"
+          >
+            <div class="my-auto flex w-full flex-col md:w-8/12">
+              <div
+                class="mx-auto flex w-2/3 flex-row-reverse justify-end gap-4 md:w-full"
+              >
                 <div class="flex flex-col gap-2">
                   <div class="text-xl text-tm-black">
                     رویداد پیش رو
-                    <span v-show="status === 0"
-                      class="mx-2 rounded-lg bg-red-50 py-1 px-2 font-samim text-sm font-light text-red-600">
-                      <div class="inline-block h-2 w-2 animate-pulse rounded bg-red-600 font-samim"></div>
+                    <span
+                      v-show="status === 0"
+                      class="mx-2 rounded-lg bg-red-50 py-1 px-2 font-samim text-sm font-light text-red-600"
+                    >
+                      <div
+                        class="inline-block h-2 w-2 animate-pulse rounded bg-red-600 font-samim"
+                      ></div>
 
                       در حال برگزاری
                     </span>
@@ -72,29 +377,51 @@
                   <div>
                     <div class="mt-3 flex gap-6 md:mt-0">
                       <div class="flex items-center gap-2 text-sm text-tm-gray">
-                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="h-4 w-4"
-                          preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                          <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          role="img"
+                          class="h-4 w-4"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <g
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                          >
                             <circle cx="12" cy="10" r="3" />
                             <path
-                              d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z" />
+                              d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z"
+                            />
                           </g>
                         </svg>
                         <span>{{ upcommingEvents[0].location }} </span>
                       </div>
-                      <div class="flex items-center gap-2 text-sm text-tm-gray md:hidden">
-                        <svg aria-hidden="true" role="img" class="h-4 w-4" preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 24 24">
-                          <path fill="currentColor"
-                            d="M8 14q-.425 0-.713-.288Q7 13.425 7 13t.287-.713Q7.575 12 8 12t.713.287Q9 12.575 9 13t-.287.712Q8.425 14 8 14Zm4 0q-.425 0-.712-.288Q11 13.425 11 13t.288-.713Q11.575 12 12 12t.713.287Q13 12.575 13 13t-.287.712Q12.425 14 12 14Zm4 0q-.425 0-.712-.288Q15 13.425 15 13t.288-.713Q15.575 12 16 12t.712.287Q17 12.575 17 13t-.288.712Q16.425 14 16 14ZM3 4h3V2h2v2h8V2h2v2h3v18H3Zm2 16h14V10H5ZM5 8h14V6H5Zm0 0V6v2Z" />
+                      <div
+                        class="flex items-center gap-2 text-sm text-tm-gray md:hidden"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          role="img"
+                          class="h-4 w-4"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M8 14q-.425 0-.713-.288Q7 13.425 7 13t.287-.713Q7.575 12 8 12t.713.287Q9 12.575 9 13t-.287.712Q8.425 14 8 14Zm4 0q-.425 0-.712-.288Q11 13.425 11 13t.288-.713Q11.575 12 12 12t.713.287Q13 12.575 13 13t-.287.712Q12.425 14 12 14Zm4 0q-.425 0-.712-.288Q15 13.425 15 13t.288-.713Q15.575 12 16 12t.712.287Q17 12.575 17 13t-.288.712Q16.425 14 16 14ZM3 4h3V2h2v2h8V2h2v2h3v18H3Zm2 16h14V10H5ZM5 8h14V6H5Zm0 0V6v2Z"
+                          />
                         </svg>
-                        <span>{{
+                        <span
+                          >{{
                             upcommingEvents[0].faFormattedDate
                               .slice()
                               .reverse()
                               .join(' ')
-                        }}
+                          }}
                         </span>
                       </div>
                     </div>
@@ -129,8 +456,14 @@
                   </div>
                 </div>
               </div>
-              <div class="pt-10 flex flex-col gap-8 md:mt-20 lg:flex-row-reverse">
-                <div v-if="time" class="grid w-full grid-cols-4 text-center text-3xl md:text-right lg:w-9/12" dir="ltr">
+              <div
+                class="flex flex-col gap-8 pt-10 md:mt-20 lg:flex-row-reverse"
+              >
+                <div
+                  v-if="time"
+                  class="grid w-full grid-cols-4 text-center text-3xl md:text-right lg:w-9/12"
+                  dir="ltr"
+                >
                   <div class="flex flex-col">
                     <span> {{ time.day }} :</span>
                     <span class="text-base text-gray-500">روز</span>
@@ -153,24 +486,30 @@
                   class="flex-center h-12 cursor-pointer rounded bg-tm-yellow text-center text-lg font-semibold text-white shadow-lg shadow-yellow-500/50 hover:bg-yellow-300 lg:h-auto lg:w-3/12"
                   :to="{
                     path: '/upcommingevent?eventId=' + upcommingEvents[0].id,
-                  }">
+                  }"
+                >
                   مشاهده رویداد
                 </nuxt-link>
               </div>
             </div>
             <div class="w-full md:w-4/12">
               <!-- src="test/val.jpg" -->
-              <img class="mx-auto max-h-full w-2/3 rounded-md object-cover md:w-full"
-                :src="upcommingEvents[0].imageLink" alt="" />
+              <img
+                class="mx-auto max-h-full w-2/3 rounded-md object-cover md:w-full"
+                :src="upcommingEvents[0].imageLink"
+                alt=""
+              />
             </div>
           </div>
         </count-down>
       </section>
 
-      <section v-else class="py-8 home__upcomming">
+      <section v-else class="home__upcomming py-8">
         <div class="container mx-auto flex flex-col-reverse gap-4 md:flex-row">
-          <div class="flex w-full flex-col md:w-8/12 my-auto">
-            <div class="mx-auto flex w-2/3 flex-row-reverse justify-end gap-4 md:w-full">
+          <div class="my-auto flex w-full flex-col md:w-8/12">
+            <div
+              class="mx-auto flex w-2/3 flex-row-reverse justify-end gap-4 md:w-full"
+            >
               <div class="flex flex-col gap-2">
                 <div class="text-xl text-tm-black">رویداد پیش رو</div>
                 <h1 class="text-3xl font-bold text-tm-black before:hidden">
@@ -178,8 +517,11 @@
                 </h1>
               </div>
             </div>
-            <div class="pt-10 flex flex-col gap-8 md:mt-20 lg:flex-row-reverse">
-              <div class="grid w-full grid-cols-4 text-center text-3xl md:text-right lg:w-9/12" dir="ltr">
+            <div class="flex flex-col gap-8 pt-10 md:mt-20 lg:flex-row-reverse">
+              <div
+                class="grid w-full grid-cols-4 text-center text-3xl md:text-right lg:w-9/12"
+                dir="ltr"
+              >
                 <div class="flex flex-col">
                   <span> {{ 0 }} :</span>
                   <span class="text-base text-gray-500">روز</span>
@@ -202,7 +544,11 @@
           </div>
           <div class="w-full md:w-4/12">
             <!-- src="test/val.jpg" -->
-            <img class="mx-auto max-h-full w-52 rounded-md object-cover" src="/icons/calendar-svgrepo-com.svg" alt="" />
+            <img
+              class="mx-auto max-h-full w-52 rounded-md object-cover"
+              src="/icons/calendar-svgrepo-com.svg"
+              alt=""
+            />
           </div>
         </div>
       </section>
@@ -213,34 +559,60 @@
           <div class="flex">
             <div class="w-1/2">
               <div class="mr-12 mb-6 w-full">
-                <h1 class="title-font mb-3 text-2xl font-medium text-tm-black sm:text-3xl">
+                <h1
+                  class="title-font mb-3 text-2xl font-medium text-tm-black sm:text-3xl"
+                >
                   اعلانات
                 </h1>
                 <!-- <div class="h-1 w-20 bg-cyan-500 rounded"></div> -->
               </div>
 
-              <div v-for="(n, index) in news" :key="index" class="flex w-full flex-col items-start py-4 lg:px-12">
+              <div
+                v-for="(n, index) in news"
+                :key="index"
+                class="flex w-full flex-col items-start py-4 lg:px-12"
+              >
                 <div class="flex items-start gap-3">
-                  <img class="aspect-square w-4/12 rounded object-cover" :src="n.image" alt="" />
+                  <img
+                    class="aspect-square w-4/12 rounded object-cover"
+                    :src="n.image"
+                    alt=""
+                  />
                   <div class="w-8/12">
                     <span
-                      class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500">کارگروه
-                      کسب و کار</span>
-                    <h2 class="title-font mt-4 mb-4 text-xl font-medium text-gray-900">
+                      class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500"
+                      >کارگروه کسب و کار</span
+                    >
+                    <h2
+                      class="title-font mt-4 mb-4 text-xl font-medium text-gray-900"
+                    >
                       {{ n.title }}
                     </h2>
                     <!-- <p class="leading-relaxed mb-8" v-html="n.body"></p> -->
-                    <div class="mb-4 mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4">
-                      <nuxt-link :to="'/post/' + n.id" class="inline-flex items-center text-cyan-500">ادامه مطلب
+                    <div
+                      class="mb-4 mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4"
+                    >
+                      <nuxt-link
+                        :to="'/post/' + n.id"
+                        class="inline-flex items-center text-cyan-500"
+                        >ادامه مطلب
 
-                        <svg class="mr-2 h-4 w-4 rotate-180 transform" viewBox="0 0 24 24" stroke="currentColor"
-                          stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg
+                          class="mr-2 h-4 w-4 rotate-180 transform"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
                           <path d="M5 12h14"></path>
                           <path d="M12 5l7 7-7 7"></path>
                         </svg>
                       </nuxt-link>
                       <span
-                        class="ml-3 mr-auto inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400">
+                        class="ml-3 mr-auto inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400"
+                      >
                         <!-- <svg
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
@@ -269,20 +641,31 @@
             </div>
             <div class="w-1/2">
               <div class="mr-12 mb-6 w-full">
-                <h1 class="title-font mb-3 text-2xl font-medium text-tm-black sm:text-3xl">
+                <h1
+                  class="title-font mb-3 text-2xl font-medium text-tm-black sm:text-3xl"
+                >
                   اخبار و رویداد ها
                 </h1>
                 <!-- <div class="h-1 w-20 bg-cyan-500 rounded"></div> -->
               </div>
-              <div v-for="(e, index) in events" :key="index" class="flex w-full flex-col items-start lg:px-12">
+              <div
+                v-for="(e, index) in events"
+                :key="index"
+                class="flex w-full flex-col items-start lg:px-12"
+              >
                 <div class="py-4 px-4 pl-0">
                   <div class="flex h-full items-start gap-4">
                     <div
-                      class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none">
-                      <span class="mb-2 w-12 border-b-2 border-tm-yellow pb-2 text-lg font-semibold text-[#ffc400]">
+                      class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none"
+                    >
+                      <span
+                        class="mb-2 w-12 border-b-2 border-tm-yellow pb-2 text-lg font-semibold text-[#ffc400]"
+                      >
                         {{ e.faFormattedDate[2] }}
                       </span>
-                      <span class="title-font font-medium leading-none text-tm-black">
+                      <span
+                        class="title-font font-medium leading-none text-tm-black"
+                      >
                         {{ e.faFormattedDate[1] }}
                       </span>
                       <span class="mt-2 font-thin leading-none text-tm-black">
@@ -294,24 +677,42 @@
                     > -->
                     </div>
                     <nuxt-link :to="'/event/' + e.link" class="flex-grow pl-6">
-                      <h3 class="title-font mb-1 text-xs font-medium tracking-widest text-black">
+                      <h3
+                        class="title-font mb-1 text-xs font-medium tracking-widest text-black"
+                      >
                         {{ e.category }}
                       </h3>
-                      <h2 class="title-font mb-3 text-xl font-medium text-gray-900">
+                      <h2
+                        class="title-font mb-3 text-xl font-medium text-gray-900"
+                      >
                         {{ e.title }}
                       </h2>
-                      <p v-snip="3" class="mb-5 cursor-pointer leading-relaxed hover:underline" v-text="e.content"></p>
+                      <p
+                        v-snip="3"
+                        class="mb-5 cursor-pointer leading-relaxed hover:underline"
+                        v-text="e.content"
+                      ></p>
                     </nuxt-link>
                   </div>
                 </div>
               </div>
               <div class="flex-center">
-                <nuxt-link to="/event/category"
-                  class="mx-auto flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none">
-                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="h-5 w-5"
-                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
-                    <path fill="currentColor"
-                      d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+                <nuxt-link
+                  to="/event/category"
+                  class="mx-auto flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
+                    class="h-5 w-5"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"
+                    />
                   </svg>
 
                   مشاهده تمام رویداد ها
@@ -330,11 +731,22 @@
                   tabIndex === 0
                     ? 'border-cyan-500  text-cyan-600'
                     : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
-                " @click="tabIndex = 0">
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                  <path fill="currentColor"
-                    d="M13.341 4A5.99 5.99 0 0 0 13 6H5v14h14v-8a5.99 5.99 0 0 0 2-.341V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h9.341zM19 8a2 2 0 1 0 0-4a2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8a4 4 0 0 1 0 8z" />
+                "
+                @click="tabIndex = 0"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="img"
+                  width="1em"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.341 4A5.99 5.99 0 0 0 13 6H5v14h14v-8a5.99 5.99 0 0 0 2-.341V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h9.341zM19 8a2 2 0 1 0 0-4a2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8a4 4 0 0 1 0 8z"
+                  />
                 </svg>
 
                 اعلانات
@@ -346,12 +758,31 @@
                   tabIndex === 1
                     ? 'border-cyan-500  text-cyan-600'
                     : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
-                " @click="tabIndex = 1">
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 48 48">
-                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
-                    <path d="m21 44l-1-8m24 8V12H25l1 8l1 8l1 8l-7 8h23ZM27 28h8m-9-8h9" />
-                    <path d="M4 4h20l1 8l1 8l1 8l1 8H4V4Zm6 8h7m-7 8h8m-8 8h9" />
+                "
+                @click="tabIndex = 1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="img"
+                  width="1em"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 48 48"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="4"
+                  >
+                    <path
+                      d="m21 44l-1-8m24 8V12H25l1 8l1 8l1 8l-7 8h23ZM27 28h8m-9-8h9"
+                    />
+                    <path
+                      d="M4 4h20l1 8l1 8l1 8l1 8H4V4Zm6 8h7m-7 8h8m-8 8h9"
+                    />
                   </g>
                 </svg>
                 اخبار و رویداد ها
@@ -360,14 +791,23 @@
           </div>
 
           <div v-show="tabIndex === 0" class="w-full">
-            <div v-for="(e, index) in events" :key="index" class="flex w-full flex-col items-start sm:px-12">
+            <div
+              v-for="(e, index) in events"
+              :key="index"
+              class="flex w-full flex-col items-start sm:px-12"
+            >
               <div class="py-4 px-4">
                 <div class="flex h-full items-start gap-4">
                   <div
-                    class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none">
-                    <span class="text mb-2 w-12 border-b-2 pb-2 font-semibold text-[#ffc400]">{{ e.faFormattedDate[2]
-                    }}</span>
-                    <span class="text-sm font-medium leading-none text-tm-black">
+                    class="flex w-20 flex-shrink-0 flex-col items-center justify-center rounded-md bg-[#fffaea] py-4 text-center leading-none"
+                  >
+                    <span
+                      class="text mb-2 w-12 border-b-2 pb-2 font-semibold text-[#ffc400]"
+                      >{{ e.faFormattedDate[2] }}</span
+                    >
+                    <span
+                      class="text-sm font-medium leading-none text-tm-black"
+                    >
                       {{ e.faFormattedDate[1] }}
                     </span>
                     <!-- <span
@@ -376,13 +816,20 @@
                     > -->
                   </div>
                   <nuxt-link :to="'/event/' + e.link" class="flex-grow pl-6">
-                    <h2 class="title-font mb-1 text-xs tracking-widest text-gray-700">
+                    <h2
+                      class="title-font mb-1 text-xs tracking-widest text-gray-700"
+                    >
                       {{ e.category }}
                     </h2>
-                    <h2 class="title-font mb-2 text-base font-medium text-gray-900">
+                    <h2
+                      class="title-font mb-2 text-base font-medium text-gray-900"
+                    >
                       {{ e.title }}
                     </h2>
-                    <p v-snip="3" class="mb-5 cursor-pointer text-sm leading-relaxed hover:underline">
+                    <p
+                      v-snip="3"
+                      class="mb-5 cursor-pointer text-sm leading-relaxed hover:underline"
+                    >
                       {{ e.content }}
                     </p>
                   </nuxt-link>
@@ -390,12 +837,22 @@
               </div>
             </div>
             <div class="py-4 px-4">
-              <nuxt-link to="/event/category"
-                class="mx-auto inline-flex text-center flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6  text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="h-5 w-5"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
-                  <path fill="currentColor"
-                    d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+              <nuxt-link
+                to="/event/category"
+                class="mx-auto inline-flex flex-row-reverse items-center gap-4 rounded border-0 bg-cyan-50 py-2 px-6 text-center text-base text-cyan-600 shadow-lg shadow-cyan-200/30 transition-all hover:bg-cyan-500 hover:text-white focus:outline-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="img"
+                  class="h-5 w-5"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"
+                  />
                 </svg>
 
                 مشاهده تمام رویداد ها
@@ -404,31 +861,55 @@
           </div>
 
           <div v-show="tabIndex === 1" class="w-full">
-            <div v-for="(n, index) in news" :key="index" class="flex w-full flex-col items-start px-12 py-4">
+            <div
+              v-for="(n, index) in news"
+              :key="index"
+              class="flex w-full flex-col items-start px-12 py-4"
+            >
               <div class="flex items-stretch gap-8">
                 <div class="h-fit w-4/12">
-                  <img class="aspect-square rounded object-cover" :src="n.image" alt="" />
+                  <img
+                    class="aspect-square rounded object-cover"
+                    :src="n.image"
+                    alt=""
+                  />
                 </div>
                 <div class="flex w-8/12 flex-col">
                   <div>
                     <span
-                      class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500">کارگروه
-                      کسب و کار</span>
+                      class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500"
+                      >کارگروه کسب و کار</span
+                    >
                   </div>
-                  <h2 class="title-font mt-4 mb-2 text-xl font-medium text-gray-900">
+                  <h2
+                    class="title-font mt-4 mb-2 text-xl font-medium text-gray-900"
+                  >
                     {{ n.title }}
                   </h2>
                   <span
-                    class="ml-auto inline-flex items-center border-gray-200 pb-2 text-sm leading-none text-gray-400">
+                    class="ml-auto inline-flex items-center border-gray-200 pb-2 text-sm leading-none text-gray-400"
+                  >
                     {{ n.date[2] }}
                     {{ n.date[1] }}
                     {{ n.date[0] }}
                   </span>
-                  <div class="mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4">
-                    <nuxt-link :to="'/post/' + n.id" class="inline-flex items-center text-cyan-500">ادامه مطلب
+                  <div
+                    class="mt-auto flex w-full flex-wrap items-center border-b-2 border-gray-100 pb-4"
+                  >
+                    <nuxt-link
+                      :to="'/post/' + n.id"
+                      class="inline-flex items-center text-cyan-500"
+                      >ادامه مطلب
 
-                      <svg class="mr-2 h-4 w-4 rotate-180 transform" viewBox="0 0 24 24" stroke="currentColor"
-                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <svg
+                        class="mr-2 h-4 w-4 rotate-180 transform"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
                         <path d="M5 12h14"></path>
                         <path d="M12 5l7 7-7 7"></path>
                       </svg>
@@ -444,20 +925,26 @@
       <departments />
 
       <section class="body-font relative text-gray-600">
-        <img class="absolute top-0 h-full w-full object-cover object-center opacity-10 grayscale filter"
-          src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg" alt="stats" />
+        <img
+          class="absolute top-0 h-full w-full object-cover object-center opacity-10 grayscale filter"
+          src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg"
+          alt="stats"
+        />
         <div class="container relative mx-auto flex flex-wrap px-5 py-12">
-          <div class="mt-auto mb-auto flex flex-wrap content-start sm:w-2/3 sm:pr-10 lg:w-1/2">
+          <div
+            class="mt-auto mb-auto flex flex-wrap content-start sm:w-2/3 sm:pr-10 lg:w-1/2"
+          >
             <div class="mb-6 w-full px-4 sm:p-4">
               <h1 class="title-font mb-2 text-2xl font-medium text-gray-900">
                 معرفی مجموعه
               </h1>
               <!-- <div class="h-1 w-20 bg-cyan-500 rounded"></div> -->
               <div class="mt-4 leading-relaxed">
-                موسسه فرهنگی نیکان در سال ۱۳۴۷ توسط مرحوم علامه کرباسچیان و عده‌ای
-                دیگر از دل‌سوختگان تعلیم و تربیت اسلامی تأسیس گردید. در این موسسه
-                سعی می‌شود محصلان به گونه‌ای در ابعاد مختلف تربیت شوند که با
-                توانمندی روحی و جسمی و برخورداری از بهداشت روانی لازم، زندگی دنیوی
+                موسسه فرهنگی نیکان در سال ۱۳۴۷ توسط مرحوم علامه کرباسچیان و
+                عده‌ای دیگر از دل‌سوختگان تعلیم و تربیت اسلامی تأسیس گردید. در
+                این موسسه سعی می‌شود محصلان به گونه‌ای در ابعاد مختلف تربیت شوند
+                که با توانمندی روحی و جسمی و برخورداری از بهداشت روانی لازم،
+                زندگی دنیوی
               </div>
             </div>
             <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
@@ -485,66 +972,104 @@
               <p class="leading-relaxed">کارگروه</p>
             </div>
           </div>
-          <div class="mt-6 w-full overflow-hidden rounded-lg sm:mt-0 sm:w-1/3 lg:w-1/2">
+          <div
+            class="mt-6 w-full overflow-hidden rounded-lg sm:mt-0 sm:w-1/3 lg:w-1/2"
+          >
             <img
               class="h-full w-full scale-100 transform cursor-pointer object-cover object-center transition duration-500 ease-in-out hover:scale-125"
-              src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg" alt="stats" />
+              src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg"
+              alt="stats"
+            />
           </div>
         </div>
       </section>
 
       <section class="bg-slate-900 text-gray-50">
-        <div class="container mx-auto flex flex-row-reverse flex-wrap gap-4 px-5 py-24">
+        <div
+          class="container mx-auto flex flex-row-reverse flex-wrap gap-4 px-5 py-24"
+        >
           <div class="w-full">
             <h1
-              class="title-font mb-8 text-center text-2xl font-bold text-white before:bg-white before:shadow before:shadow-cyan-500 sm:text-3xl">
+              class="title-font mb-8 text-center text-2xl font-bold text-white before:bg-white before:shadow before:shadow-cyan-500 sm:text-3xl"
+            >
               آرشیو رسانه
             </h1>
           </div>
 
-          <div class="flex items-stretch lg:items-start flex-col-reverse lg:flex-row-reverse gap-4">
-            <div class="-m-2 flex lg:w-2/5 flex-wrap">
+          <div
+            class="flex flex-col-reverse items-stretch gap-4 lg:flex-row-reverse lg:items-start"
+          >
+            <div class="-m-2 flex flex-wrap lg:w-2/5">
               <div v-for="(i, index) in media" :key="index" class="w-full p-2">
                 <!-- v-show="index !== mediaIndex" -->
-                <div :title="i.subject"
-                  class="flex h-full py-4 translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 px-4 transition-all"
+                <div
+                  :title="i.subject"
+                  class="flex h-full translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 py-4 px-4 transition-all"
                   :class="
                     mediaIndex === index
                       ? 'border border-cyan-700 shadow-md shadow-cyan-900/50'
                       : ' hover:-translate-y-2 hover:bg-slate-800 hover:shadow-sm hover:shadow-yellow-200/50'
-                  " @click="mediaIndex = index">
-                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                  "
+                  @click="mediaIndex = index"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
                     class="ml-4 h-10 w-10 flex-shrink-0 rounded-full bg-white object-cover object-center p-2 text-cyan-700 shadow-lg shadow-cyan-500/50"
-                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
-                    <path fill="currentColor"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 36 36"
+                  >
+                    <path
+                      fill="currentColor"
                       d="M32.16 16.08L8.94 4.47A2.07 2.07 0 0 0 6 6.32v23.21a2.06 2.06 0 0 0 3 1.85l23.16-11.61a2.07 2.07 0 0 0 0-3.7Z"
-                      class="clr-i-solid clr-i-solid-path-1" />
+                      class="clr-i-solid clr-i-solid-path-1"
+                    />
                     <path fill="none" d="M0 0h36v36H0z" />
                   </svg>
 
                   <div class="flex flex-grow">
-                    <div class="text-sx flex w-full flex-col items-start gap-1 text-slate-400">
+                    <div
+                      class="text-sx flex w-full flex-col items-start gap-1 text-slate-400"
+                    >
                       <div class="flex-col gap-2">
-                        <h2 class="title-font text-sm font-medium drop-shadow-2xl" :class="
-                          mediaIndex === index
-                            ? 'text-cyan-50'
-                            : 'text-yellow-100 shadow-yellow-500/50'
-                        " style="text-shadow: 1px 1px 9px #dee3f0">
+                        <h2
+                          class="title-font text-sm font-medium drop-shadow-2xl"
+                          :class="
+                            mediaIndex === index
+                              ? 'text-cyan-50'
+                              : 'text-yellow-100 shadow-yellow-500/50'
+                          "
+                          style="text-shadow: 1px 1px 9px #dee3f0"
+                        >
                           {{ i.subject }}
                         </h2>
-                        <div class="flex gap-4 mt-2 text-xs text-slate-400">
+                        <div class="mt-2 flex gap-4 text-xs text-slate-400">
                           <span>
                             {{ i.cat }}
                           </span>
                         </div>
                       </div>
-                      <div v-if="i.speaker" class="flex-center gap-1 text-xs mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" class="w-4 h-4"
-                          preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
-                          <path fill="currentColor"
-                            d="M29.415 19L27.7 17.285A2.97 2.97 0 0 0 28 16a3 3 0 1 0-3 3a2.97 2.97 0 0 0 1.286-.3L28 20.414V28h-6v-3a7.008 7.008 0 0 0-7-7H9a7.008 7.008 0 0 0-7 7v5h28v-9.586A1.988 1.988 0 0 0 29.415 19ZM4 25a5.006 5.006 0 0 1 5-5h6a5.006 5.006 0 0 1 5 5v3H4Z" />
-                          <path fill="currentColor"
-                            d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7Z" />
+                      <div
+                        v-if="i.speaker"
+                        class="flex-center mt-1 gap-1 text-xs"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                          role="img"
+                          class="h-4 w-4"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 32 32"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M29.415 19L27.7 17.285A2.97 2.97 0 0 0 28 16a3 3 0 1 0-3 3a2.97 2.97 0 0 0 1.286-.3L28 20.414V28h-6v-3a7.008 7.008 0 0 0-7-7H9a7.008 7.008 0 0 0-7 7v5h28v-9.586A1.988 1.988 0 0 0 29.415 19ZM4 25a5.006 5.006 0 0 1 5-5h6a5.006 5.006 0 0 1 5 5v3H4Z"
+                          />
+                          <path
+                            fill="currentColor"
+                            d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7Z"
+                          />
                         </svg>
 
                         {{ i.speaker }}
@@ -554,38 +1079,61 @@
                 </div>
               </div>
               <div class="w-full px-2 text-center">
-                <nuxt-link to="/video"
-                  class="flex-center cursor-pointer mx-auto mt-8 flex w-full gap-4 rounded border border-slate-500 bg-slate-800 py-4 px-8 text-lg text-slate-200 shadow-md shadow-white/5 transition hover:border-white hover:bg-white hover:text-cyan-600 hover:shadow-lg hover:shadow-cyan-300/50 focus:outline-none">
+                <nuxt-link
+                  to="/video"
+                  class="flex-center mx-auto mt-8 flex w-full cursor-pointer gap-4 rounded border border-slate-500 bg-slate-800 py-4 px-8 text-lg text-slate-200 shadow-md shadow-white/5 transition hover:border-white hover:bg-white hover:text-cyan-600 hover:shadow-lg hover:shadow-cyan-300/50 focus:outline-none"
+                >
                   ورود به بخش آرشیو رسانه
 
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
                       d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                      clip-rule="evenodd" />
+                      clip-rule="evenodd"
+                    />
                   </svg>
                 </nuxt-link>
               </div>
             </div>
 
-            <div class="flex full lg:w-3/5 flex-col">
+            <div class="full flex flex-col lg:w-3/5">
               <client-only>
                 <div class="aspect-video">
-                  <vue-plyr v-if="media[mediaIndex]" ref="plyr" :options="playerOptions">
+                  <vue-plyr
+                    v-if="media[mediaIndex]"
+                    ref="plyr"
+                    :options="playerOptions"
+                  >
                     <!-- data-poster="https://dummyimage.com/300x300" -->
-                    <video controls crossorigin playsinline :src="media[mediaIndex].url" size="720" format="video/mp4"
-                      preload="none">
+                    <video
+                      controls
+                      crossorigin
+                      playsinline
+                      :src="media[mediaIndex].url"
+                      size="720"
+                      format="video/mp4"
+                      preload="none"
+                    >
                       <!-- <source   /> -->
                     </video>
                   </vue-plyr>
                 </div>
               </client-only>
-              <div v-if="media[mediaIndex]" class="bg-opacity-5 bg-gradient-to-tr from-slate-500/5 to-slate-100/5 p-4">
+              <div
+                v-if="media[mediaIndex]"
+                class="bg-opacity-5 bg-gradient-to-tr from-slate-500/5 to-slate-100/5 p-4"
+              >
                 <h2 class="mt-4 mb-2 text-2xl text-yellow-100">
                   {{ media[mediaIndex].subject }}
                 </h2>
                 <div v-show="media[mediaIndex].speaker" class="mb-4 text-lg">
                   سخنران:
-                  <span class="font-bold mt-2">
+                  <span class="mt-2 font-bold">
                     {{ media[mediaIndex].speaker }}
                   </span>
                 </div>
@@ -594,43 +1142,68 @@
           </div>
         </div>
         <div class="flex-center mt-10 h-48">
-          <img class="h-full object-contain opacity-40 grayscale filter" src="img/logo_only.png"
-            alt="nikan-alumni-logo" />
+          <img
+            class="h-full object-contain opacity-40 grayscale filter"
+            src="img/logo_only.png"
+            alt="nikan-alumni-logo"
+          />
         </div>
 
         <footer class="body-font text-gray-600">
           <div
-            class="container mx-auto flex flex-col flex-wrap px-5 py-24 text-slate-300 md:flex-row md:flex-nowrap md:items-center lg:items-start">
+            class="container mx-auto flex flex-col flex-wrap px-5 py-24 text-slate-300 md:flex-row md:flex-nowrap md:items-center lg:items-start"
+          >
             <div class="mx-auto w-64 flex-shrink-0 md:mx-0 md:text-left">
-              <h2 class="title-font mb-3 text-sm text-right font-medium tracking-widest text-cyan-600">
+              <h2
+                class="title-font mb-3 text-right text-sm font-medium tracking-widest text-cyan-600"
+              >
                 کانون دانش آموختگان نیکان
               </h2>
-              <p class="mt-2 text-sm text-gray-400 text-right">
+              <p class="mt-2 text-right text-sm text-gray-400">
                 محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و ایجاد
-                بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها و توانمندی های ایشان
+                بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها و توانمندی های
+                ایشان
               </p>
             </div>
 
-            <div class="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pr-20 md:text-left">
-              <div v-for="(col, colindex) in $store.state.navigation.footer" :key="colindex"
-                class="w-full text-right px-4 md:w-1/2 lg:w-1/3">
-                <h2 class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600">
+            <div
+              class="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pr-20 md:text-left"
+            >
+              <div
+                v-for="(col, colindex) in $store.state.navigation.footer"
+                :key="colindex"
+                class="w-full px-4 text-right md:w-1/2 lg:w-1/3"
+              >
+                <h2
+                  class="title-font mb-3 text-sm font-medium tracking-widest text-cyan-600"
+                >
                   {{ col.title }}
                 </h2>
-                <nav class="mb-10 list-none flex flex-col gap-2 items-start text-sm">
-                  <li v-for="({ type, title, link }, index) in col.items" :key="index">
+                <nav
+                  class="mb-10 flex list-none flex-col items-start gap-2 text-sm"
+                >
+                  <li
+                    v-for="({ type, title, link }, index) in col.items"
+                    :key="index"
+                  >
                     <span v-if="type === 'text'">
                       {{ title }}
                     </span>
-                    <a v-else target="_blank" rel="noopener noreferrer" :href="
-                      link
-                        ? link
-                        : type === 'email'
+                    <a
+                      v-else
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      :href="
+                        link
+                          ? link
+                          : type === 'email'
                           ? 'mailto:' + title
                           : type === 'tel'
-                            ? 'tel:' + title
-                            : '#'
-                    " class="hover:underline">
+                          ? 'tel:' + title
+                          : '#'
+                      "
+                      class="hover:underline"
+                    >
                       {{ formatstr(title) }}
                     </a>
                   </li>
@@ -639,17 +1212,34 @@
             </div>
           </div>
           <div class="bg-slate-800" dir="ltr">
-            <div class="container mx-auto flex flex-wrap justify-between py-4 px-5 sm:flex-row">
-              <div class="flex text-center font-mono text-sm text-slate-50 sm:text-left">
+            <div
+              class="container mx-auto flex flex-wrap justify-between py-4 px-5 sm:flex-row"
+            >
+              <div
+                class="flex text-center font-mono text-sm text-slate-50 sm:text-left"
+              >
                 © {{ new Date().getFullYear() }} nikan-alumni —
-                <a href="https://netdom.ir" rel="noopener noreferrer"
-                  class="flex-center ml-1 gap-1 tracking-widest text-gray-400" target="_blank">
+                <a
+                  href="https://netdom.ir"
+                  rel="noopener noreferrer"
+                  class="flex-center ml-1 gap-1 tracking-widest text-gray-400"
+                  target="_blank"
+                >
                   Designed and developed by Mahdiyar Anari
 
-                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1.3em" height="1.3em"
-                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                      d="M5 3h14v2H5V3zm0 16H3V5h2v14zm14 0v2H5v-2h14zm0 0h2V5h-2v14zM10 8H8v2h2V8zm4 0h2v2h-2V8zm-5 6v-2H7v2h2zm6 0v2H9v-2h6zm0 0h2v-2h-2v2z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="img"
+                    width="1.3em"
+                    height="1.3em"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M5 3h14v2H5V3zm0 16H3V5h2v14zm14 0v2H5v-2h14zm0 0h2V5h-2v14zM10 8H8v2h2V8zm4 0h2v2h-2V8zm-5 6v-2H7v2h2zm6 0v2H9v-2h6zm0 0h2v-2h-2v2z"
+                    />
                   </svg>
                 </a>
               </div>
@@ -658,7 +1248,6 @@
         </footer>
       </section>
     </div>
-
   </div>
 </template>
 
@@ -727,7 +1316,7 @@ export default Vue.extend({
           'airplay',
           'fullscreen',
         ],
-      }
+      },
     }
   },
   async fetch() {
@@ -761,7 +1350,7 @@ export default Vue.extend({
           subject: i?.title || '',
           cat: i?.categories?.nodes?.map((j) => j?.name).join(' . ') || '',
           speaker: i?.speakers?.speakers || '',
-          url: res[0].replace('nikan-alumni.com','visionquest.ir'),
+          url: res[0].replace('nikan-alumni.com', 'visionquest.ir'),
         }
         this.media.push(v)
       }
@@ -805,12 +1394,12 @@ export default Vue.extend({
       ev.content = i?.content ? htmlStrip(i.content) : ''
       ev.category = i?.categories?.edges
         ? i.categories.edges
-          .filter(
-            (j) =>
-              j && !!j.node?.name && j.node.name.search('کارگروه ها') === -1
-          )
-          .map((j) => j!.node!.name)
-          .join('-')
+            .filter(
+              (j) =>
+                j && !!j.node?.name && j.node.name.search('کارگروه ها') === -1
+            )
+            .map((j) => j!.node!.name)
+            .join('-')
         : ''
       this.events.push(ev)
       if (ev.eventStatus === EventStatus.current) this.upcommingEvents.push(ev)
@@ -819,7 +1408,7 @@ export default Vue.extend({
   computed: {
     ...mapGetters({
       isLoggedIn: 'authentication/isLoggedIn',
-    })
+    }),
   },
   mounted() {
     // @ts-ignore
@@ -827,7 +1416,6 @@ export default Vue.extend({
     this.getUpcommingEvents()
   },
   beforeMount() {
-
     const options = {
       // root: document.querySelector('#scrollArea'),
       rootMargin: '100px',
@@ -846,6 +1434,35 @@ export default Vue.extend({
     this.observer = Object.freeze(observer)
   },
   methods: {
+    async videoloaded() {
+      if(this.$device.isMobile)
+      return
+
+      console.log('video loaded')
+      await timeout(5000)
+      import('animejs').then(({ default: anime }) => {
+        anime({
+          targets: '.st0,.st1,.st2',
+          strokeDashoffset: [anime.setDashoffset, 0],
+          easing: 'easeInOutSine',
+          // direction: 'reverse',
+
+          async begin() {
+            const svg = document.querySelector('#nikanlogosvg')! as HTMLElement
+            svg.classList.remove('hidden')
+            const st0 = document.querySelector('.st0')! as HTMLElement
+            st0.style.transition = 'all ease 6s'
+            st0.style.fill = '#ffffff00'
+            await timeout(5000)
+            st0.style.fill = '#06b6d488'
+          },
+          duration: 11500,
+          delay: (_, i) => {
+            return i * 400
+          },
+        })
+      })
+    },
     observe() {
       type NavRef = InstanceType<typeof Vue>
 
@@ -902,10 +1519,18 @@ export default Vue.extend({
 </script>
 
 <style>
-.m-blur-background-1 {
-  background: linear-gradient(90deg,
-      rgba(33, 37, 41, 0.6) 0%,
-      rgba(33, 37, 41, 0.24) 100%);
+.pic-blur-background {
+  background: linear-gradient(
+    90deg,
+    rgba(33, 37, 41, 0.6) 0%,
+    rgba(33, 37, 41, 0.24) 100%
+  );
+}
+
+.vid-blur-background {
+  background: linear-gradient(90deg, #297387 0%, rgb(179 250 0 / 3%) 100%);
+  /* backdrop-filter: blur(2px); */
+  mix-blend-mode: overlay;
 }
 
 .home__upcomming {

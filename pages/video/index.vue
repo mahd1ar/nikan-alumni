@@ -8,7 +8,7 @@
       href="https://cdn.rawgit.com/shuvroroy/youtube-clone/883c8d9a/public/css/main.css"
     /> -->
     <div class="font-samim bg-white">
-      <div class="h-80 bg-cover relative">
+      <div class="h-44 md:h-80 bg-cover relative">
         <img
           class="h-full w-full object-bottom object-cover"
           src="img/cinema.jpg"
@@ -20,8 +20,8 @@
           >
             <div class="flex-col">
               <h1
-                style="background: black"
-                class="text-3xl font-bold tracking-wider py-2 px-4"
+                
+                class="text-3xl bg-black bg-opacity-60 font-bold tracking-wider py-2 px-4"
               >
                 آرشیو رسانه کانون دانش آموختگان
               </h1>
@@ -97,10 +97,11 @@
                 </span>
               </h3>
               <div class="relative mb-4 grid md:grid-cols-4 grid-cols-2">
-                <div
+                <nuxt-link
                   v-for="(video, index) in vlist.videos"
                   :key="index"
                   class="mr-1 flex-1"
+                   :to="'/video/' + encodeURIComponent(video.gqlid)"
                 >
                   <div>
                     <img
@@ -147,7 +148,7 @@
                       {{ video.date }}
                     </p>
                   </div>
-                </div>
+                </nuxt-link>
               </div>
             </div>
           </div>
@@ -157,7 +158,7 @@
             <h3 class="py-6 text-base font-medium">
               {{ selectedCategory }}
             </h3>
-            <div class="relative mb-4 grid grid-cols-4 gap-1">
+            <div class="relative mb-4 grid md:grid-cols-4 grid-cols-2 gap-1">
               <nuxt-link
                 v-for="video in hashVideos"
                 :key="video.id"
