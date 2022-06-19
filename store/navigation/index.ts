@@ -511,17 +511,17 @@ const initialState = {
         {
           title: 'اینستاگرام',
           type: 'href',
-          link: '#',
+          link: 'https://www.instagram.com/kanoonikan/',
         },
         {
           title: 'کانال تلگرام',
           type: 'href',
-          link: '#',
+          link: 'https://t.me/kanoonikan',
         },
         {
           title: 'لینکدین',
           type: 'href',
-          link: '#',
+          link: 'https://www.linkedin.com/company/74597528/admin/',
         },
       ],
     },
@@ -536,7 +536,7 @@ const initialState = {
         {
           title: 'امور خیریه',
           type: 'href',
-          link: '#',
+          link: 'https://www.instagram.com/kanoon_nikan_charity/',
         },
         {
           title: 'نیک آثار',

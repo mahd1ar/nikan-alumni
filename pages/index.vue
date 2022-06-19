@@ -1,7 +1,7 @@
 <template>
   <div dir="rtl" class="">
     <!-- hero section -->
-    <div class="flex h-screen w-full flex-col">
+    <div class="flex  w-full flex-col">
       <!-- <nuxt-link to="login">++++</nuxt-link> -->
       <div class="relative flex h-full w-full flex-col">
         <div class="relative h-full">
@@ -30,7 +30,7 @@
                 class="container relative mx-auto flex h-full flex-col-reverse justify-center md:flex-row-reverse"
               >
                 <div class="flex-center w-full md:w-6/12">
-                  <div class="flex flex-col justify-center gap-6">
+                  <div class="my-24 flex flex-col justify-center gap-6 rounded-md bg-slate-900 bg-opacity-0 p-4">
                     <div class="text-right text-5xl font-bold text-gray-50">
                       کانون
                       <br />
@@ -1328,7 +1328,8 @@ export default Vue.extend({
       variables,
     })
 
-    if (data.category?.contentNodes)
+    if (data.category?.contentNodes){
+
       data.category.contentNodes.edges?.forEach((i) => {
         this.news.push({
           // @ts-ignore
@@ -1341,6 +1342,7 @@ export default Vue.extend({
           id: i?.node!.id!,
         })
       })
+    }else this.$nuxt.error({statusCode : 500 })
 
     data.videos?.nodes?.forEach((i) => {
       if (i?.content) {

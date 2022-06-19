@@ -78,23 +78,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://cors.nikan-alumni.com/https://nikan-alumni.org',
-    // baseURL: `${process.env.NODE_ENV === 'production' ? 'https://cors.nikan-alumni.com' : 'http://localhost:3000'}/https://nikan-alumni.org`,
+    baseURL: '//cors.nikan-alumni.com/https://nikan-alumni.org',
   },
-
-  // auth: {
-  //   strategies: {
-  //     graphql: {
-  //       scheme: '~/schemes/graphqlScheme.js',
-  //     },
-  //   },
-  //   redirect: {
-  //     login: '/login',
-  //     logout: '/login?logout=true',
-  //     callback: false,
-  //     home: '/dashboard',
-  //   },
-  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
