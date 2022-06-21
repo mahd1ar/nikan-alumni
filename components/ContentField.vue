@@ -146,8 +146,6 @@ export default Vue.extend({
     if (this.html !== '') this.purge()
   },
   mounted() {
-    // @ts-ignore
-    window.html = this
     this.isProtected = this.html.search('Login to read more') !== -1
     if (this.isExcerpt) return
 

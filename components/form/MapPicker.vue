@@ -65,15 +65,6 @@ export default Vue.extend({
     }
   },
   mounted() {
-    // @ts-ignore
-    window.map = this
-    // if(this.viewFrom && this.viewFrom[0]){
-
-    //   this.center.push(this.viewFrom)
-    //   this.center.push(this.lng)
-
-    //   }else{
-
     this.center.push(this.lat)
     this.center.push(this.lng)
   },

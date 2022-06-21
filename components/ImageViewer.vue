@@ -179,10 +179,6 @@ export default Vue.extend({
       }
     },
   },
-  mounted() {
-    // @ts-ignore
-    window.mv = this
-  },
   methods: {
     enter() {
       if (this.imgIndex > -1 && this.$device.isMobile) {

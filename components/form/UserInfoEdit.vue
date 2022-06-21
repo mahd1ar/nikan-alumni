@@ -482,12 +482,12 @@ import {
   configure,
 } from 'vee-validate'
 import * as rules from 'vee-validate/dist/rules'
-// @ts-ignore
-import isEqual from 'lodash.isequal'
-import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile } from '~/data/GlobslTypes'
+import MapPicker from '~/components/form/MapPicker.vue'
 import { Dict } from '~/data/utils/dictionary'
 const clonedeep: <T>(a: T) => T = require('lodash.clonedeep')
+
+const isEqual: <T>(a: T, b: T) => Boolean = require('lodash.isequal')
 
 for (const [rule, validation] of Object.entries(rules)) {
   extend(rule, {

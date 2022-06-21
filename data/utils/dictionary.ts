@@ -31,6 +31,8 @@ export enum Dict {
   rp_min_6char = 'رمز عبور باید حداقل 8 کاراکتر داشته باشد',
   rp_incorrect = ' incorrect',
   signout_reset_pass_success = 'پسورد با موفقیت تغییر کرد',
-  signout_seeusoon = 'به امید دیدار'
+  signout_seeusoon = 'به امید دیدار',
+  AUTH_LOGIN_ERROR = "خطا ورود",
+  AUTH_LOGIN_WRONG_PASSWD = "نام کاربری یا رمز عبور اشتباه است"
 
 }

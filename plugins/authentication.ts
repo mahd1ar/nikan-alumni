@@ -164,9 +164,10 @@ class LoginStrategy {
     } catch (error) {
       this.logout()
       if (String(error).toLowerCase().search('network error') === -1) {
+        await timeout(600);
         this.ctx.$about.error({
-          title: 'AUTH.LOGIN.ERROR',
-          body: 'AUTH.LOGIN.WRONG.PASSWD',
+          title: Dict.AUTH_LOGIN_ERROR,
+          body: Dict.AUTH_LOGIN_WRONG_PASSWD,
         })
       }
 

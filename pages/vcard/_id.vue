@@ -321,7 +321,7 @@
             class="mb-3 flex items-center justify-center gap-3 py-3 text-gray-700"
           >
             <a
-              v-if="user.socialMedias.twitter"
+              v-if="user.socialMedias && user.socialMedias.twitter"
               :href="user.socialMedias.twitter"
               target="_blank"
             >
@@ -341,7 +341,7 @@
             </a>
 
             <a
-              v-if="user.socialMedias.linkedin"
+              v-if="user.socialMedias && user.socialMedias.linkedin"
               :href="user.socialMedias.linkedin"
               target="_blank"
             >
@@ -361,7 +361,7 @@
 
             <!-- instagram -->
             <a
-              v-if="user.socialMedias.instagram"
+              v-if="user.socialMedias && user.socialMedias.instagram"
               :href="user.socialMedias.instagram"
               target="_blank"
             >
@@ -500,10 +500,9 @@ export default Vue.extend({
   },
   async fetch() {
     const id = this.$route.params.id as string
-    console.log({ id })
-    // TODO REFORM THIS URL AND ITS BACKEND
+
     const { data } = await this.$axios.get<WPapi.pulicUser.RootObject | false>(
-      '/wp-json/myplugin/v1/user/' + id
+      'https://cors.nikan-alumni.com/https://nikan-alumni.org/wp-json/myplugin/v1/user/' + id + "/"
     )
 
     if (data === false)
@@ -561,11 +560,10 @@ export default Vue.extend({
       if (this.user.occupation) query.set('occupation', this.user.occupation)
 
       return '/api/create-contact?' + query.toString()
-    },
+    }
   },
   mounted() {
-    // @ts-ignore
-    window.v = this
+
 
     this.$nextTick(() => {
       this.loaded = true
@@ -574,24 +572,7 @@ export default Vue.extend({
   methods: {
     toIndiaDigits(input?: string | number) {
       return toIndiaDigits(input || '')
-    },
-    //   addToContacts() {
-    //     const query = new URLSearchParams()
-
-    //     if (this.user.firstName) query.set('firstname', this.user.firstName)
-
-    //     if (this.user.lastName) query.set('lastname', this.user.lastName)
-
-    //     if (this.user.email) query.set('email', this.user.email)
-
-    //     if (this.user.mobile) query.set('mobile', this.user.mobile)
-
-    //     if (this.user.occupation) query.set('occupation', this.user.occupation)
-
-    //     console.log(query.toString)
-
-    //     window.open('http://194.5.205.148:3000/?' + query.toString())
-    //   },
-  },
+    }
+  }
 })
 </script>

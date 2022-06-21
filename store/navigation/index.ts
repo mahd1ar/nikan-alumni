@@ -490,11 +490,23 @@ const initialState = {
       items: [
         {
           type: 'tel',
-          title: '22631250',
+          title: '02122631250',
+        },
+        {
+          type: 'tel',
+          title: '02122631787',
+        },
+        {
+          type: 'tel',
+          title: '02178169000',
         },
         {
           type: 'tel',
           title: '09203179823',
+        },
+        {
+          type: 'email',
+          title: 'nikanalumni@gmail.com',
         },
         {
           type: 'text',

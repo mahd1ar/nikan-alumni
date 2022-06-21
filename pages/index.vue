@@ -1354,7 +1354,7 @@ export default Vue.extend({
           subject: i?.title || '',
           cat: i?.categories?.nodes?.map((j) => j?.name).join(' . ') || '',
           speaker: i?.speakers?.speakers || '',
-          url: res[0].replace('nikan-alumni.com', 'visionquest.ir'),
+          url: res[0],
         }
         this.media.push(v)
       }
