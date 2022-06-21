@@ -2,7 +2,6 @@
   <div dir="rtl" class="">
     <!-- hero section -->
     <div class="flex  w-full flex-col">
-      <!-- <nuxt-link to="login">++++</nuxt-link> -->
       <div class="relative flex h-full w-full flex-col">
         <div class="relative h-full">
           <!-- <img class="absolute top-0 left-0 h-full w-full object-cover object-bottom"
@@ -1323,91 +1322,99 @@ export default Vue.extend({
   },
   async fetch() {
     const variables: HomeQueryVariables = { first: 4, first1: 4 }
-    const { data } = await this.$apollo.query<HomeQuery>({
-      query: homegql,
-      variables,
-    })
 
-    if (data.category?.contentNodes){
-
-      data.category.contentNodes.edges?.forEach((i) => {
-        this.news.push({
-          // @ts-ignore
-          title: i?.node?.title || '',
-          // @ts-ignore
-          date: wordpressDateToFormattedJalali(i!.node!.date),
-          // @ts-ignore
-          image: i?.node?.featuredImage.node.mediaItemUrl || '',
-          // @ts-ignore
-          id: i?.node!.id!,
-        })
+try {
+  
+      const { data } = await this.$apollo.query<HomeQuery>({
+        query: homegql,
+        variables,
       })
-    }else this.$nuxt.error({statusCode : 500 })
-
-    data.videos?.nodes?.forEach((i) => {
-      if (i?.content) {
-        const reg = /https?:\/\/.*\.mp4/
-        const res = reg.exec(i.content)
-        if (res === null) return
-
-        const v = {
-          subject: i?.title || '',
-          cat: i?.categories?.nodes?.map((j) => j?.name).join(' . ') || '',
-          speaker: i?.speakers?.speakers || '',
-          url: res[0],
+  
+      if (data.category?.contentNodes){
+  
+        data.category.contentNodes.edges?.forEach((i) => {
+          this.news.push({
+            // @ts-ignore
+            title: i?.node?.title || '',
+            // @ts-ignore
+            date: wordpressDateToFormattedJalali(i!.node!.date),
+            // @ts-ignore
+            image: i?.node?.featuredImage.node.mediaItemUrl || '',
+            // @ts-ignore
+            id: i?.node!.id!,
+          })
+        })
+      }else this.$nuxt.error({statusCode : 500 })
+  
+      data.videos?.nodes?.forEach((i) => {
+        if (i?.content) {
+          const reg = /https?:\/\/.*\.mp4/
+          const res = reg.exec(i.content)
+          if (res === null) return
+  
+          const v = {
+            subject: i?.title || '',
+            cat: i?.categories?.nodes?.map((j) => j?.name).join(' . ') || '',
+            speaker: i?.speakers?.speakers || '',
+            url: res[0],
+          }
+          this.media.push(v)
         }
-        this.media.push(v)
-      }
-    })
-
-    data.events?.nodes?.forEach((i) => {
-      const ev = {} as Event
-
-      ev.id = i!.databaseId
-      ev.gqlid = i!.id
-      // @ts-ignore
-      ev.link = encodeURIComponent(i!.id)
-      ev.title = i?.title || ''
-      ev.imageLink = i?.featuredImage?.node?.sourceUrl || ''
-      ev.commentCount = i?.commentCount
-        ? toIndiaDigits(i.commentCount)
-        : toIndiaDigits(0)
-      ev.wpdate = i!.date!
-      ev.date = wordpressDateToJalali(i!.date!)
-        .map((i) => toIndiaDigits(i))
-        .join('/')
-      ev.faFormattedDate = wordpressDateToFormattedJalali(i!.date!)
-      ev.duration = i?.eventProps?.duration || 0
-      ev.location = i?.eventProps?.venue || ''
-
-      const startingFrom = ~~(new Date(ev.wpdate).getTime() / 1000)
-      const now = ~~(Date.now() / 1000)
-      const duration = ev.duration * 24 * 3600
-      let status: EventStatus
-
-      if (startingFrom > now) {
-        status = EventStatus.ahead
-      } else if (startingFrom + duration > now) {
-        status = EventStatus.current
-      } else {
-        status = EventStatus.passed
-      }
-
-      ev.eventStatus = status
-
-      ev.content = i?.content ? htmlStrip(i.content) : ''
-      ev.category = i?.categories?.edges
-        ? i.categories.edges
-            .filter(
-              (j) =>
-                j && !!j.node?.name && j.node.name.search('کارگروه ها') === -1
-            )
-            .map((j) => j!.node!.name)
-            .join('-')
-        : ''
-      this.events.push(ev)
-      if (ev.eventStatus === EventStatus.current) this.upcommingEvents.push(ev)
-    })
+      })
+  
+      data.events?.nodes?.forEach((i) => {
+        const ev = {} as Event
+  
+        ev.id = i!.databaseId
+        ev.gqlid = i!.id
+        // @ts-ignore
+        ev.link = encodeURIComponent(i!.id)
+        ev.title = i?.title || ''
+        ev.imageLink = i?.featuredImage?.node?.sourceUrl || ''
+        ev.commentCount = i?.commentCount
+          ? toIndiaDigits(i.commentCount)
+          : toIndiaDigits(0)
+        ev.wpdate = i!.date!
+        ev.date = wordpressDateToJalali(i!.date!)
+          .map((i) => toIndiaDigits(i))
+          .join('/')
+        ev.faFormattedDate = wordpressDateToFormattedJalali(i!.date!)
+        ev.duration = i?.eventProps?.duration || 0
+        ev.location = i?.eventProps?.venue || ''
+  
+        const startingFrom = ~~(new Date(ev.wpdate).getTime() / 1000)
+        const now = ~~(Date.now() / 1000)
+        const duration = ev.duration * 24 * 3600
+        let status: EventStatus
+  
+        if (startingFrom > now) {
+          status = EventStatus.ahead
+        } else if (startingFrom + duration > now) {
+          status = EventStatus.current
+        } else {
+          status = EventStatus.passed
+        }
+  
+        ev.eventStatus = status
+  
+        ev.content = i?.content ? htmlStrip(i.content) : ''
+        ev.category = i?.categories?.edges
+          ? i.categories.edges
+              .filter(
+                (j) =>
+                  j && !!j.node?.name && j.node.name.search('کارگروه ها') === -1
+              )
+              .map((j) => j!.node!.name)
+              .join('-')
+          : ''
+        this.events.push(ev)
+        if (ev.eventStatus === EventStatus.current) this.upcommingEvents.push(ev)
+      })
+  
+} catch (error) {
+  console.log("firs page not loaded ")
+  console.log(error)
+}
   },
   computed: {
     ...mapGetters({

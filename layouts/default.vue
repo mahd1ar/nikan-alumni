@@ -42,11 +42,11 @@
         class="fixed inset-0 z-20 h-full w-full"
       >
         <!-- overlay -->
-        <dir
+        <div
           id="mmenu__overlay"
           class="absolute top-0 left-0 m-0 h-full w-full bg-black bg-opacity-30"
           @click.stop="closeMobileMenu"
-        ></dir>
+        ></div>
         <!-- @click.stop="closeMobileMenu" -->
         <div
           id="mmenu__cart"
@@ -520,7 +520,7 @@
         </nav>
       </transition>
 
-      <Nuxt class="flex-1" @error="nuxtonError" />
+      <Nuxt class="flex-1 bg-white" @error="nuxtonError" />
     </div>
   </div>
 </template>
