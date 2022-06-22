@@ -361,14 +361,6 @@
               class="rigth-0 absolute top-0 bottom-0 hidden w-1/5 bg-gradient-to-l from-black md:block"
             ></div>
 
-            <!-- <img
-          width="2250"
-          height="1500"
-          src="https://ncmaz.chisnghiax.com/wp-content/uploads/2021/09/pexels-photo-2339009-2.jpeg"
-          class="block w-full h-full object-cover wp-post-image"
-          alt=""
-          loading="lazy"
-        /> -->
             <img
               v-if="event.imageLink"
               :src="event.imageLink"
@@ -699,8 +691,10 @@ export default Vue.extend({
             this.modal.isOpen = true
             this.modal.title = 'موفقیت آمیز'
             this.modal.body =
-              'ثبت نام شما در رویداد' +
+              ' ثبت نام شما در رویداد' +
+              "<b>" +
               this.event.title +
+              "</b>" +
               'موفقیت آمیز بود ' +
               '<br />' +
               'به امید دیدار شما در این رویداد'

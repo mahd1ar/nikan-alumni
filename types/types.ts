@@ -9655,7 +9655,7 @@ export type CategoryVideosQueryVariables = Exact<{
 }>;
 
 
-export type CategoryVideosQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, databaseId: number, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, children?: { __typename?: 'CategoryToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null } | null> | null } | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', id: string, databaseId: number, title?: string | null, date?: string | null, featuredImageId?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null> | null } | null } | null };
+export type CategoryVideosQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, databaseId: number, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, children?: { __typename?: 'CategoryToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null } | null> | null } | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', id: string, databaseId: number, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', id: string, sourceUrl?: string | null } | null } | null } | null> | null } | null } | null };
 
 export type EventParticipantsQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -9731,7 +9731,7 @@ export type VideoQueryVariables = Exact<{
 }>;
 
 
-export type VideoQuery = { __typename?: 'RootQuery', video?: { __typename?: 'Video', id: string, content?: string | null, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, categories?: { __typename?: 'VideoToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null, databaseId: number, id: string } | null> | null } | null } | null };
+export type VideoQuery = { __typename?: 'RootQuery', video?: { __typename?: 'Video', id: string, content?: string | null, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', sourceUrl?: string | null } | null } | null, categories?: { __typename?: 'VideoToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null, databaseId: number, id: string } | null> | null } | null } | null };
 
 export type VideosAllQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -9746,4 +9746,4 @@ export type VideosQueryVariables = Exact<{
 }>;
 
 
-export type VideosQuery = { __typename?: 'RootQuery', categories?: { __typename?: 'RootQueryToCategoryConnection', edges?: Array<{ __typename?: 'RootQueryToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null, slug?: string | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', content?: string | null, id: string, databaseId: number, date?: string | null, title?: string | null, featuredImageId?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null } | null> | null } | null } | null } | null> | null } | null };
+export type VideosQuery = { __typename?: 'RootQuery', categories?: { __typename?: 'RootQueryToCategoryConnection', edges?: Array<{ __typename?: 'RootQueryToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null, slug?: string | null, videos?: { __typename?: 'CategoryToVideoConnection', nodes?: Array<{ __typename?: 'Video', content?: string | null, id: string, databaseId: number, date?: string | null, title?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', id: string, sourceUrl?: string | null } | null } | null } | null> | null } | null } | null } | null> | null } | null };

@@ -11,12 +11,6 @@ query categoryVideos($id: ID = "uncategorized", $first: Int = 10) {
         slug
       }
     }
-    # categoryAttrs {
-    #   categoryAttrs {
-    #     altText
-    #     sourceUrl
-    #   }
-    # }
     description
     videos(first: $first) {
       nodes {
@@ -27,12 +21,12 @@ query categoryVideos($id: ID = "uncategorized", $first: Int = 10) {
         speakers {
           speakers
         }
-        featuredImageId
-        # featuredImage {
-        #   node {
-        #     srcSet(size: LARGE)
-        #   }
-        # }
+        featuredImage {
+          node {
+            id
+            sourceUrl
+          }
+        }
       }
     }
   }

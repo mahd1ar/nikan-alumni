@@ -7,6 +7,11 @@ query video($id: ID!, $first: Int = 3, $idType: VideoIdType = ID) {
     speakers {
       speakers
     }
+    featuredImage {
+      node {
+        sourceUrl
+      }
+    }
     categories(first: $first) {
       nodes {
         name

@@ -13,6 +13,7 @@
                   :src="video.src"
                   size="720"
                   format="video/mp4"
+                  :data-poster="video.poster"
                 ></video>
               </vue-plyr>
             </div>
@@ -116,6 +117,7 @@ export default Vue.extend({
     }
   },
   async fetch() {
+    
     const videoId = this.$route.params.id
     if (!videoId) {
       this.$nuxt.error({ statusCode: 404, message: 'err.message' })
@@ -134,6 +136,7 @@ export default Vue.extend({
       this.video.id = data.video.id
       this.video.title = data.video.title || ''
       this.video.content = data.video.content || ''
+      this.video.poster = data.video.featuredImage?.node?.sourceUrl || ''
       this.video.date = data.video.date
         ? wordpressDateToFormattedJalali(data.video.date).join(' / ')
         : ''
@@ -161,6 +164,7 @@ export default Vue.extend({
         this.video.content.replace(/<figure .*figure>/g, '')
       }
     } else this.$nuxt.error({ statusCode: 404, message: 'not found' })
+
   },
 
   mounted(): void {

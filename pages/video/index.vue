@@ -52,6 +52,9 @@
           </div>
         </div>
       </div>
+      <client-only>
+
+      
       <div class="container mx-auto flex">
         <!-- <div v-if="hash === ''" class="py-6"> -->
         <div
@@ -218,6 +221,8 @@
           </div>
         </div>
       </div>
+      </client-only>
+
     </div>
   </div>
 </template>
@@ -266,7 +271,9 @@ export default Vue.extend({
     }
   },
   async fetch() {
+    
     if (this.hash === '') await this.getHome()
+    // TODO ssr problem with hash
     else await this.getContentsByCategory(this.hash)
   },
   computed: {
@@ -381,7 +388,7 @@ export default Vue.extend({
 
               // FIX NEXT LINE LATER
               // TODO : id should be used in url
-              v.poster = vid.featuredImageId || undefined
+              v.poster = vid.featuredImage?.node?.sourceUrl || ""
 
               if (vid.content) {
                 const matched = vid.content!.match(/<video.*src="(.+)"/)
@@ -415,6 +422,7 @@ export default Vue.extend({
       })
     },
     async getContentsByCategory(slug: string) {
+      console.log("hash is" , this.hash)
       const variables: CategoryVideosQueryVariables = { id: slug, first: 20 }
       const { data } = await this.$apollo.query<CategoryVideosQuery>({
         query: mediacatquery,
@@ -441,7 +449,7 @@ export default Vue.extend({
 
         // FIX NEXT LINE LATER
         // TODO : id should be used in url
-        v.poster = vid.featuredImageId || undefined
+        v.poster = vid.featuredImage?.node?.sourceUrl || undefined
 
         v.duration = ''
         v.loaded = false

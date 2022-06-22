@@ -158,7 +158,7 @@
       </client-only>
 
       <div
-        v-show="events.length === 0 && !$fetchState.pending"
+        v-show="events.length === 0 && !pending"
         class="mt-10 text-center text-gray-400"
       >
         هیچ رویدادی وجود ندارد
@@ -170,10 +170,11 @@
 <script lang="ts">
 import Vue from 'vue'
 
+import fetchApi from '@wordpress/api-fetch';
 import onLoggedOut from '@/mixins/on-logged-out'
 import { Dict } from '~/data/utils/dictionary'
 import { wordpressDateToJalali } from '~/data/utils'
-import { WPapi } from '~/data/GlobslTypes'
+import { WPapi } from '~/data/GlobslTypes';
 
 interface Event {
   id: number | string
@@ -193,15 +194,23 @@ export default Vue.extend({
   middleware: ['authentication'],
   data() {
     return {
+      pending : true,
       cutdown: [] as [number, number, number][],
       events: [] as Event[],
     }
   },
-  async fetch() {
-    try {
-      const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject[]>(
-        '/wp-json/myplugin/v1/upcommingevent'
-      )
+
+  mounted() {
+    // @ts-ignore
+    window.events = this
+
+    this.fetch()
+  },
+
+  methods: {
+    async fetch(){
+   try {
+      const data  = await fetchApi <WPapi.upcommingEvent.RootObject[]>({ path : 'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent'})
 
       console.log(data)
       this.events.splice(0, this.events.length)
@@ -222,14 +231,10 @@ export default Vue.extend({
     } catch (error) {
       this.$about.error({ title: Dict.fetch_err, body: String(error) })
       console.error(error)
+    } finally{
+      this.pending = false
+    }
     }
   },
-
-  mounted() {
-    // @ts-ignore
-    window.events = this
-  },
-
-  methods: {},
 })
 </script>

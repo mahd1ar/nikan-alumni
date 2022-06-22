@@ -480,9 +480,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import MapPicker from '~/components/form/MapPicker.vue'
 import { UserFullProfile, WPapi } from '~/data/GlobslTypes'
 import { LocationHandler, MiscHandler, toIndiaDigits } from '~/data/utils'
+
 
 export default Vue.extend({
   components: {
@@ -545,6 +547,11 @@ export default Vue.extend({
 
     this.user.website = data.user_url
   },
+  head() : MetaInfo {
+  return {
+    title : this.user.lastName
+  }  
+  },
   computed: {
     contact() {
       const query = new URLSearchParams()
@@ -563,8 +570,6 @@ export default Vue.extend({
     }
   },
   mounted() {
-
-
     this.$nextTick(() => {
       this.loaded = true
     })

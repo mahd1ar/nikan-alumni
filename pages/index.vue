@@ -1268,6 +1268,7 @@ import { Dict } from '~/data/utils/dictionary'
 import homegql from '@/apollo/queries/home.gql'
 import { HomeQuery, HomeQueryVariables } from '~/types/types'
 import { Event, EventStatus, WPapi } from '@/data/GlobslTypes'
+import apiFetch from '@wordpress/api-fetch';
 
 export default Vue.extend({
   name: 'IndexPage',
@@ -1487,9 +1488,10 @@ try {
       try {
         if (this.upcommingEvents.length > 0) return
 
-        const { data } = await this.$axios.get<
-          WPapi.upcommingEvent.RootObject[]
-        >('/wp-json/myplugin/v1/upcommingevent')
+const data = await  apiFetch<WPapi.upcommingEvent.RootObject[]>( { path: 'https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent' } )
+
+
+    
 
         const d: Event[] = data
           .map((e) => ({
