@@ -1110,8 +1110,8 @@
                     ref="plyr"
                     :options="playerOptions"
                   >
-                    <!-- data-poster="https://dummyimage.com/300x300" -->
                     <video
+                    :data-poster="media[mediaIndex].poster"
                       controls
                       crossorigin
                       playsinline
@@ -1303,7 +1303,8 @@ export default Vue.extend({
         subject: string
         cat: string
         speaker: string
-        url: string
+        url: string,
+        poster : string
       }[],
       playerOptions: {
         controls: [
@@ -1357,7 +1358,9 @@ try {
             cat: i?.categories?.nodes?.map((j) => j?.name).join(' . ') || '',
             speaker: i?.speakers?.speakers || '',
             url: res[0],
+            poster : i.featuredImage?.node?.sourceUrl || ""
           }
+          
           this.media.push(v)
         }
       })
