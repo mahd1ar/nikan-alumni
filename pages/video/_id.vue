@@ -2,32 +2,42 @@
   <section dir="rtl" class="body-font relative bg-slate-800 text-gray-900">
     <div class="container relative mx-auto flex flex-col gap-4">
       <div class="flex flex-col items-start gap-2 lg:flex-row">
-        <div class="w-full bg-cyan-600 bg-opacity-5 lg:w-8/12">
-          <client-only>
-            <div class="aspect-video">
-              <vue-plyr ref="plyr" :options="playerOptions">
-                <video
-                  controls
-                  crossorigin
-                  playsinline
-                  :src="video.src"
-                  size="720"
-                  format="video/mp4"
-                  :data-poster="video.poster"
-                ></video>
-              </vue-plyr>
+        <div  class="w-full bg-cyan-600 bg-opacity-5 lg:w-8/12">
+          <transition name="v-openwindow">
+            <div v-if="$fetchState.pending === false" >
+  
+              <client-only>
+                <div class="aspect-video">
+                  <vue-plyr ref="plyr" :options="playerOptions">
+                    <video
+                      controls
+                      crossorigin
+                      playsinline
+                      :src="video.src"
+                      size="720"
+                      format="video/mp4"
+                      :data-poster="video.poster"
+                    ></video>
+                  </vue-plyr>
+                </div>
+              </client-only>
+              <div class="p-4">
+                <h1
+                  class="mt-5 flex h-20 items-center text-3xl leading-10 text-cyan-300"
+                >
+                  {{ video.title }}
+                </h1>
+                <p class="text-lg text-white">
+                  {{ video.speakers }}
+                </p>
+              </div>
             </div>
-          </client-only>
-          <div class="p-4">
-            <h1
-              class="mt-5 flex h-20 items-center text-3xl leading-10 text-cyan-300"
-            >
-              {{ video.title }}
-            </h1>
-            <p class="text-lg text-white">
-              {{ video.speakers }}
-            </p>
-          </div>
+            <div v-else class="w-full h-full flex-center p-10" >
+  
+              <loading-indicator :showif="true"  ></loading-indicator>
+            </div>
+
+          </transition>
         </div>
 
         <div class="flex w-full mt-4 flex-col text-cyan-50 lg:w-4/12">
@@ -130,8 +140,10 @@ export default Vue.extend({
     const { data } = await this.$apollo.query<VideoQuery>({
       query: videogql,
       variables,
+      fetchPolicy : "network-only"
     })
-
+console.log('data')
+console.log(data)
     if (data.video) {
       this.video.id = data.video.id
       this.video.title = data.video.title || ''
