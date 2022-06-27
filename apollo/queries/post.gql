@@ -3,7 +3,13 @@ query Post($idType: PostIdType = DATABASE_ID, $id: ID = "1", $first: Int = 10) {
     id
     slug
     title
-    featuredImageId
+    featuredImage {
+      node {
+        altText
+        id
+        sourceUrl
+      }
+    }
     date
     content(format: RENDERED)
     categories(first: $first) {

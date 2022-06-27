@@ -9714,7 +9714,7 @@ export type PostQueryVariables = Exact<{
 }>;
 
 
-export type PostQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, slug?: string | null, title?: string | null, featuredImageId?: string | null, date?: string | null, content?: string | null, categories?: { __typename?: 'PostToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, link?: string | null, slug?: string | null } | null> | null } | null } | null };
+export type PostQuery = { __typename?: 'RootQuery', post?: { __typename?: 'Post', id: string, slug?: string | null, title?: string | null, date?: string | null, content?: string | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, id: string, sourceUrl?: string | null } | null } | null, categories?: { __typename?: 'PostToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, link?: string | null, slug?: string | null } | null> | null } | null } | null };
 
 export type PostsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -9731,7 +9731,7 @@ export type VideoQueryVariables = Exact<{
 }>;
 
 
-export type VideoQuery = { __typename?: 'RootQuery', video?: { __typename?: 'Video', id: string, content?: string | null, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', sourceUrl?: string | null } | null } | null, categories?: { __typename?: 'VideoToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null, databaseId: number, id: string } | null> | null } | null } | null };
+export type VideoQuery = { __typename?: 'RootQuery', video?: { __typename?: 'Video', id: string, content?: string | null, title?: string | null, date?: string | null, speakers?: { __typename?: 'Video_Speakers', speakers?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', id: string, sourceUrl?: string | null } | null } | null, categories?: { __typename?: 'VideoToCategoryConnection', nodes?: Array<{ __typename?: 'Category', name?: string | null, slug?: string | null, databaseId: number, id: string } | null> | null } | null } | null };
 
 export type VideosAllQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
