@@ -1,5 +1,5 @@
 <template>
-<div class="fixed inset-x-0 bottom-0" dir="rtl" >
+<div class="fixed inset-x-0 bottom-0 z-20" dir="rtl" >
     <transition name="v-openwindow" >
 
         <div v-if="show" class="relative px-4 py-3 text-white bg-indigo-600 pr-14">
