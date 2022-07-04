@@ -391,30 +391,30 @@ const initialState = {
       href: '/video',
       svg: SVG.MEDIA,
       submenu: [
-        { hasSubmenu: false, href: '/video#ted', title: 'تد نیکان', svg: '' },
+        { hasSubmenu: false, href: '/video?category=ted', title: 'تد نیکان', svg: '' },
         {
           hasSubmenu: false,
-          href: '/video#business-challenges',
+          href: '/video?category=business-challenges',
           title: 'چالش های کسب و کار',
           svg: '',
         },
         {
           hasSubmenu: false,
-          href: '/video#medical-discussion',
+          href: '/video?category=medical-discussion',
           title: 'بحث های پزشکی',
           svg: '',
         },
-        { hasSubmenu: false, href: '/video#karbarg', title: 'کاربرگ', svg: '' },
+        { hasSubmenu: false, href: '/video?category=karbarg', title: 'کاربرگ', svg: '' },
         {
           hasSubmenu: false,
-          href: '/video#clubinar',
+          href: '/video?category=clubinar',
           title: 'کلابینار',
           svg: '',
         },
-        { hasSubmenu: false, href: '/video#live', title: 'لایوها', svg: '' },
+        { hasSubmenu: false, href: '/video?category=live', title: 'لایوها', svg: '' },
         {
           hasSubmenu: false,
-          href: '/video#nikasar',
+          href: '/video?category=nikasar',
           title: 'نیک اثار',
           svg: '',
         },
@@ -511,8 +511,8 @@ const initialState = {
         {
           type: 'text',
           title: `
-          الهیه، خیابان فیاضی (فرشته)، خیابان چناران، پلاک ۳/۲، طبقه
-          اول.
+          الهیه، خیابان فیاضی (فرشته)، خیابان چناران، پلاک ۳/۲، طبقه اول.
+طبقه همکف
           `,
         },
       ],
@@ -618,7 +618,7 @@ export const actions: ActionTree<RootState, RootState> = {
     const submenus = items.map((item) => {
       const m: Menu = {
         hasSubmenu: false,
-        href: '/video#' + item.slug,
+        href: '/video?category=' + item.slug,
         title: item.name,
         svg: '',
       }

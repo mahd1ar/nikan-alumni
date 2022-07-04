@@ -520,6 +520,9 @@
         </nav>
       </transition>
 
+      <!-- announcement -->
+      <announcement :show.sync="announcement.show" :title="announcement.title" :link="announcement.link" />
+
       <Nuxt class="flex-1 bg-white" @error="nuxtonError" />
     </div>
   </div>
@@ -530,6 +533,8 @@ import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 // @ts-ignore
 import vClickOutside from 'v-click-outside'
+import apiFetch from '@wordpress/api-fetch'
+import { WPapi } from '~/data/GlobslTypes'
 
 export default Vue.extend({
   // eslint-disable-next-line vue/multi-word-component-names
@@ -539,6 +544,11 @@ export default Vue.extend({
   },
   data() {
     return {
+      announcement : {
+        show : false,
+        title : "",
+        link : ""
+      },
       menuConfirm: {
         show: false,
       },
@@ -591,7 +601,7 @@ export default Vue.extend({
   created() {
     this.mobileMenu.selected.push(1)
   },
-  mounted() {
+  async mounted() {
     // remove fucking service worker
     navigator.serviceWorker
       .getRegistrations()
@@ -604,7 +614,27 @@ export default Vue.extend({
         console.log('Service Worker registration failed: ', err)
       })
     // @ts-ignore
-    window.mm = this
+    window.mm = this;
+
+     try {
+
+        const data = await apiFetch<WPapi.stdPost.RootObject[]>({ path: 'https://nikan-alumni.org/wp-json/wp/v2/posts?sticky=true' })
+
+if(data && data[0]){
+  const pagelink = '/post/' + btoa( 'post:' + data[0].id)
+  if(this.$route.path === pagelink) return
+  
+  this.announcement.show = true ;
+  this.announcement.title = data[0].title.rendered ;
+  this.announcement.link = pagelink
+}else{
+  this.announcement.show = false
+}
+
+
+      } catch (error) {
+       console.log(error)
+      }
   },
 
   methods: {

@@ -14,15 +14,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
+import { MetaInfo } from 'vue-meta'
 import { EventQueryVariables, EventQuery } from '@/types/types'
 import eventgql from '@/apollo/queries/event.gql'
 import { Event, EventStatus } from '@/data/GlobslTypes'
 import {
+htmlStrip,
   toIndiaDigits,
   wordpressDateToFormattedJalali,
   wordpressDateToJalali,
 } from '~/data/utils'
 import eventPage from '@/components/pages/event.vue'
+
 export default Vue.extend({
   components: {
     eventPage,
@@ -80,6 +83,27 @@ export default Vue.extend({
       event.eventStatus = status
       this.event = event
     } else throw new Error('cannot get contents from url')
+  },
+  head(): MetaInfo {
+    const data = {
+      title: this.event.title + ' | ' + 'کانون دانش آموختگان نیکان',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: htmlStrip(this.event.content || "" ).replace(/[\n\t\s]/g,' ').substring(0,60) + "...",
+        },
+      ],
+    }
+        const image = {
+            property : "og:image" ,
+            content : this.event.imageLink 
+        }
+
+        if(this.event.imageLink)
+        // @ts-ignore
+        data.meta.push(image)
+    return data
   },
   computed: {
     ...mapGetters({

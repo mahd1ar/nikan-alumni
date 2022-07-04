@@ -58,8 +58,8 @@
       <div class="container mx-auto flex">
         <!-- <div v-if="hash === ''" class="py-6"> -->
         <div
-          class="flex-center text-gray-500 w-full h-16"
           v-if="$fetchState.pending"
+          class="flex-center text-gray-500 w-full h-16"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -229,6 +229,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import mediaquery from '@/apollo/queries/videos.gql'
 import mediacatquery from '@/apollo/queries/category-videos.gql'
 import {
@@ -276,9 +277,14 @@ export default Vue.extend({
     // TODO ssr problem with hash
     else await this.getContentsByCategory(this.hash)
   },
+    head(): MetaInfo {
+    return {
+      title: "آرشیو ویدیو نیکان" + ' | ' + 'کانون دانش آموختگان نیکان',
+    }
+  },
   computed: {
     hash() {
-      return this.$route.hash.replace('#', '')
+      return this.$route.query.category as string
     },
     categories(): navbarState['menu'] {
       const x = (this.$store.state.navigation as navbarState).menu.find(
@@ -327,8 +333,9 @@ export default Vue.extend({
     },
 
     selectedCategory(): string {
+  
       return this.categories.find(
-        (cat) => cat.href.replace(/(\/|#|(video))/g, '') === this.hash
+        (cat) => new URL ( "https://x.com" + cat.href).searchParams.get('category') === this.hash
       )!.title
     },
   },

@@ -63,6 +63,8 @@ export interface UserFullProfile {
   socialMedias: SupportedSocialMedias
 }
 
+
+
 export namespace WPapi {
   export namespace categories {
 
@@ -367,6 +369,125 @@ export namespace WPapi {
       avatar: string;
       description: string;
       occupation: string;
+    }
+
+  }
+
+
+  export namespace stdPost {
+
+
+    interface Guid {
+      rendered: string;
+    }
+
+    interface Title {
+      rendered: string;
+    }
+
+    interface Content {
+      rendered: string;
+      protected: boolean;
+    }
+
+    interface Excerpt {
+      rendered: string;
+      protected: boolean;
+    }
+
+    interface Self {
+      href: string;
+    }
+
+    interface Collection {
+      href: string;
+    }
+
+    interface About {
+      href: string;
+    }
+
+    interface Author {
+      embeddable: boolean;
+      href: string;
+    }
+
+    interface Reply {
+      embeddable: boolean;
+      href: string;
+    }
+
+    interface Version_history {
+      count: number;
+      href: string;
+    }
+
+    interface Predecessor_version {
+      id: number;
+      href: string;
+    }
+
+    interface Wp_featuredmedia {
+      embeddable: boolean;
+      href: string;
+    }
+
+    interface Wp_attachment {
+      href: string;
+    }
+
+    interface Wp_term {
+      taxonomy: string;
+      embeddable: boolean;
+      href: string;
+    }
+
+    interface Cury {
+      name: string;
+      href: string;
+      templated: boolean;
+    }
+
+    interface _link {
+      self: Self[];
+      collection: Collection[];
+      about: About[];
+      author: Author[];
+      replies: Reply[];
+      'version-history': Version_history[];
+      'predecessor_version': Predecessor_version[];
+      'wp:featuredmedia': Wp_featuredmedia[];
+      'wp:attachment': Wp_attachment[];
+      'wp:term': Wp_term[];
+      curies: Cury[];
+    }
+
+    export interface RootObject {
+      id: number;
+      date: string;
+      date_gmt: string;
+      guid: Guid;
+      modified: string;
+      modified_gmt: string;
+      slug: string;
+      status: string;
+      type: string;
+      link: string;
+      title: Title;
+      content: Content;
+      excerpt: Excerpt;
+      author: number;
+      featured_media: number;
+      comment_status: string;
+      ping_status: string;
+      sticky: boolean;
+      template: string;
+      format: string;
+      meta: any[];
+      categories: number[];
+      tags: any[];
+      acf: any[];
+      _links: _link;
     }
 
   }

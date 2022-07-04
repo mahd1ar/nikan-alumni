@@ -3,22 +3,22 @@
     <transition name="scale-up" @after-leave="closeViewer" @enter="enter">
       <div
         v-show="show"
-        class="z-20 fixed w-full h-full flex-center top-0 left-0"
+        class="flex-center fixed top-0 left-0 z-20 h-full w-full"
       >
         <!-- overlay -->
         <div
-          class="bg-gray-700 bg-opacity-90 absolute flex-center top-0 left-0 w-full h-full select-none"
+          class="flex-center absolute top-0 left-0 h-full w-full select-none bg-gray-700 bg-opacity-90"
         ></div>
 
         <!-- For mobile -->
         <div v-if="$device.isMobile" class="relative w-full">
-          <div class="snap-mandatory snap-x w-full flex overflow-auto">
+          <div class="flex w-full snap-x snap-mandatory overflow-auto">
             <div
               v-for="(img, index) in imgs"
               ref="image-item"
               :key="index"
               :style="{ '--count': index }"
-              class="snap-center w-11/12 flex-shrink-0"
+              class="w-11/12 flex-shrink-0 snap-center"
             >
               <img class="m-auto w-full" :src="img" />
             </div>
@@ -27,10 +27,10 @@
 
         <!-- for desktop -->
         <div v-else class="relative w-full select-none">
-          <div class="movable w-10/12 h-5/6 mx-auto" :style="{ '--count': 3 }">
+          <div class="movable mx-auto h-5/6 w-10/12" :style="{ '--count': 3 }">
             <img
               :style="{ transform: `scale(${scale})` }"
-              class="mx-auto max-w-full max-h-full object-cover will-change-transform transition-all duration-500"
+              class="mx-auto max-h-full max-w-full object-cover transition-all duration-500 will-change-transform"
               :src="imgs[imgIndex + diff]"
               alt=""
             />
@@ -39,13 +39,13 @@
 
         <!-- buttons -->
         <div
-          class="absolute cursor-pointer top-4 right-4 p-5 text-gray-500"
+          class="absolute top-4 right-4 cursor-pointer p-5 text-gray-500"
           @click="hide"
         >
           <svg
             aria-hidden="true"
             role="img"
-            class="w-10 h-10"
+            class="h-10 w-10"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 24 24"
           >
@@ -60,12 +60,12 @@
         <div
           v-if="$device.isDesktop"
           @click="next"
-          class="absolute cursor-pointer right-4 p-5 text-gray-500"
+          class="absolute right-4 cursor-pointer p-5 text-gray-500"
         >
           <svg
             aria-hidden="true"
             role="img"
-            class="w-10 h-10"
+            class="h-10 w-10"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 24 24"
           >
@@ -79,12 +79,12 @@
         <div
           @click="prv"
           v-if="$device.isDesktop"
-          class="absolute cursor-pointer left-4 p-5 text-gray-500"
+          class="absolute left-4 cursor-pointer p-5 text-gray-500"
         >
           <svg
             aria-hidden="true"
             role="img"
-            class="w-10 h-10 transform rotate-180"
+            class="h-10 w-10 rotate-180 transform"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 24 24"
           >
@@ -97,13 +97,13 @@
 
         <div
           v-if="$device.isDesktop"
-          class="absolute cursor-pointer border-l-0 transform translate-x-1/2 bottom-4 p-5 text-white bg-white bg-opacity-20 border"
+          class="absolute bottom-4 translate-x-1/2 transform cursor-pointer border border-l-0 bg-white bg-opacity-20 p-5 text-white"
           @click="zoomIn"
         >
           <svg
             aria-hidden="true"
             role="img"
-            class="w-5 h-5"
+            class="h-5 w-5"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 1024 1024"
           >
@@ -116,13 +116,13 @@
 
         <div
           v-if="$device.isDesktop"
-          class="absolute border-r-0 cursor-pointer transform -translate-x-1/2 bottom-4 p-5 text-white bg-white bg-opacity-20 border"
+          class="absolute bottom-4 -translate-x-1/2 transform cursor-pointer border border-r-0 bg-white bg-opacity-20 p-5 text-white"
           @click="zoomOut"
         >
           <svg
             aria-hidden="true"
             role="img"
-            class="w-5 h-5"
+            class="h-5 w-5"
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 1024 1024"
           >
@@ -179,7 +179,35 @@ export default Vue.extend({
       }
     },
   },
+  mounted() {
+    // document.onkeydown = checkKey;
+
+    document.addEventListener('keydown', this.checkKey)
+  },
+  destroyed() {
+    document.removeEventListener('keydown', this.checkKey)
+  },
   methods: {
+    checkKey(e: KeyboardEvent) {
+      if (this.show === false) return
+
+      e = e || window.event
+      console.log(e)
+      if (e.key === 'Escape') {
+        // scaped
+        this.show = false
+      } else if (e.keyCode === 38) {
+        // up arrow
+      } else if (e.keyCode === 40) {
+        // down arrow
+      } else if (e.keyCode === 37) {
+        // left arrow
+        this.prv()
+      } else if (e.keyCode === 39) {
+        // right arrow
+        this.next()
+      }
+    },
     enter() {
       if (this.imgIndex > -1 && this.$device.isMobile) {
         const divs = this.$refs['image-item'] as HTMLDivElement[]
