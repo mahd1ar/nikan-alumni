@@ -164,6 +164,7 @@ export const library = [
             },
             {
               title: 'هیٔت اجرایی دور اول',
+              link: '/page/22908',
             },
             {
               title: 'هیٔت اجرایی دور دوم',

@@ -52,6 +52,8 @@ props : {
 },
 methods: {
     close(){
+        // has taken action
+        window.sessionStorage.setItem('announcement:hashaction' , "true")
         this.$emit('update:show' , false)
     }
 }

@@ -616,25 +616,7 @@ export default Vue.extend({
     // @ts-ignore
     window.mm = this;
 
-     try {
-
-        const data = await apiFetch<WPapi.stdPost.RootObject[]>({ path: 'https://nikan-alumni.org/wp-json/wp/v2/posts?sticky=true' })
-
-if(data && data[0]){
-  const pagelink = '/post/' + btoa( 'post:' + data[0].id)
-  if(this.$route.path === pagelink) return
-  
-  this.announcement.show = true ;
-  this.announcement.title = data[0].title.rendered ;
-  this.announcement.link = pagelink
-}else{
-  this.announcement.show = false
-}
-
-
-      } catch (error) {
-       console.log(error)
-      }
+ this.getAnnouncement()
   },
 
   methods: {
@@ -662,12 +644,34 @@ if(data && data[0]){
       this.mobileMenu.selected.splice(level, level + 1)
       this.mobileMenu.selected.splice(level, 0, i)
     },
-
     toggleUserController(val?: boolean) {
       if (val === undefined)
         this.isOpenUserController = !this.isOpenUserController
       else this.isOpenUserController = val
     },
+  async  getAnnouncement(){
+    if(sessionStorage.getItem('announcement:hashaction') === 'true' )
+return
+
+    try {
+        const data = await apiFetch<WPapi.stdPost.RootObject[]>({ path: 'https://nikan-alumni.org/wp-json/wp/v2/posts?sticky=true' })
+
+if(data && data[0]){
+  const pagelink = '/post/' + btoa( 'post:' + data[0].id)
+  if(this.$route.path === pagelink) return
+
+  this.announcement.show = true ;
+  this.announcement.title = data[0].title.rendered ;
+  this.announcement.link = pagelink
+}else{
+  this.announcement.show = false
+}
+
+
+      } catch (error) {
+       console.log(error)
+      }
+    }
   },
 })
 </script>
