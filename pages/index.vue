@@ -445,8 +445,10 @@ class="mx-auto max-h-full w-2/3 rounded-md object-cover md:w-full"
                   <img class="aspect-square w-4/12 rounded object-cover" :src="n.image" alt="" />
                   <div class="w-8/12">
                     <span
-                      class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500">کارگروه
-                      کسب و کار</span>
+                    v-for="cat in n.category"
+                    :key="cat.id"
+                      class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500 mx-1">      {{ cat.title }}
+                      </span>
                     <h2 class="title-font mt-4 mb-4 text-xl font-medium text-gray-900">
                       {{ n.title }}
                     </h2>
@@ -548,14 +550,14 @@ fill="currentColor"
         <!-- mobile tabs -->
         <div class="md:hidden">
           <div class="flex-center">
-            <div class="mb-10 flex border-b border-gray-200">
+            <div class="mb-10 mt-5 flex border-b border-gray-200">
               <button
                 class="-mb-px flex h-10 items-center gap-2 whitespace-nowrap border-b-2 bg-transparent px-4 py-2 text-center text-sm focus:outline-none sm:text-base"
                 :class="
-                  tabIndex === 0
+                  tabIndex === 1
                     ? 'border-cyan-500  text-cyan-600'
                     : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
-                " @click="tabIndex = 0">
+                " @click="tabIndex = 1">
                 <svg
 xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                   preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
@@ -570,10 +572,10 @@ fill="currentColor"
               <button
                 class="-mb-px flex h-10 items-center gap-2 whitespace-nowrap border-b-2 bg-transparent px-4 py-2 text-center text-sm focus:outline-none sm:text-base"
                 :class="
-                  tabIndex === 1
+                  tabIndex === 0
                     ? 'border-cyan-500  text-cyan-600'
                     : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
-                " @click="tabIndex = 1">
+                " @click="tabIndex = 0">
                 <svg
 xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                   preserveAspectRatio="xMidYMid meet" viewBox="0 0 48 48">
@@ -643,8 +645,11 @@ fill="currentColor"
                 <div class="flex w-8/12 flex-col">
                   <div>
                     <span
-                      class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500">کارگروه
-                      کسب و کار</span>
+                    v-for="cat in n.category"
+                    :key="cat.id"
+                      class="inline-block rounded bg-cyan-50 py-1 px-2 text-xs font-medium tracking-widest text-cyan-500 mx-1">
+                      {{ cat.title }}
+                      </span>
                   </div>
                   <h2 class="title-font mt-4 mb-2 text-xl font-medium text-gray-900">
                     {{ n.title }}
@@ -950,7 +955,8 @@ export default Vue.extend({
         title: string
         date: string[]
         image: string
-        id: string
+        id: string,
+        category : {title : string , id : string , slug : string}[]
       }[],
       stats: {
         alumni: toIndiaDigits(4) + 'K',
@@ -990,10 +996,11 @@ export default Vue.extend({
         query: homegql,
         variables,
       })
-console.log(data)
+
       if (data.category?.contentNodes) {
 
         data.category.contentNodes.edges?.forEach((i) => {
+          
           this.news.push({
             // @ts-ignore
             title: i?.node?.title || '',
@@ -1001,8 +1008,10 @@ console.log(data)
             date: wordpressDateToFormattedJalali(i!.node!.date),
             // @ts-ignore
             image: i?.node?.featuredImage.node.mediaItemUrl || '',
-            // @ts-ignore
+      
             id: i?.node!.id!,
+            // @ts-ignore
+            category : (i?.node!.categories.nodes.map( c => ({id : c.id , title : c.name , slug : c.slug}) ) || []).filter(c => c.slug !== 'announcement')
           })
         })
       } else this.$nuxt.error({ statusCode: 500 })
@@ -1079,6 +1088,20 @@ console.log(data)
       console.log(error)
     }
   },
+  head : {
+    title : 'خانه | کانون دانش آموختگان نیکان',
+    meta : [
+      {
+        hid: 'description',
+        name: 'description',
+        content: `
+        کانون دانش آموختگان نیکان
+
+محلی است برای ارائه خدمات به دانش آموختگان مدرسه نیکان و ایجاد بستری برای شکوفایی و به اشتراک گذاری ظرفیت ها و توانمندی های ایشان در راستای اهداف کانون
+        `
+      }
+    ]
+  },
   computed: {
     ...mapGetters({
       isLoggedIn: 'authentication/isLoggedIn',
@@ -1108,9 +1131,20 @@ console.log(data)
     this.observer = Object.freeze(observer)
   },
   methods: {
-    async videoloaded() {
+    async videoloaded(numOfTry = 3) {
       if (this.$device.isMobile) return
 
+    try {
+     document.querySelector("video")?.play(); 
+    } catch (error) {
+      console.log(error);
+
+      if (numOfTry > 0){
+        await timeout(1000);
+        this.videoloaded(numOfTry - 1);
+      }
+      
+    }
       console.log('video loaded')
       await timeout(5000)
       import('animejs').then(({ default: anime }) => {
