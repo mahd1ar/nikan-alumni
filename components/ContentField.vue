@@ -202,6 +202,13 @@ export default Vue.extend({
   p {
     @apply text-lg leading-8;
   }
+
+  a {
+    @apply underline underline-offset-1;
+  }
+  hr {
+    @apply my-6;
+  }
 }
 // .content .wp-block-columns {
 //   @apply flex flex-col sm:flex-row;
@@ -276,6 +283,22 @@ export default Vue.extend({
 .wp-block-column.is-vertically-aligned-top {
   width: 100%;
 }
+
+.wp-block-separator{
+  border-top:1px solid;border-bottom:1px solid}
+  .wp-block-separator.is-style-dots{
+    background:none!important;
+    border:none;
+    text-align:center;
+    line-height:1;
+    height:auto
+    }
+  .wp-block-separator.is-style-dots:before{
+    content:"···";
+    color:currentColor;
+    font-size:1.5em;
+    letter-spacing:2em;padding-left:2em;font-family:serif}
+.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-right:auto;margin-left:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}
 
 .content .wp-block-column {
   flex-grow: 1;

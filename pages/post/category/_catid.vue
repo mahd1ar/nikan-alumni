@@ -95,25 +95,36 @@
           </div>
         </div>
       </div>
-          <loading-indicator :showif="$fetchState.pending" dark fullscreen />
+      <loading-indicator :showif="$fetchState.pending" dark fullscreen />
 
       <div v-if="$fetchState.pending === false" class="mt-10">
-        <div class="border-b pb-3 text-gray-600 mb-5" >  مطالب مربوط
-          :
-        </div>
-        <div
-          v-for="item in items"
-          :key="item.id"
-          class="shadow p-4 rounded-lg hover:shadow-xl border-r-8 border-cyan-500"
-        >
-          <nuxt-link :to="'/post/' + encodeURIComponent(item.id)" class="p-2">
-            <div class="text-2xl mb-4">{{ item.title }}</div>
-            <content-field
-              class="text-gray-500"
-              :html="item.content"
-              :is-excerpt="true"
-            />
-          </nuxt-link>
+        <div class="border-b pb-3 text-gray-600 mb-5">مطالب مربوط :</div>
+
+        <div class="flex flex-col gap-4">
+          <div
+            v-for="item in items"
+            :key="item.id"
+            class="shadow p-4 rounded-lg hover:shadow-xl border-r-8 border-cyan-500 flex flex-col-reverse sm:flex-row justify-between gap-4 sm:gap-0 "
+          >
+            <nuxt-link :to="'/post/' + encodeURIComponent(item.id)" class="p-2">
+              <div class="text-2xl mb-4">{{ item.title }}</div>
+              <content-field
+                class="text-gray-500 w-9/12"
+                :html="item.content"
+                :is-excerpt="true"
+              />
+            </nuxt-link>
+            <div
+              class="w-52 md:w-60 aspect-square flex-shrink-0 rounded-md shadow-2xl overflow-hidden"
+            >
+              <img
+                v-if="item.img"
+                :src="item.img"
+                :alt="item.imgalt"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -124,10 +135,10 @@
 import Vue from 'vue'
 import { CategoryPostsQuery, CategoryPostsQueryVariables } from '~/types/types'
 import postgql from '@/apollo/queries/category-posts.gql'
-import {  htmlStrip, wordpressDateToJalali } from '~/data/utils'
+import { htmlStrip, wordpressDateToJalali } from '~/data/utils'
 
 export default Vue.extend({
-  data() {
+  data () {
     return {
       title: '',
       count: 0,
@@ -137,38 +148,42 @@ export default Vue.extend({
         content: string
         id: string
         date: string
-      }[],
+        img: string
+        imgalt: string
+      }[]
     }
   },
-  async fetch() {
+  async fetch () {
     const catid = this.$route.params.catid
     const variables: CategoryPostsQueryVariables = {
       id: catid,
-      first: 20,
+      first: 20
     }
     const { data } = await this.$apollo.query<CategoryPostsQuery>({
       query: postgql,
       variables,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'network-only'
     })
-    console.log(data)
+
     if (data.category) {
       this.title = data.category.name || ''
       this.gqlid = data.category.id
       this.count = data.category.count || 0
       if (data.category.posts?.edges)
-        data.category.posts.edges.forEach((i) => {
+        data.category.posts.edges.forEach(i => {
           this.items.push({
             title: i?.node?.title || '',
-            content: i?.node?.content ?  htmlStrip(i?.node?.content) : '',
+            content: i?.node?.content ? htmlStrip(i?.node?.content) : '',
             id: i?.node?.id || '',
             date: i?.node?.date
               ? wordpressDateToJalali(i.node.date).join(' . ')
               : '',
+            img: i?.node?.featuredImage?.node?.sourceUrl || '',
+            imgalt:
+              i?.node?.featuredImage?.node?.altText || i?.node?.title || ''
           })
         })
-      
     } else this.$nuxt.error({ statusCode: 404 })
-  },
+  }
 })
 </script>

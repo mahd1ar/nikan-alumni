@@ -22,6 +22,7 @@ query categoryPosts($id: ID = "uncategorized", $first: Int = 10) {
             node {
               sourceUrl
               id
+              altText
             }
           }
         }
