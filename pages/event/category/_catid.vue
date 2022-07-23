@@ -15,49 +15,60 @@
         </p>
       </div>
     </div>
-    <div class="container mx-auto">
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
-        dir="rtl"
-      >
-        <div
-          v-for="(ev, index) in eventList"
-          :key="ev.id"
-          :style="{ '--count': index }"
-        >
+    <div class="container mx-auto pt-4">
+        <transition name="s-fade">
           <div
-            class="block overflow-hidden border border-gray-100 rounded-lg shadow-sm"
+            v-if="$fetchState.pending === false"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-end"
+            dir="rtl"
           >
-            <img
-              v-if="ev.imagelink"
-              class="object-cover w-full h-56"
-              :src="ev.imagelink"
-              alt=""
-            />
-
-            <div class="p-6">
-              <h5 class="text-xl font-bold">
-                {{ ev.title }}
-              </h5>
-
-              <content-field
-                class="mt-2 text-gray-500"
-                style="max-height: 80px; overflow: hidden"
-                :is-excerpt="true"
-                :html="ev.content"
-              />
-
-              <nuxt-link
-                :to="'/event/' + ev.gqlid"
-                class="inline-block pb-1 mt-4 font-medium text-blue-600 border-b border-blue-500"
+            <div
+              v-for="(ev, index) in eventList"
+              :key="ev.id"
+              :style="{ '--count': index }"
+            >
+              <div
+                class="block overflow-hidden border border-gray-100 rounded-lg shadow-sm  "
               >
-                ادامه مطلب
-                <span aria-hidden="true">&rarr;</span>
-              </nuxt-link>
+              <div
+              v-if="ev.imageLink"
+                class="w-full h-56 relative grayscale"
+              >
+    
+                <img class="object-cover w-full h-full"
+                  :src="ev.imageLink"
+                  :alt="ev.title"
+                />
+                <div aria-hidden="true" class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-white to-transparent" ></div>
+              </div>
+    
+                <div class="p-6 relative">
+                  <h5 class="text-xl font-bold"
+                  :class=" ev.imageLink ? 'absolute transform -translate-y-full px-6 w-full right-0' : null"
+                  >
+                    {{ ev.title }}
+                  </h5>
+    
+                  <content-field
+                    class="mt-2 text-gray-500"
+                    style="max-height: 80px; overflow: hidden"
+                    :is-excerpt="true"
+                    :html="ev.content"
+                  />
+    
+                  <nuxt-link
+                    :to="'/event/' + ev.gqlid"
+                    class="inline-block pb-1 mt-4 font-medium text-cyan-600 border-b border-cyan-500"
+                  >
+                    ادامه مطلب
+                    <span aria-hidden="true">&larr;</span>
+                  </nuxt-link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+
+        </transition>
     </div>
   </div>
 </template>
@@ -128,3 +139,28 @@ window.location.reload()
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.s-fade-enter-active,
+.s-fade-leave-active {
+  transition: all 1.8s ease;
+  transition-delay: 0.2s;
+  div {
+    transition: all 0.9s ease;
+    overflow: hidden;
+    opacity: 1;
+    transform: translateY(0%);
+    transition-delay: calc(var(--count) * 100ms);
+  }
+}
+.s-fade-enter, .s-fade-leave-to /* .s-fade-leave-active below version 2.1.8 */ {
+  div {
+    overflow: hidden;
+    transform: translateY(50px);
+    opacity: 0;
+  }
+}
+.s-fade-move {
+  transition: transform 0.2s;
+}
+</style>

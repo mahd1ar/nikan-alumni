@@ -21,6 +21,7 @@ query events($first: Int = 10) {
       }
       featuredImage {
         node {
+          id
           altText
           sourceUrl
         }

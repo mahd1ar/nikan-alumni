@@ -101,25 +101,26 @@
         <div class="border-b pb-3 text-gray-600 mb-5">مطالب مربوط :</div>
 
         <div class="flex flex-col gap-4">
-          <div
+          <nuxt-link
             v-for="item in items"
             :key="item.id"
+            :to="'/post/' + encodeURIComponent(item.id)"
             class="shadow p-4 rounded-lg hover:shadow-xl border-r-8 border-cyan-500 flex flex-col-reverse sm:flex-row justify-between gap-4 sm:gap-0 "
           >
-            <nuxt-link :to="'/post/' + encodeURIComponent(item.id)" class="p-2">
+            <div class="p-2">
               <div class="text-2xl mb-4">{{ item.title }}</div>
               <content-field
                 class="text-gray-500 w-9/12"
                 :html="item.content"
                 :is-excerpt="true"
               />
-            </nuxt-link>
+            </div>
             <div
               class="w-52 md:w-60 aspect-square flex-shrink-0 rounded-md shadow-2xl overflow-hidden"
             >
               <img v-if="item.img" :src="item.img" :alt="item.imgalt" class="w-full h-full object-cover"/>
             </div>
-          </div>
+          </nuxt-link>
         </div>
       </div>
     </div>

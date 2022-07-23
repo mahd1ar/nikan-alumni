@@ -3,7 +3,7 @@
     <div class="container mx-auto">
        <loading-indicator :showif="$fetchState.pending" dark fullscreen />
        <div v-if="fimage" class="h-60 mt-10" >
-         <img :src="fimage" :alt="falttext" class="h-full w-full object-contain object-right rounded" >
+         <img :src="fimage" :alt="falttext || title" class="h-full w-full object-contain object-right rounded" >
        </div>
       <h1 class="text-right text-4xl mt-10">{{ title }}</h1>
       <div class="mt-5 pb-3 border-b-2 flex items-center justify-between px-4">

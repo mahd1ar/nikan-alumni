@@ -284,7 +284,7 @@ export default Vue.extend({
   },
   computed: {
     hash() {
-      return this.$route.query.category as string
+      return this.$route.query.category as string || ''
     },
     categories(): navbarState['menu'] {
       const x = (this.$store.state.navigation as navbarState).menu.find(

@@ -142,8 +142,7 @@ export default Vue.extend({
       variables,
       fetchPolicy : "network-only"
     })
-console.log('data')
-console.log(data)
+
     if (data.video) {
       this.video.id = data.video.id
       this.video.title = data.video.title || ''
