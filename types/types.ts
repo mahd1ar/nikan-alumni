@@ -5166,8 +5166,14 @@ export type PostTypeLabelDetails = {
 /** The reading setting type */
 export type ReadingSettings = {
   __typename?: 'ReadingSettings';
+  /** The ID of the page that should display the latest posts */
+  pageForPosts?: Maybe<Scalars['Int']>;
+  /** The ID of the page that should be displayed on the front page */
+  pageOnFront?: Maybe<Scalars['Int']>;
   /** Blog pages show at most. */
   postsPerPage?: Maybe<Scalars['Int']>;
+  /** What to show on the front page */
+  showOnFront?: Maybe<Scalars['String']>;
 };
 
 /** The redirect */
@@ -7284,7 +7290,13 @@ export type Settings = {
   /** Settings of the the string Settings Group */
   generalSettingsUrl?: Maybe<Scalars['String']>;
   /** Settings of the the integer Settings Group */
+  readingSettingsPageForPosts?: Maybe<Scalars['Int']>;
+  /** Settings of the the integer Settings Group */
+  readingSettingsPageOnFront?: Maybe<Scalars['Int']>;
+  /** Settings of the the integer Settings Group */
   readingSettingsPostsPerPage?: Maybe<Scalars['Int']>;
+  /** Settings of the the string Settings Group */
+  readingSettingsShowOnFront?: Maybe<Scalars['String']>;
   /** Settings of the the integer Settings Group */
   writingSettingsDefaultCategory?: Maybe<Scalars['Int']>;
   /** Settings of the the string Settings Group */
@@ -8296,8 +8308,14 @@ export type UpdateSettingsInput = {
   generalSettingsTitle?: InputMaybe<Scalars['String']>;
   /** Site URL. */
   generalSettingsUrl?: InputMaybe<Scalars['String']>;
+  /** The ID of the page that should display the latest posts */
+  readingSettingsPageForPosts?: InputMaybe<Scalars['Int']>;
+  /** The ID of the page that should be displayed on the front page */
+  readingSettingsPageOnFront?: InputMaybe<Scalars['Int']>;
   /** Blog pages show at most. */
   readingSettingsPostsPerPage?: InputMaybe<Scalars['Int']>;
+  /** What to show on the front page */
+  readingSettingsShowOnFront?: InputMaybe<Scalars['String']>;
   /** Default post category. */
   writingSettingsDefaultCategory?: InputMaybe<Scalars['Int']>;
   /** Default post format. */
@@ -9639,7 +9657,7 @@ export type CategoryEventsQueryVariables = Exact<{
 }>;
 
 
-export type CategoryEventsQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, events?: { __typename?: 'CategoryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null } | null };
+export type CategoryEventsQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, events?: { __typename?: 'CategoryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', id: string, altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null } | null };
 
 export type CategoryPostsQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;

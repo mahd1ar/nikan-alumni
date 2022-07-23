@@ -100,6 +100,8 @@ export default Vue.extend({
     })
     this.category.name = data.category?.name || ''
     this.category.desc = data.category?.description || ''
+if(this.category.name === '' && process.client )
+window.location.reload()
 
     if (data.category?.events?.nodes) {
       this.eventList.splice(0, this.eventList.length)

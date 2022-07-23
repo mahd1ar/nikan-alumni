@@ -20,6 +20,7 @@ query categoryEvents($slug: ID = "uncategorized", $first: Int = 10) {
 
         featuredImage {
           node {
+            id
             altText
             sourceUrl
           }
