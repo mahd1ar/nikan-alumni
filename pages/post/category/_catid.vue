@@ -117,12 +117,7 @@
             <div
               class="w-52 md:w-60 aspect-square flex-shrink-0 rounded-md shadow-2xl overflow-hidden"
             >
-              <img
-                v-if="item.img"
-                :src="item.img"
-                :alt="item.imgalt"
-                class="w-full h-full object-cover"
-              />
+              <img v-if="item.img" :src="item.img" :alt="item.imgalt" class="w-full h-full object-cover"/>
             </div>
           </div>
         </div>
@@ -133,6 +128,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import { CategoryPostsQuery, CategoryPostsQueryVariables } from '~/types/types'
 import postgql from '@/apollo/queries/category-posts.gql'
 import { htmlStrip, wordpressDateToJalali } from '~/data/utils'
@@ -184,6 +180,27 @@ export default Vue.extend({
           })
         })
     } else this.$nuxt.error({ statusCode: 404 })
+  },
+    head(): MetaInfo {
+    const data = {
+      title: this.title + 'دسته بندی : | ' + 'کانون دانش آموختگان نیکان',
+      // meta: [
+      //   {
+      //     hid: 'description',
+      //     name: 'description',
+      //     content: htmlStrip(this.event.content || "" ).replace(/[\n\t\s]/g,' ').substring(0,60) + "...",
+      //   },
+      // ],
+    }
+        // const image = {
+        //     property : "og:image" ,
+        //     content : this.event.imageLink 
+        // }
+
+        // if(this.event.imageLink)
+        // // @ts-ignore
+        // data.meta.push(image)
+    return data
   }
 })
 </script>
