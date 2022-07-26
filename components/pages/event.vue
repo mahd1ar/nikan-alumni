@@ -560,8 +560,6 @@ export default Vue.extend({
   mounted() {
     if (this.loading === false) this.recalcProps()
 
-    // @ts-ignore
-    window.id = this
     if (this.canRegister) this.getRegistrationStatus()
   },
 
@@ -661,7 +659,8 @@ export default Vue.extend({
 
         console.log(data)
       } catch (error) {
-        console.error(error)
+        console.log("error:")
+        console.log(error)
       }
     },
     askForConfirmRegEvent() {

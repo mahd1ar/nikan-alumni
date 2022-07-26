@@ -1,6 +1,6 @@
 <template>
   <div class="h-full">
-    <event :loading="$fetchState.pending" :event="upcommingevent" />
+    <event :loading="pending" :event="upcommingevent" />
   </div>
 </template>
 
@@ -22,6 +22,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      pending : false,
       threshold: 2,
       upcommingevent: {} as Event,
     }
@@ -29,7 +30,7 @@ export default Vue.extend({
   // computed : {
   //     eventIsReady
   // },
-  async fetch() {
+  async mounted() {
     if (!this.$route.query.eventId)
       this.$nuxt.error({
         statusCode: 400,
@@ -37,6 +38,8 @@ export default Vue.extend({
       })
 
     try {
+      this.pending = true;
+      console.log(this.$route.query.eventId)
       const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject>(
         `/wp-json/myplugin/v1/upcommingevent/${this.$route.query.eventId}`
       )
@@ -71,6 +74,8 @@ export default Vue.extend({
         this.$nuxt.error({ message: 'cannot get the event', statusCode: 500 })
       }
       console.error(error)
+    } finally {
+      this.pending = false
     }
   },
 })
