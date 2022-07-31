@@ -275,7 +275,7 @@ v-slot="{ status, time }" :starting-from="upcommingEvents[0].wpdate"
                   <div class="text-xl text-tm-black">
                     رویداد پیش رو
                     <span
-v-show="status === 0"
+                      v-show="status === 0"
                       class="mx-2 rounded-lg bg-red-50 py-1 px-2 font-samim text-sm font-light text-red-600">
                       <div class="inline-block h-2 w-2 animate-pulse rounded bg-red-600 font-samim"></div>
 
@@ -372,10 +372,9 @@ fill="currentColor"
                 <nuxt-link
                   class="flex-center h-12 cursor-pointer rounded bg-tm-yellow text-center text-lg font-semibold text-white shadow-lg shadow-yellow-500/50 hover:bg-yellow-300 lg:h-auto lg:w-3/12"
                   :to="{
-                    path: '/upcommingevent?eventId=' + upcommingEvents[0].id,
+                    path: status === 0 ? '/event/' + events[0].link : '/upcommingevent?eventId=' + upcommingEvents[0].id,
                   }">
-                  مشاهده رویداد
-                </nuxt-link>
+                  مشاهده رویداد                 </nuxt-link>
               </div>
             </div>
             <div class="w-full md:w-4/12">
