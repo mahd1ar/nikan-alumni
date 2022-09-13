@@ -169,6 +169,7 @@ export default Vue.extend({
           eventStatus: 1,
           duration: e?.eventProps?.duration || 0,
           location: e?.eventProps?.venue || '',
+          price: e?.eventProps?.price || 0,
         }
       })
     }

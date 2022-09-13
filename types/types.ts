@@ -9657,7 +9657,7 @@ export type CategoryEventsQueryVariables = Exact<{
 }>;
 
 
-export type CategoryEventsQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, events?: { __typename?: 'CategoryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', id: string, altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null } | null };
+export type CategoryEventsQuery = { __typename?: 'RootQuery', category?: { __typename?: 'Category', id: string, count?: number | null, name?: string | null, slug?: string | null, description?: string | null, events?: { __typename?: 'CategoryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null, price?: number | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', id: string, altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null } | null };
 
 export type CategoryPostsQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
@@ -9694,7 +9694,7 @@ export type EventsQueryVariables = Exact<{
 }>;
 
 
-export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null };
+export type EventsQuery = { __typename?: 'RootQuery', events?: { __typename?: 'RootQueryToEventConnection', nodes?: Array<{ __typename?: 'Event', id: string, databaseId: number, title?: string | null, commentCount?: number | null, date?: string | null, content?: string | null, eventProps?: { __typename?: 'Event_Eventprops', duration?: number | null, venue?: string | null, price?: number | null } | null, categories?: { __typename?: 'EventToCategoryConnection', edges?: Array<{ __typename?: 'EventToCategoryConnectionEdge', node?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null } | null, featuredImage?: { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: { __typename?: 'MediaItem', id: string, altText?: string | null, sourceUrl?: string | null } | null } | null } | null> | null } | null };
 
 export type FetchMeQueryVariables = Exact<{ [key: string]: never; }>;
 

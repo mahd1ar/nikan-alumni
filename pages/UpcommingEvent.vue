@@ -65,6 +65,8 @@ export default Vue.extend({
       this.upcommingevent.duration = data.duration
         ? parseFloat(data.duration)
         : 0.0
+
+        this.upcommingevent.price = ( data.price || 0)
     } catch (error) {
       if (this.threshold > 0) {
         await timeout(1500)

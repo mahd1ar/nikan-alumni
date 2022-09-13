@@ -46,8 +46,12 @@ export default Vue.extend({
 
     try {
       const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject>(
-        `/wp-json/myplugin/v1/upcommingevent/${this.$route.params.id}`
-      )
+        `https://cors.nikan-alumni.com/https://nikan-alumni.org/wp-json/myplugin/v1/upcommingevent/${this.$route.params.id}`
+        )
+      // const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject>(
+      //   `/wp-json/myplugin/v1/upcommingevent/${this.$route.params.id}`
+      //   )
+
       
       this.upcommingevent.id = data.ID
       this.upcommingevent.gqlid = data.gqlid

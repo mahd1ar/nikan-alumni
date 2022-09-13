@@ -29,6 +29,7 @@ export enum EventStatus {
 export interface Event extends PostScheme {
   location: string
   duration: number
+  price: number
   eventStatus?: EventStatus
 }
 
@@ -159,6 +160,7 @@ export namespace WPapi {
       category: Category[]
       duration: string
       venue: string
+      price: number
     }
   }
 

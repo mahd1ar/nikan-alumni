@@ -10,6 +10,7 @@ query events($first: Int = 10) {
       eventProps {
         duration
         venue
+        price
       }
       categories {
         edges {

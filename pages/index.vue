@@ -1200,6 +1200,7 @@ export default Vue.extend({
             location: e.venue,
             category: e.category.length ? e.category[0].name : '',
             duration: e.duration ? parseFloat(e.duration) : 0.0,
+            price : 0
           }))
           .sort(
             ({ wpdate: a }, { wpdate: b }) =>

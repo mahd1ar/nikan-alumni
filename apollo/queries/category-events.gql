@@ -16,6 +16,7 @@ query categoryEvents($slug: ID = "uncategorized", $first: Int = 10) {
         eventProps {
           duration
           venue
+          price
         }
 
         featuredImage {

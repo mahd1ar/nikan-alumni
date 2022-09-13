@@ -1,5 +1,6 @@
 <template>
   <div dir="rtl" class="relative flex-grow bg-gray-100">
+
     <modal
       :type="modal.success ? 'success' : 'error'"
       :open.sync="modal.isOpen"
@@ -237,6 +238,30 @@
                       >
                         {{ duration }}
                         {{ delimiter }}
+                      </span>
+                    </button>
+                    <button
+                    v-if="event.price !== -1"
+                      style="--count: 4"
+                      class="sd-item relative hidden h-7 items-center justify-center rounded-full bg-neutral-800 pl-2 pr-3 text-xs text-neutral-200 transition-colors sm:flex sm:h-8 sm:min-w-[68px] sm:text-sm"
+                      title="هزینه شرکت در رویداد"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        role="img"
+                        class="h-5 w-5"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                      >
+                      <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 20.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v16.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 8.5c-.685-.685-1.891-1.161-3-1.191M9 15c.644.86 1.843 1.35 3 1.391m0-9.082c-1.32-.036-2.5.561-2.5 2.191c0 3 5.5 1.5 5.5 4.5c0 1.711-1.464 2.446-3 2.391m0-9.082V5.5m0 10.891V18.5"/></g>
+                      </svg>
+
+                      <span
+                        class="mx-1 whitespace-nowrap group-hover:text-teal-600 text-neutral-200"
+                      >
+                       {{
+                         event.price == 0 ?
+                        "رایگان " : faPrice  + " تومان " }}
                       </span>
                     </button>
 
@@ -498,6 +523,17 @@ export default Vue.extend({
   },
 
   computed: {
+    faPrice(){
+      // return String( this.event.price).split("")
+// return this.event.price || 0
+    //     let x = String( this.event.price);
+    // const pattern = /(-?\d+)(\d{3})/;
+    // while (pattern.test(x))
+    //     x = x.replace(pattern, "$1,$2");
+    // return (x);
+    // return toIndiaDigits(x);
+        return toIndiaDigits(this.event.price || 0)
+    },
     totalRegistrantsFa() {
       const x = toIndiaDigits(this.totalRegistrants)
       return x
@@ -549,7 +585,6 @@ export default Vue.extend({
 
   watch: {
     loading(nval: boolean) {
-      console.log('WATCH')
       if (nval === false) {
         // TODO : maybe adjust category
         this.recalcProps()
@@ -558,6 +593,7 @@ export default Vue.extend({
   },
 
   mounted() {
+   
     if (this.loading === false) this.recalcProps()
 
     if (this.canRegister) this.getRegistrationStatus()
@@ -616,7 +652,6 @@ export default Vue.extend({
           }
         )
 
-        console.log(data)
 
         data.forEach((i) => {
           this.participantsModal.body.push({

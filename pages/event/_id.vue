@@ -66,6 +66,7 @@ export default Vue.extend({
       event.category = data.event.categories?.edges || []
 
       event.content = data.event.content || ''
+      event.price = data.event.eventProps?.price || 0
 
       const startingFrom = ~~(new Date(event.wpdate).getTime() / 1000)
       const now = ~~(Date.now() / 1000)
@@ -81,6 +82,7 @@ export default Vue.extend({
       }
 
       event.eventStatus = status
+   
       this.event = event
     } else throw new Error('cannot get contents from url')
   },

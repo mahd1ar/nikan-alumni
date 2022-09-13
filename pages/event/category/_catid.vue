@@ -131,6 +131,7 @@ window.location.reload()
           eventStatus: 1,
           duration: e?.eventProps?.duration || 0,
           location: e?.eventProps?.venue || '',
+          price : e?.eventProps?.price || 0
         }
 
         this.eventList.push(x)
