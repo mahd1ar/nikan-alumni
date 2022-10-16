@@ -128,13 +128,11 @@ export default Vue.extend({
             data.sendPasswordResetEmail.user.email +
             'ارسال شد'
           this.$about.success({ title: msg, time: 6000 })
-          console.log(data)
           await timeout(3000)
           this.$router.push({ path: '/login' })
         } else {
           const msg = ' لینک بازیابی ارسال شد '
           this.$about.success({ title: msg, time: 6000 })
-          console.log(data)
           await timeout(3000)
           this.$router.push({ path: '/login' })
         }

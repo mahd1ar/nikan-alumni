@@ -1,6 +1,6 @@
 query home(
   $first: Int = 10
-  $order: OrderEnum = ASC
+  $order: OrderEnum = DESC
   $field: PostObjectsConnectionOrderbyEnum = DATE
   $first1: Int = 10
 ) {
@@ -20,6 +20,7 @@ query home(
       }
       featuredImage {
         node {
+          id
           sourceUrl(size: LARGE)
         }
       }
@@ -59,6 +60,7 @@ query home(
       edges {
         node {
           date
+          id
           contentTypeName
           ... on Post {
             id
@@ -77,7 +79,6 @@ query home(
               }
             }
           }
-          id
         }
       }
     }

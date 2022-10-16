@@ -404,7 +404,7 @@ const initialState = {
           title: 'بحث های پزشکی',
           svg: '',
         },
-        { hasSubmenu: false, href: '/video?category=karbarg', title: 'کاربرگ', svg: '' },
+        { hasSubmenu: false, href: '/video?category=karbarg', title: 'شهدای نیکان', svg: '' },
         {
           hasSubmenu: false,
           href: '/video?category=clubinar',

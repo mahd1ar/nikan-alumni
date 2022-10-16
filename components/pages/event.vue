@@ -679,7 +679,7 @@ export default Vue.extend({
             user_id: this.$store.state.authentication.user.id,
           }
         )
-        console.log(data)
+      
         if (data.length > 0) {
           if (data[0].comment_approved === commentStatus.Approved) {
             this.registrationStatus = 'registerd'
@@ -692,7 +692,7 @@ export default Vue.extend({
           this.registrationStatus = 'notregisterd'
         }
 
-        console.log(data)
+    
       } catch (error) {
         console.log("error:")
         console.log(error)

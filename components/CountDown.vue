@@ -76,7 +76,7 @@ export default Vue.extend({
       clearInterval(this.interval)
     },
     getStatus() {
-      console.log('getStatus')
+     
       const startingFrom = ~~(new Date(this.startingFrom).getTime() / 1000)
       const now = ~~(Date.now() / 1000)
       const duration = this.duration * 24 * 3600

@@ -192,7 +192,7 @@ export default Vue.extend({
       if (this.show === false) return
 
       e = e || window.event
-      console.log(e)
+  
       if (e.key === 'Escape') {
         // scaped
         this.show = false

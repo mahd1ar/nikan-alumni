@@ -58,9 +58,9 @@ export default Vue.extend({
 
     if (hash) {
       this.tabs.forEach((i, index) => {
-        console.log(i.href.split('#')[1].trim())
+      
         if (i.href.split('#')[1].trim() === hash) {
-          console.log({ index })
+       
           this.tabindex = index
         }
       })

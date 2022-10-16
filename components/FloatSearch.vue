@@ -217,9 +217,6 @@ const VueSearch = Vue.extend({
       this.time = Object.freeze(time)
     },
   },
-  mounted() {
-    console.log('mounted')
-  },
   methods: {
     async input() {
       this.results.events.items.splice(0, this.results.events.items.length)
