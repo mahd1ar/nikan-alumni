@@ -523,7 +523,9 @@ class="mr-2 h-4 w-4 rotate-180 transform" viewBox="0 0 24 24" stroke="currentCol
                       <h2 class="title-font mb-3 text-xl font-medium text-gray-900">
                         {{ e.title }}
                       </h2>
-                      <p v-snip="3" class="mb-5 cursor-pointer leading-relaxed hover:underline" v-text="e.content"></p>
+                      <client-only>
+                        <p v-snip="3" class="mb-5 cursor-pointer leading-relaxed hover:underline" v-text="e.content"></p>
+                      </client-only>
                     </nuxt-link>
                   </div>
                 </div>

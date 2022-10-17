@@ -30,6 +30,7 @@
                 <p class="text-lg text-white">
                   {{ video.speakers }}
                 </p>
+                <ContentField :html="video.content" :remove-tags="['video']" style="color: white"  />
               </div>
             </div>
             <div v-else class="w-full h-full flex-center p-10" >
@@ -40,9 +41,9 @@
           </transition>
         </div>
 
-        <div class="flex w-full mt-4 flex-col text-cyan-50 lg:w-4/12">
+        <div class="flex w-full mt-4 lg:mt-0 flex-col text-cyan-50 lg:w-4/12">
           <div
-            class="flex h-12 items-center justify-start bg-gray-600 px-4 font-bold text-white"
+            class="flex h-12 items-center justify-start bg-slate-100 px-4 font-bold text-slate-700 rounded-t"
           >
             مطلب پیشنهادی
           </div>

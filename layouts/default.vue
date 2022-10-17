@@ -526,7 +526,10 @@
       <Nuxt class="flex-1 bg-white" @error="nuxtonError" />
     </div>
     <!-- gap -->
-    <div v-show="$route.path !== '/' " class="w-full h-10 text-gray-300 flex-center font-extrabold text-3xl">.</div>
+    <div v-show="$route.path !== '/' " class="w-full h-10  flex-center font-extrabold text-3xl">
+      <div v-if="$route.matched[0].path === '/video/:id'" class="h-full w-full flex-center bg-slate-800  text-gray-300" >.</div>
+      <div v-else class="h-full w-full flex-center  text-slate-300" >.</div>
+    </div>
   </div>
 </template>
 
