@@ -2,10 +2,9 @@
   <section dir="rtl" class="body-font relative bg-slate-800 text-gray-900">
     <div class="container relative mx-auto flex flex-col gap-4">
       <div class="flex flex-col items-start gap-2 lg:flex-row">
-        <div  class="w-full bg-cyan-600 bg-opacity-5 lg:w-8/12">
+        <div class="w-full bg-cyan-600 bg-opacity-5 lg:w-8/12">
           <transition name="v-openwindow">
-            <div v-if="$fetchState.pending === false" >
-  
+            <div v-if="$fetchState.pending === false">
               <client-only>
                 <div class="aspect-video">
                   <vue-plyr ref="plyr" :options="playerOptions">
@@ -27,23 +26,43 @@
                 >
                   {{ video.title }}
                 </h1>
-                <p class="text-lg text-white">
+                <p class="text-lg text-white" v-if="video.speakers">
+                  <svg
+                  class="inline-block"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 32 32"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M29.415 19L27.7 17.285A2.97 2.97 0 0 0 28 16a3 3 0 1 0-3 3a2.97 2.97 0 0 0 1.286-.3L28 20.414V28h-6v-3a7.008 7.008 0 0 0-7-7H9a7.008 7.008 0 0 0-7 7v5h28v-9.586A1.988 1.988 0 0 0 29.415 19ZM4 25a5.006 5.006 0 0 1 5-5h6a5.006 5.006 0 0 1 5 5v3H4Z"
+                    />
+                    <path
+                      fill="currentColor"
+                      d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7Z"
+                    />
+                  </svg>
+
                   {{ video.speakers }}
                 </p>
-                <ContentField :html="video.content" :remove-tags="['video']" style="color: white"  />
+                <ContentField
+                  :html="video.content"
+                  :remove-tags="['video']"
+                  style="color: white"
+                />
               </div>
             </div>
-            <div v-else class="w-full h-full flex-center p-10" >
-  
-              <loading-indicator :showif="true"  ></loading-indicator>
+            <div v-else class="flex-center h-full w-full p-10">
+              <loading-indicator :showif="true"></loading-indicator>
             </div>
-
           </transition>
         </div>
 
-        <div class="flex w-full mt-4 lg:mt-0 flex-col text-cyan-50 lg:w-4/12">
+        <div class="mt-4 flex w-full flex-col text-cyan-50 lg:mt-0 lg:w-4/12">
           <div
-            class="flex h-12 items-center justify-start bg-slate-100 px-4 font-bold text-slate-700 rounded-t"
+            class="flex h-12 items-center justify-start rounded-t bg-slate-100 px-4 font-bold text-slate-700"
           >
             مطلب پیشنهادی
           </div>
@@ -128,7 +147,6 @@ export default Vue.extend({
     }
   },
   async fetch() {
-    
     const videoId = this.$route.params.id
     if (!videoId) {
       this.$nuxt.error({ statusCode: 404, message: 'err.message' })
@@ -141,7 +159,7 @@ export default Vue.extend({
     const { data } = await this.$apollo.query<VideoQuery>({
       query: videogql,
       variables,
-      fetchPolicy : "network-only"
+      fetchPolicy: 'network-only',
     })
 
     if (data.video) {
@@ -176,7 +194,6 @@ export default Vue.extend({
         this.video.content.replace(/<figure .*figure>/g, '')
       }
     } else this.$nuxt.error({ statusCode: 404, message: 'not found' })
-
   },
 
   mounted(): void {
