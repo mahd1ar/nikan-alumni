@@ -1,17 +1,21 @@
 <template>
   <div dir="rtl">
     <div class="container mx-auto">
-       <loading-indicator :showif="$fetchState.pending" dark fullscreen />
-       <div v-if="fimage" class="h-60 mt-10" >
-         <img :src="fimage" :alt="falttext || title" class="h-full w-full object-contain object-right rounded" >
-       </div>
-      <h1 class="text-right text-4xl mt-10">{{ title }}</h1>
-      <div class="mt-5 pb-3 border-b-2 flex items-center justify-between px-4">
+      <loading-indicator :showif="$fetchState.pending" dark fullscreen />
+      <div v-if="fimage" class="mt-10 h-60">
+        <img
+          :src="fimage"
+          :alt="falttext || title"
+          class="h-full w-full rounded object-contain object-right"
+        />
+      </div>
+      <h1 class="mt-10 text-right text-4xl">{{ title }}</h1>
+      <div class="mt-5 flex items-center justify-between border-b-2 px-4 pb-3">
         <div>
           <nuxt-link
             v-for="(cat, index) in categories"
             :key="index"
-            class="text-blue-600 bg-blue-50 text-sm mx-1 rounded-full px-2 py-1"
+            class="mx-1 rounded-full bg-blue-50 px-2 py-1 text-sm text-blue-600"
             :to="cat.link"
             :prefetch="false"
           >
@@ -42,8 +46,8 @@ export default Vue.extend({
     return {
       title: '',
       content: '',
-      fimage : '',
-      falttext : '',
+      fimage: '',
+      falttext: '',
       date: [] as string[],
       categories: [] as { name: string; link: string }[],
     }
@@ -60,25 +64,26 @@ export default Vue.extend({
       idType: Number(id) ? PostIdType.DatabaseId : PostIdType.Id,
     }
 
-    
     const { data } = await this.$apollo.query<PostQuery>({
       query: postgql,
       variables,
     })
 
     if (data.post) {
-      this.title = data.post.title || '';
-      this.content = data.post.content || '';
-      this.date = data.post.date ? wordpressDateToFormattedJalali(data.post.date) : [];
+      this.title = data.post.title || ''
+      this.content = data.post.content || ''
+      this.date = data.post.date
+        ? wordpressDateToFormattedJalali(data.post.date)
+        : []
 
-      this.fimage = data.post.featuredImage?.node?.sourceUrl || '';
-      this.falttext = data.post.featuredImage?.node?.altText || '';
-        
-      this.categories = data.post.categories?.nodes?.map((i) => ({
+      this.fimage = data.post.featuredImage?.node?.sourceUrl || ''
+      this.falttext = data.post.featuredImage?.node?.altText || ''
+
+      this.categories =
+        data.post.categories?.nodes?.map((i) => ({
           name: i?.name || '',
           link: i?.slug ? '/post/category/' + i.slug : '',
         })) || []
-
     } else this.$nuxt.error({ statusCode: 404 })
   },
   head(): MetaInfo {
@@ -88,18 +93,21 @@ export default Vue.extend({
         {
           hid: 'description',
           name: 'description',
-          content: htmlStrip(this.content).replace(/[\n\t\s]/g,' ').substring(0,60) + "...",
+          content:
+            htmlStrip(this.content)
+              .replace(/[\n\t\s]/g, ' ')
+              .substring(0, 60) + '...',
         },
       ],
     }
-        const image = {
-            property : "og:image" ,
-            content : this.fimage 
-        }
+    const image = {
+      property: 'og:image',
+      content: this.fimage,
+    }
 
-        if(this.fimage)
-        // @ts-ignore
-        data.meta.push(image)
+    if (this.fimage)
+      // @ts-ignore
+      data.meta.push(image)
     return data
   },
 })

@@ -18,8 +18,8 @@
               <fieldset class="mt-4 flex flex-col gap-6" :disabled="loading">
                 <validation-provider
                   v-slot="{ errors }"
-                  name="first name"
-                  rules="required|max:22"
+                  name="نام"
+                  rules="required|max:122"
                 >
                   <div>
                     <label class="text-gray-700" for="firstname">نام</label>
@@ -43,7 +43,7 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="last name"
+                  name="نام خانوادگی"
                   rules="max:22"
                 >
                   <div>
@@ -70,7 +70,7 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="mobile"
+                  name="موبایل"
                   :rules="{ regex: /^(\d|\+)\d+$/, min: 11, max: 15 }"
                 >
                   <div>
@@ -98,7 +98,7 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="phone"
+                  name="تلفن"
                   rules="max:22"
                 >
                   <!-- :rules="{ regex: /^(\d|\+)\d+$/, min: 11, max: 15 }" -->
@@ -127,7 +127,7 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="website"
+                  name="وبسایت"
                   :rules="{
                     regex: /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
                   }"
@@ -180,7 +180,7 @@
                 </div>
                 <validation-provider
                   v-slot="{ errors }"
-                  name="description"
+                  name="بیوگرافی"
                   rules="max:225"
                 >
                   <div>
@@ -231,7 +231,7 @@
                       <validation-provider
                         v-slot="{ errors }"
                         :rules="{ regex: /^[^\d]*$/, max: 30 }"
-                        name="city"
+                        name="شهر"
                       >
                         <label class="text-gray-700 text-xs" for="city">
                           شهر
@@ -261,7 +261,7 @@
                       <validation-provider
                         v-slot="{ errors }"
                         :rules="{ regex: /^[^\d]*$/, max: 30 }"
-                        name="country"
+                        name="کشور"
                       >
                         <label class="text-gray-700 text-xs" for="providence">
                           کشور
@@ -313,7 +313,7 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="occupation"
+                  name="شغل"
                   rules="max:22"
                 >
                   <div>
@@ -338,7 +338,7 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="instagram"
+                  name="آدرس اینستاگرام "
                   :rules="{
                     regex: /instagram\.com\/.+/,
                     max: 100,
@@ -372,7 +372,7 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="linkedin-url"
+                  name="آدرس لینکدین"
                   :rules="{
                     regex: /linkedin\.com\/.+/,
                     max: 100,
@@ -406,7 +406,7 @@
 
                 <validation-provider
                   v-slot="{ errors }"
-                  name="twitter"
+                  name="آدرس توییتر"
                   :rules="{
                     regex: /twitter\.com\/.+/,
                     max: 100,
@@ -482,6 +482,7 @@ import {
   configure,
 } from 'vee-validate'
 import * as rules from 'vee-validate/dist/rules'
+import { messages } from 'vee-validate/dist/locale/fa.json';
 import { UserFullProfile } from '~/data/GlobslTypes'
 import MapPicker from '~/components/form/MapPicker.vue'
 import { Dict } from '~/data/utils/dictionary'
@@ -489,11 +490,15 @@ const clonedeep: <T>(a: T) => T = require('lodash.clonedeep')
 
 const isEqual: <T>(a: T, b: T) => Boolean = require('lodash.isequal')
 
-for (const [rule, validation] of Object.entries(rules)) {
-  extend(rule, {
-    ...validation,
-  })
-}
+
+  Object.keys(rules).forEach((rule) => {
+    extend(rule, {
+      // @ts-ignore
+      ...rules[rule],
+      // @ts-ignore
+    message: messages[rule]
+  });
+});
 
 configure({
   classes: {

@@ -26,7 +26,7 @@
                 >
                   {{ video.title }}
                 </h1>
-                <p class="text-lg text-white" v-if="video.speakers">
+                <p v-if="video.speakers" class="text-lg text-white">
                   <svg
                   class="inline-block"
                     xmlns="http://www.w3.org/2000/svg"
@@ -94,6 +94,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { MetaInfo } from 'vue-meta'
 import videogql from '@/apollo/queries/video.gql'
 // TODO : compose a beter query V
 // import allvideos from '@/apollo/queries/videos-all.gql'
@@ -104,7 +105,7 @@ import {
   // VideosAllQuery,
   VideoIdType,
 } from '~/types/types'
-import { filterCategory, wordpressDateToFormattedJalali } from '~/data/utils'
+import { filterCategory, htmlStrip, toIndiaDigits, wordpressDateToFormattedJalali } from '~/data/utils'
 import { WPapi } from '~/data/GlobslTypes'
 
 interface SuggestedVideos {
@@ -164,7 +165,7 @@ export default Vue.extend({
 
     if (data.video) {
       this.video.id = data.video.id
-      this.video.title = data.video.title || ''
+      this.video.title = toIndiaDigits( data.video.title || '');
       this.video.content = data.video.content || ''
       this.video.poster = data.video.featuredImage?.node?.sourceUrl || ''
       this.video.date = data.video.date
@@ -190,23 +191,38 @@ export default Vue.extend({
         if (res === null) return
 
         this.video.src = res[0]
-        console.log(this.video.src)
+        
         this.video.content.replace(/<figure .*figure>/g, '')
       }
     } else this.$nuxt.error({ statusCode: 404, message: 'not found' })
   },
+  head(): MetaInfo {
+    const data = {
+      title: this.video.title + ' | ' + 'کانون دانش آموختگان نیکان',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            htmlStrip(this.video.content)
+              .replace(/[\n\t\s]/g, ' ')
+              .substring(0, 60) + '...',
+        },
+      ],
+    }
+    const image = {
+      property: 'og:image',
+      content: this.video.poster,
+    }
+
+    if (this.video.poster)
+      // @ts-ignore
+      data.meta.push(image)
+    return data
+  },
 
   mounted(): void {
     this.getSimilarVideos()
-    // TODO : remove this bolshit
-    // const div = document.createElement('div')
-    // div.innerHTML = this.video.content
-    // const htmlVideoElement = div.querySelector('video') as HTMLVideoElement
-    // if (htmlVideoElement) {
-    //   this.video.src = htmlVideoElement.src
-    // }
-    // this.video.content = div.innerHTML
-    // div.remove()
   },
   methods: {
     async getSimilarVideos() {
