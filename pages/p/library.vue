@@ -87,17 +87,17 @@ export const library = [
             {
               title: 'انتخابات',
               link:
-                'https://nikan-alumni.org/wp-content/uploads/2020/07/%D8%A2%DB%8C%DB%8C%D9%86-%D9%86%D8%A7%D9%85%D9%87-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA-%D9%88%DB%8C%D8%B1%D8%A7%DB%8C%D8%B4-8.pdf',
+                'https://nikan-alumni.org/wp-content/uploads/2022/11/آیین_نامه_نهایی_انتخابات_اعضای_شورای_مرکزی_کانون_ویرایش_10_14010616.pdf',
             },
             {
               title: 'اداره جلسات شورای مرکزی',
               link:
-                'https://nikan-alumni.org/wp-content/uploads/2018/08/jalasat.pdf',
+                'https://nikan-alumni.org/wp-content/uploads/2022/11/آئین_نامه_3_اداره_جلسات_شورای_مرکزی_13960824.pdf',
             },
             {
               title: 'آیین نامه تبلیغات',
               link:
-                'https://nikan-alumni.org/1399/02/20/%d9%85%d8%b1%d8%a7%d8%b3%d9%85-%d8%b3%d8%a7%d9%84-%d8%b1%d9%88%d8%b2-%d9%85%db%8c%d9%84%d8%a7%d8%af-%d8%a7%d9%85%d8%a7%d9%85-%d8%ad%d8%b3%d9%86-%d9%85%d8%ac%d8%aa%d8%a8%db%8c-%d8%b9%d9%84%db%8c%d9%87/%d8%a2%db%8c%db%8c%d9%86-%d9%86%d8%a7%d9%85%d9%87-%d8%aa%d8%a8%d9%84%db%8c%d8%ba%d8%a7%d8%aa-%d9%86%d9%87%d8%a7%db%8c%db%8c-990713/',
+                'https://nikan-alumni.org/wp-content/uploads/2022/11/آیین_نامه_نحوه_تبلیغات_نامزدها_در_انتخابات_شورای_مرکزی_ویرایش06.pdf',
             },
             {
               title: 'مالی',
@@ -111,8 +111,7 @@ export const library = [
             },
             {
               title: 'نحوه ی تشکیل و عملکرد کارگروه ها',
-              link:
-                'https://nikan-alumni.org/1399/02/20/%d9%85%d8%b1%d8%a7%d8%b3%d9%85-%d8%b3%d8%a7%d9%84-%d8%b1%d9%88%d8%b2-%d9%85%db%8c%d9%84%d8%a7%d8%af-%d8%a7%d9%85%d8%a7%d9%85-%d8%ad%d8%b3%d9%86-%d9%85%d8%ac%d8%aa%d8%a8%db%8c-%d8%b9%d9%84%db%8c%d9%87/%d8%a7%db%8c%db%8c%d9%86_%d9%86%d8%a7%d9%85%d9%87_%d9%86%d8%ad%d9%88%d9%87_%d8%aa%d8%b4%da%a9%db%8c%d9%84_%d9%88_%d8%b9%d9%85%d9%84%da%a9%d8%b1%d8%af_%da%a9%d8%a7%d8%b1%da%af%d8%b1%d9%88%d9%87_%d9%87/',
+              link: `https://nikan-alumni.org/wp-content/uploads/2022/11/آیین_نامه_نحوه_تشکیل_و_عملکرد_کارگروه_ها_ویرایش_5_991220.pdf`
             },
           ],
         },
@@ -127,7 +126,7 @@ export const library = [
             },
             {
               link:
-                'https://nikan-alumni.org/wp-content/uploads/2019/11/%D8%B4%D9%86%D8%A7%D8%B3%D9%86%D8%A7%D9%85%D9%87_%D9%BE%D8%B1%D9%88%DA%98%D9%87_%D9%87%D8%A7%DB%8C_%DA%A9%D8%A7%D9%86%D9%88%D9%86_%D8%AF%D8%A7%D9%86%D8%B4_%D8%A2%D9%85%D9%88%D8%AE%D8%AA%DA%AF%D8%A7%D9%86.pdf',
+                'https://nikan-alumni.org/wp-content/uploads/2022/11/شناسنامه_پروژه_های_کانون_دانش_آموختگان.pdf',
               title: 'شناسنامه پروژه',
             },
             {
@@ -153,6 +152,7 @@ export const library = [
           subset: [
             {
               title: 'شورای مرکزی دور اول',
+              link: '/page/22908'
             },
             {
               title: 'شورای مرکزی دور دوم',
