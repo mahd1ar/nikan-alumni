@@ -163,6 +163,10 @@ export const library = [
               link: '/page/22771',
             },
             {
+              title: 'شورای مرکزی دور چهارم',
+              link: '/page/23156',
+            },
+            {
               title: 'هیٔت اجرایی دور اول',
               link: '/page/22908',
             },
@@ -173,6 +177,10 @@ export const library = [
             {
               title: 'هیٔت اجرایی دور سوم',
               link: '/page/22781',
+            },
+            {
+              title: 'هیٔت اجرایی دور چهارم',
+              link: '/page/23152',
             },
           ],
         },
