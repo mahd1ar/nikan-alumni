@@ -1351,15 +1351,18 @@ export default Vue.extend({
         variables,
       })
 
+      
+
       if (data.category?.contentNodes) {
         data.category.contentNodes.edges?.forEach((i) => {
+          
           this.news.push({
             // @ts-ignore
             title: i?.node?.title || '',
             // @ts-ignore
             date: wordpressDateToFormattedJalali(i!.node!.date),
             // @ts-ignore
-            image: i?.node?.featuredImage.node.mediaItemUrl || '',
+            image: i?.node?.featuredImage?.node?.mediaItemUrl || 'img/tumbnail-logo.jpg',
 
             id: i?.node!.id!,
             // @ts-ignore
