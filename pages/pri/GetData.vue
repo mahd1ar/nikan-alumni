@@ -20,10 +20,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import { timeout } from '~/data/utils'
 
-export default {
+export default Vue.extend({
   data() {
     return {
       text: 'HIther',
@@ -40,8 +41,15 @@ export default {
         const { data } = await this.$axios.get(
           location.origin + '/api/get_laststr'
         )
-        console.log(data)
-        this.text = data.str
+
+        if (this.text !== data.str.trim()) {
+          this.text = data.str.trim()
+          const mp3 = new Audio(
+            'https://notificationsounds.com/storage/sounds/file-sounds-1150-pristine.mp3'
+          )
+
+          mp3.play()
+        }
       } catch (error) {
         alert(error)
       } finally {
@@ -52,8 +60,8 @@ export default {
       navigator.clipboard.writeText(this.text)
 
       // Alert the copied text
-      alert('Copied the text: ' + this.text)
+      this.$about.success({ title: 'کپی شد', time: 4000 })
     },
   },
-}
+})
 </script>

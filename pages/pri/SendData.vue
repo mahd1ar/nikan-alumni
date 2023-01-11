@@ -15,7 +15,7 @@
       class="mt-2 flex-grow rounded bg-cyan-300 bg-opacity-25 px-4 py-1 hover:bg-opacity-50"
       @click="scan"
     >
-      copy to clipboard
+      start
     </button>
 
     <div class="h-48 overflow-auto bg-gray-50">
@@ -28,7 +28,7 @@
 export default {
   data() {
     return {
-      text: 'nothing to see here',
+      text: 'nothing to see here!',
       logtext: [
         {
           id: 0,
