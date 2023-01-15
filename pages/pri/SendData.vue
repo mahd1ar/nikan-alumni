@@ -67,7 +67,7 @@ export default {
           this.text = serialNumber
           this.log(`> Serial Number: ${serialNumber}`)
           this.log(`> Records: (${message.records.length})`)
-          this.log(`> Records: (${String(message)})`)
+          console.log(message)
           this.sendData()
         })
       } catch (error) {
