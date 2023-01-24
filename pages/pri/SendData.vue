@@ -76,6 +76,7 @@ export default {
             message.records[0].data
           )
           this.cardid = bffstr.match(/\d+/)[0]
+          alert(cardid)
           this.sendData()
         })
       } catch (error) {
