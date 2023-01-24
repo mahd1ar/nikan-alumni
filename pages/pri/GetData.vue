@@ -49,6 +49,7 @@ export default Vue.extend({
         )
 
         if (this.text !== data.str.trim()) {
+          this.cardid = data.cardid.trim()
           this.text = data.str.trim()
           const mp3 = new Audio(
             'https://notificationsounds.com/storage/sounds/file-sounds-1150-pristine.mp3'

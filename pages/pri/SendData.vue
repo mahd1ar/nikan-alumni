@@ -52,7 +52,7 @@ export default {
     sendData() {
       this.$axios.get(
         location.origin +
-          `/api/set_laststr?srt=${this.text}&cardid=${this.cardid}`
+          `/api/set_laststr?srt=${this.text}&cardid=${String(this.cardid)}`
       )
     },
     async scan() {
