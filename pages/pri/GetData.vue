@@ -17,6 +17,11 @@
     >
       copy to clipboard
     </button>
+    <a
+      :href="`https://nikan-alumni.org/wp-admin/user-edit.php?user_id=${cardid}wp_http_referer=%2Fwp-admin%2Fusers.php`"
+      target="_blank"
+      >go to user {{ cardid }}</a
+    >
   </div>
 </template>
 
@@ -28,6 +33,7 @@ export default Vue.extend({
   data() {
     return {
       text: 'HIther',
+      cardid: '',
     }
   },
   mounted() {
@@ -49,6 +55,7 @@ export default Vue.extend({
           )
 
           mp3.play()
+          this.$about.success({ title: 'عضو جدید ', time: 4000 })
         }
       } catch (error) {
         alert(error)

@@ -53,18 +53,20 @@ app.get('/create-contact', (req, res) => {
 
 // this is for getting serial number
 let inMemoryString: string = "nothing there";
+let inMemoryCardId: string = "nothing there";
 
 app.get('/set_laststr', (req, res) => {
 
   if (req.query.srt) {
     inMemoryString = Array.isArray(req.query.srt) ? String(req.query.srt.at(-1)) : String(req.query.srt)
+    inMemoryCardId = Array.isArray(req.query.cardid) ? String(req.query.cardid.at(-1)) : String(req.query.cardid)
     res.send('ok')
   } else
     res.status(401).send('notok')
 })
 
 app.get('/get_laststr', (_, res) => {
-  res.json({ str: inMemoryString })
+  res.json({ str: inMemoryString, cardid: inMemoryCardId })
 })
 
 

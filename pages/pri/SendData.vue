@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       text: 'nothing to see here!',
+      cardid: '0000',
       logtext: [
         {
           id: 0,
@@ -49,7 +50,10 @@ export default {
       })
     },
     sendData() {
-      this.$axios.get(location.origin + '/api/set_laststr?srt=' + this.text)
+      this.$axios.get(
+        location.origin +
+          `/api/set_laststr?srt=${this.text}&cardid=${this.cardid}`
+      )
     },
     async scan() {
       this.log('User clicked scan button')
@@ -67,7 +71,11 @@ export default {
           this.text = serialNumber
           this.log(`> Serial Number: ${serialNumber}`)
           this.log(`> Records: (${message.records.length})`)
-          console.log(message)
+
+          const bffstr = new TextDecoder('utf-8').decode(
+            message.records[0].data
+          )
+          this.cardid = bffstr.match(/\d+/)[0]
           this.sendData()
         })
       } catch (error) {
