@@ -18,7 +18,7 @@
       copy to clipboard
     </button>
     <a
-      :href="`https://nikan-alumni.org/wp-admin/user-edit.php?user_id=${cardid}wp_http_referer=%2Fwp-admin%2Fusers.php`"
+      :href="`https://nikan-alumni.org/wp-admin/users.php?s=${cardid}&action=-1&new_role&paged=1&action2=-1&new_role2`"
       target="_blank"
       >go to user {{ cardid }}</a
     >
