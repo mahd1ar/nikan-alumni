@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div v-if="!pending" class="h-full">
     <event :loading="pending" :event="upcommingevent" />
   </div>
 </template>
@@ -22,7 +22,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      pending : false,
+      pending: false,
       threshold: 2,
       upcommingevent: {} as Event,
     }
@@ -38,12 +38,12 @@ export default Vue.extend({
       })
 
     try {
-      this.pending = true;
-      console.log(this.$route.query.eventId)
+      this.pending = true
+
       const { data } = await this.$axios.get<WPapi.upcommingEvent.RootObject>(
         `/wp-json/myplugin/v1/upcommingevent/${this.$route.query.eventId}`
       )
-      console.log(data)
+
       this.upcommingevent.id = data.ID
       this.upcommingevent.gqlid = data.gqlid
       this.upcommingevent.title = data.post_title
@@ -66,7 +66,7 @@ export default Vue.extend({
         ? parseFloat(data.duration)
         : 0.0
 
-        this.upcommingevent.price = ( data.price || 0)
+      this.upcommingevent.price = data.price || 0
     } catch (error) {
       if (this.threshold > 0) {
         await timeout(1500)

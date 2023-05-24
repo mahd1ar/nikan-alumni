@@ -1,6 +1,5 @@
 <template>
   <div dir="rtl" class="relative flex-grow bg-gray-100">
-
     <modal
       :type="modal.success ? 'success' : 'error'"
       :open.sync="modal.isOpen"
@@ -91,10 +90,10 @@
     </modal>
     <loading-indicator :showif="loading" dark fullscreen />
     <transition name="slide-down">
-      <div v-show="!loading" id="event-page">
+      <div v-if="!loading" id="event-page">
         <header
           style="z-index: 5"
-          class="relative flex flex-col-reverse items-center md:items-start pb-16 md:pt-16 bg-black md:py-20 lg:py-28"
+          class="relative flex flex-col-reverse items-center bg-black pb-16 md:items-start md:py-20 md:pt-16 lg:py-28"
         >
           <div class="container relative z-10">
             <div class="max-w-screen-md">
@@ -234,14 +233,14 @@
                       </svg>
 
                       <span
-                        class="mx-1 whitespace-nowrap group-hover:text-teal-600 text-neutral-200"
+                        class="mx-1 whitespace-nowrap text-neutral-200 group-hover:text-teal-600"
                       >
                         {{ duration }}
                         {{ delimiter }}
                       </span>
                     </button>
                     <button
-                    v-if="event.price !== -1"
+                      v-if="event.price !== -1"
                       style="--count: 4"
                       class="sd-item relative hidden h-7 items-center justify-center rounded-full bg-neutral-800 pl-2 pr-3 text-xs text-neutral-200 transition-colors sm:flex sm:h-8 sm:min-w-[68px] sm:text-sm"
                       title="هزینه شرکت در رویداد"
@@ -253,15 +252,22 @@
                         preserveAspectRatio="xMidYMid meet"
                         viewBox="0 0 24 24"
                       >
-                      <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 20.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v16.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 8.5c-.685-.685-1.891-1.161-3-1.191M9 15c.644.86 1.843 1.35 3 1.391m0-9.082c-1.32-.036-2.5.561-2.5 2.191c0 3 5.5 1.5 5.5 4.5c0 1.711-1.464 2.446-3 2.391m0-9.082V5.5m0 10.891V18.5"/></g>
+                        <g fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path
+                            d="M3 20.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v16.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"
+                          />
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15 8.5c-.685-.685-1.891-1.161-3-1.191M9 15c.644.86 1.843 1.35 3 1.391m0-9.082c-1.32-.036-2.5.561-2.5 2.191c0 3 5.5 1.5 5.5 4.5c0 1.711-1.464 2.446-3 2.391m0-9.082V5.5m0 10.891V18.5"
+                          />
+                        </g>
                       </svg>
 
                       <span
-                        class="mx-1 whitespace-nowrap group-hover:text-teal-600 text-neutral-200"
+                        class="mx-1 whitespace-nowrap text-neutral-200 group-hover:text-teal-600"
                       >
-                       {{
-                         event.price == 0 ?
-                        "رایگان " : faPrice  + " تومان " }}
+                        {{ event.price == 0 ? 'رایگان ' : faPrice + ' تومان ' }}
                       </span>
                     </button>
 
@@ -380,7 +386,7 @@
           </div>
 
           <div
-            class="mt-8 md:absolute md:top-0 md:left-0 md:bottom-0 md:mt-0 w-1/2 text-center md:w-1/2 lg:w-2/5 2xl:w-1/3"
+            class="mt-8 w-1/2 text-center md:absolute md:top-0 md:left-0 md:bottom-0 md:mt-0 md:w-1/2 lg:w-2/5 2xl:w-1/3"
           >
             <div
               class="rigth-0 absolute top-0 bottom-0 hidden w-1/5 bg-gradient-to-l from-black md:block"
@@ -523,16 +529,17 @@ export default Vue.extend({
   },
 
   computed: {
-    faPrice(){
+    faPrice() {
       // return String( this.event.price).split("")
-// return this.event.price || 0
-    //     let x = String( this.event.price);
-    // const pattern = /(-?\d+)(\d{3})/;
-    // while (pattern.test(x))
-    //     x = x.replace(pattern, "$1,$2");
-    // return (x);
-    // return toIndiaDigits(x);
-        return toIndiaDigits(this.event.price || 0)
+      // return this.event.price || 0
+      //     let x = String( this.event.price);
+      // const pattern = /(-?\d+)(\d{3})/;
+      // while (pattern.test(x))
+      //     x = x.replace(pattern, "$1,$2");
+      // return (x);
+      // return toIndiaDigits(x);
+      console.log(this.event.price)
+      return toIndiaDigits(this.event.price || 0)
     },
     totalRegistrantsFa() {
       const x = toIndiaDigits(this.totalRegistrants)
@@ -593,7 +600,6 @@ export default Vue.extend({
   },
 
   mounted() {
-   
     if (this.loading === false) this.recalcProps()
 
     if (this.canRegister) this.getRegistrationStatus()
@@ -652,7 +658,6 @@ export default Vue.extend({
           }
         )
 
-
         data.forEach((i) => {
           this.participantsModal.body.push({
             firstName: i?.comment_author || 'firstname',
@@ -679,7 +684,7 @@ export default Vue.extend({
             user_id: this.$store.state.authentication.user.id,
           }
         )
-      
+
         if (data.length > 0) {
           if (data[0].comment_approved === commentStatus.Approved) {
             this.registrationStatus = 'registerd'
@@ -691,10 +696,8 @@ export default Vue.extend({
         } else {
           this.registrationStatus = 'notregisterd'
         }
-
-    
       } catch (error) {
-        console.log("error:")
+        console.log('error:')
         console.log(error)
       }
     },
@@ -726,9 +729,9 @@ export default Vue.extend({
             this.modal.title = 'موفقیت آمیز'
             this.modal.body =
               ' ثبت نام شما در رویداد' +
-              "<b>" +
+              '<b>' +
               this.event.title +
-              "</b>" +
+              '</b>' +
               'موفقیت آمیز بود ' +
               '<br />' +
               'به امید دیدار شما در این رویداد'
