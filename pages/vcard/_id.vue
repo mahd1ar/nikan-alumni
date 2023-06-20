@@ -493,7 +493,7 @@ export default Vue.extend({
   layout: 'RawLayout',
   asyncData(args) {
     const { path } = args.route
-    args.redirect('https://nikpeyvand.nikan-alumni.com/' + path)
+    args.redirect('https://nikpeyvand.nikan-alumni.com' + path)
   },
   data() {
     return {
