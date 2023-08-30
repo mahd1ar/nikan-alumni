@@ -18,7 +18,7 @@
       copy to clipboard
     </button>
     <a
-      :href="`https://nikpeyvand-api.nikan-alumni.com/users?search=${cardid}`"
+      :href="`https://nikan-admin.nikpeyvand.com/users?search=${cardid}`"
       target="_blank"
       >go to user {{ cardid }}</a
     >
