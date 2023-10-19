@@ -492,10 +492,10 @@ const initialState = {
           type: 'tel',
           title: '02122631250',
         },
-        {
-          type: 'tel',
-          title: '02122631787',
-        },
+        // {
+        //   type: 'tel',
+        //   title: '02122631787',
+        // },
         {
           type: 'tel',
           title: '02122631787',
