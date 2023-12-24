@@ -91,7 +91,7 @@ export default Vue.extend({
   },
 
   asyncData(args) {
-    args.redirect('https://nikpeyvand.nikan-alumni.com/login')
+    args.redirect('https://nikan.nikpeyvand.com/login')
   },
 
   computed: {
