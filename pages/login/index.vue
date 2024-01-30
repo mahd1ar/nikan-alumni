@@ -89,11 +89,6 @@ export default Vue.extend({
       loaded: false,
     }
   },
-
-  asyncData(args) {
-    args.redirect('https://nikan.nikpeyvand.com/login')
-  },
-
   computed: {
     action() {
       const action = this.$route.query.action as string | null
