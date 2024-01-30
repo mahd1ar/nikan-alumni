@@ -451,16 +451,16 @@ const initialState = {
           hasSubmenu: false,
           href: '/page/22403',
         },
-        {
-          title: 'بیمه درمان تکمیلی وابستگان درجه دو',
-          hasSubmenu: false,
-          href: '/page/22007',
-        },
-        {
-          title: 'بیمه درمان تکمیلی گروهی و شرکتی',
-          hasSubmenu: false,
-          href: '/page/22009',
-        },
+        // {
+        //   title: 'بیمه درمان تکمیلی وابستگان درجه دو',
+        //   hasSubmenu: false,
+        //   href: '/page/22007',
+        // },
+        // {
+        //   title: 'بیمه درمان تکمیلی گروهی و شرکتی',
+        //   hasSubmenu: false,
+        //   href: '/page/22009',
+        // },
       ],
     },
     {
