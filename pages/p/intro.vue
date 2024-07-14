@@ -1321,6 +1321,10 @@
                     <p>نایب رئیس کانون: آقای نوری۱۰</p>
                     <p>منشی جلسات شورا: آقای کاملی۶</p>
                   </div>
+
+
+                  <h3>شورای مرکزی چهارم</h3>
+                  <ShoraFourth />
                 </div>
               </div>
             </div>
@@ -1713,6 +1717,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { RootState as navbarState } from '@/store/navigation/index'
+import { ShoraFourth  } from '@/components/shora'
 // import lottie from 'lottie-web'
 
 export default Vue.extend({
