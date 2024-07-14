@@ -1717,8 +1717,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { RootState as navbarState } from '@/store/navigation/index'
-import { ShoraFourth  } from '@/components/shora'
-// import lottie from 'lottie-web'
+import ShoraFourth from '@/components/shora/ShoraFourth.vue'
+
 
 export default Vue.extend({
   data() {
