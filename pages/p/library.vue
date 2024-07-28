@@ -85,9 +85,9 @@ export const library = [
                 'https://nikan-alumni.org/wp-content/uploads/2018/08/ozviat.pdf',
             },
             {
-              title: 'انتخابات',
+              title: 'آئین نامه جدید انتخابات شورای مرکزی کانون',
               link:
-                'https://nikan-alumni.org/wp-content/uploads/2022/11/آیین_نامه_نهایی_انتخابات_اعضای_شورای_مرکزی_کانون_ویرایش_10_14010616.pdf',
+                'https://nikan-alumni.org/wp-content/uploads/2024/07/آئین_نامه_انتخابات_شورای_مرکزی_مصوب_شورای_چهارم_کانون_ویرایش_11.pdf',
             },
             {
               title: 'اداره جلسات شورای مرکزی',
