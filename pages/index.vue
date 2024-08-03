@@ -1284,8 +1284,8 @@ import {
   wordpressDateToJalali,
 } from '~/data/utils'
 import { Dict } from '~/data/utils/dictionary'
-import homegql from '@/apollo/queries/home.gql'
-import { HomeQuery, HomeQueryVariables } from '~/types/types'
+// import homegql from '@/apollo/queries/home.gql'
+// import { HomeQuery, HomeQueryVariables } from '~/types/types'
 import { Event, EventStatus, WPapi } from '@/data/GlobslTypes'
 
 export default Vue.extend({
@@ -1343,15 +1343,116 @@ export default Vue.extend({
     }
   },
   async fetch() {
-    const variables: HomeQueryVariables = { first: 4, first1: 4 }
+    const variables: HomeQueryVariables = { first: 4, first1: 4 };
+
+const query = `query home(
+  $first: Int = 10
+  $order: OrderEnum = DESC
+  $field: PostObjectsConnectionOrderbyEnum = DATE
+  $first1: Int = 10
+) {
+  videos(first: $first, where: { orderby: { field: $field, order: $order } }) {
+    nodes {
+      id
+      title(format: RENDERED)
+      content
+      speakers {
+        speakers
+      }
+      categories {
+        nodes {
+          name
+          id
+        }
+      }
+      featuredImage {
+        node {
+          id
+          sourceUrl(size: LARGE)
+        }
+      }
+    }
+  }
+  events(first: $first1) {
+    nodes {
+      id
+      databaseId
+      title(format: RENDERED)
+      commentCount
+      date
+      content(format: RENDERED)
+      eventProps {
+        duration
+        venue
+      }
+      categories {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+      featuredImage {
+        node {
+          id
+          altText
+          sourceUrl
+        }
+      }
+    }
+  }
+  category(id: "announcement", idType: SLUG) {
+    contentNodes(first: 4) {
+      edges {
+        node {
+          date
+          id
+          contentTypeName
+          ... on Post {
+            id
+            title(format: RENDERED)
+            featuredImage {
+              node {
+                mediaItemUrl
+                id
+              }
+            }
+            categories {
+              nodes {
+                id
+                name
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`
+
+const ss = JSON.stringify({query,variables})
 
     try {
-      const { data } = await this.$apollo.query<HomeQuery>({
-        query: homegql,
-        variables,
-      })
+      // const { data } = await this.$apollo.query<HomeQuery>({
+      //   query: homegql,
+      //   variables,
+      // })
 
-      
+     const x = await fetch("https://nikan-alumni.org/index.php?graphql", {
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+  },
+  "body": ss, 
+  "method": "POST",
+});
+
+const {data} = await x.json()
+
+      console.log("{data}")
+      console.log({data})
 
       if (data.category?.contentNodes) {
         data.category.contentNodes.edges?.forEach((i) => {
