@@ -26,7 +26,8 @@
       // "@nuxtjs/auth-next",
       "nuxt-leaflet",
       "@nuxtjs/device"
-    ]
+    ],
+    "noImplicitAny": false
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
