@@ -515,8 +515,8 @@
               <button
                 class="-mb-px flex h-10 items-center gap-2 whitespace-nowrap border-b-2 bg-transparent px-4 py-2 text-center text-sm focus:outline-none sm:text-base"
                 :class="tabIndex === 1
-                    ? 'border-cyan-500  text-cyan-600'
-                    : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
+                  ? 'border-cyan-500  text-cyan-600'
+                  : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
                   " @click="tabIndex = 1">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                   preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
@@ -530,8 +530,8 @@
               <button
                 class="-mb-px flex h-10 items-center gap-2 whitespace-nowrap border-b-2 bg-transparent px-4 py-2 text-center text-sm focus:outline-none sm:text-base"
                 :class="tabIndex === 0
-                    ? 'border-cyan-500  text-cyan-600'
-                    : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
+                  ? 'border-cyan-500  text-cyan-600'
+                  : 'cursor-base  border-transparent  text-gray-700  hover:border-gray-400'
                   " @click="tabIndex = 0">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                   preserveAspectRatio="xMidYMid meet" viewBox="0 0 48 48">
@@ -697,8 +697,8 @@
                 <div :title="i.subject"
                   class="flex h-full translate-y-0 transform cursor-pointer items-center rounded-md border border-gray-700 bg-opacity-10 py-4 px-4 transition-all"
                   :class="mediaIndex === index
-                      ? 'border border-cyan-700 shadow-md shadow-cyan-900/50'
-                      : ' hover:-translate-y-2 hover:bg-slate-800 hover:shadow-sm hover:shadow-yellow-200/50'
+                    ? 'border border-cyan-700 shadow-md shadow-cyan-900/50'
+                    : ' hover:-translate-y-2 hover:bg-slate-800 hover:shadow-sm hover:shadow-yellow-200/50'
                     " @click="mediaIndex = index">
                   <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
                     class="ml-4 h-10 w-10 flex-shrink-0 rounded-full bg-white object-cover object-center p-2 text-cyan-700 shadow-lg shadow-cyan-500/50"
@@ -713,8 +713,8 @@
                     <div class="text-sx flex w-full flex-col items-start gap-1 text-slate-400">
                       <div class="flex-col gap-2">
                         <h2 class="title-font text-sm font-medium drop-shadow-2xl" :class="mediaIndex === index
-                            ? 'text-cyan-50'
-                            : 'text-yellow-100 shadow-yellow-500/50'
+                          ? 'text-cyan-50'
+                          : 'text-yellow-100 shadow-yellow-500/50'
                           " style="text-shadow: 1px 1px 9px #dee3f0">
                           {{ i.subject }}
                         </h2>
@@ -817,12 +817,12 @@
                       {{ title }}
                     </span>
                     <a v-else target="_blank" rel="noopener noreferrer" :href="link
-                        ? link
-                        : type === 'email'
-                          ? 'mailto:' + title
-                          : type === 'tel'
-                            ? 'tel:' + title
-                            : '#'
+                      ? link
+                      : type === 'email'
+                        ? 'mailto:' + title
+                        : type === 'tel'
+                          ? 'tel:' + title
+                          : '#'
                       " class="hover:underline">
                       {{ formatstr(title) }}
                     </a>
@@ -868,8 +868,8 @@ import {
   wordpressDateToJalali,
 } from '~/data/utils'
 import { Dict } from '~/data/utils/dictionary'
-// import homegql from '@/apollo/queries/home.gql'
-// import { HomeQuery, HomeQueryVariables } from '~/types/types'
+import homegql from '@/apollo/queries/home.gql'
+import { HomeQuery, HomeQueryVariables } from '~/types/types'
 import { Event, EventStatus, WPapi } from '@/data/GlobslTypes'
 
 export default Vue.extend({
@@ -927,113 +927,16 @@ export default Vue.extend({
     }
   },
   async fetch() {
-    const variables = { first: 4, first1: 4 };
-
-    const query = `query home(
-  $first: Int = 10
-  $order: OrderEnum = DESC
-  $field: PostObjectsConnectionOrderbyEnum = DATE
-  $first1: Int = 10
-) {
-  videos(first: $first, where: { orderby: { field: $field, order: $order } }) {
-    nodes {
-      id
-      title(format: RENDERED)
-      content
-      speakers {
-        speakers
-      }
-      categories {
-        nodes {
-          name
-          id
-        }
-      }
-      featuredImage {
-        node {
-          id
-          sourceUrl(size: LARGE)
-        }
-      }
-    }
-  }
-  events(first: $first1) {
-    nodes {
-      id
-      databaseId
-      title(format: RENDERED)
-      commentCount
-      date
-      content(format: RENDERED)
-      eventProps {
-        duration
-        venue
-      }
-      categories {
-        edges {
-          node {
-            id
-            name
-          }
-        }
-      }
-      featuredImage {
-        node {
-          id
-          altText
-          sourceUrl
-        }
-      }
-    }
-  }
-  category(id: "announcement", idType: SLUG) {
-    contentNodes(first: 4) {
-      edges {
-        node {
-          date
-          id
-          contentTypeName
-          ... on Post {
-            id
-            title(format: RENDERED)
-            featuredImage {
-              node {
-                mediaItemUrl
-                id
-              }
-            }
-            categories {
-              nodes {
-                id
-                name
-                slug
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}`
-
-    const ss = JSON.stringify({ query, variables })
+    const variables : HomeQueryVariables = { first: 4, first1: 4 };
 
     try {
-      // const { data } = await this.$apollo.query<HomeQuery>({
-      //   query: homegql,
-      //   variables,
-      // })
+      const { data } = await this.$apollo.query<HomeQuery>({
+        query: homegql,
+        variables,
+        fetchPolicy: 'no-cache'
+      })
 
-      const x = await fetch("https://nikan-alumni.org/index.php?graphql", {
-        "headers": {
-          "accept": "application/json",
-          "content-type": "application/json",
-        },
-        "body": ss,
-        "method": "POST",
-      });
-
-      const { data } = await x.json()
+   
 
       if (data.category?.contentNodes) {
         data.category.contentNodes.edges?.forEach((i) => {
