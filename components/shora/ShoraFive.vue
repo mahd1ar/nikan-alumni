@@ -26,47 +26,16 @@
 
 
     <table>
-      <thead>
-        <tr>
-          <th scope="col">
-            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-31-1/"><img loading="lazy"
-                class="aligncenter wp-image-21498 size-thumbnail"
-                src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.31-1.jpeg"
-                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>
-            مهدی معصومی اصفهانی 2- 604 رای
-          </th>
-          <th scope="col">
-            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-31-53/"><img loading="lazy"
-                class="aligncenter wp-image-21494 size-thumbnail"
-                src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-15.31.53.jpeg"
-                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a> آقای محمد مهدی راد نیکنام۱۳: 714 رأی
-          </th>
-          <th scope="col">
-            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-12-02-at-14-14-01/"><img loading="lazy"
-                class="aligncenter wp-image-21598 size-thumbnail"
-                src="https://nikan-alumni.org/wp-content/uploads/2020/12/WhatsApp-Image-2020-12-02-at-14.14.01.jpeg"
-                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>
-            صدرا نوری 33- 459 رای
-          </th>
-          <th scope="col">
-            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-45/"><img loading="lazy"
-                class="aligncenter wp-image-21489 size-thumbnail"
-                src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-15.32.45.jpeg"
-                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>
-            بهنام پرنیانپور8- 615 رای
-
-          </th>
-        </tr>
-      </thead>
+      
       <tbody>
 
         <tr v-for="(j, jinx) in chunk(mems,4)" :key="jinx">
           <td v-for="(i, inx) in j" :key="inx" style="text-align: center" data-label="Account">
-            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-28/"><img loading="lazy"
+            <a :href="i[1]"><img loading="lazy"
                 class="aligncenter wp-image-21502 size-thumbnail"
-                src="https://nikan-alumni.org/wp-content/uploads/2024/07/محمدرضا-اویسی-12-634-رای.jpg" alt=""
+                :src="i[1]" alt=""
                 sizes="(max-width: 150px) 100vw, 150px" /></a>
-            {{ i }}
+            {{ i[0] }}
           </td>
 
         </tr>
