@@ -63,7 +63,7 @@
                   v-show="index !== 0"
                   :key="index"
                   :class="{
-                    'mmenu__icon cursor-pointer rounded border bg-white p-3 transition-all hover:bg-slate-50': true,
+                    'mmenu__icon cursor-pointer rounded border bg-white p-3 transition-all hover:bg-slate-50 list-none': true,
                     ' border border-cyan-200': index === mobileMenu.selected[0],
                     'opacity-70': index !== mobileMenu.selected[0],
                   }"
@@ -75,7 +75,7 @@
                 ></li>
                 <!-- back -->
                 <li
-                  class="mmenu__icon mt-auto rotate-180 transform cursor-pointer rounded border bg-white p-3 text-red-400 transition-all"
+                  class="mmenu__icon mt-auto rotate-180 transform cursor-pointer rounded border bg-white p-3 list-none text-red-400 transition-all"
                   @click="closeMobileMenu"
                 >
                   <svg
@@ -138,8 +138,8 @@
                   role="img"
                   style="transform: rotate(180deg)"
                   class="flex-shrink-0"
-                  width="1em"
-                  height="1em"
+                  width="1.25rem"
+                  height="1.25rem"
                   preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 24 24"
                 >
@@ -158,7 +158,7 @@
                 <li
                   v-for="(sm, index2) in menu[mobileMenu.selected[0]].submenu"
                   :key="index2 * 100 + 5"
-                  class="overflow-hidden rounded-md bg-slate-50 p-2"
+                  class="overflow-hidden rounded-md bg-slate-50 p-2 list-none"
                   :style="{
                     '--count': index2,
                     '--max': menu[mobileMenu.selected[0]].submenu.length,
@@ -174,9 +174,9 @@
                       xmlns="http://www.w3.org/2000/svg"
                       aria-hidden="true"
                       role="img"
-                      width="1em"
-                      height="1em"
-                      class="flex-shrink-0"
+                      width="1.25rem"
+                      height="1.25rem"
+                      class="flex-shrink-0 opacity-75"
                       style="transform: rotate(180deg)"
                       preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 24 24"

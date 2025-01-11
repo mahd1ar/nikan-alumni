@@ -57,7 +57,8 @@ export default {
     },
     defaultOptions: {
       $query: {
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'no-cache',
+        // fetchPolicy: 'network-only',
         errorPolicy: 'all',
         loadingKey: 'loading',
       },

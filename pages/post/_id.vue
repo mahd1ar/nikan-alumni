@@ -66,6 +66,7 @@ export default Vue.extend({
 
     const { data } = await this.$apollo.query<PostQuery>({
       query: postgql,
+      fetchPolicy: 'no-cache',
       variables,
     })
 
