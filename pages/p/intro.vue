@@ -1330,6 +1330,8 @@
 
                   <h3>شورای مرکزی چهارم</h3>
                   <ShoraFourth />
+                  <h3>شورای مرکزی پنجم</h3>
+                  <ShoraFive />
                 </div>
               </div>
             </div>
@@ -1780,6 +1782,7 @@
 import Vue from 'vue'
 import { RootState as navbarState } from '@/store/navigation/index'
 import ShoraFourth from '@/components/shora/ShoraFourth.vue'
+import ShoraFive from '@/components/shora/ShoraFive.vue'
 
 
 export default Vue.extend({
