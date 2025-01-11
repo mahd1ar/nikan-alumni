@@ -38,7 +38,7 @@
 
 
     <p>&nbsp;</p>
-    <p>نمایندگان مدرسه نیز در شورای مرکزی چهارم عبارتند از:</p>
+    <p>نمایندگان مدرسه نیز در شورای مرکزی پنجم عبارتند از:</p>
     <p>
       <a href="https://nikan-alumni.org/wp-content/uploads/2024/07/علی-دوایی-نماینده-مدرسه-scaled.jpg"><img
           loading="lazy" class="alignnone wp-image-15611 size-thumbnail"
