@@ -69,9 +69,13 @@ export const library = [
           icon: '/icons/bookmark-svgrepo-com.svg',
           subset: [
             {
-              title: 'اساسنامه و مرامنامه',
+              title: 'اساسنامه جدید مصوب شورای مرکزی دوره چهارم',
               link:
-                'https://nikan-alumni.org/wp-content/uploads/2018/08/Asasnameh_Signed.pdf',
+              'https://nikan-alumni.org/wp-content/uploads/2024/07/%D8%A7%D8%B3%D8%A7%D8%B3%D9%86%D8%A7%D9%85%D9%87_%D8%AC%D8%AF%DB%8C%D8%AF_%DA%A9%D8%A7%D9%86%D9%88%D9%86_%D8%AF%D8%A7%D9%86%D8%B4_%D8%A2%D9%85%D9%88%D8%AE%D8%AA%DA%AF%D8%A7%D9%86_%D9%86%DB%8C%DA%A9%D8%A7%D9%86_%D9%85%D8%B5%D9%88%D8%A8_%D8%B4%D9%88%D8%B1%D8%A7%DB%8C_%D9%85%D8%B1%DA%A9%D8%B2%DB%8C_%D8%AF%D9%88%D8%B1%D9%87_%DA%86%D9%87%D8%A7%D8%B1%D9%85.pdf'
+            },
+            {
+              title: 'مرام نامه',
+              link: 'https://nikan-alumni.org/wp-content/uploads/2024/09/%D9%85%D8%B1%D8%A7%D9%85%D9%86%D8%A7%D9%85%D9%87_%DA%A9%D8%A7%D9%86%D9%88%D9%86_%D8%AF%D8%A7%D9%86%D8%B4_%D8%A2%D9%85%D9%88%D8%AE%D8%AA%DA%AF%D8%A7%D9%86_%D9%86%DB%8C%DA%A9%D8%A7%D9%86.pdf'
             },
           ],
         },
@@ -85,9 +89,9 @@ export const library = [
                 'https://nikan-alumni.org/wp-content/uploads/2018/08/ozviat.pdf',
             },
             {
-              title: 'انتخابات',
+              title: 'آئین نامه جدید انتخابات شورای مرکزی کانون',
               link:
-                'https://nikan-alumni.org/wp-content/uploads/2022/11/آیین_نامه_نهایی_انتخابات_اعضای_شورای_مرکزی_کانون_ویرایش_10_14010616.pdf',
+                'https://nikan-alumni.org/wp-content/uploads/2024/07/آئین_نامه_انتخابات_شورای_مرکزی_مصوب_شورای_چهارم_کانون_ویرایش_11.pdf',
             },
             {
               title: 'اداره جلسات شورای مرکزی',

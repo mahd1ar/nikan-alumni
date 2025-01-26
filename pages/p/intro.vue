@@ -2,22 +2,15 @@
   <div dir="rtl" class="container mx-auto py-10 overflow-hidden">
     <div class="pb-6 mb-4 border-b">
       <ul class="css-header flex gap-4 flex-wrap items-end">
-        <li
-          v-for="(t, index) in tabs"
-          :key="index"
-          class="text-gray-400 transition-all"
-          :class="
-            index === tabindex
-              ? 'text-cyan-400 text-lg select-none'
-              : 'hover:text-gray-600 cursor-pointer'
-          "
-          @click="tabindex = index"
-        >
+        <li v-for="(t, index) in tabs" :key="index" class="text-gray-400 transition-all" :class="index === tabindex
+            ? 'text-cyan-400 text-lg select-none'
+            : 'hover:text-gray-600 cursor-pointer'
+          " @click="tabindex = index">
           {{ t.title }}
         </li>
       </ul>
     </div>
-    <div class="w-full overflow-clip" >
+    <div class="w-full overflow-clip">
 
       <transition mode="out-in" name="anime-intro">
         <div v-if="tabindex === 0" :key="0">
@@ -47,7 +40,7 @@
               <li>اخلاقی</li>
               <li>عاطفی و روانی</li>
               <li>فرهنگی و هنری</li>
-  
+
               <li>اجتماعی</li>
               <li>سیاسی – نظامی</li>
               <li>اقتصادی</li>
@@ -85,7 +78,7 @@
               بستری برای شکوفایی و به اشتراک ­گذاری ظرفیت­ ها و توانمندی­ های
               ایشان در راستای اهداف کانون است.
             </p>
-  
+
             اهداف کلان کانون:
             <ul class="list-inside list-disc">
               <li>
@@ -106,7 +99,7 @@
               </li>
             </ul>
             ارکان کانون عبارتند از:
-  
+
             <ul class="list-inside list-disc">
               <li>شورای عالی هماهنگی</li>
               <li>شورای مرکزی (به نمایندگی تام الاختیار از مجمع عمومی)</li>
@@ -116,12 +109,12 @@
             به مجموعه­ ی همه­ ی اعضای کانون، مجمع عمومی گفته می شود.
           </div>
         </div>
-  
+
         <div v-if="tabindex === 2" :key="2" class="leading-7 text-tm-black">
           <h1 class="text-cyan-400 text-xl mb-10">معرفی شورای عالی هماهنگی</h1>
           <div>
             شورای عالی هماهنگی کانون از اشخاص زیر تشکیل می­ شود:
-  
+
             <ul class="list-inside list-disc">
               <li>
                 سه نفر نمایندگان مدرسه که حدّاقل یک تن از ایشان از میان اعضای
@@ -134,13 +127,13 @@
             <br />
             <br />
             وظایف شورای عالی هماهنگی:
-  
+
             <ul class="list-inside list-disc">
               <li>
                 تشخیص و پیگیری رفع مغایرت­ های احتمالی چشم انداز و مفاد برنامه­ ی­
                 راهبردی مصوّب کانون با اهداف مدرسه.
               </li>
-  
+
               <li>
                 تا رفع مغایرت­ ها و ایرادات وارده، مفاد و موارد مرتبط با آن­ها
                 برای کانون، قابل استناد و اجرا نخواهد بود.
@@ -157,29 +150,41 @@
             <br /><br />
             رسیدگی به پیشنهادها و شکایات دانش ­آموختگان در خصوص کیفیت فعالیت کانون
             و بهبود امور آن
-  
+
             <h2 class="text-lg text-cyan-500 bg-cyan-50 mt-5 p-1">
               اعضای شورای عالی هماهنگی دوره اول
             </h2>
             نمایندگان مدرسه: جناب حاج آقای دوایی، جناب حاج آقای کاشانی، آقای دکتر
             مهدی دوایی۱ رئیس کانون : آقای مهدی معصومی۲ نایب رئیس کانون: آقای حمید
             یزدانی۴
-  
+
             <h2 class="text-lg text-cyan-500 bg-cyan-50 mt-5 p-1">
               اعضای شورای عالی هماهنگی دوره دوم
             </h2>
             نمایندگان مدرسه: جناب حاج آقای دوایی، جناب حاج آقای کاشانی، آقای سید
             علی اصغر رهنمافرد۶ رئیس کانون : آقای مهدی معصومی۲ نایب رئیس کانون:
             آقای علی ظاهری۷
-  
+
             <h2 class="text-lg text-cyan-500 bg-cyan-50 mt-5 p-1">
               اعضای شورای عالی هماهنگی دوره سوم
             </h2>
             نمایندگان مدرسه: جناب حاج آقای دوایی، جناب حاج آقای کاشانی رئیس کانون
             : آقای مهدی معصومی۲ نایب رئیس کانون: آقای نوری۱۰
+
+            <h2 class="text-lg text-cyan-500 bg-cyan-50 mt-5 p-1">
+              اعضای شورای عالی هماهنگی دوره چهارم
+            </h2>
+            نمایندگان مدرسه: جناب حاج آقای دوایی، جناب حاج آقای کاشانی رئیس کانون : آقای مهدی معصومی۲ نایب رئیس کانون:
+            آقای اویسی 12
+
+            <h2 class="text-lg text-cyan-500 bg-cyan-50 mt-5 p-1">
+            اعضای شورای عالی هماهنگی دوره پنجم
+            </h2>
+            نمایندگان مدرسه : جناب حاج آقای دوایی ، جناب حاج آقای کاشانی 
+ رئیس شورا : آقای محمد حسین نوری 10 ، نایب رئیس شورا : آقای محمد ظاهری 5
           </div>
         </div>
-  
+
         <div v-if="tabindex === 3" :key="3" class="leading-7 text-tm-black">
           <h1 class="text-cyan-400 text-xl mb-10">معرفی شورای مرکزی</h1>
           <div>
@@ -323,280 +328,172 @@
                       <thead>
                         <tr>
                           <th scope="col">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-46-48.jpg"
-                            >
-                              <img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15618 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-46-48.jpg">
+                              <img loading="lazy" class="size-thumbnail wp-image-15618 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-46-48.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱- آقای مهدی معصومی۲: ۳۵۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱- آقای مهدی معصومی۲: ۳۵۹ رأی
                           </th>
                           <th scope="col">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0007.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20840 size-thumbnail"
-                                src="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0007.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲- آقای محمد ظاهری۵: ۳۱۳ رأی
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0007.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-20840 size-thumbnail"
+                                src="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0007.jpg" alt=""
+                                sizes="(max-width: 150px) 100vw, 150px" /></a>۲- آقای محمد ظاهری۵: ۳۱۳ رأی
                           </th>
                           <th scope="col">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-21.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15615 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-21.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15615 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-21.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۳- آقای حسام زرین۲۰: ۳۰۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۳- آقای حسام زرین۲۰: ۳۰۸ رأی
                           </th>
                           <th scope="col">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-28_11-57-31.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-16166 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-28_11-57-31.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-16166 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-28_11-57-31.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۴- آقای حسین فیاض بخش۱۴: ۳۰۵ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۴- آقای حسین فیاض بخش۱۴: ۳۰۵ رأی
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td data-label="Account">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-05-46.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15720 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-05-46.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15720 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-05-46.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۵- اقای میرحامد مدیر زاده تهرانی: ۲۹۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۵- اقای میرحامد مدیر زاده تهرانی:
+                            ۲۹۳ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-39.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15614 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-39.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15614 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-39.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۶- آقای سیدعلی اصغر رهنمافرد۶: ۲۸۰ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۶- آقای سیدعلی اصغر رهنمافرد۶: ۲۸۰
+                            رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-33.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15620 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-33.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15620 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-33.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۷- اقای شاهین رضا ادیبی۲: ۲۵۴ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۷- اقای شاهین رضا ادیبی۲: ۲۵۴ رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-59.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15622 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-59.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15622 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-59.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۸- آقای محمدحسین نوری۱۰: ۲۴۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۸- آقای محمدحسین نوری۱۰: ۲۴۳ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Account">
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-09.03.40.jpeg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20960 size-thumbnail"
+                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-09.03.40.jpeg"><img
+                                loading="lazy" class="aligncenter wp-image-20960 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-09.03.40.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۹- آقای حمید یزدانی۴: ۲۴۰ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۹- آقای حمید یزدانی۴: ۲۴۰ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-08-07.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-15722 size-thumbnail"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-08-07.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-15722 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-08-07-e1577100828850.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۰- آقای بهنام پرنیان پور۹: ۲۳۶ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۰- آقای بهنام پرنیان پور۹: ۲۳۶ رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-08-39.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15723 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-08-39.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15723 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-08-39.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۱- آقای وحید افخمی ستوده۱۸: ۲۰۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۱- آقای وحید افخمی ستوده۱۸: ۲۰۸
+                            رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_13-58-36.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-17942 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_13-58-36.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-17942 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_13-58-36.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۲- آقای سید وحید ابوالمعالی۱۵: ۱۹۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۲- آقای سید وحید ابوالمعالی۱۵: ۱۹۹
+                            رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Account">
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.56.36.jpeg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20961 size-thumbnail"
+                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.56.36.jpeg"><img
+                                loading="lazy" class="aligncenter wp-image-20961 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.56.36.jpeg"
-                                alt="" /></a
-                            >– آقای امیر رسولیان۷: ۱۹۳ رأی
+                                alt="" /></a>– آقای امیر رسولیان۷: ۱۹۳ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-10-25.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15724 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-10-25.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15724 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-10-25.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۴- آقای محمدرضا پاکروان۷: ۱۸۴ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۴- آقای محمدرضا پاکروان۷: ۱۸۴ رأی
                           </td>
                           <td data-label="Amount">
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-20-at-15.57.13.jpeg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20847 size-thumbnail"
+                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-20-at-15.57.13.jpeg"><img
+                                loading="lazy" class="aligncenter wp-image-20847 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-20-at-15.57.13.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۵- آقای امیرعباس پاکتچیان۱۳: ۱۸۴ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۵- آقای امیرعباس پاکتچیان۱۳: ۱۸۴
+                            رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-11-46.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-15726 size-thumbnail"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-11-46.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-15726 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-11-46-e1577101446109.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۶- آقای امیر محمود رستم بیگی۱۱: ۱۸۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۶- آقای امیر محمود رستم بیگی۱۱:
+                            ۱۸۳ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Acount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-12-30.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15727 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-12-30.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15727 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-12-30.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۷- آقای حمید رفیق دوست۱: ۱۷۶ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۷- آقای حمید رفیق دوست۱: ۱۷۶ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_14-08-35.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-17944 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_14-08-35.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-17944 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_14-08-35.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۸- آقای امیرحسین زرگرباشی۱۶: ۱۶۷ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۸- آقای امیرحسین زرگرباشی۱۶: ۱۶۷
+                            رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0013.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20841 size-thumbnail"
-                                src="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0013.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۹- آقای عباس نصیرایی۱۲: ۱۶۴ رأی
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0013.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-20841 size-thumbnail"
+                                src="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0013.jpg" alt=""
+                                sizes="(max-width: 150px) 100vw, 150px" /></a>۱۹- آقای عباس نصیرایی۱۲: ۱۶۴ رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_18-13-06.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-17948 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_18-13-06.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-17948 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/12/photo_2019-12-23_18-13-06.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۰- آقای محمد مهدی راد نیکنام۱۳: ۱۶۲ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۰- آقای محمد مهدی راد نیکنام۱۳:
+                            ۱۶۲ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Acount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-14-19.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15728 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-14-19.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15728 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-14-19.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۱- آقای محمدعلی اکرمی۲۲: ۱۶۱ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۱- آقای محمدعلی اکرمی۲۲: ۱۶۱ رأی
                           </td>
                           <td>
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.57.24.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20962 size-thumbnail"
+                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.57.24.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-20962 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.57.24.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۲- آقای مسعود نیلفروشان۲: ۱۵۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۲- آقای مسعود نیلفروشان۲: ۱۵۸ رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-15-37.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15730 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-15-37.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15730 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-15-37.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۳- آقای محمد سمیعی۳: ۱۵۵ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۳- آقای محمد سمیعی۳: ۱۵۵ رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-16-12.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15731 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-16-12.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15731 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-12_20-16-12.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۴- آقای حمید رسولی۵: ۱۵۲ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۴- آقای حمید رسولی۵: ۱۵۲ رأی
                           </td>
                         </tr>
                       </tbody>
@@ -639,293 +536,181 @@
                       <tbody>
                         <tr>
                           <td scope="col">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/photo_2019-11-12_20-08-07.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20892 size-thumbnail"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2022/09/photo_2019-11-12_20-08-07.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-20892 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/photo_2019-11-12_20-08-07.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱- آقای بهنام پرنیان پور۹: ۶۵۴ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱- آقای بهنام پرنیان پور۹: ۶۵۴ رأی
                           </td>
                           <td scope="col">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-46-48.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15618 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-46-48.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15618 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-46-48.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲- آقای مهدی معصومی۲: ۶۵۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲- آقای مهدی معصومی۲: ۶۵۳ رأی
                           </td>
                           <td scope="col">
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.56.36.jpeg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20961 size-thumbnail"
+                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.56.36.jpeg"><img
+                                loading="lazy" class="aligncenter wp-image-20961 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.56.36.jpeg"
-                                alt="" /></a
-                            >۳- آقای امیر رسولیان۷: ۵۳۰ رأی
+                                alt="" /></a>۳- آقای امیر رسولیان۷: ۵۳۰ رأی
                           </td>
                           <td scope="col">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-33.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15620 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-33.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15620 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-33.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۴- آقای شاهین رضا ادیبی۲: ۴۴۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۴- آقای شاهین رضا ادیبی۲: ۴۴۳ رأی
                           </td>
                         </tr>
-  
+
                         <tr>
                           <td data-label="Account">
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.57.26.jpeg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20963 size-thumbnail"
+                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.57.26.jpeg"><img
+                                loading="lazy" class="aligncenter wp-image-20963 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-07-01-at-08.57.26.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۵- آقای امید هاشمی۱۷: ۴۳۲ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۵- آقای امید هاشمی۱۷: ۴۳۲ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-59.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15622 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-59.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15622 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-59.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۶- آقای محمدحسین نوری۱۰: ۴۲۷ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۶- آقای محمدحسین نوری۱۰: ۴۲۷ رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-16-16.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15623 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-16-16.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15623 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-16-16.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۷- آقای محمدحسن بهمن پور۳۸: ۴۲۰ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۷- آقای محمدحسن بهمن پور۳۸: ۴۲۰ رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-24.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15624 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-24.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15624 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-44-24.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۸- آقای علی ظاهری۷: ۴۰۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۸- آقای علی ظاهری۷: ۴۰۹ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Account">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-16-38.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15625 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-16-38.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15625 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-16-38.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۹- آقای شهاب کریمیان۵: ۴۰۰ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۹- آقای شهاب کریمیان۵: ۴۰۰ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-30-52.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-15626 size-thumbnail"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-30-52.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-15626 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-30-52-e1577100665558.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۰- آقای مهدی علی اکبریان۱۴: ۳۹۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۰- آقای مهدی علی اکبریان۱۴: ۳۹۸
+                            رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-11.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15627 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-11.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15627 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-15-11.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۱- آقای محمدرضا هنرور۱۸: ۳۹۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۱- آقای محمدرضا هنرور۱۸: ۳۹۸ رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-23-39.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15628 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-23-39.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15628 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-23-39.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۲- آقای محمد اعرابی مقدم۱۷: ۳۸۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۲- آقای محمد اعرابی مقدم۱۷: ۳۸۳
+                            رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Account">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-21.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15615 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-21.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15615 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-21.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۳- آقای حسام زرین۲۰: ۳۶۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۳- آقای حسام زرین۲۰: ۳۶۳ رأی
                           </td>
                           <td>
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-14-09-1.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15630 aligncenter"
+                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-14-09-1.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15630 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-14-09-1.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۴- آقای سید محمد صدرالسادات۱۶: ۳۶۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۴- آقای سید محمد صدرالسادات۱۶: ۳۶۳
+                            رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0002.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20842 size-thumbnail"
-                                src="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0002.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۵- آقای محمدرضا کوثرمدار۱۲: ۳۶۲ رأی
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0002.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-20842 size-thumbnail"
+                                src="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0002.jpg" alt=""
+                                sizes="(max-width: 150px) 100vw, 150px" /></a>۱۵- آقای محمدرضا کوثرمدار۱۲: ۳۶۲ رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-30-26.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-15633 size-thumbnail"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-30-26.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-15633 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_18-30-26-e1577100599570.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۶- آقای محمدعلی حاجی عمو عصار۶: ۳۴۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۶- آقای محمدعلی حاجی عمو عصار۶:
+                            ۳۴۸ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Acount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-37-36.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15634 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-37-36.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15634 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-37-36.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۷- آقای مقداد ولایی۲۶: ۳۴۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۷- آقای مقداد ولایی۲۶: ۳۴۸ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-38-18.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15635 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-38-18.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15635 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-38-18.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۸- آقای احمدرضا شاه آبادی۸: ۳۴۵ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۸- آقای احمدرضا شاه آبادی۸: ۳۴۵
+                            رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-38-51.jpg"
-                              ><img
-                                loading="lazy"
-                                class="alignnone size-thumbnail wp-image-15636"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-38-51.jpg"><img
+                                loading="lazy" class="alignnone size-thumbnail wp-image-15636"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-38-51.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px"
-                            /></a>
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>
                             <p></p>
                             <p>۱۹- آقای محسن میرمحمد صادقی۱۱: ۳۳۸ رأی</p>
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-39-38.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15637 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-39-38.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15637 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-39-38.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۰- آقای محمد امین مفتح۳۱: ۳۳۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۰- آقای محمد امین مفتح۳۱: ۳۳۳ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Acount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-40-13.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15638 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-40-13.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15638 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-40-13.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۱- آقای امیرحسین خیاط تهرانچی۲۹: ۳۲۷ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۱- آقای امیرحسین خیاط تهرانچی۲۹:
+                            ۳۲۷ رأی
                           </td>
                           <td>
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-29-at-16.55.52.jpeg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20965 size-thumbnail"
+                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-29-at-16.55.52.jpeg"><img
+                                loading="lazy" class="aligncenter wp-image-20965 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-29-at-16.55.52.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۲- آقای محمد حسین تابش۲۳: ۳۱۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۲- آقای محمد حسین تابش۲۳: ۳۱۹ رأی
                           </td>
                           <td data-label="Amount">
                             <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-30-at-09.13.52.jpeg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20964 size-thumbnail"
+                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-30-at-09.13.52.jpeg"><img
+                                loading="lazy" class="aligncenter wp-image-20964 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2022/09/WhatsApp-Image-2020-06-30-at-09.13.52.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۳- آقای سید محمدرضا احمدی۴: ۳۱۶ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۳- آقای سید محمدرضا احمدی۴: ۳۱۶
+                            رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-42-19.jpg"
-                              ><img
-                                loading="lazy"
-                                class="size-thumbnail wp-image-15641 aligncenter"
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-42-19.jpg"><img
+                                loading="lazy" class="size-thumbnail wp-image-15641 aligncenter"
                                 src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-11_15-42-19.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۴- آقای محمدعلی مفتح۲۸: ۳۱۲ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۴- آقای محمدعلی مفتح۲۸: ۳۱۲ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Acount">
-                            <a
-                              href="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0006.jpg"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-20843 size-thumbnail"
-                                src="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0006.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۵- آقای حسین ذوقی۳۲: ۳۱۲ رأی
+                            <a href="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0006.jpg"><img
+                                loading="lazy" class="aligncenter wp-image-20843 size-thumbnail"
+                                src="https://nikan-alumni.org/wp-content/uploads/2022/09/IMG-20200513-WA0006.jpg" alt=""
+                                sizes="(max-width: 150px) 100vw, 150px" /></a>۲۵- آقای حسین ذوقی۳۲: ۳۱۲ رأی
                           </td>
                           <td></td>
                           <td data-label="Amount"></td>
@@ -937,26 +722,16 @@
                     <p>نمایندگان مدرسه نیز در شورای مرکزی دوم عبارتند از:</p>
                     <p>جناب حاج آقای دوایی</p>
                     <p>
-                      <a
-                        href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-09-07_11-35-19.jpg"
-                        ><img
-                          loading="lazy"
-                          class="alignnone wp-image-15611 size-thumbnail"
-                          src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-09-07_11-35-19.jpg"
-                          alt=""
-                          sizes="(max-width: 150px) 100vw, 150px" /></a
-                      >جناب حاج آقای کاشانی وحید
+                      <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-09-07_11-35-19.jpg"><img
+                          loading="lazy" class="alignnone wp-image-15611 size-thumbnail"
+                          src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-09-07_11-35-19.jpg" alt=""
+                          sizes="(max-width: 150px) 100vw, 150px" /></a>جناب حاج آقای کاشانی وحید
                     </p>
                     <p>
-                      <a
-                        href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-39.jpg"
-                        ><img
-                          loading="lazy"
-                          class="alignnone size-thumbnail wp-image-15614"
-                          src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-39.jpg"
-                          alt=""
-                          sizes="(max-width: 150px) 100vw, 150px" /></a
-                      >جناب آقای سیدعلی اصغر رهنمافرد۶
+                      <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-39.jpg"><img
+                          loading="lazy" class="alignnone size-thumbnail wp-image-15614"
+                          src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-11-10_19-13-39.jpg" alt=""
+                          sizes="(max-width: 150px) 100vw, 150px" /></a>جناب آقای سیدعلی اصغر رهنمافرد۶
                     </p>
                     <p>
                       مدت فعالیت دوره اول شورای مرکزی کانون از تاریخ ۱/۷/۱۳۹۷ تا
@@ -995,284 +770,174 @@
                       <thead>
                         <tr>
                           <th scope="col">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-31-1/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21498 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-31-1/"><img
+                                loading="lazy" class="aligncenter wp-image-21498 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.31-1.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱- آقای مهدی معصومی۲: ۶۴۶ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱- آقای مهدی معصومی۲: ۶۴۶ رأی
                           </th>
                           <th scope="col">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-31-53/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21494 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-31-53/"><img
+                                loading="lazy" class="aligncenter wp-image-21494 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-15.31.53.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲- آقای محمد مهدی راد نیکنام۱۳: ۶۳۶ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲- آقای محمد مهدی راد نیکنام۱۳: ۶۳۶
+                            رأی
                           </th>
                           <th scope="col">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-12-02-at-14-14-01/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21598 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-12-02-at-14-14-01/"><img
+                                loading="lazy" class="aligncenter wp-image-21598 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/12/WhatsApp-Image-2020-12-02-at-14.14.01.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۳- آقای صدر الدین نوری۳۳: ۵۳۵ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۳- آقای صدر الدین نوری۳۳: ۵۳۵ رأی
                           </th>
                           <th scope="col">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-45/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21489 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-45/"><img
+                                loading="lazy" class="aligncenter wp-image-21489 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-15.32.45.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۴- آقای بهنام پرنیان پور۸: ۵۱۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۴- آقای بهنام پرنیان پور۸: ۵۱۸ رأی
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td style="text-align: center" data-label="Account">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-28/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21502 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-28/"><img
+                                loading="lazy" class="aligncenter wp-image-21502 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.28.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۵- آقای فرشاد علامه۱۸: ۵۱۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۵- آقای فرشاد علامه۱۸: ۵۱۳ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-17/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21491 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-17/"><img
+                                loading="lazy" class="aligncenter wp-image-21491 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-15.32.17.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۶- آقای شاهین رضا ادیبی۲: ۵۰۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۶- آقای شاهین رضا ادیبی۲: ۵۰۹ رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-29/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21501 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-29/"><img
+                                loading="lazy" class="aligncenter wp-image-21501 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.29.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۷- آقای محمد ظاهری۵: ۵۰۴ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۷- آقای محمد ظاهری۵: ۵۰۴ رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-08/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21492 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-08/"><img
+                                loading="lazy" class="aligncenter wp-image-21492 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-15.32.08.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۸- آقای محمد حسین نوری۱۰: ۴۷۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۸- آقای محمد حسین نوری۱۰: ۴۷۹ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Account">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-59-52/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21488 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-59-52/"><img
+                                loading="lazy" class="aligncenter wp-image-21488 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-15.59.52.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۹- آقای محمد صراف زاده۴: ۴۷۶ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۹- آقای محمد صراف زاده۴: ۴۷۶ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-17-47-42/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21487 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-17-47-42/"><img
+                                loading="lazy" class="aligncenter wp-image-21487 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-17.47.42.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۰- آقای حمیدرضا مرادی مطلق۱۴: ۴۶۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۰- آقای حمیدرضا مرادی مطلق۱۴: ۴۶۹
+                            رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-31/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21496 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-31/"><img
+                                loading="lazy" class="aligncenter wp-image-21496 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.31.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۱- آقای احمد رضا شاه آبادی۸: ۴۳۰ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۱- آقای احمد رضا شاه آبادی۸: ۴۳۰
+                            رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/img-20200513-wa0002/"
-                              ><img
-                                loading="lazy"
+                            <a href="https://nikan-alumni.org/16150-2/img-20200513-wa0002/"><img loading="lazy"
                                 class="aligncenter wp-image-21493 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/IMG-20200513-WA0002-1.jpg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۲- آقای محمد رضا کوثر مدار۱۲: ۴۱۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۲- آقای محمد رضا کوثر مدار۱۲: ۴۱۹
+                            رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Account">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-30/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21499 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-30/"><img
+                                loading="lazy" class="aligncenter wp-image-21499 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.30.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۳- آقای مهدی علی اکبریان۱۴: ۴۱۷ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۳- آقای مهدی علی اکبریان۱۴: ۴۱۷
+                            رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/16150-2/a6ddd4f9-0536-4b29-a11d-dca63a1e7f67/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21510 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/a6ddd4f9-0536-4b29-a11d-dca63a1e7f67/"><img
+                                loading="lazy" class="aligncenter wp-image-21510 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/A6DDD4F9-0536-4B29-A11D-DCA63A1E7F67.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۴- آقای محمد ذوقی۲۱: ۴۱۴ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۴- آقای محمد ذوقی۲۱: ۴۱۴ رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-30-1/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21500 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-30-1/"><img
+                                loading="lazy" class="aligncenter wp-image-21500 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.30-1.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۵- آقای مصطفی محمدی اردهالی۶: ۴۰۸ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۵- آقای مصطفی محمدی اردهالی۶: ۴۰۸
+                            رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-25/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21505 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-25/"><img
+                                loading="lazy" class="aligncenter wp-image-21505 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.25.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۶- آقای عباس مجیدی۲۹: ۴۰۵ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۶- آقای عباس مجیدی۲۹: ۴۰۵ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Acount">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-32/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21495 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-32/"><img
+                                loading="lazy" class="aligncenter wp-image-21495 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.32.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۷- آقای سید علی طباطبایی یگانه۴۰: ۳۸۵ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۷- آقای سید علی طباطبایی یگانه۴۰:
+                            ۳۸۵ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-12-16-at-06-44-04/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21599 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-12-16-at-06-44-04/"><img
+                                loading="lazy" class="aligncenter wp-image-21599 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/12/WhatsApp-Image-2020-12-16-at-06.44.04.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۱۸- آقای حمید رضا فرحزادی۲۲: ۳۸۴ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۱۸- آقای حمید رضا فرحزادی۲۲: ۳۸۴
+                            رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-15-at-07-28-15/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21485 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-15-at-07-28-15/"><img
+                                loading="lazy" class="aligncenter wp-image-21485 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-15-at-07.28.15.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px"
-                            /></a>
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>
                             <p></p>
                             <p style="text-align: center">
                               ۱۹- آقای محسن فیض بخش۲۶: ۳۷۴ رأی
                             </p>
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-26/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21503 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-26/"><img
+                                loading="lazy" class="aligncenter wp-image-21503 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.26.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۰- آقای علی رضا کاملی۶: ۳۶۳ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۰- آقای علی رضا کاملی۶: ۳۶۳ رأی
                           </td>
                         </tr>
                         <tr>
                           <td scope="row" data-label="Acount">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-35/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21490 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-15-32-35/"><img
+                                loading="lazy" class="aligncenter wp-image-21490 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-15.32.35.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۱- آقای حسین ذوقی۳۲: ۳۵۶ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۱- آقای حسین ذوقی۳۲: ۳۵۶ رأی
                           </td>
                           <td>
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-26-1/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21504 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-11-at-15-29-26-1/"><img
+                                loading="lazy" class="aligncenter wp-image-21504 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-11-at-15.29.26-1.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۲- آقای سید علی سید احمدیان۳۹: ۳۵۴ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۲- آقای سید علی سید احمدیان۳۹: ۳۵۴
+                            رأی
                           </td>
                           <td data-label="Amount">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-17-53-44/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21486 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-11-14-at-17-53-44/"><img
+                                loading="lazy" class="aligncenter wp-image-21486 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/11/WhatsApp-Image-2020-11-14-at-17.53.44.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۳- آقای محمد حسین فاضلی۲۸: ۳۵۰ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۳- آقای محمد حسین فاضلی۲۸: ۳۵۰ رأی
                           </td>
                           <td data-label="Period">
-                            <a
-                              href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-12-21-at-08-22-14/"
-                              ><img
-                                loading="lazy"
-                                class="aligncenter wp-image-21600 size-thumbnail"
+                            <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-12-21-at-08-22-14/"><img
+                                loading="lazy" class="aligncenter wp-image-21600 size-thumbnail"
                                 src="https://nikan-alumni.org/wp-content/uploads/2020/12/WhatsApp-Image-2020-12-21-at-08.22.14.jpeg"
-                                alt=""
-                                sizes="(max-width: 150px) 100vw, 150px" /></a
-                            >۲۴- آقای دارا کره بند بوشهری۹: ۳۴۹ رأی
+                                alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>۲۴- آقای دارا کره بند بوشهری۹: ۳۴۹
+                            رأی
                           </td>
                         </tr>
                         <tr>
@@ -1287,26 +952,16 @@
                     <p>نمایندگان مدرسه نیز در شورای مرکزی سوم عبارتند از:</p>
                     <p>جناب حاج آقای دوایی</p>
                     <p>
-                      <a
-                        href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-09-07_11-35-19.jpg"
-                        ><img
-                          loading="lazy"
-                          class="alignnone wp-image-15611 size-thumbnail"
-                          src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-09-07_11-35-19.jpg"
-                          alt=""
-                          sizes="(max-width: 150px) 100vw, 150px" /></a
-                      >جناب حاج آقای کاشانی وحید
+                      <a href="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-09-07_11-35-19.jpg"><img
+                          loading="lazy" class="alignnone wp-image-15611 size-thumbnail"
+                          src="https://nikan-alumni.org/wp-content/uploads/2019/11/photo_2019-09-07_11-35-19.jpg" alt=""
+                          sizes="(max-width: 150px) 100vw, 150px" /></a>جناب حاج آقای کاشانی وحید
                     </p>
                     <p>
-                      <a
-                        href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-07-01-at-08-57-26-2/"
-                        ><img
-                          loading="lazy"
-                          class="wp-image-21601 size-thumbnail alignnone"
+                      <a href="https://nikan-alumni.org/16150-2/whatsapp-image-2020-07-01-at-08-57-26-2/"><img
+                          loading="lazy" class="wp-image-21601 size-thumbnail alignnone"
                           src="https://nikan-alumni.org/wp-content/uploads/2020/12/WhatsApp-Image-2020-07-01-at-08.57.26.jpeg"
-                          alt=""
-                          sizes="(max-width: 150px) 100vw, 150px" /></a
-                      >جناب آقای امیدهاشمی۱۷
+                          alt="" sizes="(max-width: 150px) 100vw, 150px" /></a>جناب آقای امیدهاشمی۱۷
                     </p>
                     <p>
                       مدت فعالیت دوره سوم شورای مرکزی کانون از تاریخ ۱/۷/۱۳۹۷ تا
@@ -1321,12 +976,18 @@
                     <p>نایب رئیس کانون: آقای نوری۱۰</p>
                     <p>منشی جلسات شورا: آقای کاملی۶</p>
                   </div>
+
+
+                  <h3>شورای مرکزی چهارم</h3>
+                  <ShoraFourth />
+                  <h3>شورای مرکزی پنجم</h3>
+                  <ShoraFive />
                 </div>
               </div>
             </div>
           </div>
         </div>
-  
+
         <div v-if="tabindex === 4" :key="4" class="leading-7 text-tm-black">
           <h1 class="text-cyan-400 text-xl mb-10">معرفی بازرسی</h1>
           <div>
@@ -1409,11 +1070,36 @@
                     بازرس علی البدل: آقای محمد مهدی راد نیکنام۱۳
                   </p>
                 </div>
+
+                <h3>بازرسان شورای مرکزی پنجم</h3>
+                <div>
+                  <p>
+
+                    در اولین جلسه شورای مرکزی دوره پنجم مورخ 10  آبان  1403 بازرس اصلی و علی البدل به این شرح انتخاب شدند
+<br>
+بازرس اصلی : آقای مهدی علی اکبریان دوره 14 
+<br>
+
+بازرس علی البدل : آقای علی طهرانچی دوره 18
+                  </p>
+                </div>
+                <h3>بازرسان شورای مرکزی چهارم</h3>
+                <div>
+                  <p>
+                    در اولین جلسه شورای مرکزی چهارم مورخ 20 مهر 1401 بازرسان اصلی و علی البدل به شرح زیر انتخاب گردیدند
+                    :
+                    <br>
+                    بازرس اصلی : آقای محمد حسین نوری 10
+                    <br>
+
+                    بازرس علی البدل : آقای مهدی علی اکبریان 14
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-  
+
         <div v-if="tabindex === 5" :key="5" class="leading-7 text-tm-black">
           <h1 class="text-cyan-400 text-xl mb-10">معرفی هیأت اجرایی</h1>
           <div>
@@ -1501,21 +1187,14 @@
               </ul>
               <br />
               <p>
-                <img
-                  loading="lazy"
-                  class="size-medium wp-image-9598 aligncenter"
-                  src="https://nikan-alumni.ir/wp-content/uploads/2018/08/kanoon-Org2-300x256.jpg"
-                  alt=""
-                  width="300"
-                  height="256"
-                  srcset="
+                <img loading="lazy" class="size-medium wp-image-9598 aligncenter"
+                  src="https://nikan-alumni.ir/wp-content/uploads/2018/08/kanoon-Org2-300x256.jpg" alt="" width="300"
+                  height="256" srcset="
                     https://nikan-alumni.ir/wp-content/uploads/2018/08/kanoon-Org2-300x256.jpg   300w,
                     https://nikan-alumni.ir/wp-content/uploads/2018/08/kanoon-Org2-768x656.jpg   768w,
                     https://nikan-alumni.ir/wp-content/uploads/2018/08/kanoon-Org2-1024x875.jpg 1024w,
                     https://nikan-alumni.ir/wp-content/uploads/2018/08/kanoon-Org2.jpg          1093w
-                  "
-                  sizes="(max-width: 300px) 100vw, 300px"
-                />
+                  " sizes="(max-width: 300px) 100vw, 300px" />
               </p>
               <br />
               <br />
@@ -1608,6 +1287,79 @@
                     • خزانه دار کانون: آقای محمد ذوقی۲۱
                   </p>
                 </div>
+                <h3>هیأت اجرایی چهارم</h3>
+                <div>
+                  <p>
+                    در اولین جلسه شورای مرکزی در تاریخ 1401/7/20 اعضای هیأت اجرایی به شرح زیر انتخاب شدند:
+                    <br>
+                    اعضای اصلی:
+                    آقایان:
+                    <br>1- امیر داودی 21
+                    <br>2- حاجی عموعصار 6
+                    <br>3- احمدرضا شاه آبادی 8
+                    <br>4- حسین قنبری 10
+                    <br>5- بهنام پرنیان پور 8
+                    <br>6- محمد صراف زاده 4
+                    <br>7- امید هاشمی 17
+                  </p>
+                  <br>
+                  <p>
+                  <ul>
+                    <li>
+                      اعضای علی البدل:
+                    </li>
+                    <li>
+                      اول: آقای علیرضا امینی 39
+                    </li>
+                    <li>
+                      دوم: آقای محمدعلی خدابنده لو 40
+                    </li>
+                  </ul>
+
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    در اولین جلسه هیأت اجرایی در تاریخ 1401/7/23 انتخاب های زیر صورت گرفت:
+                    <br> • رئیس هیأت اجرایی: آقای بهنام پرنیان پور۹
+                    <br> • نائب رئیس هیأت اجرایی: آقای محمد علی حاجی عموعصار 6
+                    <br> • خزانه دار کانون: آقای حسین قنبری 10
+                  </p>
+                </div>
+                <h3>هیأت اجرایی پنجم</h3>
+                <div>
+                  
+                  <p>
+                    در اولین  جلسه شورای مرکزی در تاریخ پنج شنبه 1403/08/10 اعضای هیئت اجرایی به شرح زیر انتخاب شدند:
+اعضای اصلی : آقایان :
+<br>1- آقای بهنام پرنیان پور دوره 8
+<br>2- آقای محمدرضا اویسی دوره 12
+<br>3-آقای حسام الدین ملکی دوره 2
+<br>4 - آقای محسن فیاض بخش دوره 17
+<br>5- آقای سید عماد طباطبایی یگانه دوره 19
+<br>6- آقای محمد حسین تابش دوره 23
+<br>7- آقای سید محمد متین ضیایی دوره 36
+<br>8- آقای محمد ملکی تبار دوره 39
+<br>9- آقای امیر داودی دوره 21
+
+<br>
+اعضای علی البدل هیئت اجرایی :
+<br>1- آقای سید وحید ابوالمعالی دوره 15
+<br>2- آقای احمد مدبری فرد دوره 26
+
+<br>
+در اولین جلسه هیئت اجرایی در تاریخ 1403/08/02  انتخاب های زیر صورت گرفت:
+
+<br>
+آقای محمدرضا اویسی 12 به عنوان ریاست هیئت اجرایی با 8 رای انتخاب شدند.
+<br>
+آقای بهنام پرنیانپور 8 به عنوان نایب رییس هیئت اجرایی با 8 رای انتخاب شدند.
+<br>
+آقای امیر داودی 21 به عنوان منشی هیئت اجرایی با 8 رای انتخاب شدند.
+<br>
+آقای محسن فیاض بخش 17 به عنوان خزانه دار با 8 رای انتخاب شدند.
+<br>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -1624,9 +1376,8 @@
                 اختیارات و حقّ&zwnj;الزحمه&shy; ی دبیر را تعیین می &shy;کند.
               </p>
               <p>
-                دبیر کانون مجری مصوبات شورای مرکزی و هیأت اجرایی است و ا<strong
-                  >ختیارات و مسئولیت</strong
-                >&shy; های زیر را دارد:
+                دبیر کانون مجری مصوبات شورای مرکزی و هیأت اجرایی است و ا<strong>ختیارات و مسئولیت</strong>&shy; های زیر
+                را دارد:
               </p>
               <ul>
                 <li>
@@ -1700,6 +1451,21 @@
                     زاده۴&nbsp; به عنوان دبیر کانون انتخاب شدند. ایشان از<br />
                     ۷/۸/۱۳۹۹ تا ۷/۸/۱۴۰۱ مشغول به فعالیت خواهند بودند.
                   </p>
+                </div>
+                <h3>دبیرخانه دوره چهار</h3>
+                <div>
+                  <p>
+                    در اولین جلسه هیئت اجرایی مورخ 23 مهر 1401 آقای محمد صراف زاده 4 به عنوان دبیر انتخاب شدند. ایشان از
+                    تارخ 23/7/1401 الی 1/7/1403 مشغول به فعالیت خواهند بود.
+                  </p>
+                  <br /><br />
+                </div>
+                <h3>دبیرخانه دوره پنجم</h3>
+                <div>
+                  <p>
+                    دبیرخانه دوره پنجم 
+با رای اعضای هیئت اجرایی آقای محمد صراف زاده دوره 4 بعنوان دبیر تا پایان سال 1403 انتخاب گردیدند.
+                  </p>
                   <br /><br />
                 </div>
               </div>
@@ -1713,7 +1479,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { RootState as navbarState } from '@/store/navigation/index'
-// import lottie from 'lottie-web'
+import ShoraFourth from '@/components/shora/ShoraFourth.vue'
+import ShoraFive from '@/components/shora/ShoraFive.vue'
+
 
 export default Vue.extend({
   data() {
@@ -1732,7 +1500,7 @@ export default Vue.extend({
   },
   created() {
     const hash = this.$route.hash ? this.$route.hash.split('#')[1].trim() : ''
-  
+
     if (hash) {
       this.tabs.forEach((i, index) => {
         console.log(i.href.split('#')[1].trim())
@@ -1747,11 +1515,11 @@ export default Vue.extend({
         hash: this.tabs[0].href.split('#')[1],
       })
     }
-    // lottie.loadAnimation({
-    //   container: this.$refs.parent as HTMLDivElement, // the dom element that will contain the animation
-    //   renderer: 'svg',
-    //   loop: true,
-    //   autoplay: true,
+// lottie.loadAnimation({
+//   container: this.$refs.parent as HTMLDivElement, // the dom element that will contain the animation
+//   renderer: 'svg',
+//   loop: true,
+//   autoplay: true,
     //   path: 'https://assets5.lottiefiles.com/packages/lf20_znukgxzs.json', // the path to the animation json
     // })
   },
@@ -1760,25 +1528,29 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .anime-intro {
+
   &-enter-active,
   &-leave-active {
     transition: all 0.5s ease;
     transform: translateX(0%);
     opacity: 1;
   }
+
   &-enter {
     background: rgb(255, 255, 255);
     transform: translateX(-50%);
     position: absolute;
     opacity: 0;
   }
+
   &-leave-to {
     background: rgb(255, 255, 255);
     position: absolute;
-   transform: translateX(50%);
+    transform: translateX(50%);
     opacity: 0;
   }
 }
+
 // .anime-intro {
 //   &-enter-active,
 //   &-leave-active {
@@ -1807,18 +1579,22 @@ h3 {
 p {
   @apply leading-7;
 }
+
 .size-thumbnail {
   @apply w-40 h-40 mt-2 object-cover;
 }
+
 ul:not(.css-header) {
   @apply list-inside list-disc;
 }
 
 tr {
   @apply grid grid-cols-4 gap-4 mb-10;
+
   td {
     a {
       @apply w-full overflow-clip;
+
       img {
         @apply h-32 w-full object-cover;
       }
