@@ -171,6 +171,10 @@ export const library = [
               link: '/page/23156',
             },
             {
+              title: 'شورای مرکزی دوره پنجم',
+              link: '/page/24169',
+            },
+            {
               title: 'هیٔت اجرایی دوره اول',
               link: '/page/22908',
             },
@@ -187,8 +191,8 @@ export const library = [
               link: '/page/23152',
             },
             {
-              title: 'صورت جلسات شورای مرکزی (دور پنجم)',
-              link: '/page/24169',
+              title: 'هیئت اجرایی دوره پنجم',
+              link: '/page/24190',
             },
           ],
         },
