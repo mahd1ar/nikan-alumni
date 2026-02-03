@@ -355,7 +355,7 @@ const initialState = {
         },
         {
           svg: SVG.EVENT_NESHAT,
-          title: 'کارگروه نشاط و سرگرمی',
+          title: 'کارگروه ورزش و سرگرمی',
           hasSubmenu: false,
           href: '/event/category/entertainment-and-entertainment',
         },
@@ -373,7 +373,7 @@ const initialState = {
         },
         {
           svg: SVG.EVENT_ELM,
-          title: 'کارگروه علم و فرهنگ',
+          title: 'کارگروه علم و فرهنگ و هنر',
           hasSubmenu: false,
           href: '/event/category/science-and-culture',
         },
