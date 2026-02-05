@@ -632,7 +632,7 @@
 
       <section class="body-font relative text-gray-600">
         <img class="absolute top-0 h-full w-full object-cover object-center opacity-10 grayscale filter"
-          src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg" alt="stats" />
+          :src="'/img/Panorama2-e1592028952881.jpg'" alt="stats" />
         <div class="container relative mx-auto flex flex-wrap px-5 py-12">
           <div class="mt-auto mb-auto flex flex-wrap content-start sm:w-2/3 sm:pr-10 lg:w-1/2">
             <div class="mb-6 w-full px-4 sm:p-4">
@@ -676,7 +676,7 @@
           <div class="mt-6 w-full overflow-hidden rounded-lg sm:mt-0 sm:w-1/3 lg:w-1/2">
             <img
               class="h-full w-full scale-100 transform cursor-pointer object-cover object-center transition duration-500 ease-in-out hover:scale-125"
-              src="https://nikan-alumni.ir/wp-content/uploads/2020/06/Panorama2-e1592028952881.jpg" alt="stats" />
+              :src="'/img/Panorama2-e1592028952881.jpg'" alt="stats" />
           </div>
         </div>
       </section>

@@ -113,6 +113,8 @@ enum SVG {
             <path fill="none" d="M0 0h36v36H0z" />
             </svg>
             `,
+            MEDICAL = `<svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="-2 -2 24 24"><path fill="currentColor" d="M7 12.917v.583a4.5 4.5 0 1 0 9 0v-1.67a3.001 3.001 0 1 1 2 0v1.67a6.5 6.5 0 1 1-13 0v-.583A6 6 0 0 1 0 7V2a2 2 0 0 1 2-2h1a1 1 0 1 1 0 2H2v5a4 4 0 1 0 8 0V2H9a1 1 0 1 1 0-2h1a2 2 0 0 1 2 2v5a6 6 0 0 1-5 5.917M17 10a1 1 0 1 0 0-2a1 1 0 0 0 0 2"/></svg>`,
+            TOURISM = `<svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path fill="currentColor" d="M19.3 16.9c.4-.7.7-1.5.7-2.4c0-2.5-2-4.5-4.5-4.5S11 12 11 14.5s2 4.5 4.5 4.5c.9 0 1.7-.3 2.4-.7l3.2 3.2l1.4-1.4zm-3.8.1c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5M12 20v2C6.48 22 2 17.52 2 12S6.48 2 12 2c4.84 0 8.87 3.44 9.8 8h-2.07A8 8 0 0 0 15 4.59V5c0 1.1-.9 2-2 2h-2v2c0 .55-.45 1-1 1H8v2h2v3H9l-4.79-4.79C4.08 10.79 4 11.38 4 12c0 4.41 3.59 8 8 8"/></svg>`,
   INSUR = `
             <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -382,6 +384,18 @@ const initialState = {
           title: 'کارگروه کسب و کار',
           hasSubmenu: false,
           href: '/event/category/business',
+        },
+        {
+          svg: SVG.EVENT_CASB,
+          title: 'گردشگری',
+          hasSubmenu: false,
+          href: '/event/category/tourism',
+        },
+        {
+          svg: SVG.EVENT_CASB,
+          title: 'پزشکی و سلامت',
+          hasSubmenu: false,
+          href: '/event/category/medicine-and-health',
         },
       ],
     },
