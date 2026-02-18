@@ -387,13 +387,13 @@ const initialState = {
         },
         {
           svg: SVG.EVENT_CASB,
-          title: 'گردشگری',
+          title: 'کارگروه گردشگری',
           hasSubmenu: false,
           href: '/event/category/tourism',
         },
         {
           svg: SVG.EVENT_CASB,
-          title: 'پزشکی و سلامت',
+          title: 'کارگروه پزشکی و سلامت',
           hasSubmenu: false,
           href: '/event/category/medicine-and-health',
         },

@@ -648,30 +648,14 @@
                 زندگی دنیوی
               </div>
             </div>
-            <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+    
+            <div v-for="(value,index) in stats" :key="index" class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
               <h2 class="title-font text-3xl font-medium text-gray-900">
-                {{ stats.alumni }}
+                {{ value.title }}
               </h2>
-              <p class="leading-relaxed">دانش آموخته</p>
+              <p class="leading-relaxed">{{ value.value }}</p>
             </div>
-            <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-              <h2 class="title-font text-3xl font-medium text-gray-900">
-                {{ stats.events }}
-              </h2>
-              <p class="leading-relaxed">رویداد</p>
-            </div>
-            <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-              <h2 class="title-font text-3xl font-medium text-gray-900">
-                {{ stats.project }}
-              </h2>
-              <p class="leading-relaxed">خیریه های مرتبط</p>
-            </div>
-            <div class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-              <h2 class="title-font text-3xl font-medium text-gray-900">
-                {{ stats.groups }}
-              </h2>
-              <p class="leading-relaxed">کارگروه</p>
-            </div>
+    
           </div>
           <div class="mt-6 w-full overflow-hidden rounded-lg sm:mt-0 sm:w-1/3 lg:w-1/2">
             <img
@@ -896,12 +880,31 @@ export default Vue.extend({
         id: string
         category: { title: string; id: string; slug: string }[]
       }[],
-      stats: {
-        alumni: toIndiaDigits(4.5) + 'K',
-        events: toIndiaDigits(1.8) + 'K',
-        project: toIndiaDigits(85),
-        groups: toIndiaDigits(8),
+      stats:[ {
+        title: 'دانش آموخته',
+        value: toIndiaDigits(4.5) + 'K'
       },
+      {
+        title: 'رویداد',
+        events: toIndiaDigits(1.8) + 'K'
+      },
+      {
+        title: 'خیریه های مرتبط',
+        value: '85'
+      },
+      {
+        title: 'کارگروه',
+        value: '8'
+      },
+      {
+        title: 'پزشکان نیکان',
+        value: '300'
+      },
+      {
+        title: 'دانش آموختگان هنرستان',
+        value: '60'
+      },
+      ],
       mediaIndex: 0,
       media: [] as {
         id: string
