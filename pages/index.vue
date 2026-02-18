@@ -649,11 +649,11 @@
               </div>
             </div>
     
-            <div v-for="(value,index) in stats" :key="index" class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
+            <div v-for="({value,title},index) in stats" :key="index" class="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
               <h2 class="title-font text-3xl font-medium text-gray-900">
-                {{ value.title }}
+                {{ value }}
               </h2>
-              <p class="leading-relaxed">{{ value.value }}</p>
+              <p class="leading-relaxed">{{ title }}</p>
             </div>
     
           </div>
