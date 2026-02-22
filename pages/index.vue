@@ -885,24 +885,24 @@ export default Vue.extend({
         value: toIndiaDigits(4.5) + 'K'
       },
       {
-        title: 'رویداد',
+        title: 'رویداد ها',
         events: toIndiaDigits(1.8) + 'K'
       },
       {
         title: 'خیریه های مرتبط',
-        value: '85'
+        value: toIndiaDigits('85')
       },
       {
         title: 'کارگروه',
-        value: '8'
+        value: toIndiaDigits('8')
       },
       {
         title: 'پزشکان نیکان',
-        value: '300'
+        value: toIndiaDigits('300')
       },
       {
         title: 'دانش آموختگان هنرستان',
-        value: '60'
+        value: toIndiaDigits('60')
       },
       ],
       mediaIndex: 0,
